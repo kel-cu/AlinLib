@@ -34,8 +34,8 @@
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.barium.github": "https://github.com/simply-kel/AlinLib",
-        "modmenu.barium.donate": "https://kelcuprum.ru/r/don"
+        "modmenu.alinlib.github": "https://github.com/simply-kel/AlinLib",
+        "modmenu.alinlib.donate": "https://kelcuprum.ru/r/don"
       }
     }
   }
