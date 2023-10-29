@@ -1,2 +1,4 @@
 # AlinLib
-A library to facilitate mod development by Kel Cuprum
+Моя библиотека для облегчения разработки модов.<br>
+Здесь есть заготовки GUI, Toast и конфигов.<br>
+Всё. Мб позже что-то еще будет хех
