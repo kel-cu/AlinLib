@@ -30,7 +30,7 @@ public class BooleanButton extends Button {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
-            float state = active ? 5 : isHovered ? 4 : 2;
+            float state = !active ? 3 : isHovered ? 2 : 1;
             final float f = state / 2 * 0.9F + 0.1F;
             final int color = (int) (255.0F * f);
 

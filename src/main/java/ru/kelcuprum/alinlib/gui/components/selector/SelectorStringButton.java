@@ -33,12 +33,7 @@ public class SelectorStringButton extends Button {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
-            float state = 2;
-            if (!active) {
-                state = 5;
-            } else if (isHovered) {
-                state = 4;
-            }
+            float state = !active ? 3 : isHovered ? 2 : 1;
             final float f = state / 2 * 0.9F + 0.1F;
             final int color = (int) (255.0F * f);
             // BASE

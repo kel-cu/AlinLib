@@ -62,7 +62,7 @@ public class DemoBariumScreen extends Screen {
     private void initButtonsCategory(){
         booleanButton = new BooleanButton(140, 40, this.width - 150, 20, Component.literal("Boolean"), "Boolean", true, AlinLib.bariumConfig);
         addRenderableWidget(booleanButton);
-        stringEditBox = new StringEditBox(140, 40+(25), width-150, 20, Component.literal("Hell"));
+        stringEditBox = new StringEditBox(140, 40+(25), width-150, 20, EDIT_BOX);
         stringEditBox.setValue(AlinLib.bariumConfig.getString("HELLO", "Hello, world!"));
         stringEditBox.setResponder((string) -> {
             AlinLib.bariumConfig.setString("HELLO", string);
@@ -80,7 +80,7 @@ public class DemoBariumScreen extends Screen {
             this.minecraft.setScreen(this);
         }));
 
-        addRenderableWidget(new ButtonWithColor(10, height - 55, 110, 20, DOCUMENTATION, 0xB6FF3131, (OnPress) -> {
+        addRenderableWidget(new Button(10, height - 55, 110, 20, DOCUMENTATION, (OnPress) -> {
             Util.getPlatform().openUri("https://github.com/simply-kel/AlinLib/wiki");
         }));
 
@@ -96,17 +96,13 @@ public class DemoBariumScreen extends Screen {
         } else {
             renderDirtBackground(guiGraphics);
         }
-        guiGraphics.fill(0, 0, 130, this.height, new Color(0x80000000, true).getRGB());
+        guiGraphics.fill(0, 0, 130, this.height, new Color(0x3F090B21, true).getRGB());
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 15-scrolled, -1);
         guiGraphics.drawCenteredString(this.minecraft.font, TITLE, 120 / 2+5, 15, -1);
-
         //
-        
-        //
-
         guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 875-scrolled, -1);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
 
@@ -114,7 +110,7 @@ public class DemoBariumScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double d, double e, double f, double g) {
-        scrolled = (int) (scrolled + (g*10.0));
+        scrolled = (int) (scrolled + (g*10.0*-1.0));
         if(scrolled <= 0) scrolled = 0;
         else if(scrolled >= size-height) scrolled = size-height;
 //        AlinLib.log("Scroll: "+ scrolled);
