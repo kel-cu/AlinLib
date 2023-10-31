@@ -20,7 +20,6 @@ public class SelectorStringButton extends Button {
         this.config = config;
         this.list = list;
 
-
         this.currentPosition = Arrays.stream(this.list).toList().indexOf(this.config.getString(typeConfig, defaultVolume));
     }
 

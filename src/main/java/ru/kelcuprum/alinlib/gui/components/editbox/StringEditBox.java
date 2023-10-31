@@ -8,13 +8,13 @@ import java.awt.*;
 import java.util.function.Consumer;
 
 public class StringEditBox extends net.minecraft.client.gui.components.EditBox {
-    public final int posX;
-    public StringEditBox(int x, int y, int width, int height, Component label, String volume, Consumer<String> consumer) {
-        super(Minecraft.getInstance().font, x+(Minecraft.getInstance().font.width(label)+12), y, width-(Minecraft.getInstance().font.width(label)+12), height, label);
-        this.posX = x;
-        setMaxLength(256);
-        this.setValue(volume);
-        this.setResponder(consumer);
+    public StringEditBox(int x, int y, int width, int height, Component label) {
+        super(Minecraft.getInstance().font, x, y, width, height, label);
+    }
+
+    @Override
+    public void onClick(double d, double e) {
+//        super.onClick(d, e);
     }
 
     @Override
@@ -29,16 +29,12 @@ public class StringEditBox extends net.minecraft.client.gui.components.EditBox {
             final float f = state / 2 * 0.9F + 0.1F;
             final int color = (int) (255.0F * f);
 
-            guiGraphics.fill(this.posX, getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-            // YELLOW - 0xFFFFEE31
-            // GREEN  - 0xFF31FF83
-            guiGraphics.fill(getX()-1, getY()+((getHeight() - 8) / 2), getX(), getY() + getHeight()-1-((getHeight() - 8) / 2), isFocused() ? 0xFFFFEE31 : 0xFF31FF83); // |
-            guiGraphics.fill(this.posX, getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(isFocused() ? 0xFFFFEE31 : 0xFF31FF83, true).getRGB()); // _
-//            guiGraphics.drawCenteredString(Minecraft.getInstance().font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+            guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
+            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(isFocused() ? 0xFFFFEE31 : 0xFF31FF83, true).getRGB());
 
-            guiGraphics.drawString(Minecraft.getInstance().font, getMessage(), this.posX + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+            guiGraphics.drawString(Minecraft.getInstance().font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
             Component volume = Component.literal(this.getValue());
-            guiGraphics.drawString(Minecraft.getInstance().font, volume, this.getX() + 4, getY() + (getHeight() - 8) / 2, 0xffffff);
+            guiGraphics.drawString(Minecraft.getInstance().font, volume, getX() + getWidth()-Minecraft.getInstance().font.width(volume.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
         }
     }
 }

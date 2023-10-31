@@ -10,32 +10,27 @@ import java.awt.*;
 
 public class BooleanButton extends Button {
     public boolean volume;
-    public boolean defaultVolume;
-    public Config configuration;
-    public String config;
-    public BooleanButton(int x, int y, int width, int height, Component label, String volume, boolean defaultVolume, Config configuration) {
+    public boolean defaultConfig;
+    public Config config;
+    public String typeConfig;
+    public BooleanButton(int x, int y, int width, int height, Component label, String typeConfig, boolean defaultConfig, Config config) {
         super(x, y, width, height, label, Button::onPress, DEFAULT_NARRATION);
-        this.configuration = configuration;
-        this.config = volume;
-        this.defaultVolume = defaultVolume;
-        this.volume = configuration.getBoolean(volume, defaultVolume);
+        this.config = config;
+        this.typeConfig = typeConfig;
+        this.defaultConfig = defaultConfig;
+        this.volume = config.getBoolean(typeConfig, defaultConfig);
     }
 
     @Override
     public void onPress() {
         this.volume = !this.volume;
-        configuration.setBoolean(config, this.volume);
+        config.setBoolean(typeConfig, this.volume);
     }
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
-            float state = 2;
-            if (!active) {
-                state = 5;
-            } else if (isHovered) {
-                state = 4;
-            }
+            float state = active ? 5 : isHovered ? 4 : 2;
             final float f = state / 2 * 0.9F + 0.1F;
             final int color = (int) (255.0F * f);
 

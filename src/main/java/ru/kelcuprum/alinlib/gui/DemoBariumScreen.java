@@ -1,9 +1,8 @@
 package ru.kelcuprum.alinlib.gui;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractScrollWidget;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -11,6 +10,7 @@ import ru.kelcuprum.alinlib.gui.components.TextBox;
 import ru.kelcuprum.alinlib.gui.components.buttons.BooleanButton;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonWithColor;
+import ru.kelcuprum.alinlib.gui.components.editbox.StringEditBox;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
 
 import java.awt.*;
@@ -25,7 +25,7 @@ public class DemoBariumScreen extends Screen {
     private int scrolled = 0;
     private int size = 900;
     //
-    private EditBox editBox;
+    private StringEditBox stringEditBox;
     private BooleanButton booleanButton;
     String[] hell = {
             "Hello",
@@ -45,7 +45,7 @@ public class DemoBariumScreen extends Screen {
     }
     public void tick() {
         booleanButton.setY(40-scrolled);
-        editBox.setY(40+(25)-scrolled);
+        stringEditBox.setY(40+(25)-scrolled);
         selectorStringButton.setY(40+(25*2)-scrolled);
         super.tick();
     }
@@ -61,13 +61,13 @@ public class DemoBariumScreen extends Screen {
 //        addRenderableWidget(new (150, 0, 155, height, this.title));
         booleanButton = new BooleanButton(140, 40, this.width - 150, 20, Component.literal("Boolean"), "Boolean", true, AlinLib.bariumConfig);
         addRenderableWidget(booleanButton);
-        editBox = new EditBox(this.font, 140+this.font.width(EDIT_BOX)+16, 40+(25), width-150-(this.font.width(EDIT_BOX)+16), 20, Component.literal("Hell"));
-        editBox.setValue(AlinLib.bariumConfig.getString("HELLO", "Hello, world!"));
-        editBox.setResponder((string) -> {
+        stringEditBox = new StringEditBox(140, 40+(25), width-150, 20, Component.literal("Hell"));
+        stringEditBox.setValue(AlinLib.bariumConfig.getString("HELLO", "Hello, world!"));
+        stringEditBox.setResponder((string) -> {
             AlinLib.bariumConfig.setString("HELLO", string);
         });
 
-        addRenderableWidget(editBox);
+        addRenderableWidget(stringEditBox);
         //
         selectorStringButton = new SelectorStringButton(140, 40+(25*2), this.width - 150, 20, hell, AlinLib.bariumConfig, "selector", hell[0], Component.literal("Selector"));
         addRenderableWidget(selectorStringButton);
@@ -98,6 +98,10 @@ public class DemoBariumScreen extends Screen {
         guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 15-scrolled, -1);
         guiGraphics.drawCenteredString(this.minecraft.font, TITLE, 120 / 2+5, 15, -1);
         new TextBox(guiGraphics, 140, 40+25-scrolled, this.font.width(EDIT_BOX)+16, 20, Component.literal("Edit Box"), false);
+
+        //
+        
+        //
 
         guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 875-scrolled, -1);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
