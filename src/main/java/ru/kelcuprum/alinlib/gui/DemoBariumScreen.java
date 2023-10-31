@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui;
 
+import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.PlayerFaceRenderer;
@@ -20,6 +21,7 @@ public class DemoBariumScreen extends Screen {
     private static final Component TITLE = Component.literal("AlinLib");
     private static final Component CATEGORY = Component.literal("Example page");
     private static final Component EDIT_BOX = Component.literal("Edit Box");
+    private static final Component DOCUMENTATION = Component.literal("Documentation");
     private static final Component EXIT = Component.literal("Exit");
     //
     private int scrolled = 0;
@@ -58,7 +60,6 @@ public class DemoBariumScreen extends Screen {
     }
 
     private void initButtonsCategory(){
-//        addRenderableWidget(new (150, 0, 155, height, this.title));
         booleanButton = new BooleanButton(140, 40, this.width - 150, 20, Component.literal("Boolean"), "Boolean", true, AlinLib.bariumConfig);
         addRenderableWidget(booleanButton);
         stringEditBox = new StringEditBox(140, 40+(25), width-150, 20, Component.literal("Hell"));
@@ -79,6 +80,10 @@ public class DemoBariumScreen extends Screen {
             this.minecraft.setScreen(this);
         }));
 
+        addRenderableWidget(new ButtonWithColor(10, height - 55, 110, 20, DOCUMENTATION, 0xB6FF3131, (OnPress) -> {
+            Util.getPlatform().openUri("https://github.com/simply-kel/AlinLib/wiki");
+        }));
+
         addRenderableWidget(new ButtonWithColor(10, height - 30, 110, 20, EXIT, 0xB6FF3131, (OnPress) -> {
             AlinLib.bariumConfig.save();
             this.minecraft.setScreen(parent);
@@ -97,7 +102,6 @@ public class DemoBariumScreen extends Screen {
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 15-scrolled, -1);
         guiGraphics.drawCenteredString(this.minecraft.font, TITLE, 120 / 2+5, 15, -1);
-        new TextBox(guiGraphics, 140, 40+25-scrolled, this.font.width(EDIT_BOX)+16, 20, Component.literal("Edit Box"), false);
 
         //
         
