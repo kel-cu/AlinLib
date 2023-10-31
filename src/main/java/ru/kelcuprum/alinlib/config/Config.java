@@ -58,6 +58,7 @@ public class Config {
      */
     public void setBoolean(String type, boolean newValue){
         this._jsonConfiguration.put(type, newValue);
+        save();
     }
     /**
      * Получение String значения
@@ -73,6 +74,7 @@ public class Config {
      */
     public void setString(String type, String newValue){
         this._jsonConfiguration.put(type, newValue);
+        save();
     }
 
     /**
@@ -89,6 +91,7 @@ public class Config {
      */
     public void setInt(String type, int newValue){
         this._jsonConfiguration.put(type, newValue);
+        save();
     }
 
     /**
@@ -105,6 +108,24 @@ public class Config {
      */
     public void setLong(String type, long newValue){
         this._jsonConfiguration.put(type, newValue);
+        save();
+    }
+
+    /**
+     * Получение Float значения
+     */
+
+    public float getFloat(String type, float defaultValue) {
+        if(this._jsonConfiguration == null) this._jsonConfiguration = new JSONObject();
+        if(!this._jsonConfiguration.isNull(type) && !(this._jsonConfiguration.get(type) instanceof Float)) setFloat(type, defaultValue);
+        return this._jsonConfiguration.isNull(type) ? defaultValue : this._jsonConfiguration.getFloat(type);
+    }
+    /**
+     * Задать значения Float
+     */
+    public void setFloat(String type, float newValue){
+        this._jsonConfiguration.put(type, newValue);
+        save();
     }
 
 }
