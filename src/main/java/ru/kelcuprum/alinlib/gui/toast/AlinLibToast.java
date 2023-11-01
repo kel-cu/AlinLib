@@ -32,19 +32,12 @@ public class AlinLibToast implements Toast {
     }
 
     public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long l) {
-        int rgba = new Color(0xBF020E15, true).getRGB();
-        int r = FastColor.ARGB32.red(rgba);
-        int g = FastColor.ARGB32.green(rgba);
-        int b = FastColor.ARGB32.blue(rgba);
-        int a = FastColor.ARGB32.alpha(rgba);
+        final float fc = 1.5F * 0.9F + 0.1F;
+        final int colorBackground = (int) (255.0F * fc);
 
-        int rgbaTimeLine = new Color(this.isFail ? 0xB6FF3131 : 0xB631FF83, true).getRGB();
-        int rTimeLine = FastColor.ARGB32.red(rgbaTimeLine);
-        int gTimeLine = FastColor.ARGB32.green(rgbaTimeLine);
-        int bTimeLine = FastColor.ARGB32.blue(rgbaTimeLine);
-        int aTimeLine = FastColor.ARGB32.alpha(rgbaTimeLine);
-        guiGraphics.fill(0, 0, this.width(), this.height()-1, FastColor.ARGB32.color(a, r, g, b));
-        guiGraphics.fill(0, this.height() - 1, this.width(), this.height(), FastColor.ARGB32.color(aTimeLine, rTimeLine, gTimeLine, bTimeLine));
+        int statusLine = new Color(this.isFail ? 0xB6FF3131 : 0xB631FF83, true).getRGB();
+        guiGraphics.fill(0, 0, this.width(), this.height()-1, colorBackground / 2 << 24);
+        guiGraphics.fill(0, this.height() - 1, this.width(), this.height(), statusLine);
 
         List<FormattedCharSequence> list = toastComponent.getMinecraft().font.split(this.message, 125);
         int i = 16777215;

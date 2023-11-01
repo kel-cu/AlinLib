@@ -108,7 +108,6 @@ public class DemoBariumScreen extends Screen {
         scrolled = (int) (scrolled + (g*10.0*-1.0));
         if(scrolled <= 0) scrolled = 0;
         else if(scrolled >= size-height) scrolled = size-height;
-//        AlinLib.log("Scroll: "+ scrolled);
 
         return super.mouseScrolled(d, e, f, g);
     }
