@@ -11,7 +11,7 @@ import java.nio.file.Path;
 
 public class Config {
     private final String _filePath;
-    private JSONObject _jsonConfiguration;
+    private JSONObject _jsonConfiguration = new JSONObject();
     public Config(String filePath){
         this._filePath = filePath;
     }

@@ -8,6 +8,7 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.buttons.BooleanButton;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonWithColor;
+import ru.kelcuprum.alinlib.gui.components.editbox.ColorEditBox;
 import ru.kelcuprum.alinlib.gui.components.editbox.StringEditBox;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
 
@@ -16,6 +17,7 @@ public class DemoBariumScreen extends Screen {
     private static final Component TITLE = Component.literal("AlinLib");
     private static final Component CATEGORY = Component.literal("Example page");
     private static final Component EDIT_BOX = Component.literal("Edit Box");
+    private static final Component COLOR_EDIT_BOX = Component.literal("Color Edit Box");
     private static final Component GITHUB = Component.literal("GitHub");
     private static final Component EXIT = Component.literal("Exit");
     //
@@ -33,6 +35,7 @@ public class DemoBariumScreen extends Screen {
             "Welcome to Hell :)"
     };
     private SelectorStringButton selectorStringButton;
+    private ColorEditBox colorEditBox;
         //
 
 
@@ -55,7 +58,7 @@ public class DemoBariumScreen extends Screen {
     }
 
     private void initButtonsCategory(){
-        booleanButton = new BooleanButton(140, 40, this.width - 150, 20, Component.literal("Boolean"), "Boolean", true, AlinLib.bariumConfig);
+        booleanButton = new BooleanButton(140, 40, this.width - 150, 20, AlinLib.bariumConfig, "Boolean", true, Component.literal("Boolean"));
         addRenderableWidget(booleanButton);
         stringEditBox = new StringEditBox(140, 40+(25), width-150, 20, EDIT_BOX);
         stringEditBox.setValue(AlinLib.bariumConfig.getString("HELLO", "Hello, world!"));
@@ -67,6 +70,9 @@ public class DemoBariumScreen extends Screen {
         //
         selectorStringButton = new SelectorStringButton(140, 40+(25*2), this.width - 150, 20, hell, AlinLib.bariumConfig, "selector", hell[0], Component.literal("Selector"));
         addRenderableWidget(selectorStringButton);
+        //
+        colorEditBox = new ColorEditBox(140, 40+(25*3), width-150, 20, AlinLib.bariumConfig, "Color", 0xFFFFFF, COLOR_EDIT_BOX);
+        addRenderableWidget(colorEditBox);
         //
     }
     private void initButton(){

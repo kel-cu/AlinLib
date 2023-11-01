@@ -9,7 +9,7 @@ import ru.kelcuprum.alinlib.command.AlinLibCommand;
 import ru.kelcuprum.alinlib.config.Config;
 
 public class AlinLib implements ClientModInitializer {
-    public static final Logger LOG = LogManager.getLogger("Barium");
+    public static final Logger LOG = LogManager.getLogger("AlinaLib");
     public static Config bariumConfig = new Config("config/Barium/config.json");
     @Override
     public void onInitializeClient() {

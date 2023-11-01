@@ -13,7 +13,7 @@ public class BooleanButton extends Button {
     public boolean defaultConfig;
     public Config config;
     public String typeConfig;
-    public BooleanButton(int x, int y, int width, int height, Component label, String typeConfig, boolean defaultConfig, Config config) {
+    public BooleanButton(int x, int y, int width, int height, Config config, String typeConfig, boolean defaultConfig, Component label) {
         super(x, y, width, height, label, Button::onPress, DEFAULT_NARRATION);
         this.config = config;
         this.typeConfig = typeConfig;
@@ -21,8 +21,25 @@ public class BooleanButton extends Button {
         this.volume = config.getBoolean(typeConfig, defaultConfig);
     }
 
+    public void setYPos(int i) {
+        this.setY(i);
+    }
+
+    public void setXPos(int i) {
+        this.setX(i);
+    }
+
+
+    public void setPos(int i, int j) {
+        this.setPosition(i, j);
+    }
+
+    public void setActive(boolean active){
+        this.active = active;
+    }
     @Override
     public void onPress() {
+        if(!active) return;
         this.volume = !this.volume;
         config.setBoolean(typeConfig, this.volume);
     }

@@ -22,6 +22,22 @@ public class SelectorStringButton extends Button {
 
         this.currentPosition = Arrays.stream(this.list).toList().indexOf(this.config.getString(typeConfig, defaultVolume));
     }
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public void setYPos(int i) {
+        this.setY(i);
+    }
+
+    public void setXPos(int i) {
+        this.setX(i);
+    }
+
+
+    public void setPos(int i, int j) {
+        this.setPosition(i, j);
+    }
 
     @Override
     public void onPress() {

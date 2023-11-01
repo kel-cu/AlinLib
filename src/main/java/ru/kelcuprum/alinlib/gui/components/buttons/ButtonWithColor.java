@@ -14,6 +14,22 @@ public class ButtonWithColor extends Button {
         super(x, y, width, height, label, onPress, DEFAULT_NARRATION);
         this.color = color;
     }
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public void setYPos(int i) {
+        this.setY(i);
+    }
+
+    public void setXPos(int i) {
+        this.setX(i);
+    }
+
+
+    public void setPos(int i, int j) {
+        this.setPosition(i, j);
+    }
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {

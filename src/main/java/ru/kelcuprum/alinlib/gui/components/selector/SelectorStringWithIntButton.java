@@ -23,6 +23,22 @@ public class SelectorStringWithIntButton extends Button {
         this.currentPosition = this.config.getInt(typeConfig, defaultVolume);
     }
 
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public void setYPos(int i) {
+        this.setY(i);
+    }
+
+    public void setXPos(int i) {
+        this.setX(i);
+    }
+
+
+    public void setPos(int i, int j) {
+        this.setPosition(i, j);
+    }
     @Override
     public void onPress() {
         this.currentPosition++;
