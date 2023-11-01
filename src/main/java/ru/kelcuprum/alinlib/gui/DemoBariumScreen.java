@@ -2,12 +2,9 @@ package ru.kelcuprum.alinlib.gui;
 
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.gui.components.TextBox;
 import ru.kelcuprum.alinlib.gui.components.buttons.BooleanButton;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonWithColor;
@@ -21,7 +18,7 @@ public class DemoBariumScreen extends Screen {
     private static final Component TITLE = Component.literal("AlinLib");
     private static final Component CATEGORY = Component.literal("Example page");
     private static final Component EDIT_BOX = Component.literal("Edit Box");
-    private static final Component DOCUMENTATION = Component.literal("Documentation");
+    private static final Component GITHUB = Component.literal("GitHub");
     private static final Component EXIT = Component.literal("Exit");
     //
     private int scrolled = 0;
@@ -80,8 +77,8 @@ public class DemoBariumScreen extends Screen {
             this.minecraft.setScreen(this);
         }));
 
-        addRenderableWidget(new Button(10, height - 55, 110, 20, DOCUMENTATION, (OnPress) -> {
-            Util.getPlatform().openUri("https://github.com/simply-kel/AlinLib/wiki");
+        addRenderableWidget(new Button(10, height - 55, 110, 20, GITHUB, (OnPress) -> {
+            Util.getPlatform().openUri("https://github.com/simply-kel/AlinLib/");
         }));
 
         addRenderableWidget(new ButtonWithColor(10, height - 30, 110, 20, EXIT, 0xB6FF3131, (OnPress) -> {
@@ -96,7 +93,7 @@ public class DemoBariumScreen extends Screen {
         } else {
             renderDirtBackground(guiGraphics);
         }
-        guiGraphics.fill(0, 0, 130, this.height, new Color(0x3F090B21, true).getRGB());
+        GUIUtils.renderLeftSlider(guiGraphics, 130, this.height, 0x3F090B21);
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {

@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 public class StringEditBox extends net.minecraft.client.gui.components.EditBox {
     public StringEditBox(int x, int y, int width, int height, Component label) {
         super(Minecraft.getInstance().font, x, y, width, height, label);
+        this.setMaxLength(Integer.MAX_VALUE);
     }
 
     @Override
