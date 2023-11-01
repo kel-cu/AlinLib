@@ -11,8 +11,6 @@ import ru.kelcuprum.alinlib.gui.components.buttons.ButtonWithColor;
 import ru.kelcuprum.alinlib.gui.components.editbox.StringEditBox;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
 
-import java.awt.*;
-
 public class DemoBariumScreen extends Screen {
     private final Screen parent;
     private static final Component TITLE = Component.literal("AlinLib");
@@ -93,7 +91,7 @@ public class DemoBariumScreen extends Screen {
         } else {
             renderDirtBackground(guiGraphics);
         }
-        GUIUtils.renderLeftSlider(guiGraphics, 130, this.height, 0x3F090B21);
+        GUIUtils.renderLeftPanel(guiGraphics, 130, this.height);
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
