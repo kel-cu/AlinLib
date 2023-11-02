@@ -58,6 +58,11 @@ public class ColorEditBox extends EditBox {
     public void onClick(double d, double e) {
     }
 
+    private int getPositionContent(String content){
+        int pos = getX() + getWidth()-Minecraft.getInstance().font.width(content)-((getHeight() - 8) / 2);
+        if(getX() + Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2 - Minecraft.getInstance().font.width(content) > pos) pos = getX() + Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
+        return pos;
+    }
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
@@ -76,14 +81,14 @@ public class ColorEditBox extends EditBox {
                 if(this.getValue().length() != this.getCursorPosition()){
                     int position = Minecraft.getInstance().font.width(this.getValue().substring(0, this.getCursorPosition()));
                     int symbolSize = Minecraft.getInstance().font.width(this.getValue().split("(?!^)")[this.getCursorPosition()]);
-                    int renderPosition = (getX() + getWidth()-Minecraft.getInstance().font.width(volume)-((getHeight() - 8) / 2)) + position;
+                    int renderPosition = getPositionContent(volume.getString()) + position;
                     int y = (getY() + (getHeight() - 8) / 2)+Minecraft.getInstance().font.lineHeight+1;
 
                     guiGraphics.fill(renderPosition-1, y, renderPosition+symbolSize, y+1, new Color(0xFFFFFFFF, true).getRGB());
                 }
 
             }
-            guiGraphics.drawString(Minecraft.getInstance().font, volume, getX() + getWidth()-Minecraft.getInstance().font.width(volume.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+            guiGraphics.drawString(Minecraft.getInstance().font, volume, getPositionContent(volume.getString()), getY() + (getHeight() - 8) / 2, 0xffffff);
         }
     }
 }
