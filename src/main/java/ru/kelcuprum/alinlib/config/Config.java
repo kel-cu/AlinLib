@@ -44,6 +44,13 @@ public class Config {
         }
 
     }
+    /**
+     * Сброс конфигурации
+     */
+    public void reset(){
+        this._jsonConfiguration = new JSONObject();
+        save();
+    }
 
     /**
      * Получение Boolean значения

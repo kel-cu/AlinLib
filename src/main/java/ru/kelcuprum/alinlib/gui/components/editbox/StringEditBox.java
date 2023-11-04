@@ -1,19 +1,19 @@
 package ru.kelcuprum.alinlib.gui.components.editbox;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.EditBox;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
-import ru.kelcuprum.alinlib.AlinLib;
+import net.minecraft.network.chat.FormattedText;
 
 import java.awt.*;
+import java.text.Format;
 import java.util.function.Consumer;
 
 import static java.lang.Math.max;
 
 public class StringEditBox extends net.minecraft.client.gui.components.EditBox {
+    private Font font = Minecraft.getInstance().font;
     private int displayPos;
     public StringEditBox(int x, int y, int width, int height, Component label) {
         super(Minecraft.getInstance().font, x, y, width, height, label);
@@ -48,7 +48,7 @@ public class StringEditBox extends net.minecraft.client.gui.components.EditBox {
     }
     private int getPositionContent(String content){
         int pos = getX() + getWidth()-Minecraft.getInstance().font.width(content)-((getHeight() - 8) / 2);
-        if(getX() + Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2 > pos) pos = getX() + Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
+        if(getX() + Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2 > pos) pos = getX() + this.font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
         return pos;
     }
 
@@ -66,8 +66,8 @@ public class StringEditBox extends net.minecraft.client.gui.components.EditBox {
             Component volume = Component.literal(this.getValue());
             if(isFocused()){
                 if(this.getValue().length() != this.getCursorPosition()){
-                    int position = Minecraft.getInstance().font.width(this.getValue().substring(0, this.getCursorPosition()));
-                    int symbolSize = Minecraft.getInstance().font.width(this.getValue().split("(?!^)")[this.getCursorPosition()]);
+                    int position = this.font.width(this.getValue().substring(0, this.getCursorPosition()));
+                    int symbolSize = this.font.width(this.getValue().split("(?!^)")[this.getCursorPosition()]);
                     int renderPosition = getPositionContent(volume.getString()) + position;
                     int y = (getY() + (getHeight() - 8) / 2)+Minecraft.getInstance().font.lineHeight+1;
 
@@ -75,7 +75,17 @@ public class StringEditBox extends net.minecraft.client.gui.components.EditBox {
                 }
 
             }
-            guiGraphics.drawString(Minecraft.getInstance().font, volume, getPositionContent(volume.getString()), getY() + (getHeight() - 8) / 2, 0xffffff);
+//            font.split(volume, getX()+getWidth()-(getPositionContent(volume.getString())- (getHeight() - 8) / 2));
+//            guiGraphics.drawString(this.font, volume, getPositionContent(volume.getString()), getY() + (getHeight() - 8) / 2, 0xffffff);
+            FormattedText volume1 = font.substrByWidth(volume, getX()+getWidth()-(getPositionContent(volume.getString())));
+            int peepohuy = volume.getString().length() - volume1.getString().length();
+            int peepohuy1 = volume.getString().length()-getCursorPosition();
+            String volume2 = getValue().substring(Math.max(0, peepohuy-peepohuy1), volume.getString().length());
+            String[] symbols = this.getValue().split("(?!^)");
+            FormattedText volume3;
+            if(symbols.length >=2) volume3 = font.substrByWidth(FormattedText.of(volume2), getX()+getWidth()-(getPositionContent(volume.getString()))+font.width(symbols[symbols.length-1]));
+            else volume3 = font.substrByWidth(FormattedText.of(volume2), getX()+getWidth()-(getPositionContent(volume.getString())));
+            guiGraphics.drawString(this.font, volume3.getString(), getPositionContent(volume.getString()), getY() + (getHeight() - 8) / 2, 0xffffff);
         }
     }
 }
