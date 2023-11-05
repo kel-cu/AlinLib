@@ -2,19 +2,20 @@ package ru.kelcuprum.alinlib.gui.components.selector;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
 
 import java.util.Arrays;
 
-public class SelectorStringButton extends Button {
+public class SelectorStringButton extends AbstractButton {
     public int currentPosition = 0;
     public String[] list;
     public Config config;
     public String typeConfig;
     public SelectorStringButton(int x, int y, int width, int height, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
-        super(x, y, width, height, label, Button::onPress, DEFAULT_NARRATION);
+        super(x, y, width, height, label);
 
         this.typeConfig = typeConfig;
         this.config = config;
@@ -60,6 +61,10 @@ public class SelectorStringButton extends Button {
             Component volumeState = Component.literal(this.list[this.currentPosition]);
             guiGraphics.drawString(Minecraft.getInstance().font, volumeState, getX() + getWidth()-Minecraft.getInstance().font.width(volumeState.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
         }
+    }
+    @Override
+    protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
+        this.defaultButtonNarrationText(narrationElementOutput);
     }
 
 }

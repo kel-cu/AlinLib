@@ -2,41 +2,44 @@ package ru.kelcuprum.alinlib.gui.components.buttons;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
 
 import java.awt.*;
 
-public class BooleanButton extends Button {
+public class BooleanButton extends AbstractButton {
     public boolean volume;
-    public boolean defaultConfig;
-    public Config config;
-    public String typeConfig;
+    public final boolean defaultConfig;
+    public final Config config;
+    public final String typeConfig;
     public BooleanButton(int x, int y, int width, int height, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        super(x, y, width, height, label, Button::onPress, DEFAULT_NARRATION);
+        super(x, y, width, height, label);
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;
         this.volume = config.getBoolean(typeConfig, defaultConfig);
     }
-
-    public void setYPos(int i) {
-        this.setY(i);
+    public void setXPos(int x) {
+        this.setX(x);
     }
-
-    public void setXPos(int i) {
-        this.setX(i);
+    public void setYPos(int y) {
+        this.setY(y);
     }
-
-
-    public void setPos(int i, int j) {
-        this.setPosition(i, j);
+    public void setPos(int x, int y) {
+        this.setPosition(x, y);
     }
-
     public void setActive(boolean active){
         this.active = active;
     }
+
+    public void resetVolume(){
+        this.volume = defaultConfig;
+        this.config.setBoolean(typeConfig, this.volume);
+    }
+
     @Override
     public void onPress() {
         if(!active) return;
@@ -57,6 +60,11 @@ public class BooleanButton extends Button {
             Component volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
             guiGraphics.drawString(Minecraft.getInstance().font, volumeState, getX() + getWidth()-Minecraft.getInstance().font.width(volumeState.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
         }
+    }
+
+    @Override
+    protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
+        this.defaultButtonNarrationText(narrationElementOutput);
     }
 
 }

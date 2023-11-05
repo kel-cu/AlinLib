@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.components.buttons.BooleanButton;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonWithColor;
@@ -24,6 +25,7 @@ public class DemoBariumScreen extends Screen {
     private int scrolled = 0;
     private int size = 900;
     //
+    private TextBox titleBox;
     private StringEditBox stringEditBox;
     private BooleanButton booleanButton;
     String[] hell = {
@@ -44,9 +46,11 @@ public class DemoBariumScreen extends Screen {
         this.parent = parent;
     }
     public void tick() {
+        titleBox.setY(15-scrolled);
         booleanButton.setY(40-scrolled);
         stringEditBox.setY(40+(25)-scrolled);
         selectorStringButton.setY(40+(25*2)-scrolled);
+        colorEditBox.setY(40+(25*3)-scrolled);
         super.tick();
     }
 
@@ -58,6 +62,7 @@ public class DemoBariumScreen extends Screen {
     }
 
     private void initButtonsCategory(){
+        titleBox = addRenderableWidget(new TextBox(140, 15, this.width - 150, this.font.lineHeight, this.title, true));
         booleanButton = new BooleanButton(140, 40, this.width - 150, 20, AlinLib.bariumConfig, "Boolean", true, Component.literal("Boolean"));
         addRenderableWidget(booleanButton);
         stringEditBox = new StringEditBox(140, 40+(25), width-150, 20, EDIT_BOX);
@@ -101,7 +106,7 @@ public class DemoBariumScreen extends Screen {
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 15-scrolled, -1);
+//        guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 15-scrolled, -1);
         guiGraphics.drawCenteredString(this.minecraft.font, TITLE, 120 / 2+5, 15, -1);
         //
         guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 875-scrolled, -1);
