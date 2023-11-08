@@ -10,15 +10,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Config {
-    private final String _filePath;
+    private String _filePath;
     private JSONObject _jsonConfiguration = new JSONObject();
+    private boolean _isFile;
     public Config(String filePath){
         this._filePath = filePath;
+        this._isFile = true;
+    }
+    public Config(JSONObject jsonConfiguration){
+        this._jsonConfiguration = jsonConfiguration;
+        this._isFile = false;
     }
     /**
      * Сохранение конфигурации
      */
     public void save(){
+        if(!_isFile) return;
         Minecraft mc = Minecraft.getInstance();
         final Path configFile = mc.gameDirectory.toPath().resolve(_filePath);
 
@@ -34,6 +41,7 @@ public class Config {
      * Загрузка файла конфигов
      */
     public void load(){
+        if(!_isFile) return;
         Minecraft mc = Minecraft.getInstance();
         final Path configFile = mc.gameDirectory.toPath().resolve(_filePath);
         try{
@@ -51,6 +59,19 @@ public class Config {
         this._jsonConfiguration = new JSONObject();
         save();
     }
+    /**
+     * Преобразование в JSON
+     */
+    public JSONObject toJSON(){
+        return this._jsonConfiguration;
+    }
+    /**
+     * Преобразование в JSON
+     */
+    public String toString(){
+        return this._jsonConfiguration.toString();
+    }
+
 
     /**
      * Получение Boolean значения
@@ -131,6 +152,23 @@ public class Config {
      * Задать значения Float
      */
     public void setFloat(String type, float newValue){
+        this._jsonConfiguration.put(type, newValue);
+        save();
+    }
+
+    /**
+     * Получение Double значения
+     */
+
+    public double getDouble(String type, double defaultValue) {
+        if(this._jsonConfiguration == null) this._jsonConfiguration = new JSONObject();
+        if(!this._jsonConfiguration.isNull(type) && !(this._jsonConfiguration.get(type) instanceof Double)) setDouble(type, defaultValue);
+        return this._jsonConfiguration.isNull(type) ? defaultValue : this._jsonConfiguration.getDouble(type);
+    }
+    /**
+     * Задать значения Double
+     */
+    public void setDouble(String type, double newValue){
         this._jsonConfiguration.put(type, newValue);
         save();
     }

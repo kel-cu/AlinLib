@@ -2,6 +2,9 @@
   "alinlib.boolean.true": "ON",
   "alinlib.boolean.false": "OFF",
 
+  "alinlib.something": "You're a failure :D",
+
   "modmenu.alinlib.github": "GitHub",
+  "modmenu.alinlib.modrinth": "Modrinth",
   "modmenu.alinlib.donate": "DonationAlerts"
 }

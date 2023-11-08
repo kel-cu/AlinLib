@@ -5,6 +5,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.components.sliders.SliderInteger;
+import ru.kelcuprum.alinlib.gui.components.sliders.SliderPercent;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.components.buttons.BooleanButton;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
@@ -19,6 +21,9 @@ public class DemoBariumScreen extends Screen {
     private static final Component CATEGORY = Component.literal("Example page");
     private static final Component EDIT_BOX = Component.literal("Edit Box");
     private static final Component COLOR_EDIT_BOX = Component.literal("Color Edit Box");
+    private static final Component SLIDER_PERCENT = Component.literal("Slider Percent");
+    private static final Component SLIDER_INTEGER = Component.literal("Slider Integer");
+    private static final Component SOMETHING = Component.translatable("alinlib.something");
     private static final Component GITHUB = Component.literal("GitHub");
     private static final Component EXIT = Component.literal("Exit");
     //
@@ -38,6 +43,9 @@ public class DemoBariumScreen extends Screen {
     };
     private SelectorStringButton selectorStringButton;
     private ColorEditBox colorEditBox;
+    private SliderPercent sliderPercent;
+    private SliderInteger sliderInt;
+    private TextBox something;
         //
 
 
@@ -51,6 +59,9 @@ public class DemoBariumScreen extends Screen {
         stringEditBox.setY(40+(25)-scrolled);
         selectorStringButton.setY(40+(25*2)-scrolled);
         colorEditBox.setY(40+(25*3)-scrolled);
+        sliderPercent.setY(40+(25*4)-scrolled);
+        sliderInt.setY(40+(25*5)-scrolled);
+        something.setY(875-scrolled);
         super.tick();
     }
 
@@ -79,6 +90,13 @@ public class DemoBariumScreen extends Screen {
         colorEditBox = new ColorEditBox(140, 40+(25*3), width-150, 20, AlinLib.bariumConfig, "Color", 0xFFFFFF, COLOR_EDIT_BOX);
         addRenderableWidget(colorEditBox);
         //
+        sliderPercent = new SliderPercent(140, 40+(25*4), width-150, 20, AlinLib.bariumConfig, "Slider_percent", 0, SLIDER_PERCENT);
+        addRenderableWidget(sliderPercent);
+        sliderInt = new SliderInteger(140, 40+(25*5), width-150, 20, AlinLib.bariumConfig, "Slider_int", 30, 30, 110, SLIDER_PERCENT);
+        sliderInt.setTypeInteger(" Coffee");
+        addRenderableWidget(sliderInt);
+        //
+        something = addRenderableWidget(new TextBox(140, 875, this.width - 150, this.font.lineHeight, SOMETHING, true));
     }
     private void initButton(){
         // line 0
@@ -106,10 +124,8 @@ public class DemoBariumScreen extends Screen {
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-//        guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 15-scrolled, -1);
         guiGraphics.drawCenteredString(this.minecraft.font, TITLE, 120 / 2+5, 15, -1);
         //
-        guiGraphics.drawCenteredString(this.minecraft.font, this.title, width / 2 + 60, 875-scrolled, -1);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
 
     }

@@ -33,6 +33,7 @@
     "modmenu": {
       "links": {
         "modmenu.alinlib.github": "https://github.com/simply-kel/AlinLib",
+        "modmenu.alinlib.modrinth": "https://modrinth.com/project/AlinLib",
         "modmenu.alinlib.donate": "https://kelcuprum.ru/r/don"
       },
       "badges": ["library"]
