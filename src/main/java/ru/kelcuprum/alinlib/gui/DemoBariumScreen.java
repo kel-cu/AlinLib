@@ -5,6 +5,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.components.editbox.StringEditBox;
+import ru.kelcuprum.alinlib.gui.components.editbox.experiment.StringEditBoxExp;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderInteger;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderPercent;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
@@ -12,7 +14,6 @@ import ru.kelcuprum.alinlib.gui.components.buttons.BooleanButton;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonWithColor;
 import ru.kelcuprum.alinlib.gui.components.editbox.ColorEditBox;
-import ru.kelcuprum.alinlib.gui.components.editbox.StringEditBox;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
 
 public class DemoBariumScreen extends Screen {
@@ -45,6 +46,7 @@ public class DemoBariumScreen extends Screen {
     private ColorEditBox colorEditBox;
     private SliderPercent sliderPercent;
     private SliderInteger sliderInt;
+    private StringEditBoxExp stringEditBoxExp;
     private TextBox something;
         //
 
@@ -61,6 +63,7 @@ public class DemoBariumScreen extends Screen {
         colorEditBox.setY(40+(25*3)-scrolled);
         sliderPercent.setY(40+(25*4)-scrolled);
         sliderInt.setY(40+(25*5)-scrolled);
+        stringEditBoxExp.setY(40+(25*6)-scrolled);
         something.setY(875-scrolled);
         super.tick();
     }
@@ -95,6 +98,14 @@ public class DemoBariumScreen extends Screen {
         sliderInt = new SliderInteger(140, 40+(25*5), width-150, 20, AlinLib.bariumConfig, "Slider_int", 30, 30, 110, SLIDER_PERCENT);
         sliderInt.setTypeInteger(" Coffee");
         addRenderableWidget(sliderInt);
+        //
+        stringEditBoxExp = new StringEditBoxExp(140, 40+(25*6), width-150, 20, EDIT_BOX);
+        stringEditBoxExp.setValue(AlinLib.bariumConfig.getString("HELLO_ALINA", "Hello, Alina! How are you?"));
+        stringEditBoxExp.setResponder((string) -> {
+            AlinLib.bariumConfig.setString("HELLO_ALINA", string);
+        });
+
+        addRenderableWidget(stringEditBoxExp);
         //
         something = addRenderableWidget(new TextBox(140, 875, this.width - 150, this.font.lineHeight, SOMETHING, true));
     }
