@@ -65,6 +65,18 @@ public class Localization {
         }
         return clearColor ? clearFormatCodes(text) : fixFormatCodes(text);
     }
+    public void setLocalization(String type, String text){
+        try {
+            JSONObject JSONLocalization = getJSONFile();
+            JSONLocalization.put(type, text);
+            Minecraft CLIENT = Minecraft.getInstance();
+            File localizationFile = new File(CLIENT.gameDirectory + filePath+getCodeLocalization()+".json");
+            Files.createDirectories(localizationFile.toPath().getParent());
+            Files.writeString(localizationFile.toPath(), JSONLocalization.toString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     // FOR EVERYTHING FUNCTION NOT IN THIS CLASS
     public static String getRounding(double number){return getRounding(number, false);}
     public static String getRounding(double number, boolean isToInt){
