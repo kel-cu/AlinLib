@@ -22,6 +22,7 @@ public class DemoBariumScreen extends Screen {
     private static final Component TITLE = Component.literal("AlinLib");
     private static final Component CATEGORY = Component.literal("Example page");
     private static final Component EDIT_BOX = Component.literal("Edit Box");
+    private static final Component SECRET_EDIT_BOX = Component.literal("Secret Edit Box");
     private static final Component COLOR_EDIT_BOX = Component.literal("Color Edit Box");
     private static final Component SLIDER_PERCENT = Component.literal("Slider Percent");
     private static final Component SLIDER_INTEGER = Component.literal("Slider Integer");
@@ -96,11 +97,11 @@ public class DemoBariumScreen extends Screen {
         //
         sliderPercent = new SliderPercent(140, 40+(25*4), width-150, 20, AlinLib.bariumConfig, "Slider_percent", 0, SLIDER_PERCENT);
         addRenderableWidget(sliderPercent);
-        sliderInt = new SliderInteger(140, 40+(25*5), width-150, 20, AlinLib.bariumConfig, "Slider_int", 30, 30, 110, SLIDER_PERCENT);
+        sliderInt = new SliderInteger(140, 40+(25*5), width-150, 20, AlinLib.bariumConfig, "Slider_int", 30, 30, 110, SLIDER_INTEGER);
         sliderInt.setTypeInteger(" Coffee");
         addRenderableWidget(sliderInt);
         //
-        secretStringEditBox = new SecretStringEditBox(140, 40+(25*6), width-150, 20, EDIT_BOX);
+        secretStringEditBox = new SecretStringEditBox(140, 40+(25*6), width-150, 20, SECRET_EDIT_BOX);
         secretStringEditBox.setValue(AlinLib.bariumConfig.getString("HELLO_ALINA", "Hello, Alina! How are you?"));
         secretStringEditBox.setResponder((string) -> {
             AlinLib.bariumConfig.setString("HELLO_ALINA", string);
