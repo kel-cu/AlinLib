@@ -19,6 +19,22 @@ public class SliderPercent extends AbstractSliderButton {
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;
     }
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public void setYPos(int i) {
+        this.setY(i);
+    }
+
+    public void setXPos(int i) {
+        this.setX(i);
+    }
+
+
+    public void setPos(int i, int j) {
+        this.setPosition(i, j);
+    }
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float tick) {

@@ -26,6 +26,22 @@ public class SliderInteger extends AbstractSliderButton {
         this.min = min;
         this.max = max;
     }
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public void setYPos(int i) {
+        this.setY(i);
+    }
+
+    public void setXPos(int i) {
+        this.setX(i);
+    }
+
+
+    public void setPos(int i, int j) {
+        this.setPosition(i, j);
+    }
 
     public void setTypeInteger(String type){
         this.typeInteger = type;

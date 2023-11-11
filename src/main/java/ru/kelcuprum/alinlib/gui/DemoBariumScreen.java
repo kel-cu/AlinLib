@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.components.editbox.SecretStringEditBox;
 import ru.kelcuprum.alinlib.gui.components.editbox.StringEditBox;
 import ru.kelcuprum.alinlib.gui.components.editbox.experiment.StringEditBoxExp;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderInteger;
@@ -46,7 +47,7 @@ public class DemoBariumScreen extends Screen {
     private ColorEditBox colorEditBox;
     private SliderPercent sliderPercent;
     private SliderInteger sliderInt;
-    private StringEditBoxExp stringEditBoxExp;
+    private SecretStringEditBox secretStringEditBox;
     private TextBox something;
         //
 
@@ -63,7 +64,7 @@ public class DemoBariumScreen extends Screen {
         colorEditBox.setY(40+(25*3)-scrolled);
         sliderPercent.setY(40+(25*4)-scrolled);
         sliderInt.setY(40+(25*5)-scrolled);
-        stringEditBoxExp.setY(40+(25*6)-scrolled);
+        secretStringEditBox.setY(40+(25*6)-scrolled);
         something.setY(875-scrolled);
         super.tick();
     }
@@ -99,13 +100,13 @@ public class DemoBariumScreen extends Screen {
         sliderInt.setTypeInteger(" Coffee");
         addRenderableWidget(sliderInt);
         //
-        stringEditBoxExp = new StringEditBoxExp(140, 40+(25*6), width-150, 20, EDIT_BOX);
-        stringEditBoxExp.setValue(AlinLib.bariumConfig.getString("HELLO_ALINA", "Hello, Alina! How are you?"));
-        stringEditBoxExp.setResponder((string) -> {
+        secretStringEditBox = new SecretStringEditBox(140, 40+(25*6), width-150, 20, EDIT_BOX);
+        secretStringEditBox.setValue(AlinLib.bariumConfig.getString("HELLO_ALINA", "Hello, Alina! How are you?"));
+        secretStringEditBox.setResponder((string) -> {
             AlinLib.bariumConfig.setString("HELLO_ALINA", string);
         });
 
-        addRenderableWidget(stringEditBoxExp);
+        addRenderableWidget(secretStringEditBox);
         //
         something = addRenderableWidget(new TextBox(140, 875, this.width - 150, this.font.lineHeight, SOMETHING, true));
     }

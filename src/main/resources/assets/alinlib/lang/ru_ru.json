@@ -4,6 +4,8 @@
 
   "alinlib.something": "Ты думал тут что-то будет?",
 
+  "alinlib.editbox.secret": "Секрет :)",
+
   "modmenu.alinlib.github": "GitHub",
   "modmenu.alinlib.modrinth": "Modrinth",
   "modmenu.alinlib.donate": "DonationAlerts"

@@ -11,8 +11,22 @@ public class TextBox extends AbstractWidget {
     public TextBox(int x, int y, int width, int height, Component label, boolean isCenter){
         super(x, y, width, height, label);
         this.isCentred = isCenter;
-//        if(isCenter) guiGraphics.drawString(Minecraft.getInstance().font, label, x + (height - 8) / 2 + ((width/2) - (Minecraft.getInstance().font.width(label)/2)), y + (height - 8) / 2, 0xffffff);
-//        else guiGraphics.drawString(Minecraft.getInstance().font, label, x + (height - 8) / 2, y + (height - 8) / 2, 0xffffff);
+    }
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public void setYPos(int i) {
+        this.setY(i);
+    }
+
+    public void setXPos(int i) {
+        this.setX(i);
+    }
+
+
+    public void setPos(int i, int j) {
+        this.setPosition(i, j);
     }
 
     @Override
