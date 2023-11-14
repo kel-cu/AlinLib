@@ -7,16 +7,30 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.gui.components.buttons.flat.FlatColoredButton;
 
 import java.awt.*;
 
 public class Button extends AbstractButton {
+    private final int color;
+    private final boolean isCentred;
     private final OnPress onPress;
 
-    public Button(int x, int y, int width, int height, Component label, OnPress onPress) {
-        super(x, y, width, height, label);
-        this.onPress = onPress;
 
+    public Button(int x, int y, int width, int height, Component label, OnPress onPress){
+        this(x, y, width, height, 0xFF31FF83, true, label, onPress);
+    }
+    public Button(int x, int y, int width, int height, int color, Component label, OnPress onPress){
+        this(x, y, width, height, color, true, label, onPress);
+    }
+    public Button(int x, int y, int width, int height, boolean isCentred, Component label, OnPress onPress){
+        this(x, y, width, height, 0xFF31FF83, isCentred, label, onPress);
+    }
+    public Button(int x, int y, int width, int height, int color, boolean isCentred, Component label, OnPress onPress) {
+        super(x, y, width, height, label);
+        this.color = color;
+        this.onPress = onPress;
+        this.isCentred = isCentred;
     }
     public void setXPos(int x) {
         this.setX(x);
@@ -43,7 +57,7 @@ public class Button extends AbstractButton {
             final int color = (int) (255.0F * f);
 
             guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(0xFF31FF83, true).getRGB());
+            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), this.color);
             guiGraphics.drawCenteredString(Minecraft.getInstance().font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
         }
     }

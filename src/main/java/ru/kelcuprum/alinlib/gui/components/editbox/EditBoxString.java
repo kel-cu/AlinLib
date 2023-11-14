@@ -1,4 +1,4 @@
-package ru.kelcuprum.alinlib.gui.components.editbox.experiment;
+package ru.kelcuprum.alinlib.gui.components.editbox;
 
 import net.minecraft.SharedConstants;
 import net.minecraft.Util;
@@ -29,7 +29,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class StringEditBoxExp extends AbstractWidget implements Renderable {
+public class EditBoxString extends AbstractWidget implements Renderable {
     public static final int BACKWARDS = -1;
     public static final int FORWARDS = 1;
     private static final int CURSOR_INSERT_WIDTH = 1;
@@ -58,18 +58,18 @@ public class StringEditBoxExp extends AbstractWidget implements Renderable {
     private Component hint;
     private long focusedTime;
 
-    public StringEditBoxExp(Font font, int i, int j, Component component) {
+    public EditBoxString(Font font, int i, int j, Component component) {
         this(font, 0, 0, i, j, component);
     }
 
-    public StringEditBoxExp(Font font, int i, int j, int k, int l, Component component) {
+    public EditBoxString(Font font, int i, int j, int k, int l, Component component) {
         this(font, i, j, k, l, (EditBox)null, component);
     }
-    public StringEditBoxExp(int i, int j, int k, int l, Component component) {
+    public EditBoxString(int i, int j, int k, int l, Component component) {
         this(Minecraft.getInstance().font, i, j, k, l, (EditBox)null, component);
     }
 
-    public StringEditBoxExp(Font font, int i, int j, int k, int l, @Nullable EditBox editBox, Component component) {
+    public EditBoxString(Font font, int i, int j, int k, int l, @Nullable EditBox editBox, Component component) {
         super(i, j, k, l, component);
         this.value = "";
         this.maxLength = Integer.MAX_VALUE;

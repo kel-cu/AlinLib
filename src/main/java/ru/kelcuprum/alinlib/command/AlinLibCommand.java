@@ -6,11 +6,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
-import ru.kelcuprum.alinlib.gui.DemoBariumScreen;
-import ru.kelcuprum.alinlib.gui.toast.AlinLibCustomToast;
-import ru.kelcuprum.alinlib.gui.toast.AlinLibToast;
-
-import java.awt.*;
+import ru.kelcuprum.alinlib.gui.screens.AlinaDemoScreen;
+import ru.kelcuprum.alinlib.gui.screens.AlinaDemoFlatScreen;
+import ru.kelcuprum.alinlib.gui.toast.AlinaFlatToast;
+import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
@@ -20,26 +19,37 @@ public class AlinLibCommand {
                 .then(literal("demo_screen")
                         .executes(context -> {
                             Minecraft client = context.getSource().getClient();
-                            client.tell(() -> client.setScreen(new DemoBariumScreen(client.screen)));
+                            client.tell(() -> client.setScreen(new AlinaDemoScreen(client.screen)));
+                            return 1;
+                        })
+                )
+                .then(literal("demo_flat_screen")
+                        .executes(context -> {
+                            Minecraft client = context.getSource().getClient();
+                            client.tell(() -> client.setScreen(new AlinaDemoFlatScreen(client.screen)));
                             return 1;
                         })
                 )
                 .then(literal("test_toast")
                         .executes(context -> {
                             Minecraft client = context.getSource().getClient();
-                            client.tell(() -> client.getToasts().addToast(new AlinLibToast(Component.literal("AlibLib"), Component.literal("Test toast, not fail"), false)));
-                            client.tell(() -> client.getToasts().addToast(new AlinLibToast(Component.literal("AlibLib"), Component.literal("Test toast, fail"), true)));
+                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMFf)"), Component.literal("Title, msg, fail false"), false)));
+                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMFt)"), Component.literal("Title, msg, fail true"), true)));
+                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMI)"), Component.literal("Title, msg, item"), Items.BEACON)));
+                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMC)"), Component.literal("Title, msg, color"), 0xFF34a0a4)));
+                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMIC)"), Component.literal("Title, msg, item, color"), Items.BEACON, 0xFF34a0a4)));
                             return 1;
                         }))
-                .then(literal("test_custom_toast")
+                .then(literal("test_flat_toast")
                         .executes(context -> {
                             Minecraft client = context.getSource().getClient();
-                            client.tell(() -> client.getToasts().addToast(new AlinLibCustomToast(Component.literal("AlibLib"), Component.literal("<- WOW, THIS BEDROCK"), Items.BEDROCK, new Color(0x65C4FF))));
-                            client.tell(() -> client.getToasts().addToast(new AlinLibCustomToast(Component.literal("AlibLib"), Component.literal("Another Mistake, by Yon"), Items.BARRIER, new Color(0xEA1266))));
+                            client.tell(() -> client.getToasts().addToast(new AlinaFlatToast(Component.literal("AlibLib (TMF)"), Component.literal("Title, msg, fail"), false)));
+                            client.tell(() -> client.getToasts().addToast(new AlinaFlatToast(Component.literal("AlibLib (TMI)"), Component.literal("Title, msg, item"), Items.BEACON)));
+                            client.tell(() -> client.getToasts().addToast(new AlinaFlatToast(Component.literal("AlibLib (TMC)"), Component.literal("Title, msg, color"))));
                             return 1;
                         }))
                 .executes(context -> {
-                    context.getSource().getClient().getToasts().addToast(new AlinLibToast(Component.literal("AlinLib"), Component.literal("Hello, world :3"), false));
+                    context.getSource().getClient().getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Hello, world :3"), false));
                     return 1;
                 })
         );

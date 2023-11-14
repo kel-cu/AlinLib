@@ -1,4 +1,4 @@
-package ru.kelcuprum.alinlib.gui.components.sliders;
+package ru.kelcuprum.alinlib.gui.components.sliders.flat;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -8,7 +8,7 @@ import ru.kelcuprum.alinlib.config.Config;
 
 import java.awt.*;
 
-public class SliderInteger extends AbstractSliderButton {
+public class FlatSliderInteger extends AbstractSliderButton {
     public final int defaultConfig;
     public final Config config;
     public final String typeConfig;
@@ -16,7 +16,7 @@ public class SliderInteger extends AbstractSliderButton {
     public final int max;
     public int displayValue;
     public String typeInteger = "";
-    public SliderInteger(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
+    public FlatSliderInteger(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
         super(x, y, width, height, component, ((double) (config.getInt(typeConfig, defaultConfig) - min) /(max-min)));
         this.config = config;
         this.typeConfig = typeConfig;
@@ -51,8 +51,7 @@ public class SliderInteger extends AbstractSliderButton {
         final float f = state / 2 * 0.9F + 0.1F;
         final int color = (int) (255.0F * f);
 
-        guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-        guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(isFocused() ? 0xFFFFEE31 : 0xFF31FF83, true).getRGB());
+        guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight(), color / 2 << 24);
         if(isHoveredOrFocused()){
             int x = this.getX() + (int)(this.value * (double)(this.width - 4));
             int y = this.getY()+(getHeight() - 8) / 2;

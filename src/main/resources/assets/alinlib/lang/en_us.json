@@ -8,5 +8,7 @@
 
   "modmenu.alinlib.github": "GitHub",
   "modmenu.alinlib.modrinth": "Modrinth",
-  "modmenu.alinlib.donate": "DonationAlerts"
+  "modmenu.alinlib.donate": "DonationAlerts",
+
+  "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum"
 }

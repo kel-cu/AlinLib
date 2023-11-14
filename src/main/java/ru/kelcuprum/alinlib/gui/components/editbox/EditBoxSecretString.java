@@ -16,12 +16,12 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
+import ru.kelcuprum.alinlib.config.Localization;
 
 import java.awt.*;
 import java.util.Objects;
@@ -29,7 +29,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class StringEditBox extends AbstractWidget implements Renderable {
+public class EditBoxSecretString extends AbstractWidget implements Renderable {
     public static final int BACKWARDS = -1;
     public static final int FORWARDS = 1;
     private static final int CURSOR_INSERT_WIDTH = 1;
@@ -58,18 +58,18 @@ public class StringEditBox extends AbstractWidget implements Renderable {
     private Component hint;
     private long focusedTime;
 
-    public StringEditBox(Font font, int i, int j, Component component) {
+    public EditBoxSecretString(Font font, int i, int j, Component component) {
         this(font, 0, 0, i, j, component);
     }
 
-    public StringEditBox(Font font, int i, int j, int k, int l, Component component) {
+    public EditBoxSecretString(Font font, int i, int j, int k, int l, Component component) {
         this(font, i, j, k, l, (EditBox)null, component);
     }
-    public StringEditBox(int i, int j, int k, int l, Component component) {
+    public EditBoxSecretString(int i, int j, int k, int l, Component component) {
         this(Minecraft.getInstance().font, i, j, k, l, (EditBox)null, component);
     }
 
-    public StringEditBox(Font font, int i, int j, int k, int l, @Nullable EditBox editBox, Component component) {
+    public EditBoxSecretString(Font font, int i, int j, int k, int l, @Nullable EditBox editBox, Component component) {
         super(i, j, k, l, component);
         this.value = "";
         this.maxLength = Integer.MAX_VALUE;
@@ -468,8 +468,7 @@ public class StringEditBox extends AbstractWidget implements Renderable {
                 }
             } else {
                 guiGraphics.drawString(Minecraft.getInstance().font, getMessage().getString()+":", getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
-                FormattedText volume1 = font.substrByWidth(FormattedText.of(value), getX()+getWidth()-(getPositionContent(value)));
-                guiGraphics.drawString(this.font, volume1.getString(), getPositionContent(volume1.getString()), getY() + (getHeight() - 8) / 2, 0xffffff);
+                guiGraphics.drawString(this.font, Localization.getText("alinlib.editbox.secret"), getX()+getWidth()-this.font.width(Localization.getText("alinlib.editbox.secret"))-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
             }
         }
     }
