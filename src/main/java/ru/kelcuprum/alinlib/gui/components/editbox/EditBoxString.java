@@ -467,11 +467,19 @@ public class EditBoxString extends AbstractWidget implements Renderable {
                     this.renderHighlight(guiGraphics, q, var10003, var10004, var10005 + 9);
                 }
             } else {
-                guiGraphics.drawString(Minecraft.getInstance().font, getMessage().getString()+":", getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
-                FormattedText volume1 = font.substrByWidth(FormattedText.of(value), getX()+getWidth()-(getPositionContent(value)));
-                guiGraphics.drawString(this.font, volume1.getString(), getPositionContent(volume1.getString()), getY() + (getHeight() - 8) / 2, 0xffffff);
+                if (isDoesNotFit()) {
+                    this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
+                } else {
+                    guiGraphics.drawString(Minecraft.getInstance().font, getMessage().getString() + ":", getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+                    FormattedText volume1 = font.substrByWidth(FormattedText.of(value), getX() + getWidth() - (getPositionContent(value)));
+                    guiGraphics.drawString(this.font, volume1.getString(), getPositionContent(volume1.getString()), getY() + (getHeight() - 8) / 2, 0xffffff);
+                }
             }
         }
+    }
+    public boolean isDoesNotFit(){
+        int size = Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
+        return size > getWidth();
     }
 
     private void renderHighlight(GuiGraphics guiGraphics, int i, int j, int k, int l) {

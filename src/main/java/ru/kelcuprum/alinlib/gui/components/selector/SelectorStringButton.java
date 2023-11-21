@@ -14,12 +14,14 @@ public class SelectorStringButton extends AbstractButton {
     public String[] list;
     public Config config;
     public String typeConfig;
+    public final String buttonMessage;
     public SelectorStringButton(int x, int y, int width, int height, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
         super(x, y, width, height, label);
 
         this.typeConfig = typeConfig;
         this.config = config;
         this.list = list;
+        this.buttonMessage = label.getString();
 
         this.currentPosition = Arrays.stream(this.list).toList().indexOf(this.config.getString(typeConfig, defaultVolume));
     }
@@ -56,11 +58,24 @@ public class SelectorStringButton extends AbstractButton {
             // BASE
             guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
             guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), 0xFF31FF83);
-            guiGraphics.drawString(Minecraft.getInstance().font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
-            // VOLUME
             Component volumeState = Component.literal(this.list[this.currentPosition]);
-            guiGraphics.drawString(Minecraft.getInstance().font, volumeState, getX() + getWidth()-Minecraft.getInstance().font.width(volumeState.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+            if(isDoesNotFit()){
+                if(isHoveredOrFocused()){
+                    this.setMessage(volumeState);
+                } else {
+                    this.setMessage(Component.literal(buttonMessage).append(": ").append(volumeState));
+                }
+                this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
+            } else {
+                guiGraphics.drawString(Minecraft.getInstance().font, buttonMessage, getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+                // VOLUME
+                guiGraphics.drawString(Minecraft.getInstance().font, volumeState, getX() + getWidth() - Minecraft.getInstance().font.width(volumeState.getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+            }
         }
+    }
+    public boolean isDoesNotFit(){
+        int size = Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
+        return size > getWidth();
     }
     @Override
     protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {

@@ -55,9 +55,14 @@ public class FlatColoredButton extends AbstractButton {
             final int colorBackground = (int) (255.0F * f);
 
             guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight(), isHovered() ? color : (colorBackground / 2 << 24));
-            if(isCentred) InterfaceUtils.drawCenteredString(guiGraphics, Minecraft.getInstance().font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, false);
+            if(isDoesNotFit()) this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
+            else if(isCentred) InterfaceUtils.drawCenteredString(guiGraphics, Minecraft.getInstance().font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, false);
             else guiGraphics.drawString(Minecraft.getInstance().font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff, false);
         }
+    }
+    public boolean isDoesNotFit(){
+        int size = Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
+        return size > getWidth();
     }
 
     @Override

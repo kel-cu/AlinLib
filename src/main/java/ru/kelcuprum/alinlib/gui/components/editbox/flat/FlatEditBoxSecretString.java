@@ -466,10 +466,19 @@ public class FlatEditBoxSecretString extends AbstractWidget implements Renderabl
                     this.renderHighlight(guiGraphics, q, var10003, var10004, var10005 + 9);
                 }
             } else {
-                guiGraphics.drawString(Minecraft.getInstance().font, getMessage().getString()+":", getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
-                guiGraphics.drawString(this.font, Localization.getText("alinlib.editbox.secret"), getX()+getWidth()-this.font.width(Localization.getText("alinlib.editbox.secret"))-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+                if (isDoesNotFit()) {
+
+                    this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
+                } else {
+                    guiGraphics.drawString(Minecraft.getInstance().font, getMessage().getString() + ":", getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+                    guiGraphics.drawString(this.font, Localization.getText("alinlib.editbox.secret"), getX() + getWidth() - this.font.width(Localization.getText("alinlib.editbox.secret")) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+                }
             }
         }
+    }
+    public boolean isDoesNotFit(){
+        int size = Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
+        return size > getWidth();
     }
 
     private void renderHighlight(GuiGraphics guiGraphics, int i, int j, int k, int l) {
