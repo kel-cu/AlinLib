@@ -10,20 +10,26 @@ import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.flat.FlatButton;
 import ru.kelcuprum.alinlib.gui.components.buttons.flat.FlatButtonBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.flat.FlatColoredButton;
+import ru.kelcuprum.alinlib.gui.components.buttons.vanilla.VanillaButton;
+import ru.kelcuprum.alinlib.gui.components.buttons.vanilla.VanillaButtonBoolean;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxSecretString;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxString;
 import ru.kelcuprum.alinlib.gui.components.editbox.flat.FlatEditBoxSecretString;
 import ru.kelcuprum.alinlib.gui.components.editbox.flat.FlatEditBoxString;
 import ru.kelcuprum.alinlib.gui.components.selector.flat.FlatSelectorStringButton;
+import ru.kelcuprum.alinlib.gui.components.selector.vanilla.VanillaSelectorStringButton;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderInteger;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderPercent;
 import ru.kelcuprum.alinlib.gui.components.sliders.flat.FlatSliderInteger;
 import ru.kelcuprum.alinlib.gui.components.sliders.flat.FlatSliderPercent;
+import ru.kelcuprum.alinlib.gui.components.sliders.vanilla.VanillaSliderInteger;
+import ru.kelcuprum.alinlib.gui.components.sliders.vanilla.VanillaSliderPercent;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxColor;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
+import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
 
 public class AlinaDemoScreen extends Screen {
     private final Screen parent;
@@ -72,8 +78,23 @@ public class AlinaDemoScreen extends Screen {
     private FlatSliderPercent flatSliderPercent;
     private FlatSliderInteger flatSliderInt;
     private FlatEditBoxSecretString flatSecretStringEditBox;
+    //
+    private TextBox vanillaTitleBox;
+    private VanillaButton vanillaButton;
+    private VanillaButtonBoolean vanillaBooleanButton;
+    String[] vanillaHell = {
+            "Hello",
+            ",",
+            "World",
+            "!",
+            "No...",
+            "Welcome to Hell :)"
+    };
+    private VanillaSelectorStringButton vanillaSelectorStringButton;
+    private VanillaSliderPercent vanillaSliderPercent;
+    private VanillaSliderInteger vanillaSliderInt;
+    //
     private TextBox something;
-        //
 
 
     public AlinaDemoScreen(Screen parent) {
@@ -97,6 +118,13 @@ public class AlinaDemoScreen extends Screen {
         flatSliderPercent.setY(40+(25*11)-scrolled);
         flatSliderInt.setY(40+(25*12)-scrolled);
         flatSecretStringEditBox.setY(40+(25*13)-scrolled);
+        //
+        vanillaTitleBox.setY(40+(25*14)-scrolled);
+        vanillaBooleanButton.setY(40+(25*15)-scrolled);
+        vanillaButton.setY(40+(25*16)-scrolled);
+        vanillaSelectorStringButton.setY(40+(25*17)-scrolled);
+        vanillaSliderPercent.setY(40+(25*18)-scrolled);
+        vanillaSliderInt.setY(40+(25*19)-scrolled);
         //
         something.setY(875-scrolled);
         super.tick();
@@ -172,8 +200,26 @@ public class AlinaDemoScreen extends Screen {
         flatSecretStringEditBox.setResponder((string) -> {
             AlinLib.bariumConfig.setString("HELLO_ALINA1", string);
         });
+        // - - - - - - - - -
+        vanillaTitleBox = new TextBox(140, 40+(25*7), this.width - 150, 20, Component.literal("Vanilla design"), true);
+        vanillaTitleBox.setTooltip(Localization.toText("Hello, world!"));
+        addRenderableWidget(vanillaTitleBox);
 
-        addRenderableWidget(secretStringEditBox);
+        vanillaBooleanButton = new VanillaButtonBoolean(140, 40+(25*8), this.width - 150, 20, AlinLib.bariumConfig, "Boolean11", true, Component.literal("Boolean"));
+        addRenderableWidget(vanillaBooleanButton);
+        vanillaButton = new VanillaButton(140, 40+(25*8), this.width - 150, 20, Component.literal("Boolean"), (OnPress) -> {
+            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Well..."), false));
+        });
+        addRenderableWidget(vanillaButton);
+        //
+        vanillaSelectorStringButton = new VanillaSelectorStringButton(140, 40+(25*10), this.width - 150, 20, hell, AlinLib.bariumConfig, "selector11", hell[0], Component.literal("Selector"));
+        addRenderableWidget(vanillaSelectorStringButton);
+        //
+        vanillaSliderPercent = new VanillaSliderPercent(140, 40+(25*11), width-150, 20, AlinLib.bariumConfig, "Slider_percent11", 0, SLIDER_PERCENT);
+        addRenderableWidget(vanillaSliderPercent);
+        vanillaSliderInt = new VanillaSliderInteger(140, 40+(25*12), width-150, 20, AlinLib.bariumConfig, "Slider_int11", 30, 0, 1000, SLIDER_INTEGER);
+        vanillaSliderInt.setTypeInteger(" wires");
+        addRenderableWidget(vanillaSliderInt);
         //
         something = addRenderableWidget(new TextBox(140, 875, this.width - 150, this.font.lineHeight, SOMETHING, true));
     }
@@ -199,7 +245,7 @@ public class AlinaDemoScreen extends Screen {
         } else {
             renderDirtBackground(guiGraphics);
         }
-        InterfaceUtils.renderLeftPanel(guiGraphics, 130, this.height);
+        InterfaceUtils.renderTextureLeftPanel(guiGraphics, 130, this.height);
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {

@@ -1,14 +1,22 @@
-package ru.kelcuprum.alinlib.gui.components.sliders.flat;
+package ru.kelcuprum.alinlib.gui.components.sliders.vanilla;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import ru.kelcuprum.alinlib.config.Config;
 
 import java.awt.*;
 
-public class FlatSliderInteger extends AbstractSliderButton {
+public class VanillaSliderInteger extends AbstractSliderButton {
+
+    private static final ResourceLocation SLIDER_SPRITE = new ResourceLocation("widget/slider");
+    private static final ResourceLocation HIGHLIGHTED_SPRITE = new ResourceLocation("widget/slider_highlighted");
+    private static final ResourceLocation SLIDER_HANDLE_SPRITE = new ResourceLocation("widget/slider_handle");
+    private static final ResourceLocation SLIDER_HANDLE_HIGHLIGHTED_SPRITE = new ResourceLocation("widget/slider_handle_highlighted");
+    //
     public final int defaultConfig;
     public final Config config;
     public final String typeConfig;
@@ -18,7 +26,7 @@ public class FlatSliderInteger extends AbstractSliderButton {
     public String typeInteger = "";
     public final String buttonMessage;
     Component volumeState;
-    public FlatSliderInteger(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
+    public VanillaSliderInteger(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
         super(x, y, width, height, component, ((double) (config.getInt(typeConfig, defaultConfig) - min) /(max-min)));
         this.config = config;
         this.typeConfig = typeConfig;
@@ -48,17 +56,24 @@ public class FlatSliderInteger extends AbstractSliderButton {
     public void setTypeInteger(String type){
         this.typeInteger = type;
     }
+
+    private ResourceLocation getSprite() {
+        return this.isFocused() ? HIGHLIGHTED_SPRITE : SLIDER_SPRITE;
+    }
+
+    private ResourceLocation getHandleSprite() {
+        return !this.isHovered ? SLIDER_HANDLE_SPRITE : SLIDER_HANDLE_HIGHLIGHTED_SPRITE;
+    }
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float tick) {
-        float state = !active ? 3 : isHovered ? 2 : 1;
-        final float f = state / 2 * 0.9F + 0.1F;
-        final int color = (int) (255.0F * f);
-
-        guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight(), color / 2 << 24);
+        guiGraphics.setColor(1.0F, 1.0F, 1.0F, this.alpha);
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.enableDepthTest();
+        guiGraphics.blitSprite(this.getSprite(), this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         if(isHoveredOrFocused()){
-            int x = this.getX() + (int)(this.value * (double)(this.width - 4));
-            int y = this.getY()+(getHeight() - 8) / 2;
-            guiGraphics.fill(x, y, x+4, y+Minecraft.getInstance().font.lineHeight, new Color(isFocused() ? 0xFFFFEE31 : 0xFF31FF83, true).getRGB());
+            guiGraphics.blitSprite(this.getHandleSprite(), this.getX() + (int)(this.value * (double)(this.width - 8)), this.getY(), 8, this.getHeight());
         }
 
         volumeState = Component.translatable(displayValue+typeInteger);

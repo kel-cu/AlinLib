@@ -3,11 +3,39 @@ package ru.kelcuprum.alinlib.gui;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 
 import java.awt.*;
 
 public class InterfaceUtils {
+    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation("textures/gui/options_background.png");
+
+    // LEFT PANEL
+    public static void renderTextureLeftPanel(GuiGraphics guiGraphics, int width, int height, float alpha, ResourceLocation texture){
+        guiGraphics.setColor(alpha, alpha, alpha, 1.0F);
+        guiGraphics.blit(texture, 0, 0, 0, 0.0F, 0.0F, width, height, 32, 32);
+        guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+    public static void renderTextureLeftPanel(GuiGraphics guiGraphics, float alpha , int width, int height){
+        renderTextureLeftPanel(guiGraphics, width, height, alpha,  BACKGROUND_LOCATION);
+    }
+    public static void renderTextureLeftPanel(GuiGraphics guiGraphics, int width, int height){
+        renderTextureLeftPanel(guiGraphics, width, height, 0.5F ,BACKGROUND_LOCATION);
+    }
+    // RIGHT PANEL
+    public static void renderTextureRightPanel(GuiGraphics guiGraphics, int screenWidth, int width, int height, float alpha, ResourceLocation texture){
+        guiGraphics.setColor(alpha, alpha, alpha, 1.0F);
+        guiGraphics.blit(texture, screenWidth-width, 0, 0, 0.0F, 0.0F, screenWidth, height, 32, 32);
+        guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+    public static void renderTextureRightPanel(GuiGraphics guiGraphics, int screenWidth, float alpha, int width, int height){
+        renderTextureRightPanel(guiGraphics, screenWidth, width, height, alpha, BACKGROUND_LOCATION);
+    }
+    public static void renderTextureRightPanel(GuiGraphics guiGraphics, int screenWidth, int width, int height){
+        renderTextureRightPanel(guiGraphics, screenWidth, width, height, 0.5F, BACKGROUND_LOCATION);
+    }
+
     // LEFT PANEL
     public static void renderLeftPanel(GuiGraphics guiGraphics, int width, int height, Color color){
         guiGraphics.fill(0, 0, width, height, color.getRGB());
