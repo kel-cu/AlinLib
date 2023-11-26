@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
+import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.gui.screens.AlinaDemoScreen;
 import ru.kelcuprum.alinlib.gui.screens.AlinaDemoFlatScreen;
 import ru.kelcuprum.alinlib.gui.toast.AlinaFlatToast;
@@ -36,8 +37,8 @@ public class AlinLibCommand {
                             client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMFf)"), Component.literal("Title, msg, fail false"), false)));
                             client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMFt)"), Component.literal("Title, msg, fail true"), true)));
                             client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMI)"), Component.literal("Title, msg, item"), Items.BEACON)));
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMC)"), Component.literal("Title, msg, color"), 0xFF34a0a4)));
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMIC)"), Component.literal("Title, msg, item, color"), Items.BEACON, 0xFF34a0a4)));
+                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMC)"), Component.literal("Title, msg, color"), Colors.TETRA)));
+                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMIC)"), Component.literal("Title, msg, item, color"), Items.BEACON, Colors.SEABIRD)));
                             return 1;
                         }))
                 .then(literal("test_flat_toast")

@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 
 import java.awt.*;
@@ -55,11 +56,11 @@ public class SliderInteger extends AbstractSliderButton {
         final int color = (int) (255.0F * f);
 
         guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-        guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(isFocused() ? 0xFFFFEE31 : 0xFF31FF83, true).getRGB());
+        guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE, true).getRGB());
         if(isHoveredOrFocused()){
             int x = this.getX() + (int)(this.value * (double)(this.width - 4));
             int y = this.getY()+(getHeight() - 8) / 2;
-            guiGraphics.fill(x, y, x+4, y+Minecraft.getInstance().font.lineHeight, new Color(isFocused() ? 0xFFFFEE31 : 0xFF31FF83, true).getRGB());
+            guiGraphics.fill(x, y, x+4, y+Minecraft.getInstance().font.lineHeight, new Color(isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE, true).getRGB());
         }
 
         volumeState = Component.translatable(displayValue+typeInteger);

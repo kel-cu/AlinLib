@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.flat.FlatColoredButton;
 
@@ -19,13 +20,13 @@ public class Button extends AbstractButton {
 
 
     public Button(int x, int y, int width, int height, Component label, OnPress onPress){
-        this(x, y, width, height, 0xFF31FF83, true, label, onPress);
+        this(x, y, width, height, Colors.SEADRIVE, true, label, onPress);
     }
     public Button(int x, int y, int width, int height, int color, Component label, OnPress onPress){
         this(x, y, width, height, color, true, label, onPress);
     }
     public Button(int x, int y, int width, int height, boolean isCentred, Component label, OnPress onPress){
-        this(x, y, width, height, 0xFF31FF83, isCentred, label, onPress);
+        this(x, y, width, height, Colors.SEADRIVE, isCentred, label, onPress);
     }
     public Button(int x, int y, int width, int height, int color, boolean isCentred, Component label, OnPress onPress) {
         super(x, y, width, height, label);

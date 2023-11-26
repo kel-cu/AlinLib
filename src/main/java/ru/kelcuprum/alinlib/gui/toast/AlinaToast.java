@@ -11,6 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import ru.kelcuprum.alinlib.Colors;
 
 import java.awt.*;
 import java.util.Iterator;
@@ -27,10 +28,10 @@ public class AlinaToast implements Toast {
     private boolean playedSound;
 
     public AlinaToast(Component title, Component message, boolean isFail) {
-        this(title, message, isFail ? Items.BARRIER : Items.CRAFTING_TABLE, isFail ? 0xFFFF3131 : 0xFF31FF83);
+        this(title, message, isFail ? Items.BARRIER : Items.CRAFTING_TABLE, isFail ? Colors.GROUPIE : Colors.KENNY);
     }
     public AlinaToast(Component title, Component message, Item icon) {
-        this(title, message, icon, 0xFF31FF83);
+        this(title, message, icon, Colors.SELFISH);
     }
     public AlinaToast(Component title, Component message, int color) {
         this(title, message, Items.CRAFTING_TABLE, color);

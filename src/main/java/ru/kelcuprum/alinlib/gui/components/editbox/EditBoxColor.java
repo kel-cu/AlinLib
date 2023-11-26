@@ -6,6 +6,7 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 
 import java.awt.*;
@@ -73,7 +74,7 @@ public class EditBoxColor extends EditBox {
             guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), fColor.getRGB());
 
 
-            guiGraphics.drawString(Minecraft.getInstance().font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? 0xef233c : 0xffffff);
+            guiGraphics.drawString(Minecraft.getInstance().font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : 0xffffff);
             Component volume = Component.literal(this.getValue());
             if(isFocused()){
                 if(this.getValue().length() != this.getCursorPosition()){

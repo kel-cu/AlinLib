@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.flat.FlatButton;
@@ -225,7 +226,7 @@ public class AlinaDemoScreen extends Screen {
     }
     private void initButton(){
         // line 0
-        addRenderableWidget(new Button(10, 40, 110, 20, CATEGORY, (OnPress) -> {
+        addRenderableWidget(new Button(10, 40, 110, 20, Colors.KENNY, CATEGORY, (OnPress) -> {
             this.minecraft.setScreen(this);
         }));
 
@@ -233,7 +234,7 @@ public class AlinaDemoScreen extends Screen {
             Util.getPlatform().openUri("https://github.com/simply-kel/AlinLib/");
         }));
 
-        addRenderableWidget(new FlatColoredButton(10, height - 30, 110, 20, 0xB6FF3131, EXIT, (OnPress) -> {
+        addRenderableWidget(new FlatColoredButton(10, height - 30, 110, 20, Colors.GROUPIE, EXIT, (OnPress) -> {
             AlinLib.bariumConfig.save();
             this.minecraft.setScreen(parent);
         }));

@@ -22,6 +22,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
+import ru.kelcuprum.alinlib.Colors;
 
 import java.awt.*;
 import java.util.Objects;
@@ -404,7 +405,7 @@ public class EditBoxString extends AbstractWidget implements Renderable {
             final int color = (int) (255.0F * f);
 
             guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(isFocused() ? 0xFFFFEE31 : 0xFF31FF83, true).getRGB());
+            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE, true).getRGB());
 
             if(isFocused()){
                 int k = this.isEditable ? this.textColor : this.textColorUneditable;

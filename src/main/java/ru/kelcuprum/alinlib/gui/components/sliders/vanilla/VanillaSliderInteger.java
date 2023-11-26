@@ -62,7 +62,7 @@ public class VanillaSliderInteger extends AbstractSliderButton {
     }
 
     private ResourceLocation getHandleSprite() {
-        return !this.isHovered ? SLIDER_HANDLE_SPRITE : SLIDER_HANDLE_HIGHLIGHTED_SPRITE;
+        return this.isHoveredOrFocused() ? SLIDER_HANDLE_SPRITE : SLIDER_HANDLE_HIGHLIGHTED_SPRITE;
     }
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float tick) {

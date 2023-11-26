@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.flat.FlatButton;
 import ru.kelcuprum.alinlib.gui.components.buttons.flat.FlatColoredButton;
@@ -37,7 +38,7 @@ public class AlinaDemoFlatScreen extends Screen {
         }));
         addRenderableWidget(new TextBox(width/2-100, height/2-120, 200, 20, CATEGORY, true));
 
-        addRenderableWidget(new FlatColoredButton(10, height - 30, 110, 20, 0xFFFF3131, EXIT, (OnPress) -> {
+        addRenderableWidget(new FlatColoredButton(10, height - 30, 110, 20, Colors.GROUPIE, EXIT, (OnPress) -> {
             AlinLib.bariumConfig.save();
             this.minecraft.setScreen(parent);
         }));

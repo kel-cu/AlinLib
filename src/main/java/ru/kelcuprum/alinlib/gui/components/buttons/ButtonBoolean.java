@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 
 import java.awt.*;
@@ -59,7 +60,7 @@ public class ButtonBoolean extends AbstractButton {
             final int color = (int) (255.0F * f);
 
             guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(volume ? 0xFF31FF83 : 0xB6FF3131, true).getRGB());
+            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(volume ? Colors.SEADRIVE : Colors.GROUPIE, true).getRGB());
             volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
 
             if(isDoesNotFit()){
