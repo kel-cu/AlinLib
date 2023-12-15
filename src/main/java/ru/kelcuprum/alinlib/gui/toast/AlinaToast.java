@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import ru.kelcuprum.alinlib.Colors;
 
-import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
