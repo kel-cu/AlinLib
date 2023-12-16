@@ -43,6 +43,10 @@ public class FlatButton extends AbstractButton {
     }
 
     @Override
+    public void setMessage(Component component) {
+        super.setMessage(component);
+    }
+    @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
             float state = !active ? 3 : isHovered ? 2 : 1;

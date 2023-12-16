@@ -42,6 +42,11 @@ public class VanillaButton extends AbstractButton {
     }
 
     @Override
+    public void setMessage(Component component) {
+        super.setMessage(component);
+    }
+
+    @Override
     public void onPress() {
         this.onPress.onPress(this);
     }
