@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
@@ -21,37 +22,45 @@ public class AlinaFlatToast implements Toast {
     public static final int DISPLAY_TIME = 5000;
     private final Component title;
     private final Component message;
-    private final Item icon;
+    private final Item itemIcon;
+    private final ResourceLocation icon;
     private boolean playedSound;
 
     /**
      * Alina not flat. And the design is flat. Heh.
-     * @param title
-     * @param message
      */
     public AlinaFlatToast(Component title, Component message) {
-        this(title, message, Items.CRAFTING_TABLE);
+        this(title, message, Items.CRAFTING_TABLE, null);
     }
 
     /**
      * Alina not flat. And the design is flat. Heh.
-     * @param title
-     * @param message
-     * @param isFail
      */
     public AlinaFlatToast(Component title, Component message, boolean isFail) {
-        this(title, message, isFail ? Items.BARRIER : Items.CRAFTING_TABLE);
+        this(title, message, isFail ? Items.BARRIER : Items.CRAFTING_TABLE, null);
+    }
+
+
+    /**
+     * Alina not flat. And the design is flat. Heh.
+     */
+    public AlinaFlatToast(Component title, Component message, Item itemIcon) {
+        this(title, message, itemIcon, null);
+    }
+    /**
+     * Alina not flat. And the design is flat. Heh.
+     */
+    public AlinaFlatToast(Component title, Component message, ResourceLocation icon) {
+        this(title, message, null, icon);
     }
 
     /**
      * Alina not flat. And the design is flat. Heh.
-     * @param title
-     * @param message
-     * @param icon
      */
-    public AlinaFlatToast(Component title, Component message, Item icon){
+    public AlinaFlatToast(Component title, Component message, Item itemIcon, ResourceLocation icon){
         this.title = title;
         this.message = message;
+        this.itemIcon = itemIcon;
         this.icon = icon;
     }
 
@@ -90,7 +99,8 @@ public class AlinaFlatToast implements Toast {
         if (!this.playedSound && l > 0L) {
             this.playedSound = true;
         }
-        guiGraphics.renderFakeItem(new ItemStack(this.icon), 8, 8);
+        if(this.icon != null) guiGraphics.blit(this.icon, 8, 8, 0.0F, 0.0F, 16, 16, 16, 16);
+        else if(this.itemIcon != null) guiGraphics.renderFakeItem(new ItemStack(this.itemIcon), 8, 8);
         return (double) l >= DISPLAY_TIME * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
     }
 }

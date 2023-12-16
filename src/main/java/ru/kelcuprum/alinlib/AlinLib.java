@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib;
 
+import com.terraformersmc.modmenu.gui.ModsScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.network.chat.Component;

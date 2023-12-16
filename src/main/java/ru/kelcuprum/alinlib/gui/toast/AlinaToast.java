@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
@@ -22,22 +23,38 @@ public class AlinaToast implements Toast {
     public static final int DISPLAY_TIME = 5000;
     private final Component title;
     private final Component message;
-    private final Item icon;
+    private final Item itemIcon;
+    private final ResourceLocation icon;
     private final int color;
     private boolean playedSound;
 
+    // ITEM
     public AlinaToast(Component title, Component message, boolean isFail) {
-        this(title, message, isFail ? Items.BARRIER : Items.CRAFTING_TABLE, isFail ? Colors.GROUPIE : Colors.KENNY);
+        this(title, message, isFail ? Items.BARRIER : Items.CRAFTING_TABLE, null, isFail ? Colors.GROUPIE : Colors.KENNY);
     }
-    public AlinaToast(Component title, Component message, Item icon) {
-        this(title, message, icon, Colors.SELFISH);
+    public AlinaToast(Component title, Component message, Item itemIcon) {
+        this(title, message, itemIcon, null, Colors.SELFISH);
     }
     public AlinaToast(Component title, Component message, int color) {
-        this(title, message, Items.CRAFTING_TABLE, color);
+        this(title, message, Items.CRAFTING_TABLE, null, color);
     }
-    public AlinaToast(Component title, Component message, Item icon, int color){
+    public AlinaToast(Component title, Component message, Item itemIcon, int color) {
+        this(title, message, itemIcon, null, color);
+    }
+    // RESOURCE LOCATION
+    public AlinaToast(Component title, Component message, ResourceLocation icon, boolean isFail) {
+        this(title, message, null, icon, isFail ? Colors.GROUPIE : Colors.KENNY);
+    }
+    public AlinaToast(Component title, Component message, ResourceLocation icon) {
+        this(title, message, icon, Colors.SELFISH);
+    }
+    public AlinaToast(Component title, Component message, ResourceLocation icon, int color) {
+        this(title, message, null, icon, color);
+    }
+    public AlinaToast(Component title, Component message, Item itemIcon, ResourceLocation icon, int color){
         this.title = title;
         this.message = message;
+        this.itemIcon = itemIcon;
         this.icon = icon;
         this.color = color;
     }
@@ -78,7 +95,9 @@ public class AlinaToast implements Toast {
         if (!this.playedSound && l > 0L) {
             this.playedSound = true;
         }
-        guiGraphics.renderFakeItem(new ItemStack(this.icon), 8, 8);
+        if(this.icon != null) guiGraphics.blit(this.icon, 8, 8, 0.0F, 0.0F, 16, 16, 16, 16);
+        else if(this.itemIcon != null) guiGraphics.renderFakeItem(new ItemStack(this.itemIcon), 8, 8);
+
         return (double) l >= DISPLAY_TIME * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
     }
 }

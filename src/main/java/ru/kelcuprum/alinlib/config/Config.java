@@ -12,7 +12,7 @@ import java.nio.file.Path;
 public class Config {
     private String _filePath;
     private JSONObject _jsonConfiguration = new JSONObject();
-    private boolean _isFile;
+    private final boolean _isFile;
     public Config(String filePath){
         this._filePath = filePath;
         this._isFile = true;

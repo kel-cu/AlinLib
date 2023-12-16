@@ -2,9 +2,9 @@ package ru.kelcuprum.alinlib.gui.screens;
 
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
+import org.json.JSONObject;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Localization;
@@ -210,6 +210,7 @@ public class AlinaDemoScreen extends Screen {
         flatSecretStringEditBox.setResponder((string) -> {
             AlinLib.bariumConfig.setString("HELLO_ALINA1", string);
         });
+        addRenderableWidget(flatSecretStringEditBox);
         // - - - - - - - - -
         vanillaTitleBox = new TextBox(140, 40+(25*14), this.width - 150, 20, Component.literal("Vanilla design"), true);
         vanillaTitleBox.setTooltip(Localization.toText("Hello, world!"));
@@ -217,8 +218,13 @@ public class AlinaDemoScreen extends Screen {
 
         vanillaBooleanButton = new VanillaButtonBoolean(140, 40+(25*15), this.width - 150, 20, AlinLib.bariumConfig, "Boolean11", true, Component.literal("Boolean"));
         addRenderableWidget(vanillaBooleanButton);
-        vanillaButton = new VanillaButton(140, 40+(25*16), this.width - 150, 20, Component.literal("Boolean"), (OnPress) -> {
-            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Well..."), false));
+        vanillaButton = new VanillaButton(140, 40+(25*16), this.width - 150, 20, Component.literal("Button"), (OnPress) -> {
+            try{
+                JSONObject hell = AlinLib.getJSONByURL("https://api.kelcuprum.ru/ping");
+                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal(hell.getString("message")), false));
+            } catch (Exception e){
+                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib (Error)"), Component.literal(e.getLocalizedMessage()), true));
+            }
         });
         addRenderableWidget(vanillaButton);
         //
