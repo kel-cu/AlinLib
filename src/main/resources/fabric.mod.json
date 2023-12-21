@@ -23,6 +23,7 @@
       "ru.kelcuprum.alinlib.gui.ModMenuIntegration"
     ]
   },
+  "accessWidener": "alinlib.accesswidener",
   "icon": "assets/alinlib/icon.png",
   "depends": {
     "fabricloader": ">=0.14.17",

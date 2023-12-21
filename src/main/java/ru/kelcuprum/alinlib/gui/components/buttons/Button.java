@@ -9,27 +9,37 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
-import ru.kelcuprum.alinlib.gui.components.buttons.flat.FlatColoredButton;
-
-import java.awt.*;
 
 public class Button extends AbstractButton {
+    private final InterfaceUtils.DesignType type;
     private final int color;
     private final boolean isCentred;
     private final OnPress onPress;
 
 
     public Button(int x, int y, int width, int height, Component label, OnPress onPress){
-        this(x, y, width, height, Colors.SEADRIVE, true, label, onPress);
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, Colors.SEADRIVE, true, label, onPress);
     }
+    public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress){
+        this(x, y, width, height, type, Colors.SEADRIVE, true, label, onPress);
+    }
+    //
     public Button(int x, int y, int width, int height, int color, Component label, OnPress onPress){
-        this(x, y, width, height, color, true, label, onPress);
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, color, true, label, onPress);
     }
+    public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, Component label, OnPress onPress){
+        this(x, y, width, height, type, color, true, label, onPress);
+    }
+    //
     public Button(int x, int y, int width, int height, boolean isCentred, Component label, OnPress onPress){
-        this(x, y, width, height, Colors.SEADRIVE, isCentred, label, onPress);
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, Colors.SEADRIVE, isCentred, label, onPress);
     }
-    public Button(int x, int y, int width, int height, int color, boolean isCentred, Component label, OnPress onPress) {
+    public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, boolean isCentred, Component label, OnPress onPress){
+        this(x, y, width, height, type, Colors.SEADRIVE, isCentred, label, onPress);
+    }
+    public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, boolean isCentred, Component label, OnPress onPress) {
         super(x, y, width, height, label);
+        this.type = type;
         this.color = color;
         this.onPress = onPress;
         this.isCentred = isCentred;
@@ -58,12 +68,7 @@ public class Button extends AbstractButton {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
-            float state = !active ? 3 : isHovered ? 2 : 1;
-            final float f = state / 2 * 0.9F + 0.1F;
-            final int color = (int) (255.0F * f);
-
-            guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), this.color);
+            this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.color);
             if(isDoesNotFit()) this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
             else if(isCentred) InterfaceUtils.drawCenteredString(guiGraphics, Minecraft.getInstance().font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, false);
             else guiGraphics.drawString(Minecraft.getInstance().font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff, false);

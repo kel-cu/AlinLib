@@ -1,0 +1,8 @@
+accessWidener	v1	named
+accessible field net/minecraft/client/gui/components/AbstractButton SPRITES Lnet/minecraft/client/gui/components/WidgetSprites;
+accessible method net/minecraft/client/gui/components/AbstractSliderButton setValue (D)V
+accessible method net/minecraft/client/gui/components/AbstractSliderButton getSprite ()Lnet/minecraft/resources/ResourceLocation;
+accessible method net/minecraft/client/gui/components/AbstractSliderButton getHandleSprite ()Lnet/minecraft/resources/ResourceLocation;
+accessible field net/minecraft/client/gui/components/EditBox font Lnet/minecraft/client/gui/Font;
+accessible field net/minecraft/client/gui/components/EditBox formatter Ljava/util/function/BiFunction;
+accessible field net/minecraft/client/gui/components/EditBox displayPos I

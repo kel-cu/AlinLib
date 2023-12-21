@@ -7,10 +7,10 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
-
-import java.awt.*;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 public class ButtonBoolean extends AbstractButton {
+    private final InterfaceUtils.DesignType type;
     public boolean volume;
     public Component volumeState;
     public final boolean defaultConfig;
@@ -18,7 +18,11 @@ public class ButtonBoolean extends AbstractButton {
     public final String typeConfig;
     public final String buttonMessage;
     public ButtonBoolean(int x, int y, int width, int height, Config config, String typeConfig, boolean defaultConfig, Component label) {
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+    }
+    public ButtonBoolean(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, boolean defaultConfig, Component label) {
         super(x, y, width, height, label);
+        this.type = type;
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;
@@ -55,12 +59,7 @@ public class ButtonBoolean extends AbstractButton {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
-            float state = !active ? 3 : isHovered ? 2 : 1;
-            final float f = state / 2 * 0.9F + 0.1F;
-            final int color = (int) (255.0F * f);
-
-            guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(volume ? Colors.SEADRIVE : Colors.GROUPIE, true).getRGB());
+            this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.volume ? Colors.SEADRIVE : Colors.GROUPIE);
             volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
 
             if(isDoesNotFit()){

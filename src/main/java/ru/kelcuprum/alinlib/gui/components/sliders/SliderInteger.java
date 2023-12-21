@@ -6,10 +6,10 @@ import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
-
-import java.awt.*;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 public class SliderInteger extends AbstractSliderButton {
+    private final InterfaceUtils.DesignType type;
     public final int defaultConfig;
     public final Config config;
     public final String typeConfig;
@@ -20,7 +20,11 @@ public class SliderInteger extends AbstractSliderButton {
     public final String buttonMessage;
     Component volumeState;
     public SliderInteger(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, min, max, component);
+    }
+    public SliderInteger(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
         super(x, y, width, height, component, ((double) (config.getInt(typeConfig, defaultConfig) - min) /(max-min)));
+        this.type = type;
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;
@@ -51,17 +55,7 @@ public class SliderInteger extends AbstractSliderButton {
     }
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float tick) {
-        float state = !active ? 3 : isHovered ? 2 : 1;
-        final float f = state / 2 * 0.9F + 0.1F;
-        final int color = (int) (255.0F * f);
-
-        guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-        guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE, true).getRGB());
-        if(isHoveredOrFocused()){
-            int x = this.getX() + (int)(this.value * (double)(this.width - 4));
-            int y = this.getY()+(getHeight() - 8) / 2;
-            guiGraphics.fill(x, y, x+4, y+Minecraft.getInstance().font.lineHeight, new Color(isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE, true).getRGB());
-        }
+        this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), Colors.SEADRIVE, this.value, this);
 
         volumeState = Component.translatable(displayValue+typeInteger);
         if(isDoesNotFit()){

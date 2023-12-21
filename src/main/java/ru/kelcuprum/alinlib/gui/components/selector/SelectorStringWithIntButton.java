@@ -3,23 +3,26 @@ package ru.kelcuprum.alinlib.gui.components.selector;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
-
-import java.util.Arrays;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 public class SelectorStringWithIntButton extends AbstractButton {
+    private final InterfaceUtils.DesignType type;
     public int currentPosition = 0;
     public String[] list;
     public Config config;
     public String typeConfig;
     public final String buttonMessage;
     public SelectorStringWithIntButton(int x, int y, int width, int height, String[] list, Config config, String typeConfig, int defaultVolume, Component label) {
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, list, config, typeConfig, defaultVolume, label);
+    }
+    public SelectorStringWithIntButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, String[] list, Config config, String typeConfig, int defaultVolume, Component label) {
         super(x, y, width, height, label);
 
+        this.type = type;
         this.typeConfig = typeConfig;
         this.config = config;
         this.list = list;
@@ -54,12 +57,7 @@ public class SelectorStringWithIntButton extends AbstractButton {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
-            float state = !active ? 3 : isHovered ? 2 : 1;
-            final float f = state / 2 * 0.9F + 0.1F;
-            final int color = (int) (255.0F * f);
-            // BASE
-            guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-            guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), Colors.SEADRIVE);
+            this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), Colors.SEADRIVE);
             Component volumeState = Component.literal(this.list[this.currentPosition]);
             if(isDoesNotFit()){
                 if(isHoveredOrFocused()){

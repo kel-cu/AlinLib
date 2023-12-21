@@ -7,17 +7,21 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
-
-import java.awt.*;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 public class SliderPercent extends AbstractSliderButton {
+    private final InterfaceUtils.DesignType type;
     public final double defaultConfig;
     public final Config config;
     public final String typeConfig;
     public final String buttonMessage;
     Component volumeState;
-    public SliderPercent(int x, int y, int width, int height, Config config, String typeConfig, double defaultConfig, Component component) {
+    public SliderPercent(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, Component component) {
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, component);
+    }
+    public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, double defaultConfig, Component component) {
         super(x, y, width, height, component, config.getDouble(typeConfig, defaultConfig));
+        this.type = type;
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;
@@ -42,19 +46,7 @@ public class SliderPercent extends AbstractSliderButton {
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float tick) {
-        // this.getX() + (int)(this.value * (double)(this.width - 8)), this.getY(), 8, this.getHeight()
-        //
-        float state = !active ? 3 : isHovered ? 2 : 1;
-        final float f = state / 2 * 0.9F + 0.1F;
-        final int color = (int) (255.0F * f);
-
-        guiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight()-1, color / 2 << 24);
-        guiGraphics.fill(getX(), getY() + getHeight()-1, getX() + getWidth(), getY() + getHeight(), new Color(isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE, true).getRGB());
-        if(isHoveredOrFocused()){
-            int x = this.getX() + (int)(this.value * (double)(this.width - 4));
-            int y = this.getY()+(getHeight() - 8) / 2;
-            guiGraphics.fill(x, y, x+4, y+Minecraft.getInstance().font.lineHeight, new Color(isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE, true).getRGB());
-        }
+        this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), Colors.SEADRIVE, this.value, this);
 
         volumeState = Component.translatable(Localization.getRounding(this.value * 100,   true)+"%");
         if(isDoesNotFit()){
