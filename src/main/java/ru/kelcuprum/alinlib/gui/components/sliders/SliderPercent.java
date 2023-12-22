@@ -20,7 +20,7 @@ public class SliderPercent extends AbstractSliderButton {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, component);
     }
     public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, double defaultConfig, Component component) {
-        super(x, y, width, height, component, config.getDouble(typeConfig, defaultConfig));
+        super(x, y, width, height, component, config.getNumber(typeConfig, defaultConfig).doubleValue());
         this.type = type;
         this.config = config;
         this.typeConfig = typeConfig;
@@ -80,7 +80,7 @@ public class SliderPercent extends AbstractSliderButton {
 
     @Override
     protected void applyValue() {
-        this.config.setDouble(this.typeConfig, this.value);
+        this.config.setNumber(this.typeConfig, this.value);
 
     }
 }

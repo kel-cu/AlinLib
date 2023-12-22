@@ -1,18 +1,11 @@
 package ru.kelcuprum.alinlib.gui.components.editbox;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
-import org.apache.logging.log4j.Level;
-import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
-
-import java.awt.*;
 
 public class EditBoxColor extends EditBoxString {
     public int volume;
@@ -31,7 +24,7 @@ public class EditBoxColor extends EditBoxString {
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;
-        this.volume = config.getInt(typeConfig, defaultConfig);
+        this.volume = config.getNumber(typeConfig, defaultConfig).intValue();
 
         setMaxLength(20);
         setFormatter((string, integer) -> FormattedCharSequence.forward(string.toUpperCase(), Style.EMPTY.withColor(volume)));
@@ -40,7 +33,7 @@ public class EditBoxColor extends EditBoxString {
         setResponder(string -> {
             try {
                 this.volume = (int) Long.parseLong(string, 16);
-                config.setInt(typeConfig, volume);
+                config.setNumber(typeConfig, volume);
 
                 setError(false);
             } catch (Exception ex) {
