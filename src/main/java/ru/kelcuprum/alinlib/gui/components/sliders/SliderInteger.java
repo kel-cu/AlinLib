@@ -37,17 +37,18 @@ public class SliderInteger extends AbstractSliderButton {
         this.active = active;
     }
 
-    public void setYPos(int i) {
-        this.setY(i);
+
+    @Override
+    public void setX(int x) {
+        super.setX(x);
     }
-
-    public void setXPos(int i) {
-        this.setX(i);
+    @Override
+    public void setY(int y) {
+        super.setY(y);
     }
-
-
-    public void setPos(int i, int j) {
-        this.setPosition(i, j);
+    @Override
+    public void setPosition(int x, int y) {
+        super.setPosition(x, y);
     }
 
     public void setTypeInteger(String type){

@@ -41,6 +41,18 @@ public class EditBoxString extends EditBox {
         this.type = type;
     }
 
+    @Override
+    public void setX(int x) {
+        super.setX(x);
+    }
+    @Override
+    public void setY(int y) {
+        super.setY(y);
+    }
+    @Override
+    public void setPosition(int x, int y) {
+        super.setPosition(x, y);
+    }
     private int getPositionContent(String content) {
         int pos = getX() + getWidth() - font.width(content) - ((getHeight() - 8) / 2);
 

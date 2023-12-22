@@ -40,14 +40,18 @@ public class ButtonSprite extends AbstractButton {
         this.iconHeight = iconHeight;
         this.onPress = onPress;
     }
-    public void setXPos(int x) {
-        this.setX(x);
+
+    @Override
+    public void setX(int x) {
+        super.setX(x);
     }
-    public void setYPos(int y) {
-        this.setY(y);
+    @Override
+    public void setY(int y) {
+        super.setY(y);
     }
-    public void setPos(int x, int y) {
-        this.setPosition(x, y);
+    @Override
+    public void setPosition(int x, int y) {
+        super.setPosition(x, y);
     }
     public void setActive(boolean active){
         this.active = active;

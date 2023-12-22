@@ -34,6 +34,18 @@ public class ButtonBoolean extends AbstractButton {
     }
 
     @Override
+    public void setX(int x) {
+        super.setX(x);
+    }
+    @Override
+    public void setY(int y) {
+        super.setY(y);
+    }
+    @Override
+    public void setPosition(int x, int y) {
+        super.setPosition(x, y);
+    }
+    @Override
     public void onPress() {
         if(!active) return;
         this.volume = !this.volume;
