@@ -23,6 +23,7 @@ import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
 
 public class AlinaDemoScreen extends Screen {
     private final Screen parent;
+    private static final ResourceLocation icon = new ResourceLocation("alinlib", "textures/gui/widget/test/well.png");
     private static final Component TITLE = Component.literal("AlinLib");
     private static final Component CATEGORY = Component.literal("Example page");
     private static final Component EDIT_BOX = Component.literal("Edit Box");
@@ -124,21 +125,20 @@ public class AlinaDemoScreen extends Screen {
     }
     private void initButton(){
         // line 0
-        addRenderableWidget(new Button(10, 40, 110, 20, Colors.KENNY, CATEGORY, (OnPress) -> {
+        addRenderableWidget(new Button(10, 40, 110, 20, InterfaceUtils.DesignType.VANILLA, Colors.KENNY, CATEGORY, (OnPress) -> {
             this.minecraft.setScreen(this);
         }));
 
-        addRenderableWidget(new Button(10, height - 55, 110, 20, GITHUB, (OnPress) -> {
+        addRenderableWidget(new Button(10, height - 55, 110, 20, InterfaceUtils.DesignType.VANILLA, GITHUB, (OnPress) -> {
             Util.getPlatform().openUri("https://github.com/simply-kel/AlinLib/");
         }));
 
 
-        addRenderableWidget(new Button(10, height - 30, 80, 20, EXIT, (OnPress) -> {
+        addRenderableWidget(new Button(10, height - 30, 80, 20, InterfaceUtils.DesignType.VANILLA, EXIT, (OnPress) -> {
             AlinLib.bariumConfig.save();
             this.minecraft.setScreen(parent);
         }));
-        ResourceLocation icon = new ResourceLocation("alinlib", "/textures/gui/widget/test/well.png");
-        addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, icon, Component.literal("Alina"), (OnPress) -> {
+        addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, InterfaceUtils.DesignType.VANILLA, icon, Component.literal("Alina"), 20, 20, (OnPress) -> {
             this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Alina sends her love"), icon));
         }));
     }

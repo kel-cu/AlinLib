@@ -15,21 +15,30 @@ public class ButtonSprite extends AbstractButton {
     private final InterfaceUtils.DesignType type;
     private final int color;
     private final ResourceLocation icon;
+    private final int iconWidth, iconHeight;
     private final OnPress onPress;
 
 
     public ButtonSprite(int x, int y, int width, int height, ResourceLocation icon, Component label, OnPress onPress){
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, Colors.SEADRIVE, icon, label, onPress);
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, Colors.SEADRIVE, icon, label, width, height, onPress);
     }
     public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, ResourceLocation icon, Component label, OnPress onPress){
-        this(x, y, width, height, type, Colors.SEADRIVE, icon, label, onPress);
+        this(x, y, width, height, type, Colors.SEADRIVE, icon, label, width, height, onPress);
     }
-    public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, ResourceLocation icon, Component label, OnPress onPress) {
+    public ButtonSprite(int x, int y, int width, int height, ResourceLocation icon, Component label, int iconWidth, int iconHeight, OnPress onPress){
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, Colors.SEADRIVE, icon, label, iconWidth, iconHeight, onPress);
+    }
+    public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, ResourceLocation icon, Component label, int iconWidth, int iconHeight, OnPress onPress){
+        this(x, y, width, height, type, Colors.SEADRIVE, icon, label, iconWidth, iconHeight, onPress);
+    }
+    public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, ResourceLocation icon, Component label, int iconWidth, int iconHeight, OnPress onPress) {
         super(x, y, width, height, label);
+        this.icon = icon;
         this.type = type;
         this.color = color;
+        this.iconWidth = iconWidth;
+        this.iconHeight = iconHeight;
         this.onPress = onPress;
-        this.icon = icon;
     }
     public void setXPos(int x) {
         this.setX(x);
@@ -56,7 +65,8 @@ public class ButtonSprite extends AbstractButton {
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
             this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.color);
-            guiGraphics.blitSprite(icon, getX(), getY(), getWidth(), getHeight());
+//            guiGraphics.blit(icon, getX(), getY(), getWidth(), getHeight(), iconWidth, iconHeight);
+            guiGraphics.blit(this.icon, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), iconWidth, iconHeight);
         }
     }
     public boolean isDoesNotFit(){
