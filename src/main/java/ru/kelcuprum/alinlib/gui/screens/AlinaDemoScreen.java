@@ -37,6 +37,8 @@ public class AlinaDemoScreen extends Screen {
     //
     private int scrolled = 0;
     //
+    private InterfaceUtils.DesignType type = InterfaceUtils.DesignType.ALINA;
+    //
     private TextBox titleBox;
     private EditBoxString stringEditBox;
     private EditBoxString stringEditBoxSecret;
@@ -83,13 +85,13 @@ public class AlinaDemoScreen extends Screen {
     }
 
     private void initButtonsCategory(){
-        titleBox = new TextBox(140, 15, this.width - 150, this.font.lineHeight, Component.literal("Default design"), true);
+        titleBox = new TextBox(140, 15, this.width - 150, this.font.lineHeight, CATEGORY, true);
         titleBox.setTooltip(Localization.toText("Hello, world!"));
         addRenderableWidget(titleBox);
 
-        booleanButton = new ButtonBoolean(140, 40, this.width - 150, 20, AlinLib.bariumConfig, "Boolean", true, Component.literal("Boolean"));
+        booleanButton = new ButtonBoolean(140, 40, this.width - 150, 20, type, AlinLib.bariumConfig, "Boolean", true, Component.literal("Boolean"));
         addRenderableWidget(booleanButton);
-        stringEditBox = new EditBoxString(140, 40+(25), width-150, 20, EDIT_BOX);
+        stringEditBox = new EditBoxString(140, 40+(25), width-150, 20, false, EDIT_BOX, type);
         stringEditBox.setValue(AlinLib.bariumConfig.getString("HELLO", "Hello, world!"));
         stringEditBox.setResponder((string) -> {
             AlinLib.bariumConfig.setString("HELLO", string);
@@ -97,7 +99,7 @@ public class AlinaDemoScreen extends Screen {
 
         addRenderableWidget(stringEditBox);
 
-        stringEditBoxSecret = new EditBoxString(140, 40+(25*2), width-150, 20, true, SECRET_EDIT_BOX);
+        stringEditBoxSecret = new EditBoxString(140, 40+(25*2), width-150, 20, true, SECRET_EDIT_BOX, type);
         stringEditBoxSecret.setValue(AlinLib.bariumConfig.getString("SECRET", "Alina doesn't have a boyfriend"));
         stringEditBoxSecret.setResponder((string) -> {
             AlinLib.bariumConfig.setString("SECRET", string);
@@ -105,15 +107,15 @@ public class AlinaDemoScreen extends Screen {
 
         addRenderableWidget(stringEditBoxSecret);
         //
-        selectorStringButton = new SelectorStringButton(140, 40+(25*3), this.width - 150, 20, hell, AlinLib.bariumConfig, "selector", hell[0], Component.literal("Selector"));
+        selectorStringButton = new SelectorStringButton(140, 40+(25*3), this.width - 150, 20, type, hell, AlinLib.bariumConfig, "selector", hell[0], Component.literal("Selector"));
         addRenderableWidget(selectorStringButton);
         //
-        colorEditBox = new EditBoxColor(140, 40+(25*4), width-150, 20, AlinLib.bariumConfig, "Color", 0xFFFFFF, COLOR_EDIT_BOX);
+        colorEditBox = new EditBoxColor(140, 40+(25*4), width-150, 20, type, AlinLib.bariumConfig, "Color", 0xFFFFFF, COLOR_EDIT_BOX);
         addRenderableWidget(colorEditBox);
         //
-        sliderPercent = new SliderPercent(140, 40+(25*5), width-150, 20, AlinLib.bariumConfig, "Slider_percent", 0, SLIDER_PERCENT);
+        sliderPercent = new SliderPercent(140, 40+(25*5), width-150, 20, type, AlinLib.bariumConfig, "Slider_percent", 0, SLIDER_PERCENT);
         addRenderableWidget(sliderPercent);
-        sliderInt = new SliderInteger(140, 40+(25*6), width-150, 20, AlinLib.bariumConfig, "Slider_int", 30, 30, 110, SLIDER_INTEGER);
+        sliderInt = new SliderInteger(140, 40+(25*6), width-150, 20, type, AlinLib.bariumConfig, "Slider_int", 30, 30, 110, SLIDER_INTEGER);
         sliderInt.setTypeInteger(" Coffee");
         addRenderableWidget(sliderInt);
         //
@@ -125,8 +127,20 @@ public class AlinaDemoScreen extends Screen {
     }
     private void initButton(){
         // line 0
-        addRenderableWidget(new Button(10, 40, 110, 20, InterfaceUtils.DesignType.VANILLA, Colors.KENNY, CATEGORY, (OnPress) -> {
-            this.minecraft.setScreen(this);
+        addRenderableWidget(new Button(10, 40, 110, 20, InterfaceUtils.DesignType.VANILLA, Colors.KENNY, Component.literal("DesignType.VANILLA"), (OnPress) -> {
+            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Set DesignType.VANILLA"), AlinaToast.Type.DEBUG));
+            this.type = InterfaceUtils.DesignType.VANILLA;
+            this.rebuildWidgets();
+        }));
+        addRenderableWidget(new Button(10, 65, 110, 20, InterfaceUtils.DesignType.ALINA, Colors.KENNY, Component.literal("DesignType.ALINA"), (OnPress) -> {
+            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Set DesignType.ALINA"), AlinaToast.Type.DEBUG));
+            this.type = InterfaceUtils.DesignType.ALINA;
+            this.rebuildWidgets();
+        }));
+        addRenderableWidget(new Button(10, 90, 110, 20, InterfaceUtils.DesignType.FLAT, Colors.KENNY, Component.literal("DesignType.FLAT"), (OnPress) -> {
+            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Set DesignType.FLAT"), AlinaToast.Type.DEBUG));
+            this.type = InterfaceUtils.DesignType.FLAT;
+            this.rebuildWidgets();
         }));
 
         addRenderableWidget(new Button(10, height - 55, 110, 20, InterfaceUtils.DesignType.VANILLA, GITHUB, (OnPress) -> {
@@ -134,7 +148,7 @@ public class AlinaDemoScreen extends Screen {
         }));
 
 
-        addRenderableWidget(new Button(10, height - 30, 80, 20, InterfaceUtils.DesignType.VANILLA, EXIT, (OnPress) -> {
+        addRenderableWidget(new Button(10, height - 30, 85, 20, InterfaceUtils.DesignType.VANILLA, EXIT, (OnPress) -> {
             AlinLib.bariumConfig.save();
             this.minecraft.setScreen(parent);
         }));
@@ -157,7 +171,7 @@ public class AlinaDemoScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double d, double e, double f, double g) {
-        int scrolled = (int)((double)this.scrolled + g * 10.0 * -1.0);
+        int scrolled = (int)((double)this.scrolled + g * -9.0);
         int size = 900;
         if (scrolled <= 0 || size <= this.height) {
             this.scrolled = 0;

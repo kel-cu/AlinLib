@@ -31,6 +31,10 @@ public class EditBoxString extends EditBox {
         this(font, i, j, k, l, secret, component, InterfaceUtils.DesignType.ALINA);
     }
 
+    public EditBoxString(int i, int j, int k, int l, boolean secret, Component component, InterfaceUtils.DesignType type) {
+        this(Minecraft.getInstance().font, i, j, k, l, secret, component, type);
+    }
+
     public EditBoxString(Font font, int i, int j, int k, int l, boolean secret, Component component, InterfaceUtils.DesignType type) {
         super(font, i, j, k, l, null, component);
         this.secret = secret;
