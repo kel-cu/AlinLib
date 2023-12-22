@@ -1,8 +1,9 @@
 package ru.kelcuprum.alinlib.config;
 
+import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.GsonHelper;
 import org.apache.logging.log4j.Level;
-import org.json.JSONObject;
 import ru.kelcuprum.alinlib.AlinLib;
 
 import java.io.IOException;
@@ -11,13 +12,13 @@ import java.nio.file.Path;
 
 public class Config {
     private String _filePath;
-    private JSONObject _jsonConfiguration = new JSONObject();
+    private JsonObject _jsonConfiguration = new JsonObject();
     private final boolean _isFile;
     public Config(String filePath){
         this._filePath = filePath;
         this._isFile = true;
     }
-    public Config(JSONObject jsonConfiguration){
+    public Config(JsonObject jsonConfiguration){
         this._jsonConfiguration = jsonConfiguration;
         this._isFile = false;
     }
@@ -45,7 +46,7 @@ public class Config {
         Minecraft mc = Minecraft.getInstance();
         final Path configFile = mc.gameDirectory.toPath().resolve(_filePath);
         try{
-            _jsonConfiguration = configFile.toFile().exists() ? new JSONObject(Files.readString(configFile)) : new JSONObject();
+            _jsonConfiguration = configFile.toFile().exists() ? GsonHelper.parse(Files.readString(configFile)) : new JsonObject();
         } catch (Exception e){
             AlinLib.log(e.getLocalizedMessage(), Level.ERROR);
             save();
@@ -56,15 +57,16 @@ public class Config {
      * Сброс конфигурации
      */
     public void reset(){
-        this._jsonConfiguration = new JSONObject();
+        this._jsonConfiguration = new JsonObject();
         save();
     }
     /**
      * Преобразование в JSON
      */
-    public JSONObject toJSON(){
+    public JsonObject toJSON(){
         return this._jsonConfiguration;
     }
+
     /**
      * Преобразование в JSON
      */
@@ -72,20 +74,31 @@ public class Config {
         return this._jsonConfiguration.toString();
     }
 
+    /**
+     * Проверка мембера на нул
+     */
+    public boolean isJsonNull(String type) {
+        if(this._jsonConfiguration == null) this._jsonConfiguration = new JsonObject();
+
+        if (!this._jsonConfiguration.has(type))
+            return true;
+
+        return this._jsonConfiguration.get(type).isJsonNull();
+    }
 
     /**
      * Получение Boolean значения
      */
     public boolean getBoolean(String type, boolean defaultValue) {
-        if(this._jsonConfiguration == null) this._jsonConfiguration = new JSONObject();
-        if(!this._jsonConfiguration.isNull(type) && !(this._jsonConfiguration.get(type) instanceof Boolean)) setBoolean(type, defaultValue);
-        return this._jsonConfiguration.isNull(type) ? defaultValue : this._jsonConfiguration.getBoolean(type);
+        if(this._jsonConfiguration == null) this._jsonConfiguration = new JsonObject();
+        if(!isJsonNull(type) && !(this._jsonConfiguration.get(type).getAsJsonPrimitive().isBoolean())) setBoolean(type, defaultValue);
+        return isJsonNull(type) ? defaultValue : this._jsonConfiguration.get(type).getAsBoolean();
     }
     /**
      * Задать значения Boolean
      */
     public void setBoolean(String type, boolean newValue){
-        this._jsonConfiguration.put(type, newValue);
+        this._jsonConfiguration.addProperty(type, newValue);
         save();
     }
     /**
@@ -93,84 +106,32 @@ public class Config {
      */
 
     public String getString(String type, String defaultValue) {
-        if(this._jsonConfiguration == null) this._jsonConfiguration = new JSONObject();
-        if(!this._jsonConfiguration.isNull(type) && !(this._jsonConfiguration.get(type) instanceof String)) setString(type, defaultValue);
-        return this._jsonConfiguration.isNull(type) ? defaultValue : this._jsonConfiguration.getString(type);
+        if(this._jsonConfiguration == null) this._jsonConfiguration = new JsonObject();
+        if(!isJsonNull(type) && !(this._jsonConfiguration.get(type).getAsJsonPrimitive().isString())) setString(type, defaultValue);
+        return isJsonNull(type) ? defaultValue : this._jsonConfiguration.get(type).getAsString();
     }
     /**
      * Задать значения String
      */
     public void setString(String type, String newValue){
-        this._jsonConfiguration.put(type, newValue);
+        this._jsonConfiguration.addProperty(type, newValue);
         save();
     }
 
     /**
-     * Получение Int значения
+     * Получение Number значения
      */
 
-    public int getInt(String type, int defaultValue) {
-        if(this._jsonConfiguration == null) this._jsonConfiguration = new JSONObject();
-        if(!this._jsonConfiguration.isNull(type) && !(this._jsonConfiguration.get(type) instanceof Integer)) setInt(type, defaultValue);
-        return this._jsonConfiguration.isNull(type) ? defaultValue : this._jsonConfiguration.getInt(type);
+    public Number getNumber(String type, Number defaultValue) {
+        if(this._jsonConfiguration == null) this._jsonConfiguration = new JsonObject();
+        if(!isJsonNull(type) && !(this._jsonConfiguration.get(type).getAsJsonPrimitive().isNumber())) setNumber(type, defaultValue);
+        return isJsonNull(type) ? defaultValue : this._jsonConfiguration.get(type).getAsNumber();
     }
     /**
-     * Задать значения Int
+     * Задать значения Number
      */
-    public void setInt(String type, int newValue){
-        this._jsonConfiguration.put(type, newValue);
+    public void setNumber(String type, Number newValue){
+        this._jsonConfiguration.addProperty(type, newValue);
         save();
     }
-
-    /**
-     * Получение Long значения
-     */
-
-    public long getLong(String type, long defaultValue) {
-        if(this._jsonConfiguration == null) this._jsonConfiguration = new JSONObject();
-        if(!this._jsonConfiguration.isNull(type) && !(this._jsonConfiguration.get(type) instanceof Long)) setLong(type, defaultValue);
-        return this._jsonConfiguration.isNull(type) ? defaultValue : this._jsonConfiguration.getLong(type);
-    }
-    /**
-     * Задать значения Long
-     */
-    public void setLong(String type, long newValue){
-        this._jsonConfiguration.put(type, newValue);
-        save();
-    }
-
-    /**
-     * Получение Float значения
-     */
-
-    public float getFloat(String type, float defaultValue) {
-        if(this._jsonConfiguration == null) this._jsonConfiguration = new JSONObject();
-        if(!this._jsonConfiguration.isNull(type) && !(this._jsonConfiguration.get(type) instanceof Float)) setFloat(type, defaultValue);
-        return this._jsonConfiguration.isNull(type) ? defaultValue : this._jsonConfiguration.getFloat(type);
-    }
-    /**
-     * Задать значения Float
-     */
-    public void setFloat(String type, float newValue){
-        this._jsonConfiguration.put(type, newValue);
-        save();
-    }
-
-    /**
-     * Получение Double значения
-     */
-
-    public double getDouble(String type, double defaultValue) {
-        if(this._jsonConfiguration == null) this._jsonConfiguration = new JSONObject();
-        if(!this._jsonConfiguration.isNull(type) && !(this._jsonConfiguration.get(type) instanceof Double)) setDouble(type, defaultValue);
-        return this._jsonConfiguration.isNull(type) ? defaultValue : this._jsonConfiguration.getDouble(type);
-    }
-    /**
-     * Задать значения Double
-     */
-    public void setDouble(String type, double newValue){
-        this._jsonConfiguration.put(type, newValue);
-        save();
-    }
-
 }

@@ -5,7 +5,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import org.json.JSONObject;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Localization;

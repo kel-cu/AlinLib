@@ -23,12 +23,12 @@ public class SliderInteger extends AbstractSliderButton {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, min, max, component);
     }
     public SliderInteger(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
-        super(x, y, width, height, component, ((double) (config.getInt(typeConfig, defaultConfig) - min) /(max-min)));
+        super(x, y, width, height, component, ((config.getNumber(typeConfig, defaultConfig).doubleValue() - min) /(max-min)));
         this.type = type;
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;
-        this.displayValue = this.config.getInt(this.typeConfig, this.defaultConfig);
+        this.displayValue = this.config.getNumber(this.typeConfig, this.defaultConfig).intValue();
         this.min = min;
         this.max = max;
         this.buttonMessage = component.getString();
@@ -91,7 +91,7 @@ public class SliderInteger extends AbstractSliderButton {
     protected void applyValue() {
         int selValue = (int) ((this.max-this.min)*this.value);
         this.displayValue = this.min+selValue;
-        this.config.setInt(this.typeConfig, this.displayValue);
+        this.config.setNumber(this.typeConfig, this.displayValue);
 
     }
 }

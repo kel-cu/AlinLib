@@ -28,7 +28,7 @@ public class SelectorStringWithIntButton extends AbstractButton {
         this.list = list;
         this.buttonMessage = label.getString();
 
-        this.currentPosition = this.config.getInt(typeConfig, defaultVolume);
+        this.currentPosition = this.config.getNumber(typeConfig, defaultVolume).intValue();
     }
 
     public void setActive(boolean active){
@@ -52,7 +52,7 @@ public class SelectorStringWithIntButton extends AbstractButton {
     public void onPress() {
         this.currentPosition++;
         if(this.list.length == this.currentPosition) this.currentPosition = 0;
-        this.config.setInt(this.typeConfig, this.currentPosition);
+        this.config.setNumber(this.typeConfig, this.currentPosition);
     }
 
     @Override

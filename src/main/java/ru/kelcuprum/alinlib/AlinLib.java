@@ -1,13 +1,13 @@
 package ru.kelcuprum.alinlib;
 
-import com.terraformersmc.modmenu.gui.ModsScreen;
+import com.google.gson.JsonObject;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.GsonHelper;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 import ru.kelcuprum.alinlib.command.AlinLibCommand;
 import ru.kelcuprum.alinlib.config.Config;
 
@@ -32,10 +32,10 @@ public class AlinLib implements ClientModInitializer {
     public static void log(String message) { log(message, Level.INFO);}
     public static void log(String message, Level level) { LOG.log(level, "[" + LOG.getName() + "] " + message); }
 
-    public static JSONObject getJSONByURL(String url) throws IOException, InterruptedException {
+    public static JsonObject getJSONByURL(String url) throws IOException, InterruptedException {
         if(webClient == null) webClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
         HttpResponse<String> response = webClient.send(request, HttpResponse.BodyHandlers.ofString());
-        return new JSONObject(response.body());
+        return GsonHelper.parse(response.body());
     }
 }

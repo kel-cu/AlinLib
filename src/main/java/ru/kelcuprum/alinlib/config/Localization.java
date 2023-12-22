@@ -1,8 +1,10 @@
 package ru.kelcuprum.alinlib.config;
 
+import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import org.json.JSONObject;
+
+import net.minecraft.util.GsonHelper;
 import ru.kelcuprum.alinlib.AlinLib;
 
 import java.io.File;
@@ -36,18 +38,18 @@ public class Localization {
             return "en_us";
         }
     }
-    public JSONObject getJSONFile(){
+    public JsonObject getJSONFile(){
         try {
             Minecraft CLIENT = Minecraft.getInstance();
             File localizationFile = new File(CLIENT.gameDirectory + filePath + getCodeLocalization() + ".json");
             if (localizationFile.exists()) {
-                return new JSONObject(Files.readString(localizationFile.toPath()));
+                return GsonHelper.parse(Files.readString(localizationFile.toPath()));
             } else {
-                return new JSONObject();
+                return new JsonObject();
             }
         } catch (Exception ex){
             AlinLib.log(ex.getLocalizedMessage());
-            return new JSONObject();
+            return new JsonObject();
         }
     }
     public String getLocalization(String key){
@@ -56,9 +58,9 @@ public class Localization {
     public String getLocalization(String key, boolean clearColor){
         String text;
         try {
-            JSONObject JSONLocalization = getJSONFile();
-            if(JSONLocalization.isNull(key)) text = getText(modID+ "." + key).getString();
-            else text = JSONLocalization.getString(key);
+            JsonObject JSONLocalization = getJSONFile();
+            if(JSONLocalization.get(key) != null && !JSONLocalization.get(key).isJsonNull()) text = getText(modID+ "." + key).getString();
+            else text = JSONLocalization.get(key).getAsString();
         } catch (Exception ex) {
             AlinLib.log(ex.getLocalizedMessage());
             text = getText(modID+ "." + key).getString();
@@ -67,8 +69,8 @@ public class Localization {
     }
     public void setLocalization(String type, String text){
         try {
-            JSONObject JSONLocalization = getJSONFile();
-            JSONLocalization.put(type, text);
+            JsonObject JSONLocalization = getJSONFile();
+            JSONLocalization.addProperty(type, text);
             Minecraft CLIENT = Minecraft.getInstance();
             File localizationFile = new File(CLIENT.gameDirectory + filePath+getCodeLocalization()+".json");
             Files.createDirectories(localizationFile.toPath().getParent());
