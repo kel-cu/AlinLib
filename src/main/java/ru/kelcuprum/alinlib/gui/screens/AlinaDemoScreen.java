@@ -2,6 +2,7 @@ package ru.kelcuprum.alinlib.gui.screens;
 
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -19,6 +20,9 @@ import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxColor;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
 import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AlinaDemoScreen extends Screen {
     private final Screen parent;
@@ -38,6 +42,7 @@ public class AlinaDemoScreen extends Screen {
     //
     private InterfaceUtils.DesignType type = InterfaceUtils.DesignType.ALINA;
     //
+    private List<AbstractWidget> widgetList = new ArrayList<AbstractWidget>();
     private TextBox titleBox;
     private EditBoxString stringEditBox;
     private EditBoxString stringEditBoxSecret;
@@ -63,16 +68,10 @@ public class AlinaDemoScreen extends Screen {
         this.parent = parent;
     }
     public void tick() {
-        titleBox.setY(15-scrolled);
-        booleanButton.setY(40-scrolled);
-        stringEditBox.setY(40+(25)-scrolled);
-        stringEditBoxSecret.setY(40+(25*2)-scrolled);
-        selectorStringButton.setY(40+(25*3)-scrolled);
-        colorEditBox.setY(40+(25*4)-scrolled);
-        sliderPercent.setY(40+(25*5)-scrolled);
-        sliderInt.setY(40+(25*6)-scrolled);
-        //
-        something.setY(875-scrolled);
+        for(int i=0; i<widgetList.size();i++){
+            if(i==0) widgetList.get(i).setY(15-scrolled);
+            else widgetList.get(i).setY(40 + (25*(i-1))-scrolled);
+        }
         super.tick();
     }
 
@@ -84,45 +83,48 @@ public class AlinaDemoScreen extends Screen {
     }
 
     private void initButtonsCategory(){
+        this.widgetList = new ArrayList<AbstractWidget>();
         titleBox = new TextBox(140, 15, this.width - 150, this.font.lineHeight, CATEGORY, true);
         titleBox.setTooltip(Localization.toText("Hello, world!"));
         addRenderableWidget(titleBox);
-
+        widgetList.add(titleBox);
+        //
         booleanButton = new ButtonBoolean(140, 40, this.width - 150, 20, type, AlinLib.bariumConfig, "Boolean", true, Component.literal("Boolean"));
         addRenderableWidget(booleanButton);
-        stringEditBox = new EditBoxString(140, 40+(25), width-150, 20, false, EDIT_BOX, type);
-        stringEditBox.setValue(AlinLib.bariumConfig.getString("HELLO", "Hello, world!"));
-        stringEditBox.setResponder((string) -> {
-            AlinLib.bariumConfig.setString("HELLO", string);
-        });
-
+        widgetList.add(booleanButton);
+        //
+        stringEditBox = new EditBoxString(140, 40+(25*2), width-150, 20, AlinLib.bariumConfig.getString("HELLO", "Hello, world!"), type, EDIT_BOX, (string) -> AlinLib.bariumConfig.setString("HELLO", string));
         addRenderableWidget(stringEditBox);
-
-        stringEditBoxSecret = new EditBoxString(140, 40+(25*2), width-150, 20, true, SECRET_EDIT_BOX, type);
-        stringEditBoxSecret.setValue(AlinLib.bariumConfig.getString("SECRET", "Alina doesn't have a boyfriend"));
-        stringEditBoxSecret.setResponder((string) -> {
-            AlinLib.bariumConfig.setString("SECRET", string);
-        });
-
+        widgetList.add(stringEditBox);
+        //
+        stringEditBoxSecret = new EditBoxString(140, 40+(25*2), width-150, 20, true, AlinLib.bariumConfig.getString("SECRET", "Alina doesn't have a boyfriend"), type, SECRET_EDIT_BOX, (string) -> AlinLib.bariumConfig.setString("SECRET", string));
         addRenderableWidget(stringEditBoxSecret);
+        widgetList.add(stringEditBoxSecret);
         //
         selectorStringButton = new SelectorStringButton(140, 40+(25*3), this.width - 150, 20, type, hell, AlinLib.bariumConfig, "selector", hell[0], Component.literal("Selector"));
         addRenderableWidget(selectorStringButton);
+        widgetList.add(selectorStringButton);
         //
         colorEditBox = new EditBoxColor(140, 40+(25*4), width-150, 20, type, AlinLib.bariumConfig, "Color", 0xFFFFFF, COLOR_EDIT_BOX);
         addRenderableWidget(colorEditBox);
+        widgetList.add(colorEditBox);
         //
         sliderPercent = new SliderPercent(140, 40+(25*5), width-150, 20, type, AlinLib.bariumConfig, "Slider_percent", 0, SLIDER_PERCENT);
         addRenderableWidget(sliderPercent);
+        widgetList.add(sliderPercent);
+        //
         sliderInt = new SliderInteger(140, 40+(25*6), width-150, 20, type, AlinLib.bariumConfig, "Slider_int", 30, 30, 110, SLIDER_INTEGER);
         sliderInt.setTypeInteger(" Coffee");
         addRenderableWidget(sliderInt);
+        widgetList.add(sliderInt);
         //
-        something = addRenderableWidget(new TextBox(140, 875, this.width - 150, this.font.lineHeight, SOMETHING, true, (OnPress) -> {
+        something = new TextBox(140, 40+(25*7), this.width - 150, 20, SOMETHING, true, (OnPress) -> {
             OnPress.setActive(false);
             AlinLib.log(Component.translatable("alinlib.something.oops"));
             this.minecraft.stop();
-        }));
+        });
+        addRenderableWidget(something);
+        widgetList.add(something);
     }
     private void initButton(){
         // line 0

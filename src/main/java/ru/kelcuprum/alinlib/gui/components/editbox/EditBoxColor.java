@@ -1,6 +1,5 @@
 package ru.kelcuprum.alinlib.gui.components.editbox;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
@@ -19,7 +18,7 @@ public class EditBoxColor extends EditBoxString {
     }
 
     public EditBoxColor(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, Component label) {
-        super(Minecraft.getInstance().font, x, y, width, height, false, label, type);
+        super(x, y, width, height, type, label);
 
         this.config = config;
         this.typeConfig = typeConfig;

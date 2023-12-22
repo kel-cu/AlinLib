@@ -8,35 +8,63 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
+import java.util.function.Consumer;
+
 public class EditBoxString extends EditBox {
     private final InterfaceUtils.DesignType type;
     private final boolean secret;
     private boolean tweakBorder;
     protected boolean isError;
 
-    public EditBoxString(int i, int j, int k, int l, Component component) {
-        this(Minecraft.getInstance().font, i, j, k, l, component);
-    }
-
-    public EditBoxString(Font font, int i, int j, int k, int l, Component component) {
-        this(font, i, j, k, l, false, component, InterfaceUtils.DesignType.ALINA);
-    }
-
 
     public EditBoxString(int i, int j, int k, int l, boolean secret, Component component) {
-        this(Minecraft.getInstance().font, i, j, k, l, secret, component);
+        this(Minecraft.getInstance().font, i, j, k, l, secret, "", InterfaceUtils.DesignType.ALINA, component, null);
+    }
+    public EditBoxString(int i, int j, int k, int l, Component component) {
+        this(Minecraft.getInstance().font, i, j, k, l, false, "", InterfaceUtils.DesignType.ALINA, component, null);
+    }
+    public EditBoxString(int i, int j, int k, int l, boolean secret, InterfaceUtils.DesignType type, Component component) {
+        this(Minecraft.getInstance().font, i, j, k, l, secret, "", type, component, null);
+    }
+    public EditBoxString(int i, int j, int k, int l, InterfaceUtils.DesignType type, Component component) {
+        this(Minecraft.getInstance().font, i, j, k, l, false, "", type, component, null);
     }
 
-    public EditBoxString(Font font, int i, int j, int k, int l, boolean secret, Component component) {
-        this(font, i, j, k, l, secret, component, InterfaceUtils.DesignType.ALINA);
+    // NO FONT
+    public EditBoxString(int i, int j, int k, int l, boolean secret, String value, Component component, Consumer<String> responder) {
+        this(Minecraft.getInstance().font, i, j, k, l, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
     }
 
-    public EditBoxString(int i, int j, int k, int l, boolean secret, Component component, InterfaceUtils.DesignType type) {
-        this(Minecraft.getInstance().font, i, j, k, l, secret, component, type);
+
+    public EditBoxString(int i, int j, int k, int l, String value, Component component, Consumer<String> responder) {
+        this(Minecraft.getInstance().font, i, j, k, l, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
     }
 
-    public EditBoxString(Font font, int i, int j, int k, int l, boolean secret, Component component, InterfaceUtils.DesignType type) {
-        super(font, i, j, k, l, null, component);
+    public EditBoxString(int i, int j, int k, int l, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
+        this(Minecraft.getInstance().font, i, j, k, l, false, value, type, component, responder);
+    }
+    public EditBoxString(int i, int j, int k, int l, boolean secret, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
+        this(Minecraft.getInstance().font, i, j, k, l, secret, value, type, component, responder);
+
+    }
+    // FONT
+    public EditBoxString(Font font, int i, int j, int k, int l, boolean secret, String value, Component component, Consumer<String> responder) {
+        this(font, i, j, k, l, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
+    }
+
+
+    public EditBoxString(Font font, int i, int j, int k, int l, String value, Component component, Consumer<String> responder) {
+        this(font, i, j, k, l, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
+    }
+
+    public EditBoxString(Font font, int i, int j, int k, int l, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
+        this(font, i, j, k, l, false, value, type, component, responder);
+    }
+
+    public EditBoxString(Font font, int i, int j, int k, int l, boolean secret, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
+        super(font, i, j, k, l, component);
+        setValue(value);
+        setResponder(responder);
         this.secret = secret;
         this.type = type;
     }
@@ -53,6 +81,11 @@ public class EditBoxString extends EditBox {
     public void setPosition(int x, int y) {
         super.setPosition(x, y);
     }
+    @Override
+    public void setValue(String content) { super.setValue(content); }
+    @Override
+    public void setResponder(Consumer<String> responder) { super.setResponder(responder); }
+
     private int getPositionContent(String content) {
         int pos = getX() + getWidth() - font.width(content) - ((getHeight() - 8) / 2);
 
