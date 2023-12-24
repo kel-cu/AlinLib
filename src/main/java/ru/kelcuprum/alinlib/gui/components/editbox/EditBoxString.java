@@ -63,6 +63,7 @@ public class EditBoxString extends EditBox {
 
     public EditBoxString(Font font, int i, int j, int k, int l, boolean secret, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
         super(font, i, j, k, l, component);
+        setMaxLength(Integer.MAX_VALUE);
         setValue(value);
         setResponder(responder);
         this.secret = secret;
