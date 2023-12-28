@@ -2,15 +2,12 @@ package ru.kelcuprum.alinlib.gui.components.buttons;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractButton;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
-public class ButtonBoolean extends AbstractButton {
-    private final InterfaceUtils.DesignType type;
+public class ButtonBoolean extends Button {
     public boolean volume;
     public Component volumeState;
     public final boolean defaultConfig;
@@ -21,41 +18,31 @@ public class ButtonBoolean extends AbstractButton {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
     }
     public ButtonBoolean(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        super(x, y, width, height, label);
-        this.type = type;
+        super(x, y, width, height, type, label, null);
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;
         this.buttonMessage = label.getString();
         this.volume = config.getBoolean(typeConfig, defaultConfig);
-        this.setMessage(Component.literal(buttonMessage +": ").append(Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"))));
-    }
-
-    @Override
-    public void setX(int x) {
-        super.setX(x);
-    }
-    @Override
-    public void setY(int y) {
-        super.setY(y);
-    }
-    @Override
-    public void setPosition(int x, int y) {
-        super.setPosition(x, y);
-    }
-    public void setActive(boolean active){
-        this.active = active;
+        this.setColor(this.volume ? Colors.SEADRIVE : Colors.GROUPIE);
+        volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
+        this.setMessage(Component.literal(buttonMessage +": ").append(volumeState));
     }
 
     public void resetVolume(){
         this.volume = defaultConfig;
-        this.config.setBoolean(typeConfig, this.volume);
+        this.volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
+        this.setColor(this.volume ? Colors.SEADRIVE : Colors.GROUPIE);
+        this.setMessage(Component.literal(buttonMessage +": ").append(Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"))));
+        config.setBoolean(typeConfig, this.volume);
     }
 
     @Override
     public void onPress() {
         if(!active) return;
         this.volume = !this.volume;
+        this.volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
+        this.setColor(this.volume ? Colors.SEADRIVE : Colors.GROUPIE);
         this.setMessage(Component.literal(buttonMessage +": ").append(Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"))));
         config.setBoolean(typeConfig, this.volume);
     }
@@ -63,9 +50,7 @@ public class ButtonBoolean extends AbstractButton {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
-            this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.volume ? Colors.SEADRIVE : Colors.GROUPIE);
-            volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
-
+            this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.color);
             if(isDoesNotFit()){
                 this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
             } else {
@@ -74,14 +59,9 @@ public class ButtonBoolean extends AbstractButton {
             }
         }
     }
+    @Override
     public boolean isDoesNotFit(){
         int size = Minecraft.getInstance().font.width(buttonMessage+": "+volume) + ((getHeight() - 8) / 2);
         return size > getWidth()-((getHeight() - 8) / 2)*2;
     }
-
-    @Override
-    protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
-        this.defaultButtonNarrationText(narrationElementOutput);
-    }
-
 }

@@ -11,10 +11,10 @@ import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 public class Button extends AbstractButton {
-    private final InterfaceUtils.DesignType type;
-    private final int color;
+    final InterfaceUtils.DesignType type;
+    int color;
     private final boolean isCentred;
-    private final OnPress onPress;
+    private OnPress onPress;
 
 
     public Button(int x, int y, int width, int height, Component label, OnPress onPress){
@@ -59,11 +59,12 @@ public class Button extends AbstractButton {
     public void setActive(boolean active){
         this.active = active;
     }
+    public void setColor(int color) { this.color = color; }
+    public void setOnPress(OnPress onPress) { this.onPress = onPress; }
     @Override
     public void onPress() {
-        this.onPress.onPress(this);
+        if(this.onPress != null) this.onPress.onPress(this);
     }
-
     @Override
     public void setMessage(Component component) {
         super.setMessage(component);
