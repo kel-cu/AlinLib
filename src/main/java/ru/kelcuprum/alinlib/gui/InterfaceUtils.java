@@ -55,24 +55,18 @@ public class InterfaceUtils {
     }
 
     // LEFT PANEL
-    public static void renderLeftPanel(GuiGraphics guiGraphics, int width, int height, Color color){
-        guiGraphics.fill(0, 0, width, height, color.getRGB());
-    }
     public static void renderLeftPanel(GuiGraphics guiGraphics, int width, int height, int color){
-        renderLeftPanel(guiGraphics, width, height, new Color(color, true));
+        guiGraphics.fill(0, 0, width, height, color);
     }
     public static void renderLeftPanel(GuiGraphics guiGraphics, int width, int height){
-        renderLeftPanel(guiGraphics, width, height, new Color(Colors.DARK_PURPLE_ALPHA, true));
+        renderLeftPanel(guiGraphics, width, height, Colors.BLACK_ALPHA);
     }
     // RIGHT PANEL
-    public static void renderRightPanel(GuiGraphics guiGraphics, int screenWidth, int width, int height, Color color){
-        guiGraphics.fill(screenWidth-width, 0, screenWidth, height, color.getRGB());
-    }
     public static void renderRightPanel(GuiGraphics guiGraphics, int screenWidth, int width, int height, int color){
-        renderRightPanel(guiGraphics, screenWidth, width, height, new Color(color, true));
+        guiGraphics.fill(screenWidth-width, 0, screenWidth, height, color);
     }
     public static void renderRightPanel(GuiGraphics guiGraphics, int screenWidth, int width, int height){
-        renderRightPanel(guiGraphics, screenWidth, width, height, new Color(Colors.DARK_PURPLE_ALPHA, true));
+        renderRightPanel(guiGraphics, screenWidth, width, height, Colors.BLACK_ALPHA);
     }
 
     // String

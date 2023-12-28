@@ -5,6 +5,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import org.apache.logging.log4j.Level;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
@@ -29,8 +31,13 @@ public class SelectorStringButton extends AbstractButton {
         this.config = config;
         this.list = list;
         this.buttonMessage = label.getString();
-
-        this.currentPosition = Arrays.stream(this.list).toList().indexOf(this.config.getString(typeConfig, defaultVolume));
+        try {
+            this.currentPosition = Arrays.stream(this.list).toList().indexOf(this.config.getString(typeConfig, defaultVolume));
+        } catch(Exception ex){
+            AlinLib.log(ex.getLocalizedMessage(), Level.ERROR);
+            this.currentPosition = 0;
+            this.config.setString(this.typeConfig, this.list[this.currentPosition]);
+        }
     }
     public void setActive(boolean active){
         this.active = active;

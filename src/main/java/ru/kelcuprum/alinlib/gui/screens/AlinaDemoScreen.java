@@ -65,6 +65,8 @@ public class AlinaDemoScreen extends Screen {
     //
     private TextBox something;
 
+    private boolean isFollow = false;
+
 
     public AlinaDemoScreen(Screen parent) {
         super(CATEGORY);
@@ -132,9 +134,15 @@ public class AlinaDemoScreen extends Screen {
         widgetList.add(sliderInt);
         //
         something = new TextBox(140, 200, this.width - 150, 20, SOMETHING, true, (OnPress) -> {
-            OnPress.setActive(false);
-            AlinLib.log(Component.translatable("alinlib.something.oops"));
-            this.minecraft.stop();
+            if(!this.isFollow){
+                this.isFollow = true;
+                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Click me again :)"), new ResourceLocation("alinlib", "textures/gui/widget/test/well.png"), AlinaToast.Type.ERROR));
+            } else {
+                OnPress.setActive(false);
+                Util.getPlatform().openUri("https://cdn.kelcuprum.ru/other/monke.gif");
+                AlinLib.log(Component.translatable("alinlib.something.oops"));
+                this.minecraft.stop();
+            }
         });
         addRenderableWidget(something);
         widgetList.add(something);
@@ -174,7 +182,7 @@ public class AlinaDemoScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f){
         InterfaceUtils.renderBackground(guiGraphics, this.minecraft);
-        InterfaceUtils.renderTextureLeftPanel(guiGraphics, 130, this.height);
+        InterfaceUtils.renderLeftPanel(guiGraphics, 130, this.height);
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {

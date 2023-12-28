@@ -22,5 +22,8 @@ public class Colors {
 
     // Default color
     public static int DARK_PURPLE_ALPHA = FORGOT - 0xC0000000;
+    public static int WHITE = 0xFFFFFFFF;
+    public static int BLACK = 0xFF000000;
+    public static int BLACK_ALPHA = 0x37000000;
 
 }
