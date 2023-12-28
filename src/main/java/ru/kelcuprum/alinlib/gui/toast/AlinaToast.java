@@ -4,8 +4,10 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
@@ -25,16 +27,27 @@ public class AlinaToast implements Toast {
     private final Component message;
     private final Item itemIcon;
     private final ResourceLocation icon;
+    private final PlayerSkin playerIcon;
     private final Type type;
 
     // ITEM
     public AlinaToast(Component title, Component message, Item itemIcon) {
-        this(title, message, itemIcon, null, Type.INFO);
+        this(title, message, null, itemIcon, null, Type.INFO);
     }
 
     // ITEM
     public AlinaToast(Component title, Component message, Item itemIcon, Type type) {
-        this(title, message, itemIcon, null, type);
+        this(title, message, null, itemIcon, null, type);
+    }
+
+    // SKIN
+    public AlinaToast(Component title, Component message, PlayerSkin playerIcon) {
+        this(title, message, playerIcon, null, null, Type.INFO);
+    }
+
+    // SKIN
+    public AlinaToast(Component title, Component message, PlayerSkin playerIcon, Type type) {
+        this(title, message, playerIcon, null, null, type);
     }
 
     // RESOURCE LOCATION
@@ -44,7 +57,7 @@ public class AlinaToast implements Toast {
 
     // RESOURCE LOCATION
     public AlinaToast(Component title, Component message, ResourceLocation icon, Type type) {
-        this(title, message, null, icon, type);
+        this(title, message, null, null, icon, type);
     }
 
     // GLOBAL
@@ -54,13 +67,14 @@ public class AlinaToast implements Toast {
 
     // GLOBAL
     public AlinaToast(Component title, Component message, Type type) {
-        this(title, message, null, null, type);
+        this(title, message, null, null, null, type);
     }
 
     // GLOBAL
-    public AlinaToast(Component title, Component message, Item itemIcon, ResourceLocation icon, Type type) {
+    public AlinaToast(Component title, Component message, PlayerSkin playerIcon, Item itemIcon, ResourceLocation icon, Type type) {
         this.title = title;
         this.message = message;
+        this.playerIcon = playerIcon;
         this.itemIcon = itemIcon;
         this.icon = icon;
         this.type = type;
@@ -71,7 +85,7 @@ public class AlinaToast implements Toast {
         final float fc = 1.5F * 0.9F + 0.1F;
         final int colorBackground = (int) (255.0F * fc);
 
-        boolean missingIcon = this.itemIcon == null && this.icon == null;
+        boolean missingIcon = this.playerIcon == null && this.itemIcon == null && this.icon == null;
 
         guiGraphics.fill(0, 0, this.width(), this.height()-1, colorBackground / 2 << 24);
         if (this.type != Type.FLAT)
@@ -105,6 +119,8 @@ public class AlinaToast implements Toast {
             guiGraphics.blit(this.icon, 8, 8, 0.0F, 0.0F, 16, 16, 16, 16);
         } else if(this.itemIcon != null) {
             guiGraphics.renderFakeItem(new ItemStack(this.itemIcon), 8, 8);
+        }else if(this.playerIcon != null) {
+            PlayerFaceRenderer.draw(guiGraphics, this.playerIcon, 8, 8, 16);
         }
 
         return (double) l >= DISPLAY_TIME * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
