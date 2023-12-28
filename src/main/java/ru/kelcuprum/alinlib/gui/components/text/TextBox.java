@@ -53,7 +53,7 @@ public class TextBox extends AbstractWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
+    public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
         if(isHovered() && tooltipMessage != null){
             guiGraphics.renderTooltip(Minecraft.getInstance().font, tooltipMessage, i, j);
         }
@@ -72,7 +72,7 @@ public class TextBox extends AbstractWidget {
     }
     @Override
     public void onClick(double d, double e) {
-        this.onPress();
+        if(onPress != null) this.onPress();
     }
     @Override
     public boolean keyPressed(int i, int j, int k) {

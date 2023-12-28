@@ -14,6 +14,7 @@ import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxString;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderInteger;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderPercent;
+import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
@@ -23,6 +24,7 @@ import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AlinaDemoScreen extends Screen {
     private final Screen parent;
@@ -43,6 +45,7 @@ public class AlinaDemoScreen extends Screen {
     private InterfaceUtils.DesignType type = InterfaceUtils.DesignType.ALINA;
     //
     private List<AbstractWidget> widgetList = new ArrayList<AbstractWidget>();
+    private CategoryBox category;
     private TextBox titleBox;
     private EditBoxString stringEditBox;
     private EditBoxString stringEditBoxSecret;
@@ -68,9 +71,12 @@ public class AlinaDemoScreen extends Screen {
         this.parent = parent;
     }
     public void tick() {
-        for(int i=0; i<widgetList.size();i++){
-            if(i==0) widgetList.get(i).setY(15-scrolled);
-            else widgetList.get(i).setY(40 + (25*(i-1))-scrolled);
+        int i = 5;
+        for(AbstractWidget widget : widgetList){
+            if(widget.visible) {
+                widget.setY(i - scrolled);
+                i += (widget.getHeight() + 5);
+            } else widget.setY(-widget.getHeight());
         }
         super.tick();
     }
@@ -83,42 +89,49 @@ public class AlinaDemoScreen extends Screen {
     }
 
     private void initButtonsCategory(){
-        this.widgetList = new ArrayList<AbstractWidget>();
-        titleBox = new TextBox(140, 15, this.width - 150, this.font.lineHeight, CATEGORY, true);
-        titleBox.setTooltip(Localization.toText("Hello, world!"));
-        addRenderableWidget(titleBox);
-        widgetList.add(titleBox);
+        this.widgetList = new ArrayList<>();
+        category = new CategoryBox(140, 5, this.width - 150, 20, CATEGORY, true);
+        category.setTooltip(Localization.toText("Hello, world!"));
+        addRenderableWidget(category);
+        widgetList.add(category);
         //
-        booleanButton = new ButtonBoolean(140, 40, this.width - 150, 20, type, AlinLib.bariumConfig, "Boolean", true, Component.literal("Boolean"));
+        booleanButton = new ButtonBoolean(140, 25, this.width - 150, 20, type, AlinLib.bariumConfig, "Boolean", true, Component.literal("Boolean"));
         addRenderableWidget(booleanButton);
+        category.addValue(booleanButton);
         widgetList.add(booleanButton);
         //
-        stringEditBox = new EditBoxString(140, 40+(25*2), width-150, 20, AlinLib.bariumConfig.getString("HELLO", "Hello, world!"), type, EDIT_BOX, (string) -> AlinLib.bariumConfig.setString("HELLO", string));
+        stringEditBox = new EditBoxString(140, 50, width-150, 20, AlinLib.bariumConfig.getString("HELLO", "Hello, world!"), type, EDIT_BOX, (string) -> AlinLib.bariumConfig.setString("HELLO", string));
         addRenderableWidget(stringEditBox);
+        category.addValue(stringEditBox);
         widgetList.add(stringEditBox);
         //
-        stringEditBoxSecret = new EditBoxString(140, 40+(25*2), width-150, 20, true, AlinLib.bariumConfig.getString("SECRET", "Alina doesn't have a boyfriend"), type, SECRET_EDIT_BOX, (string) -> AlinLib.bariumConfig.setString("SECRET", string));
+        stringEditBoxSecret = new EditBoxString(140, 75, width-150, 20, true, AlinLib.bariumConfig.getString("SECRET", "Alina doesn't have a boyfriend"), type, SECRET_EDIT_BOX, (string) -> AlinLib.bariumConfig.setString("SECRET", string));
         addRenderableWidget(stringEditBoxSecret);
+        category.addValue(stringEditBoxSecret);
         widgetList.add(stringEditBoxSecret);
         //
-        selectorStringButton = new SelectorStringButton(140, 40+(25*3), this.width - 150, 20, type, hell, AlinLib.bariumConfig, "selector", hell[0], Component.literal("Selector"));
+        selectorStringButton = new SelectorStringButton(140, 100, this.width - 150, 20, type, hell, AlinLib.bariumConfig, "selector", hell[0], Component.literal("Selector"));
         addRenderableWidget(selectorStringButton);
+        category.addValue(selectorStringButton);
         widgetList.add(selectorStringButton);
         //
-        colorEditBox = new EditBoxColor(140, 40+(25*4), width-150, 20, type, AlinLib.bariumConfig, "Color", 0xFFFFFF, COLOR_EDIT_BOX);
+        colorEditBox = new EditBoxColor(140, 125, width-150, 20, type, AlinLib.bariumConfig, "Color", 0xFFFFFF, COLOR_EDIT_BOX);
         addRenderableWidget(colorEditBox);
+        category.addValue(colorEditBox);
         widgetList.add(colorEditBox);
         //
-        sliderPercent = new SliderPercent(140, 40+(25*5), width-150, 20, type, AlinLib.bariumConfig, "Slider_percent", 0, SLIDER_PERCENT);
+        sliderPercent = new SliderPercent(140, 150, width-150, 20, type, AlinLib.bariumConfig, "Slider_percent", 0, SLIDER_PERCENT);
         addRenderableWidget(sliderPercent);
+        category.addValue(sliderPercent);
         widgetList.add(sliderPercent);
         //
-        sliderInt = new SliderInteger(140, 40+(25*6), width-150, 20, type, AlinLib.bariumConfig, "Slider_int", 30, 30, 110, SLIDER_INTEGER);
+        sliderInt = new SliderInteger(140, 175, width-150, 20, type, AlinLib.bariumConfig, "Slider_int", 30, 30, 110, SLIDER_INTEGER);
         sliderInt.setTypeInteger(" Coffee");
         addRenderableWidget(sliderInt);
+        category.addValue(sliderInt);
         widgetList.add(sliderInt);
         //
-        something = new TextBox(140, 40+(25*7), this.width - 150, 20, SOMETHING, true, (OnPress) -> {
+        something = new TextBox(140, 200, this.width - 150, 20, SOMETHING, true, (OnPress) -> {
             OnPress.setActive(false);
             AlinLib.log(Component.translatable("alinlib.something.oops"));
             this.minecraft.stop();
@@ -127,6 +140,7 @@ public class AlinaDemoScreen extends Screen {
         widgetList.add(something);
     }
     private void initButton(){
+        addRenderableWidget(new TextBox(10, 15, 110, this.font.lineHeight, TITLE, true));
         // line 0
         addRenderableWidget(new Button(10, 40, 110, 20, InterfaceUtils.DesignType.VANILLA, Colors.KENNY, Component.literal("DesignType.VANILLA"), (OnPress) -> {
             this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Set DesignType.VANILLA"), AlinaToast.Type.DEBUG));
@@ -164,9 +178,6 @@ public class AlinaDemoScreen extends Screen {
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-
-        guiGraphics.drawCenteredString(this.minecraft.font, TITLE, 120 / 2+5, 15, -1);
-        //
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
     }
 

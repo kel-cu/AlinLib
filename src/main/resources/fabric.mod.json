@@ -5,7 +5,10 @@
   "version": "${version}",
   "description": "A library to facilitate mod development by Kel Cuprum",
   "authors": [
-    "Im_Kel (Kel Cuprum)"
+    "Im_Kel [Developer, Tester, Translator]"
+  ],
+  "contributors": [
+    "@dima_dencep [#1]"
   ],
   "contact": {
     "repo": "https://github.com/simply-kel/AlinLib",
@@ -26,7 +29,7 @@
   "accessWidener": "alinlib.accesswidener",
   "icon": "assets/alinlib/icon.png",
   "depends": {
-    "fabricloader": ">=0.14.17",
+    "fabricloader": "*",
     "fabric": "*",
     "minecraft": [">=1.20.2"]
   },

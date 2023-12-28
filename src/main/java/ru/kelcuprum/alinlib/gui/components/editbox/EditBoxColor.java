@@ -28,7 +28,6 @@ public class EditBoxColor extends EditBoxString {
         setMaxLength(20);
         setFormatter((string, integer) -> FormattedCharSequence.forward(string.toUpperCase(), Style.EMPTY.withColor(volume)));
         setValue(Integer.toHexString(volume));
-//        setFilter(((ConfigValueDuck) this.value).getValueSpec()::test);
         setResponder(string -> {
             try {
                 this.volume = (int) Long.parseLong(string, 16);
