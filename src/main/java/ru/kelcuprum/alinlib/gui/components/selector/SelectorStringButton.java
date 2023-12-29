@@ -10,12 +10,14 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
 
 import java.util.Arrays;
 
-public class SelectorStringButton extends AbstractButton {
+public class SelectorStringButton extends AbstractButton implements Resetable {
     private final InterfaceUtils.DesignType type;
     public int currentPosition = 0;
+    public final String defaultVolume;
     public String[] list;
     public Config config;
     public String typeConfig;
@@ -27,6 +29,7 @@ public class SelectorStringButton extends AbstractButton {
         super(x, y, width, height, label);
 
         this.type = type;
+        this.defaultVolume = defaultVolume;
         this.typeConfig = typeConfig;
         this.config = config;
         this.list = list;
@@ -92,4 +95,14 @@ public class SelectorStringButton extends AbstractButton {
         this.defaultButtonNarrationText(narrationElementOutput);
     }
 
+    @Override
+    public void resetValue() {
+        try {
+            this.currentPosition = Arrays.stream(this.list).toList().indexOf(defaultVolume);
+        } catch(Exception ex){
+            AlinLib.log(ex.getLocalizedMessage(), Level.ERROR);
+            this.currentPosition = 0;
+        }
+        this.config.setString(this.typeConfig, this.list[this.currentPosition]);
+    }
 }

@@ -5,8 +5,9 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
 
-public class EditBoxColor extends EditBoxString {
+public class EditBoxColor extends EditBoxString implements Resetable {
     public int volume;
     public int defaultConfig;
     public Config config;
@@ -52,5 +53,10 @@ public class EditBoxColor extends EditBoxString {
     @Override
     public int getColor() {
         return this.volume;
+    }
+
+    @Override
+    public void resetValue() {
+        setValue(Integer.toHexString(this.defaultConfig));
     }
 }

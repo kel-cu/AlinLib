@@ -8,8 +8,9 @@ import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
 
-public class SliderPercent extends AbstractSliderButton {
+public class SliderPercent extends AbstractSliderButton implements Resetable {
     private final InterfaceUtils.DesignType type;
     public final double defaultConfig;
     public final Config config;
@@ -82,5 +83,11 @@ public class SliderPercent extends AbstractSliderButton {
     protected void applyValue() {
         this.config.setNumber(this.typeConfig, this.value);
 
+    }
+
+    @Override
+    public void resetValue() {
+        this.config.setNumber(this.typeConfig, this.defaultConfig);
+        this.setValue(this.defaultConfig);
     }
 }

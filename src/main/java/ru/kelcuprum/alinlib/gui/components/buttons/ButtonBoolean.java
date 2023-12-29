@@ -6,8 +6,9 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
 
-public class ButtonBoolean extends Button {
+public class ButtonBoolean extends Button implements Resetable {
     public boolean volume;
     public Component volumeState;
     public final boolean defaultConfig;
@@ -27,14 +28,6 @@ public class ButtonBoolean extends Button {
         this.setColor(this.volume ? Colors.SEADRIVE : Colors.GROUPIE);
         volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
         this.setMessage(Component.literal(buttonMessage +": ").append(volumeState));
-    }
-
-    public void resetVolume(){
-        this.volume = defaultConfig;
-        this.volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
-        this.setColor(this.volume ? Colors.SEADRIVE : Colors.GROUPIE);
-        this.setMessage(Component.literal(buttonMessage +": ").append(Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"))));
-        config.setBoolean(typeConfig, this.volume);
     }
 
     @Override
@@ -63,5 +56,14 @@ public class ButtonBoolean extends Button {
     public boolean isDoesNotFit(){
         int size = Minecraft.getInstance().font.width(buttonMessage+": "+volume) + ((getHeight() - 8) / 2);
         return size > getWidth()-((getHeight() - 8) / 2)*2;
+    }
+
+    @Override
+    public void resetValue() {
+        this.volume = defaultConfig;
+        this.volumeState = Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"));
+        this.setColor(this.volume ? Colors.SEADRIVE : Colors.GROUPIE);
+        this.setMessage(Component.literal(buttonMessage +": ").append(Component.translatable("alinlib.boolean." + (this.volume ? "true" : "false"))));
+        config.setBoolean(typeConfig, this.volume);
     }
 }

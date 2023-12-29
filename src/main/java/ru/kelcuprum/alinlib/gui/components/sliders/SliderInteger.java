@@ -7,8 +7,9 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
 
-public class SliderInteger extends AbstractSliderButton {
+public class SliderInteger extends AbstractSliderButton implements Resetable {
     private final InterfaceUtils.DesignType type;
     public final int defaultConfig;
     public final Config config;
@@ -93,5 +94,12 @@ public class SliderInteger extends AbstractSliderButton {
         this.displayValue = this.min+selValue;
         this.config.setNumber(this.typeConfig, this.displayValue);
 
+    }
+
+    @Override
+    public void resetValue() {
+        this.displayValue = defaultConfig;
+        this.config.setNumber(this.typeConfig, this.displayValue);
+        this.setValue(((config.getNumber(typeConfig, defaultConfig).doubleValue() - min) /(max-min)));
     }
 }

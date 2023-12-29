@@ -7,6 +7,10 @@
 
   "alinlib.editbox.secret": "Secret :)",
 
+  "alinlib.component.exit": "Exit",
+  "alinlib.component.reset": "Reset",
+  "alinlib.component.reset.toast": "The category configs have been reset",
+
   "modmenu.alinlib.github": "GitHub",
   "modmenu.alinlib.modrinth": "Modrinth",
   "modmenu.alinlib.donate": "DonationAlerts",

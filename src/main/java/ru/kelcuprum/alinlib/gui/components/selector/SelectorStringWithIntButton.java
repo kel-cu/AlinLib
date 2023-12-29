@@ -8,10 +8,12 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
 
-public class SelectorStringWithIntButton extends AbstractButton {
+public class SelectorStringWithIntButton extends AbstractButton implements Resetable {
     private final InterfaceUtils.DesignType type;
     public int currentPosition = 0;
+    public final int defaultVolume;
     public String[] list;
     public Config config;
     public String typeConfig;
@@ -23,6 +25,7 @@ public class SelectorStringWithIntButton extends AbstractButton {
         super(x, y, width, height, label);
 
         this.type = type;
+        this.defaultVolume = defaultVolume;
         this.typeConfig = typeConfig;
         this.config = config;
         this.list = list;
@@ -83,4 +86,11 @@ public class SelectorStringWithIntButton extends AbstractButton {
         this.defaultButtonNarrationText(narrationElementOutput);
     }
 
+    @Override
+    public void resetValue() {
+        this.currentPosition = defaultVolume;
+        if(this.list.length == this.currentPosition) this.currentPosition = 0;
+        this.config.setNumber(this.typeConfig, this.currentPosition);
+
+    }
 }
