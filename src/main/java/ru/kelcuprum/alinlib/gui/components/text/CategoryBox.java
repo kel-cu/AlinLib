@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -23,15 +24,30 @@ public class CategoryBox extends TextBox {
 
         values.add(widget);
     }
-
-    @Override
-    public void onClick(double d, double e) {
+    public void changeState(){
         state = !state;
         for (AbstractWidget widget : values) {
             widget.visible = state;
         }
-
+    }
+    @Override
+    public void onClick(double d, double e) {
+        changeState();
         super.onClick(d, e);
+    }
+    @Override
+    public boolean keyPressed(int i, int j, int k) {
+        if (this.active && this.visible) {
+            if (CommonInputs.selected(i)) {
+                this.playDownSound(Minecraft.getInstance().getSoundManager());
+                changeState();
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override

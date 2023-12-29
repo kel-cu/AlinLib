@@ -79,6 +79,7 @@ public class Localization {
             e.printStackTrace();
         }
     }
+
     // FOR EVERYTHING FUNCTION NOT IN THIS CLASS
     public static String getRounding(double number){return getRounding(number, false);}
     public static String getRounding(double number, boolean isToInt){

@@ -11,7 +11,7 @@ import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 public class Button extends AbstractButton {
-    final InterfaceUtils.DesignType type;
+    protected final InterfaceUtils.DesignType type;
     int color;
     private final boolean isCentred;
     private OnPress onPress;

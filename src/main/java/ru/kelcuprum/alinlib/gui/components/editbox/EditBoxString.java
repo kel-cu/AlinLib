@@ -87,7 +87,7 @@ public class EditBoxString extends EditBox {
     @Override
     public void setResponder(Consumer<String> responder) { super.setResponder(responder); }
 
-    private int getPositionContent(String content) {
+    protected int getPositionContent(String content) {
         int pos = getX() + getWidth() - font.width(content) - ((getHeight() - 8) / 2);
 
         if (getX() + font.width(getMessage()) + ((getHeight() - 8) / 2) * 2 > pos)
@@ -119,6 +119,7 @@ public class EditBoxString extends EditBox {
 
                 String volume1 = font.plainSubstrByWidth(secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue(), getX() + getWidth() - (getPositionContent(getValue())));
 
+//                guiGraphics.drawString(Minecraft.getInstance().font, volume1, getX() + getWidth() - Minecraft.getInstance().font.width(volume1) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
                 guiGraphics.drawString(font, formatter.apply(volume1, displayPos), getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : -1);
             }
         }

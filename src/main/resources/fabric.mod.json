@@ -5,9 +5,10 @@
   "version": "${version}",
   "description": "A library to facilitate mod development by Kel Cuprum",
   "authors": [
-    "Im_Kel [Developer, Tester, Translator]"
+    "Kel Cuprum (Im_Kel)"
   ],
   "contributors": [
+    "Im_Kel [Developer, Tester, Translator]",
     "@dima_dencep [#1]"
   ],
   "contact": {

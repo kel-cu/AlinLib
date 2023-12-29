@@ -44,7 +44,7 @@ public class TextBox extends AbstractWidget {
         super.setPosition(x, y);
     }
     public void onPress() {
-        this.onPress.onPress(this);
+        if(onPress != null) this.onPress.onPress(this);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class TextBox extends AbstractWidget {
     }
     @Override
     public void onClick(double d, double e) {
-        if(onPress != null) this.onPress();
+        this.onPress();
     }
     @Override
     public boolean keyPressed(int i, int j, int k) {

@@ -30,7 +30,7 @@ public class EditBoxColor extends EditBoxString {
         setValue(Integer.toHexString(volume));
         setResponder(string -> {
             try {
-                this.volume = (int) Long.parseLong(string, 16);
+                this.volume = (int) Long.parseLong(string.toUpperCase(), 16);
                 config.setNumber(typeConfig, volume);
 
                 setError(false);
@@ -40,6 +40,15 @@ public class EditBoxColor extends EditBoxString {
         });
     }
 
+    @Override
+    protected int getPositionContent(String content) {
+        int pos = getX() + getWidth() - font.width(content.toUpperCase()) - ((getHeight() - 8) / 2);
+
+        if (getX() + font.width(getMessage()) + ((getHeight() - 8) / 2) * 2 > pos)
+            pos = getX() + font.width(getMessage()) + ((getHeight() - 8) / 2) * 2;
+
+        return pos;
+    }
     @Override
     public int getColor() {
         return this.volume;
