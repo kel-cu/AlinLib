@@ -27,14 +27,14 @@ public class SelectorStringButton extends SelectorButton implements Resetable {
         this.typeConfig = typeConfig;
         this.config = config;
         setOnPress((OnPress) (onPress) -> {
-            this.config.setString(this.typeConfig, getList()[this.position]);
+            if(this.config != null) this.config.setString(this.typeConfig, getList()[this.position]);
         });
         try {
-            setPosition(Arrays.stream(getList()).toList().indexOf(this.config.getString(typeConfig, defaultVolume)));
+            if(this.config != null) setPosition(Arrays.stream(getList()).toList().indexOf(this.config.getString(typeConfig, defaultVolume)));
         } catch(Exception ex){
             AlinLib.log(ex.getLocalizedMessage(), Level.ERROR);
             setPosition(0);
-            this.config.setString(this.typeConfig, getList()[getPosition()]);
+            if(this.config != null) this.config.setString(this.typeConfig, getList()[getPosition()]);
         }
     }
 
@@ -46,6 +46,6 @@ public class SelectorStringButton extends SelectorButton implements Resetable {
             AlinLib.log(ex.getLocalizedMessage(), Level.ERROR);
             setPosition(0);
         }
-        this.config.setString(this.typeConfig, getList()[getPosition()]);
+        if(this.config != null) this.config.setString(this.typeConfig, getList()[getPosition()]);
     }
 }

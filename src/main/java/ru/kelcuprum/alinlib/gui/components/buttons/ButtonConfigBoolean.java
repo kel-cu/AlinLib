@@ -18,6 +18,7 @@ public class ButtonConfigBoolean extends ButtonBoolean implements Resetable {
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;
+        if(this.config == null) return;
         this.setValue(this.config.getBoolean(this.typeConfig, this.defaultConfig));
         this.setOnPress((OnPress) (value) ->  config.setBoolean(typeConfig, value));
     }
@@ -25,6 +26,6 @@ public class ButtonConfigBoolean extends ButtonBoolean implements Resetable {
     @Override
     public void resetValue() {
         this.setValue(defaultConfig);
-        config.setBoolean(typeConfig, this.getValue());
+        if(config != null) config.setBoolean(typeConfig, this.getValue());
     }
 }

@@ -23,14 +23,14 @@ public class SelectorIntegerButton extends SelectorButton implements Resetable {
         this.typeConfig = typeConfig;
         this.config = config;
         setOnPress((OnPress) (onPress) -> {
-            this.config.setNumber(this.typeConfig, onPress.getPosition());
+            if(this.config != null) this.config.setNumber(this.typeConfig, onPress.getPosition());
         });
-        setPosition(this.config.getNumber(this.typeConfig, this.defaultVolume).intValue());
+        if(this.config != null) setPosition(this.config.getNumber(this.typeConfig, this.defaultVolume).intValue());
     }
 
     @Override
     public void resetValue() {
         setPosition(defaultVolume);
-        this.config.setNumber(this.typeConfig, getPosition());
+        if(this.config != null) this.config.setNumber(this.typeConfig, getPosition());
     }
 }

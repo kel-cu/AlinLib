@@ -1,11 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.sliders;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
-import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.sliders.base.Slider;
@@ -44,14 +40,16 @@ public class SliderInteger extends Slider implements Resetable {
     protected void applyValue() {
         int selValue = (int) ((this.max-this.min)*this.value);
         this.displayValue = this.min+selValue;
-        this.config.setNumber(this.typeConfig, this.displayValue);
+        if(this.config != null) this.config.setNumber(this.typeConfig, this.displayValue);
 
     }
 
     @Override
     public void resetValue() {
         this.displayValue = defaultConfig;
-        this.config.setNumber(this.typeConfig, this.displayValue);
-        this.setValue(((config.getNumber(typeConfig, defaultConfig).doubleValue() - min) /(max-min)));
+        if(this.config != null) {
+            this.config.setNumber(this.typeConfig, this.displayValue);
+            this.setValue(((config.getNumber(typeConfig, defaultConfig).doubleValue() - min) /(max-min)));
+        }
     }
 }
