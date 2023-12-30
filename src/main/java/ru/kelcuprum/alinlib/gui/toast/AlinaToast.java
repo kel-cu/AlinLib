@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import ru.kelcuprum.alinlib.Colors;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 import java.util.Iterator;
 import java.util.List;
@@ -128,10 +128,10 @@ public class AlinaToast implements Toast {
 
     public enum Type {
         FLAT(null),
-        INFO(Colors.SEADRIVE),
-        WARN(Colors.CLOWNFISH),
-        DEBUG(Colors.TETRA),
-        ERROR(Colors.GROUPIE);
+        INFO(InterfaceUtils.Colors.SEADRIVE),
+        WARN(InterfaceUtils.Colors.CLOWNFISH),
+        DEBUG(InterfaceUtils.Colors.TETRA),
+        ERROR(InterfaceUtils.Colors.GROUPIE);
 
         public final Integer color;
 

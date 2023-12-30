@@ -5,7 +5,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.Colors;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 import java.util.function.Consumer;
@@ -97,7 +96,7 @@ public class EditBoxString extends EditBox {
     }
 
     protected int getColor() {
-        return (isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE);
+        return (isFocused() ? InterfaceUtils.Colors.CLOWNFISH : InterfaceUtils.Colors.SEADRIVE);
     }
 
     public void setError(boolean error) {
@@ -115,12 +114,12 @@ public class EditBoxString extends EditBox {
                 super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
                 this.tweakBorder = false;
             } else {
-                guiGraphics.drawString(font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : -1);
+                guiGraphics.drawString(font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? InterfaceUtils.Colors.GROUPIE : -1);
 
                 String volume1 = font.plainSubstrByWidth(secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue(), getX() + getWidth() - (getPositionContent(getValue())));
 
 //                guiGraphics.drawString(Minecraft.getInstance().font, volume1, getX() + getWidth() - Minecraft.getInstance().font.width(volume1) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
-                guiGraphics.drawString(font, formatter.apply(volume1, displayPos), getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : -1);
+                guiGraphics.drawString(font, formatter.apply(volume1, displayPos), getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? InterfaceUtils.Colors.GROUPIE : -1);
             }
         }
     }

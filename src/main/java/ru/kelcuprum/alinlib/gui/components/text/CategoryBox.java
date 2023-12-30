@@ -24,12 +24,18 @@ public class CategoryBox extends TextBox {
 
         values.add(widget);
     }
+
+    public List<AbstractWidget> getValues(){
+        return values;
+    }
+
     public void changeState(){
         state = !state;
         for (AbstractWidget widget : values) {
             widget.visible = state;
         }
     }
+
     @Override
     public void onClick(double d, double e) {
         changeState();

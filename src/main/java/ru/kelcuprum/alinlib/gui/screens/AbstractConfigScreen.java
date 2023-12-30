@@ -2,15 +2,19 @@ package ru.kelcuprum.alinlib.gui.screens;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.ConfigureScrolWidget;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
-import ru.kelcuprum.alinlib.gui.components.buttons.Button;
+import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
@@ -22,7 +26,7 @@ import java.util.List;
 public abstract class AbstractConfigScreen extends Screen {
     private static final ResourceLocation icon = new ResourceLocation("alinlib", "textures/gui/widget/buttons/reset.png");
 
-    protected List<AbstractWidget> widgetList = new ArrayList<AbstractWidget>();
+    protected List<AbstractWidget> widgetList = new ArrayList<>();
     private ConfigureScrolWidget scroller;
     private final Screen parent;
     public AbstractConfigScreen(Screen parent, Component title) {
@@ -44,15 +48,17 @@ public abstract class AbstractConfigScreen extends Screen {
         // 85 before reset button
         addRenderableWidget(new Button(10, height - 30, 85, 20, InterfaceUtils.DesignType.VANILLA, Localization.getText("alinlib.component.exit"), (OnPress) -> {
             AlinLib.bariumConfig.save();
+            assert this.minecraft != null;
             this.minecraft.setScreen(parent);
         }));
-        addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, InterfaceUtils.DesignType.VANILLA, icon, Localization.getText("alinlib.component.reset"), 20, 20, (OnPress) -> {
-            this.minecraft.getToasts().addToast(new AlinaToast(title, Component.translatable("alinlib.component.reset.toast"), icon));
+        addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, InterfaceUtils.DesignType.VANILLA, icon, Localization.getText("alinlib.component.reset"), (OnPress) -> {
             for(AbstractWidget widget : widgetList){
                 if(widget instanceof Resetable){
                     ((Resetable) widget).resetValue();
                 }
             }
+            assert this.minecraft != null;
+            this.minecraft.getToasts().addToast(new AlinaToast(title, Component.translatable("alinlib.component.reset.toast"), icon));
         }));
     }
     protected void initCategory(){
@@ -73,17 +79,32 @@ public abstract class AbstractConfigScreen extends Screen {
             }
         }));
         addRenderableWidget(scroller);
-        this.scroller.onScroll.accept(scroller);
     }
-    protected void addRenderableWidgets(List<AbstractWidget> widgets){
+
+    // Добавление виджетов
+    protected void addRenderableWidgets(@NotNull List<AbstractWidget> widgets){
         for(AbstractWidget widget : widgets){
             addRenderableWidget(widget);
         }
     }
-    //
+    @Override
+    protected <T extends GuiEventListener & Renderable & NarratableEntry> @NotNull T addRenderableWidget(T widget) {
+        return super.addRenderableWidget(widget);
+    }
+    protected void addCategoryWidget(AbstractWidget widget){
+        widgetList.add(widget);
+        addRenderableWidget(widget);
+    };
+    protected void addCategory(CategoryBox category){
+        addCategoryWidget(category);
+        widgetList.addAll(category.getValues());
+        addRenderableWidgets(category.getValues());
+    }
+
+    // Рендер, скролл, прослушивание кей-биндов
     @Override
     public void tick(){
-        scroller.onScroll.accept(scroller);
+        if(scroller != null) scroller.onScroll.accept(scroller);
     }
 
     @Override
@@ -100,6 +121,7 @@ public abstract class AbstractConfigScreen extends Screen {
 
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f){
+        assert this.minecraft != null;
         InterfaceUtils.renderBackground(guiGraphics, this.minecraft);
         InterfaceUtils.renderLeftPanel(guiGraphics, 130, this.height);
     }

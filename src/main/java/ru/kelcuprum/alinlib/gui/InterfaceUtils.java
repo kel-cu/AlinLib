@@ -8,9 +8,6 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import ru.kelcuprum.alinlib.Colors;
-
-import java.awt.*;
 
 public class InterfaceUtils {
     private static final WidgetSprites SPRITES = new WidgetSprites(new ResourceLocation("widget/button"), new ResourceLocation("widget/button_disabled"), new ResourceLocation("widget/button_highlighted"));
@@ -75,6 +72,11 @@ public class InterfaceUtils {
         guiGraphics.drawString(font, formattedCharSequence, x - font.width(formattedCharSequence) / 2, y, color, shadow);
     }
 
+    public static boolean isDoesNotFit(Component message, Number width, Number height){
+        int size = Minecraft.getInstance().font.width(message) + ((height.intValue() - 8) / 2) * 2;
+        return size > width.intValue();
+    }
+
     public enum DesignType {
         ALINA(0),
         FLAT(1),
@@ -101,7 +103,7 @@ public class InterfaceUtils {
                 default -> guiGraphics.blitSprite(SPRITES.get(active, isHoveredOrFocused), x, y, width, height);
             }
         }
-        public void renderSliderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, int color, double position, AbstractSliderButton component){
+        public void renderSliderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position, AbstractSliderButton component){
             float state = !active ? 3 : isHoveredOrFocused ? 2 : 1;
             final float f = state / 2 * 0.9F + 0.1F;
             final int background = (int) (255.0F * f);
@@ -109,11 +111,11 @@ public class InterfaceUtils {
             switch (this.type){
                 case 0 -> {
                     guiGraphics.fill(x, y, x + width, y + height-1, background / 2 << 24);
-                    guiGraphics.fill(x, y + height-1, x + width, y + height, new Color(isHoveredOrFocused ? Colors.CLOWNFISH : Colors.SEADRIVE, true).getRGB());
+                    guiGraphics.fill(x, y + height-1, x + width, y + height, isHoveredOrFocused ? Colors.CLOWNFISH : Colors.SEADRIVE);
                     if(isHoveredOrFocused){
                         int xS = x + (int)(position * (double)(width - 4));
                         int yS = y+(height - 8) / 2;
-                        guiGraphics.fill(xS, yS, xS+4, yS+Minecraft.getInstance().font.lineHeight, new Color(Colors.CLOWNFISH, true).getRGB());
+                        guiGraphics.fill(xS, yS, xS+4, yS+Minecraft.getInstance().font.lineHeight, Colors.CLOWNFISH);
                     }
                 }
                 case 1 -> {
@@ -121,7 +123,7 @@ public class InterfaceUtils {
                     if(isHoveredOrFocused){
                         int xS = x + (int)(position * (double)(width - 4));
                         int yS = y+(height - 8) / 2;
-                        guiGraphics.fill(xS, yS, xS+4, yS+Minecraft.getInstance().font.lineHeight, new Color(Colors.CLOWNFISH, true).getRGB());
+                        guiGraphics.fill(xS, yS, xS+4, yS+Minecraft.getInstance().font.lineHeight, Colors.CLOWNFISH);
                     }
                 }
                 default -> {
@@ -132,6 +134,20 @@ public class InterfaceUtils {
                 }
             }
         }
+    }
+    public interface Colors {
+        int SEADRIVE = 0xFF79c738;
+        int CLOWNFISH = 0xFFf1ae31;
+        int SELFISH = 0xFFff366e;
+        int GROUPIE = 0xFFfc1a47;
+        int KENNY = 0xFF627921;
+        int CONVICT = 0xFFffdc32;
+        int SEABIRD = 0xFFf1ae31;
+        int TETRA = 0xFFff67d1;
+        int FORGOT = 0xFF4f3e60;
+        int WHITE = 0xFFFFFFFF;
+        int BLACK = 0xFF000000;
+        int BLACK_ALPHA = 0x37000000;
     }
 }
 
