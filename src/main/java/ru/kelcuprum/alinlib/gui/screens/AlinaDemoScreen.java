@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.ImageWidget;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxString;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderInteger;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderPercent;
@@ -50,7 +51,7 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
     protected void initCategory(){
         super.initCategory();
         //
-        CategoryBox category = new CategoryBox(140, 5, this.width - 150, 20, CATEGORY, true);
+        CategoryBox category = new CategoryBox(140, 5, this.width - 150, 20, CATEGORY);
         category.setTooltip(Localization.toText("Hello, world!"));
         //
         ButtonConfigBoolean booleanButton = new ButtonConfigBoolean(140, 30, this.width - 150, 20, type, AlinLib.bariumConfig, "Boolean", true, Component.literal("Boolean"));
@@ -75,6 +76,8 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         sliderInt.setTypeInteger(" Coffee");
         category.addValue(sliderInt);
         addCategory(category);
+        //
+        addCategoryWidget(new ImageWidget(140, 230, this.width - 150, this.width - 150, new ResourceLocation("alinlib", "textures/gui/widget/buttons/reset.png"), Component.empty()));
         //
         TextBox something = new TextBox(140, 205, this.width - 150, 20, SOMETHING, true, (OnPress) -> {
             if (!this.isFollow) {

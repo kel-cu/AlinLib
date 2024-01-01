@@ -13,8 +13,8 @@ import java.util.List;
 public class CategoryBox extends TextBox {
     public final List<AbstractWidget> values = new ArrayList<>();
     private boolean state = true;
-    public CategoryBox(int x, int y, int width, int height, Component label, boolean isCenter) {
-        super(x, y, width, height, label, isCenter);
+    public CategoryBox(int x, int y, int width, int height, Component label) {
+        super(x, y, width, height, label, true);
         this.setActive(true);
     }
 
@@ -23,6 +23,11 @@ public class CategoryBox extends TextBox {
             return;
 
         values.add(widget);
+    }
+    public void addValues(List<AbstractWidget> widgets) {
+        if (widgets == null)
+            return;
+        values.addAll(widgets);
     }
 
     public List<AbstractWidget> getValues(){

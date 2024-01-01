@@ -59,6 +59,7 @@ public abstract class AbstractConfigScreen extends Screen {
             }
             assert this.minecraft != null;
             this.minecraft.getToasts().addToast(new AlinaToast(title, Component.translatable("alinlib.component.reset.toast"), icon));
+            AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
         }));
     }
     protected void initCategory(){
