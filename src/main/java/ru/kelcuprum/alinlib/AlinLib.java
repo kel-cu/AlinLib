@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.kelcuprum.alinlib.command.AlinLibCommand;
 import ru.kelcuprum.alinlib.config.Config;
+import ru.kelcuprum.alinlib.config.Localization;
 
 import java.io.IOException;
 import java.net.URI;
@@ -20,6 +21,7 @@ import java.net.http.HttpResponse;
 public class AlinLib implements ClientModInitializer {
     public static final Logger LOG = LogManager.getLogger("AlinaLib");
     public static Config bariumConfig = new Config("config/AlibLib/config.json");
+    public static Localization localization = new Localization("alinlib", "config/AlinLib/lang/");
     public static HttpClient webClient = HttpClient.newHttpClient();
     @Override
     public void onInitializeClient() {

@@ -6,6 +6,7 @@ import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
+import ru.kelcuprum.alinlib.gui.components.editbox.base.EditBoxString;
 
 public class EditBoxColor extends EditBoxString implements Resetable {
     public int volume;
@@ -26,8 +27,8 @@ public class EditBoxColor extends EditBoxString implements Resetable {
         this.defaultConfig = defaultConfig;
         this.volume = config.getNumber(typeConfig, defaultConfig).intValue();
 
-        setMaxLength(20);
-        setFormatter((string, integer) -> FormattedCharSequence.forward(string.toUpperCase(), Style.EMPTY.withColor(volume)));
+        setMaxLength(16);
+        setFormatter((string, integer) -> FormattedCharSequence.forward(string.toUpperCase(), Style.EMPTY.withColor(getColor())));
         setValue(Integer.toHexString(volume));
         setResponder(string -> {
             try {
@@ -52,7 +53,7 @@ public class EditBoxColor extends EditBoxString implements Resetable {
     }
     @Override
     public int getColor() {
-        return this.volume;
+        return getError() ? InterfaceUtils.Colors.GROUPIE : this.volume;
     }
 
     @Override

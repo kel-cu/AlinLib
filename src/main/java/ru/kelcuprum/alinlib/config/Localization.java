@@ -11,10 +11,12 @@ import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Localization {
+    private Parser parser;
     private static final int codes = 23;
     private static final Map<String, String> formatCodes = IntStream.range(0, codes)
             .boxed()
@@ -31,6 +33,7 @@ public class Localization {
         this.modID = modID;
         this.filePath = filePath;
     }
+    // Получить
     private String getCodeLocalization(){
         try{
             return Minecraft.getInstance().options.languageCode;
@@ -56,6 +59,9 @@ public class Localization {
         return getLocalization(key, false);
     }
     public String getLocalization(String key, boolean clearColor){
+        return getLocalization(key, clearColor, true);
+    }
+    public String getLocalization(String key, boolean clearColor, boolean parse){
         String text;
         try {
             JsonObject JSONLocalization = getJSONFile();
@@ -63,10 +69,25 @@ public class Localization {
             else text = JSONLocalization.get(key).getAsString();
         } catch (Exception ex) {
             AlinLib.log(ex.getLocalizedMessage());
-            text = getText(modID+ "." + key).getString();
+            text = getDefaultLocalization(key);
         }
-        return clearColor ? clearFormatCodes(text) : fixFormatCodes(text);
+        text = clearColor ? clearFormatCodes(text) : fixFormatCodes(text);
+        return parse ? getParsedText(text) : text;
     }
+    public String getParsedText(String content){
+        if(parser == null) return content;
+        return parser.parser(content);
+    }
+    public String getDefaultLocalization(String key){
+        return getText(modID+ "." + key).getString();
+    }
+    public void resetLocalization(String key){
+        setLocalization(key, getDefaultLocalization(key));
+    }
+    public interface Parser {
+        String parser(String content);
+    }
+    // Заменить
     public void setLocalization(String type, String text){
         try {
             JsonObject JSONLocalization = getJSONFile();
@@ -78,6 +99,9 @@ public class Localization {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+    public void setParser(Parser parser){
+        this.parser = parser;
     }
 
     // FOR EVERYTHING FUNCTION NOT IN THIS CLASS
