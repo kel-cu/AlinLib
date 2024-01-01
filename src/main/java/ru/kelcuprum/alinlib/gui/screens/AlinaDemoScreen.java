@@ -129,7 +129,7 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         notConfigure.addValue(editBoxStringSecret);
         //
         SelectorButton selectorButton = new SelectorButton(140, 330, width, 20, type, InterfaceUtils.Colors.GROUPIE, alina, 0, STRING_SELECTOR, (s) -> {
-            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal(String.format("Select: %b", s.getValue().getString())), icon, AlinaToast.Type.DEBUG));
+            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal(String.format("Select: %s", s.getValue().getString())), icon, AlinaToast.Type.DEBUG));
         });
         notConfigure.addValue(selectorButton);
         //
