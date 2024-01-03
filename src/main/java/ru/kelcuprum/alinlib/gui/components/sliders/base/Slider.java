@@ -56,16 +56,16 @@ public class Slider extends AbstractSliderButton {
 
     // Рендер
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int i, int j, float tick) {
+    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
         if(this.visible){
-            renderBackground(guiGraphics, i, j, tick);
-            renderText(guiGraphics, i, j, tick);
+            renderBackground(guiGraphics, mouseX, mouseY, tick);
+            renderText(guiGraphics, mouseX, mouseY, tick);
         }
     }
-    public void renderBackground(GuiGraphics guiGraphics, int i, int j, float tick) {
+    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
         this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value, this);
     }
-    public void renderText(GuiGraphics guiGraphics, int i, int j, float tick) {
+    public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
         if(InterfaceUtils.isDoesNotFit(getMessage(), getWidth(), getHeight())){
             if(isHoveredOrFocused()){
                 this.setMessage(getComponentValue());
