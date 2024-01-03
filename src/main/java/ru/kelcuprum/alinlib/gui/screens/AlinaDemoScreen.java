@@ -137,23 +137,23 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         notConfigure.addValue(slider);
 
         notConfigure.addValue(new TextBox(140, 405, width, 20, Component.literal("Not center"), false, (s)->{
-            Util.getPlatform().openUri("https://cdn.kelcuprum.ru/other/monke.gif");
+            Util.getPlatform().openUri("https://cdn.discordapp.com/emojis/1190682055273619627.png?size=512&quality=lossless");
         }));
         notConfigure.addValue(new TextBox(140, 380, width, 20, Component.literal("Center"), true, (s)->{
-            Util.getPlatform().openUri("https://cdn.kelcuprum.ru/other/monke.gif");
+            Util.getPlatform().openUri("https://cdn.discordapp.com/emojis/1190682055273619627.png?size=512&quality=lossless");
         }));
         addCategory(notConfigure);
 
         // -=-=-=-=-=-=-=-=-=-=-=-
-        addCategoryWidget(new ImageWidget(140, 430, width, 20, icon, 20, 20, Component.empty()));
+        addCategoryWidget(new ImageWidget(140, 430, width, 60, new ResourceLocation("alinlib", "textures/gui/widget/test/normal.png"), 20, 20, Component.empty()));
         //
         TextBox something = new TextBox(140, 455, width, 20, SOMETHING, true, (OnPress) -> {
             if (!this.isFollow) {
                 this.isFollow = true;
-                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Click me again :)"), new ResourceLocation("alinlib", "textures/gui/widget/test/well.png"), AlinaToast.Type.ERROR));
+                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("fire in the hole"), Component.literal("fire in the hole"), new ResourceLocation("alinlib", "textures/gui/widget/test/normal.png"), AlinaToast.Type.INFO));
             } else {
                 OnPress.setActive(false);
-                Util.getPlatform().openUri("https://cdn.kelcuprum.ru/other/monke.gif");
+                Util.getPlatform().openUri("https://cdn.discordapp.com/emojis/1190682055273619627.png?size=512&quality=lossless");
                 AlinLib.log(Component.translatable("alinlib.something.oops"));
                 this.minecraft.stop();
             }

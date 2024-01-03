@@ -12,16 +12,29 @@ import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 public class Slider extends AbstractSliderButton {
     public final InterfaceUtils.DesignType type;
     public final String buttonMessage;
+    public OnPress onPress;
 
+    //
     public Slider(int x, int y, int width, int height, Component label) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, 0, label);
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, 0, label, null);
     }
     public Slider(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label) {
-        this(x, y, width, height, type, 0, label);
+        this(x, y, width, height, type, 0, label, null);
     }
     public Slider(int x, int y, int width, int height, InterfaceUtils.DesignType type, double position, Component label) {
+        this(x, y, width, height, type, position, label, null);
+    }
+    //
+    public Slider(int x, int y, int width, int height, Component label, OnPress onPress) {
+        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, 0, label, onPress);
+    }
+    public Slider(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
+        this(x, y, width, height, type, 0, label, onPress);
+    }
+    public Slider(int x, int y, int width, int height, InterfaceUtils.DesignType type, double position, Component label, OnPress onPress) {
         super(x, y, width, height, label, position);
         this.type = type;
+        this.onPress = onPress;
         this.buttonMessage = label.getString();
         this.setMessage(Component.literal(buttonMessage).append(": ").append(getComponentValue()));
     }
@@ -37,6 +50,9 @@ public class Slider extends AbstractSliderButton {
     public void setActive(boolean active){
         this.active = active;
     }
+    public void setOnPress(OnPress onPress){
+        this.onPress = onPress;
+    }
 
     // Рендер
     @Override
@@ -50,7 +66,6 @@ public class Slider extends AbstractSliderButton {
         this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value, this);
     }
     public void renderText(GuiGraphics guiGraphics, int i, int j, float tick) {
-
         if(InterfaceUtils.isDoesNotFit(getMessage(), getWidth(), getHeight())){
             if(isHoveredOrFocused()){
                 this.setMessage(getComponentValue());
@@ -79,7 +94,7 @@ public class Slider extends AbstractSliderButton {
 
     @Override
     protected void applyValue(){
-
+        if(this.onPress != null) this.onPress.onPress(this);
     }
     // Мелочи
     @Environment(EnvType.CLIENT)
