@@ -3,11 +3,18 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'maven-publish'
 }
-
+def getGitHash = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
 archivesBaseName = project.archives_base_name
-version = project.mod_version
+version_public = project.version_public
+version = version_public == "true" ? project.mod_version : "${project.mod_version}+git.${getGitHash()}"
 group = project.maven_group
-
 loom {
     silentMojangMappingsLicense()
 
@@ -96,4 +103,9 @@ publishing {
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
     }
+}
+
+
+build {
+    if(!version_public) setVersion(version+"+git."+getGitHash());
 }

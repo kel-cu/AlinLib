@@ -41,7 +41,8 @@
         "modmenu.alinlib.modrinth": "https://modrinth.com/project/AlinLib",
         "modmenu.alinlib.donate": "https://kelcuprum.ru/r/don"
       },
-      "badges": ["library"]
+      "badges": ["library"],
+      "update_checker": false
     }
   }
 }

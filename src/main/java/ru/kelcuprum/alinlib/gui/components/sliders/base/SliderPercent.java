@@ -9,29 +9,29 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
-public class Slider extends AbstractSliderButton {
+public class SliderPercent extends AbstractSliderButton {
     public final InterfaceUtils.DesignType type;
     public final String buttonMessage;
     public OnPress onPress;
 
     //
-    public Slider(int x, int y, int width, int height, Component label) {
+    public SliderPercent(int x, int y, int width, int height, Component label) {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, 0, label, null);
     }
-    public Slider(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label) {
+    public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label) {
         this(x, y, width, height, type, 0, label, null);
     }
-    public Slider(int x, int y, int width, int height, InterfaceUtils.DesignType type, double position, Component label) {
+    public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, double position, Component label) {
         this(x, y, width, height, type, position, label, null);
     }
     //
-    public Slider(int x, int y, int width, int height, Component label, OnPress onPress) {
+    public SliderPercent(int x, int y, int width, int height, Component label, OnPress onPress) {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, 0, label, onPress);
     }
-    public Slider(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
+    public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
         this(x, y, width, height, type, 0, label, onPress);
     }
-    public Slider(int x, int y, int width, int height, InterfaceUtils.DesignType type, double position, Component label, OnPress onPress) {
+    public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, double position, Component label, OnPress onPress) {
         super(x, y, width, height, label, position);
         this.type = type;
         this.onPress = onPress;
@@ -94,11 +94,11 @@ public class Slider extends AbstractSliderButton {
 
     @Override
     protected void applyValue(){
-        if(this.onPress != null) this.onPress.onPress(this);
+        if(this.onPress != null) this.onPress.onPress(this.value);
     }
     // Мелочи
     @Environment(EnvType.CLIENT)
     public interface OnPress {
-        void onPress(Slider onPress);
+        void onPress(double value);
     }
 }
