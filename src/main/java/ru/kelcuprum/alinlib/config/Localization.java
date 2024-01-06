@@ -9,6 +9,7 @@ import ru.kelcuprum.alinlib.AlinLib;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -44,9 +45,9 @@ public class Localization {
     public JsonObject getJSONFile(){
         try {
             Minecraft CLIENT = Minecraft.getInstance();
-            File localizationFile = new File(CLIENT.gameDirectory + filePath + getCodeLocalization() + ".json");
-            if (localizationFile.exists()) {
-                return GsonHelper.parse(Files.readString(localizationFile.toPath()));
+            Path localizationFile = CLIENT.gameDirectory.toPath().resolve(String.format("%s/%s.json", filePath, getCodeLocalization()));//new File(CLIENT.gameDirectory + filePath + getCodeLocalization() + ".json");
+            if (localizationFile.toFile().exists()) {
+                return GsonHelper.parse(Files.readString(localizationFile));
             } else {
                 return new JsonObject();
             }
@@ -93,9 +94,9 @@ public class Localization {
             JsonObject JSONLocalization = getJSONFile();
             JSONLocalization.addProperty(type, text);
             Minecraft CLIENT = Minecraft.getInstance();
-            File localizationFile = new File(CLIENT.gameDirectory + filePath+getCodeLocalization()+".json");
-            Files.createDirectories(localizationFile.toPath().getParent());
-            Files.writeString(localizationFile.toPath(), JSONLocalization.toString());
+            Path localizationFile = CLIENT.gameDirectory.toPath().resolve(String.format("%s/%s.json", filePath, getCodeLocalization()));
+            Files.createDirectories(localizationFile.getParent());
+            Files.writeString(localizationFile, JSONLocalization.toString());
         } catch (Exception e){
             e.printStackTrace();
         }

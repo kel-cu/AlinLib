@@ -110,53 +110,53 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         // -=-=-=-=-=-=-=-=-=-=-=-
 
         CategoryBox notConfigure = new CategoryBox(140, 255, width, 20, BASE_CATEGORY);
-        Button button = new Button(140, 255, width, 20, type, BUTTON, (s)->{
+        Button button = new Button(140, 280, width, 20, type, BUTTON, (s)->{
             this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Click!"), icon, AlinaToast.Type.DEBUG));
         });
         notConfigure.addValue(button);
         //
-        ButtonBoolean buttonBoolean = new ButtonBoolean(140, 280, width, 20, type, BOOLEAN, (s)->{
+        ButtonBoolean buttonBoolean = new ButtonBoolean(140, 305, width, 20, type, BOOLEAN, (s)->{
             this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal(String.format("State: %b", s)), icon, AlinaToast.Type.DEBUG));
         });
         notConfigure.addValue(buttonBoolean);
         //
-        EditBoxString editBoxString = new EditBoxString(140, 305, width, 20, "Change me", type, EDIT_BOX, (s) -> {
+        EditBoxString editBoxString = new EditBoxString(140, 330, width, 20, "Change me", type, EDIT_BOX, (s) -> {
             AlinLib.log(String.format("Not Secret: %s", s), Level.WARN);
         });
         notConfigure.addValue(editBoxString);
         //
-        EditBoxString editBoxStringSecret = new EditBoxString(140, 330, width, 20, true, "Change me", type, EDIT_BOX, (s) -> {
+        EditBoxString editBoxStringSecret = new EditBoxString(140, 355, width, 20, true, "Change me", type, EDIT_BOX, (s) -> {
             AlinLib.log(String.format("Secret: %s", s), Level.WARN);
         });
         notConfigure.addValue(editBoxStringSecret);
         //
-        SelectorButton selectorButton = new SelectorButton(140, 355, width, 20, type, InterfaceUtils.Colors.GROUPIE, alina, 0, STRING_SELECTOR, (s) -> {
+        SelectorButton selectorButton = new SelectorButton(140, 380, width, 20, type, InterfaceUtils.Colors.GROUPIE, alina, 0, STRING_SELECTOR, (s) -> {
             this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal(String.format("Select: %s", s.getValue().getString())), icon, AlinaToast.Type.DEBUG));
         });
         notConfigure.addValue(selectorButton);
         //
-        SliderPercent sliderPercent = new SliderPercent(140, 380, width, 20, type, Math.random(), SLIDER);
+        SliderPercent sliderPercent = new SliderPercent(140, 405, width, 20, type, Math.random(), SLIDER);
         notConfigure.addValue(sliderPercent);
         //
-        SliderInteger sliderInteger = new SliderInteger(140, 405, width, 20, type, 50, 0, 100, SLIDER);
+        SliderInteger sliderInteger = new SliderInteger(140, 430, width, 20, type, 50, 0, 100, SLIDER);
         notConfigure.addValue(sliderInteger);
 
-        notConfigure.addValue(new TextBox(140, 430, width, 20, Component.literal("Not center"), false));
-        notConfigure.addValue(new TextBox(140, 455, width, 20, Component.literal("Center"), true));
+        notConfigure.addValue(new TextBox(140, 455, width, 20, Component.literal("Not center"), false));
+        notConfigure.addValue(new TextBox(140, 480, width, 20, Component.literal("Center"), true));
         addCategory(notConfigure);
 
         // -=-=-=-=-=-=-=-=-=-=-=-
-        addCategoryWidget(new ImageWidget(140, 480, width, 60, new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png"), 20, 20, Component.empty()));
+        addCategoryWidget(new ImageWidget(140, 505, width, 60, new ResourceLocation("alinlib", "textures/gui/widget/test/normal.png"), 20, 20, Component.empty()));
         //
-        TextBox something = new TextBox(140, 545, width, 20, SOMETHING, true, (OnPress) -> {
+        TextBox something = new TextBox(140, 570, width, 20, SOMETHING, true, (OnPress) -> {
             if (!this.isFollow) {
                 this.isFollow = true;
-                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("fire in the hole"), Component.literal("fire in the hole"), new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png"), AlinaToast.Type.INFO));
+                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("fire in the hole"), Component.literal("fire in the hole"), new ResourceLocation("alinlib", "textures/gui/widget/test/normal.png"), AlinaToast.Type.INFO));
             } else {
                 OnPress.setActive(false);
                 Util.getPlatform().openUri("https://cdn.discordapp.com/emojis/1190682055273619627.png?size=512&quality=lossless");
                 AlinLib.log(Component.translatable("alinlib.something.oops"));
-//                this.minecraft.stop();
+                this.minecraft.stop();
             }
         });
         addCategoryWidget(something);

@@ -70,9 +70,9 @@ public abstract class AbstractConfigScreen extends Screen {
 
             for(AbstractWidget widget : widgetList){
                 if(widget.visible){
-                    if (widget instanceof CategoryBox && scroller.innerHeight > 5) {
-                        scroller.innerHeight += 10;
-                    }
+//                    if (widget instanceof CategoryBox && scroller.innerHeight > 5) {
+//                        scroller.innerHeight += 10;
+//                    }
 
                     widget.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
 

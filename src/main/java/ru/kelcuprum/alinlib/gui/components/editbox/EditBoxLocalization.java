@@ -21,7 +21,7 @@ public class EditBoxLocalization extends EditBoxString implements Resetable {
         this.localization = localization;
         this.key = key;
 
-        setValue(this.localization.getLocalization(key, false, false));
+        setValue(this.localization.getLocalization(this.key, false, false));
         setResponder(string -> {
             this.localization.setLocalization(this.key, string);
         });
