@@ -146,12 +146,12 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         addCategory(notConfigure);
 
         // -=-=-=-=-=-=-=-=-=-=-=-
-        addCategoryWidget(new ImageWidget(140, 505, width, 60, new ResourceLocation("alinlib", "textures/gui/widget/test/normal.png"), 20, 20, Component.empty()));
+        addCategoryWidget(new ImageWidget(140, 505, width, 60, new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png"), 20, 20, Component.empty()));
         //
         TextBox something = new TextBox(140, 570, width, 20, SOMETHING, true, (OnPress) -> {
             if (!this.isFollow) {
                 this.isFollow = true;
-                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("fire in the hole"), Component.literal("fire in the hole"), new ResourceLocation("alinlib", "textures/gui/widget/test/normal.png"), AlinaToast.Type.INFO));
+                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("fire in the hole"), Component.literal("fire in the hole"), new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png"), AlinaToast.Type.INFO));
             } else {
                 OnPress.setActive(false);
                 Util.getPlatform().openUri("https://cdn.discordapp.com/emojis/1190682055273619627.png?size=512&quality=lossless");
