@@ -6,6 +6,7 @@ import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
@@ -46,7 +47,7 @@ public abstract class AbstractConfigScreen extends Screen {
         // -=-=-=-=-=-=-=-
         // Exit Buttons
         // 85 before reset button
-        addRenderableWidget(new Button(10, height - 30, 85, 20, InterfaceUtils.DesignType.VANILLA, Localization.getText("alinlib.component.exit"), (OnPress) -> {
+        addRenderableWidget(new Button(10, height - 30, 85, 20, InterfaceUtils.DesignType.VANILLA, CommonComponents.GUI_BACK, (OnPress) -> {
             AlinLib.bariumConfig.save();
             assert this.minecraft != null;
             this.minecraft.setScreen(parent);

@@ -12,8 +12,8 @@
     "@dima_dencep [#1]"
   ],
   "contact": {
-    "repo": "https://github.com/simply-kel/AlinLib",
-    "homepage": "https://github.com/simply-kel/AlinLib",
+    "sources": "https://github.com/simply-kel/AlinLib",
+    "homepage": "https://modrinth.com/project/AlinLib",
     "issues": "https://github.com/simply-kel/AlinLib/issues",
     "email": "me@kelcuprum.ru"
   },
@@ -22,9 +22,6 @@
   "entrypoints": {
     "client": [
       "ru.kelcuprum.alinlib.AlinLib"
-    ],
-    "modmenu": [
-      "ru.kelcuprum.alinlib.gui.ModMenuIntegration"
     ]
   },
   "accessWidener": "alinlib.accesswidener",
@@ -37,12 +34,10 @@
   "custom": {
     "modmenu": {
       "links": {
-        "modmenu.alinlib.github": "https://github.com/simply-kel/AlinLib",
-        "modmenu.alinlib.modrinth": "https://modrinth.com/project/AlinLib",
-        "modmenu.alinlib.donate": "https://kelcuprum.ru/r/don"
+        "modmenu.modrinth": "https://modrinth.com/project/AlinLib",
+        "modmenu.donate": "https://kelcuprum.ru/r/don"
       },
-      "badges": ["library"],
-      "update_checker": false
+      "badges": ["library"]
     }
   }
 }

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "name": "AlinLib (Test)",
+  "id": "alinlibtest",
+  "version": "0.0.0",
+  "description": "Testmod for AlinLib",
+  "authors": [
+    "Kel Cuprum (Im_Kel)"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "ru.kelcuprum.alinlib.AlinLibTest"
+    ],
+    "modmenu": [
+      "ru.kelcuprum.alinlib.gui.ModMenuIntegration"
+    ]
+  }
+}
