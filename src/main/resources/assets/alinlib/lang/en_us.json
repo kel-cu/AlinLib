@@ -1,19 +1,8 @@
 {
-  "alinlib.boolean.true": "ON",
-  "alinlib.boolean.false": "OFF",
-
-  "alinlib.something": "fire in the hole",
-  "alinlib.something.oops": "fire in the hole",
-
   "alinlib.editbox.secret": "Secret :)",
 
-  "alinlib.component.exit": "Exit",
   "alinlib.component.reset": "Reset",
   "alinlib.component.reset.toast": "The category configs have been reset",
-
-  "modmenu.alinlib.github": "GitHub",
-  "modmenu.alinlib.modrinth": "Modrinth",
-  "modmenu.alinlib.donate": "DonationAlerts",
 
   "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum"
 }

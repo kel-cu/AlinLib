@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
@@ -25,7 +26,7 @@ public class ButtonBoolean extends Button {
         this.value = current;
         this.onPress = onPress;
         this.setColor(this.value ? InterfaceUtils.Colors.SEADRIVE : InterfaceUtils.Colors.GROUPIE);
-        volumeState = Component.translatable("alinlib.boolean." + (this.value ? "true" : "false"));
+        volumeState = this.value ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF;
         this.setMessage(Component.literal(buttonMessage +": ").append(volumeState));
     }
     @Override
@@ -49,9 +50,9 @@ public class ButtonBoolean extends Button {
     // Заменить
     public ButtonBoolean setValue(boolean value){
         this.value = value;
-        this.volumeState = Component.translatable("alinlib.boolean." + (this.value ? "true" : "false"));
+        this.volumeState = this.value ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF;
         this.setColor(this.value ? InterfaceUtils.Colors.SEADRIVE : InterfaceUtils.Colors.GROUPIE);
-        this.setMessage(Component.literal(buttonMessage +": ").append(Component.translatable("alinlib.boolean." + (this.value ? "true" : "false"))));
+        this.setMessage(Component.literal(buttonMessage +": ").append(volumeState));
         return this;
     }public ButtonBoolean setOnPress(OnPress onPress){
         this.onPress = onPress;

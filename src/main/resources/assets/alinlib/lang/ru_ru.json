@@ -1,19 +1,8 @@
 {
-  "alinlib.boolean.true": "ВКЛ",
-  "alinlib.boolean.false": "ВЫКЛ",
-
-  "alinlib.something": "fire in the hole",
-  "alinlib.something.oops": "fire in the hole",
-
   "alinlib.editbox.secret": "Секрет :)",
 
-  "alinlib.component.exit": "Выйти",
   "alinlib.component.reset": "Сброс",
   "alinlib.component.reset.toast": "Конфиги категории были сброшены",
-
-  "modmenu.alinlib.github": "GitHub",
-  "modmenu.alinlib.modrinth": "Modrinth",
-  "modmenu.alinlib.donate": "DonationAlerts",
 
   "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"
 }

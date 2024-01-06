@@ -11,15 +11,36 @@ def getGitHash = { ->
     }
     return stdout.toString().trim()
 }
+
 archivesBaseName = project.archives_base_name
 version_public = project.version_public
 version = version_public == "true" ? project.mod_version : "${project.mod_version}+git.${getGitHash()}"
 group = project.maven_group
+
+sourceSets {
+    testmodClient {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+
+        compileClasspath += main.output
+        runtimeClasspath += main.output
+    }
+}
+
 loom {
     silentMojangMappingsLicense()
 
+    runs {
+        testmodClient {
+            client()
+            name = "Testmod Client"
+            source sourceSets.testmodClient
+        }
+    }
+
     accessWidenerPath = file("src/main/resources/alinlib.accesswidener")
 }
+
 repositories {
     mavenCentral()
     maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
