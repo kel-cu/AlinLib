@@ -71,6 +71,7 @@ public class ToastBuilder {
         return new AlinaToast(this);
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public AlinaToast buildAndShow(ToastComponent toasts) {
         AlinaToast toast = build();
         toasts.addToast(toast);
