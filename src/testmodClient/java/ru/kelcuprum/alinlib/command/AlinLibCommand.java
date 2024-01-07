@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import ru.kelcuprum.alinlib.AlinLibTest;
 import ru.kelcuprum.alinlib.gui.screens.AlinaDemoScreen;
-import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
@@ -26,23 +26,54 @@ public class AlinLibCommand {
                 .then(literal("test_toast")
                         .executes(context -> {
                             Minecraft client = context.getSource().getClient();
-                            ResourceLocation icon = new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/well.png");
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TM)"), Component.literal("Title, msg"))));
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TM)"), Component.literal("Title, msg"), AlinaToast.Type.WARN)));
 
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMI)"), Component.literal("Title, msg, item"), Items.CRAFTING_TABLE)));
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMI)"), Component.literal("Title, msg, item"), Items.BEACON, AlinaToast.Type.WARN)));
+                            client.tell(() -> {
+                                ToastBuilder tm = new ToastBuilder()
+                                        .setTitle(Component.literal("AlibLib (TM)"))
+                                        .setMessage(Component.literal("Title, msg"));
 
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMRl)"), Component.literal("Title, msg, resource location"), icon)));
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMRl)"), Component.literal("Title, msg, resource location"), icon, AlinaToast.Type.WARN)));
+                                tm.show(client.getToasts());
+                                tm.setType(ToastBuilder.Type.WARN)
+                                        .show(client.getToasts());
 
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMP)"), Component.literal("Title, msg, player"), context.getSource().getPlayer().getSkin())));
-                            client.tell(() -> client.getToasts().addToast(new AlinaToast(Component.literal("AlibLib (TMP)"), Component.literal("Title, msg, player"), context.getSource().getPlayer().getSkin(), AlinaToast.Type.WARN)));
+                                ToastBuilder tmi = new ToastBuilder()
+                                        .setTitle(Component.literal("AlibLib (TMI)"))
+                                        .setMessage(Component.literal("Title, msg, item"));
+
+                                tmi.setIcon(Items.CRAFTING_TABLE)
+                                        .show(client.getToasts());
+                                tmi.setMessage(Component.literal("Title, msg, item"))
+                                        .setIcon(Items.BEACON)
+                                        .setType(ToastBuilder.Type.WARN)
+                                        .show(client.getToasts());
+
+                                ToastBuilder tmrl = new ToastBuilder()
+                                        .setTitle(Component.literal("AlibLib (TMRl)"))
+                                        .setMessage(Component.literal("Title, msg, resource location"))
+                                        .setIcon(new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/well.png"));
+
+                                tmrl.show(client.getToasts());
+                                tmrl.setType(ToastBuilder.Type.WARN)
+                                        .show(client.getToasts());
+
+                                ToastBuilder tmp = new ToastBuilder()
+                                        .setTitle(Component.literal("AlibLib (TMP)"))
+                                        .setMessage(Component.literal("Title, msg, player"))
+                                        .setIcon(context.getSource().getPlayer());
+
+                                tmp.show(client.getToasts());
+                                tmp.setType(ToastBuilder.Type.WARN)
+                                        .show(client.getToasts());
+                            });
 
                             return 1;
                         }))
                 .executes(context -> {
-                    context.getSource().getClient().getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Hello, world :3"), new ResourceLocation("alinlib", "textures/gui/widget/test/well.png")));
+                    new ToastBuilder()
+                            .setTitle(Component.literal("AlinLib"))
+                            .setMessage(Component.literal("Hello, world :3"))
+                            .setIcon("alinlib", "textures/gui/widget/test/well.png")
+                            .show(context.getSource().getClient().getToasts());
                     return 1;
                 })
         );

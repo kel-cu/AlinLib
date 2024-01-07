@@ -19,7 +19,7 @@ import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
-import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,11 @@ public abstract class AbstractConfigScreen extends Screen {
                 }
             }
             assert this.minecraft != null;
-            this.minecraft.getToasts().addToast(new AlinaToast(title, Component.translatable("alinlib.component.reset.toast"), icon));
+            new ToastBuilder()
+                    .setTitle(title)
+                    .setMessage(Component.translatable("alinlib.component.reset.toast"))
+                    .setIcon(icon)
+                    .show(this.minecraft.getToasts());
             AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
         }));
     }
