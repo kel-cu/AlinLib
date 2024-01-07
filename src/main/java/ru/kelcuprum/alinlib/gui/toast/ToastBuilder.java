@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.toast;
 
+import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.resources.PlayerSkin;
@@ -10,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 import java.util.Objects;
+import java.util.function.Function;
 
 public class ToastBuilder {
     protected Component title;
@@ -19,6 +21,7 @@ public class ToastBuilder {
     protected PlayerSkin playerIcon;
     protected Type type;
     protected int displayTime = 5000;
+    protected Function<Toast.Visibility, Toast.Visibility> visibilityVisitor;
 
     public ToastBuilder setTitle(Component component) {
         this.title = component;
@@ -69,6 +72,12 @@ public class ToastBuilder {
     @SuppressWarnings("unused")
     public ToastBuilder setDisplayTime(int time) {
         this.displayTime = time;
+        return this;
+    }
+
+    @SuppressWarnings("unused")
+    public ToastBuilder setVisibilityVisitor(Function<Toast.Visibility, Toast.Visibility> visibilityVisitor) {
+        this.visibilityVisitor = visibilityVisitor;
         return this;
     }
 

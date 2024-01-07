@@ -67,6 +67,12 @@ public class AlinaToast implements Toast {
             }
         }
 
-        return (double) l >= builder.displayTime * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+        Visibility visibility = (double) l >= builder.displayTime * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+
+        if (builder.visibilityVisitor != null) {
+            visibility = builder.visibilityVisitor.apply(visibility);
+        }
+
+        return visibility;
     }
 }
