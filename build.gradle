@@ -125,8 +125,3 @@ publishing {
         // retrieving dependencies.
     }
 }
-
-
-build {
-    if(!version_public) setVersion(version+"+git."+getGitHash());
-}
