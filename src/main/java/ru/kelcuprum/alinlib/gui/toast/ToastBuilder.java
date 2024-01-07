@@ -18,6 +18,7 @@ public class ToastBuilder {
     protected ResourceLocation icon;
     protected PlayerSkin playerIcon;
     protected Type type;
+    protected int displayTime = 5000;
 
     public ToastBuilder setTitle(Component component) {
         this.title = component;
@@ -62,6 +63,12 @@ public class ToastBuilder {
 
     public ToastBuilder setType(Type type) {
         this.type = type;
+        return this;
+    }
+
+    @SuppressWarnings("unused")
+    public ToastBuilder setDisplayTime(int time) {
+        this.displayTime = time;
         return this;
     }
 

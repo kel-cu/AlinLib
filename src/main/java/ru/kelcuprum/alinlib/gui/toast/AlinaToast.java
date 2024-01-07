@@ -16,7 +16,6 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class AlinaToast implements Toast {
-    public static final int DISPLAY_TIME = 5000;
     private final ToastBuilder builder;
 
     protected AlinaToast(ToastBuilder builder) {
@@ -68,6 +67,6 @@ public class AlinaToast implements Toast {
             }
         }
 
-        return (double) l >= DISPLAY_TIME * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+        return (double) l >= builder.displayTime * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
     }
 }
