@@ -26,7 +26,7 @@ import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxColor;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
-import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 public class AlinaDemoScreen extends AbstractConfigScreen {
     private static final ResourceLocation icon = new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/well.png");
@@ -110,14 +110,24 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         // -=-=-=-=-=-=-=-=-=-=-=-
 
         CategoryBox notConfigure = new CategoryBox(140, 255, width, 20, BASE_CATEGORY);
-        Button button = new Button(140, 280, width, 20, type, BUTTON, (s)->{
-            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Click!"), icon, AlinaToast.Type.DEBUG));
-        });
+        Button button = new Button(140, 280, width, 20, type, BUTTON, (s) ->
+                new ToastBuilder()
+                        .setTitle(Component.literal("AlinLib"))
+                        .setMessage(Component.literal("Click!"))
+                        .setIcon(icon)
+                        .setType(ToastBuilder.Type.DEBUG)
+                        .show(this.minecraft.getToasts())
+        );
         notConfigure.addValue(button);
         //
-        ButtonBoolean buttonBoolean = new ButtonBoolean(140, 305, width, 20, type, BOOLEAN, (s)->{
-            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal(String.format("State: %b", s)), icon, AlinaToast.Type.DEBUG));
-        });
+        ButtonBoolean buttonBoolean = new ButtonBoolean(140, 305, width, 20, type, BOOLEAN, (s)->
+                new ToastBuilder()
+                        .setTitle(Component.literal("AlinLib"))
+                        .setMessage(Component.literal(String.format("State: %b", s)))
+                        .setIcon(icon)
+                        .setType(ToastBuilder.Type.DEBUG)
+                        .show(this.minecraft.getToasts())
+        );
         notConfigure.addValue(buttonBoolean);
         //
         EditBoxString editBoxString = new EditBoxString(140, 330, width, 20, "Change me", type, EDIT_BOX, (s) -> {
@@ -130,9 +140,14 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         });
         notConfigure.addValue(editBoxStringSecret);
         //
-        SelectorButton selectorButton = new SelectorButton(140, 380, width, 20, type, InterfaceUtils.Colors.GROUPIE, alina, 0, STRING_SELECTOR, (s) -> {
-            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal(String.format("Select: %s", s.getValue().getString())), icon, AlinaToast.Type.DEBUG));
-        });
+        SelectorButton selectorButton = new SelectorButton(140, 380, width, 20, type, InterfaceUtils.Colors.GROUPIE, alina, 0, STRING_SELECTOR, (s) ->
+                new ToastBuilder()
+                        .setTitle(Component.literal("AlinLib"))
+                        .setMessage(Component.literal(String.format("Select: %s", s.getValue().getString())))
+                        .setIcon(icon)
+                        .setType(ToastBuilder.Type.DEBUG)
+                        .show(this.minecraft.getToasts())
+        );
         notConfigure.addValue(selectorButton);
         //
         SliderPercent sliderPercent = new SliderPercent(140, 405, width, 20, type, Math.random(), SLIDER);
@@ -151,7 +166,12 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         TextBox something = new TextBox(140, 570, width, 20, SOMETHING, true, (OnPress) -> {
             if (!this.isFollow) {
                 this.isFollow = true;
-                this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("fire in the hole"), Component.literal("fire in the hole"), new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png"), AlinaToast.Type.INFO));
+                new ToastBuilder()
+                        .setTitle(Component.literal("fire in the hole"))
+                        .setMessage(Component.literal("fire in the hole"))
+                        .setIcon(AlinLibTest.MODID, "textures/gui/widget/test/normal.png")
+                        .setType(ToastBuilder.Type.INFO)
+                        .show(this.minecraft.getToasts());
             } else {
                 OnPress.setActive(false);
                 Util.getPlatform().openUri("https://cdn.discordapp.com/emojis/1190682055273619627.png?size=512&quality=lossless");
@@ -167,17 +187,30 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         super.initPanelButtons();
         // line 0
         addRenderableWidget(new Button(10, 40, 110, 20, InterfaceUtils.DesignType.VANILLA, InterfaceUtils.Colors.KENNY, Component.literal("DesignType.VANILLA"), (OnPress) -> {
-            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Set DesignType.VANILLA"), AlinaToast.Type.DEBUG));
+            new ToastBuilder()
+                    .setTitle(Component.literal("AlinLib"))
+                    .setMessage(Component.literal("Set DesignType.VANILLA"))
+                    .setType(ToastBuilder.Type.DEBUG)
+                    .show(this.minecraft.getToasts());
+
             this.type = InterfaceUtils.DesignType.VANILLA;
             this.rebuildWidgets();
         }));
         addRenderableWidget(new Button(10, 65, 110, 20, InterfaceUtils.DesignType.ALINA, InterfaceUtils.Colors.KENNY, Component.literal("DesignType.ALINA"), (OnPress) -> {
-            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Set DesignType.ALINA"), AlinaToast.Type.DEBUG));
+            new ToastBuilder()
+                    .setTitle(Component.literal("AlinLib"))
+                    .setMessage(Component.literal("Set DesignType.ALINA"))
+                    .setType(ToastBuilder.Type.DEBUG)
+                    .show(this.minecraft.getToasts());
             this.type = InterfaceUtils.DesignType.ALINA;
             this.rebuildWidgets();
         }));
         addRenderableWidget(new Button(10, 90, 110, 20, InterfaceUtils.DesignType.FLAT, InterfaceUtils.Colors.KENNY, Component.literal("DesignType.FLAT"), (OnPress) -> {
-            this.minecraft.getToasts().addToast(new AlinaToast(Component.literal("AlinLib"), Component.literal("Set DesignType.FLAT"), AlinaToast.Type.DEBUG));
+            new ToastBuilder()
+                    .setTitle(Component.literal("AlinLib"))
+                    .setMessage(Component.literal("Set DesignType.FLAT"))
+                    .setType(ToastBuilder.Type.DEBUG)
+                    .show(this.minecraft.getToasts());
             this.type = InterfaceUtils.DesignType.FLAT;
             this.rebuildWidgets();
         }));
