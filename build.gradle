@@ -1,6 +1,5 @@
 plugins {
     id 'dev.architectury.loom' version '1.4-SNAPSHOT'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'maven-publish'
 }
 def getGitHash = { ->
@@ -18,7 +17,7 @@ version = version_public == "true" ? project.mod_version : "${project.mod_versio
 group = project.maven_group
 
 sourceSets {
-    testmodClient {
+    demoClient {
         compileClasspath += main.compileClasspath
         runtimeClasspath += main.runtimeClasspath
 
@@ -31,10 +30,10 @@ loom {
     silentMojangMappingsLicense()
 
     runs {
-        testmodClient {
+        demoClient {
             client()
-            name = "Testmod Client"
-            source sourceSets.testmodClient
+            name = "Demo Client"
+            source sourceSets.demoClient
         }
     }
 
@@ -45,10 +44,6 @@ repositories {
     mavenCentral()
     maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
     maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
-}
-
-configurations {
-    shade
 }
 
 dependencies {
@@ -90,19 +85,6 @@ java {
     withSourcesJar()
 }
 
-// Produce a fat-jar of all shaded dependencies
-shadowJar {
-    configurations = [project.configurations.shade]
-    destinationDirectory.set(layout.buildDirectory.dir('devlibs'))
-}
-
-/*remapJar {
-    dependsOn tasks.shadowJar
-    inputFile.set(tasks.shadowJar.archiveFile)
-}*/
-
-components.java.withVariantsFromConfiguration(configurations.shadowRuntimeElements) { skip() }
-
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}
@@ -119,9 +101,13 @@ publishing {
 
     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        // Add repositories to publish to here.
-        // Notice: This block does NOT have the same function as the block in the top level.
-        // The repositories here will be used for publishing your artifact, not for
-        // retrieving dependencies.
+        maven {
+            name = "KelCuprum"
+            url = "https://repo.kelcuprum.ru/developer"
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
     }
 }
