@@ -72,7 +72,7 @@ public class AlinLibCommand {
                     new ToastBuilder()
                             .setTitle(Component.literal("AlinLib"))
                             .setMessage(Component.literal("Hello, world :3"))
-                            .setIcon("alinlib", "textures/gui/widget/test/well.png")
+                            .setIcon(AlinLibTest.MODID, "textures/gui/widget/test/well.png")
                             .show(context.getSource().getClient().getToasts());
                     return 1;
                 })

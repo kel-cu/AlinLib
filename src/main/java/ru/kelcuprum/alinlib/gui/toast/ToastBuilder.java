@@ -19,7 +19,7 @@ public class ToastBuilder {
     protected ItemStack itemIcon;
     protected ResourceLocation icon;
     protected PlayerSkin playerIcon;
-    protected Type type;
+    protected Type type = Type.INFO;
     protected int displayTime = 5000;
     protected Function<Toast.Visibility, Toast.Visibility> visibilityVisitor;
 
