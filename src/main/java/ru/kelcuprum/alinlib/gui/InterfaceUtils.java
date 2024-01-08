@@ -8,6 +8,7 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+import ru.kelcuprum.alinlib.AlinLib;
 
 public class InterfaceUtils {
     private static final WidgetSprites SPRITES = new WidgetSprites(new ResourceLocation("widget/button"), new ResourceLocation("widget/button_disabled"), new ResourceLocation("widget/button_highlighted"));
@@ -148,6 +149,13 @@ public class InterfaceUtils {
         int WHITE = 0xFFFFFFFF;
         int BLACK = 0xFF000000;
         int BLACK_ALPHA = 0x37000000;
+    }
+    public interface Icons {
+        ResourceLocation RESET = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/reset.png");
+        ResourceLocation OPTIONS = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/options.png");
+        ResourceLocation LIST = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/list.png");
+        ResourceLocation ADD = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/add.png");
+        ResourceLocation REMOVE = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/remove.png");
     }
 }
 

@@ -8,7 +8,6 @@ import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
@@ -24,8 +23,9 @@ import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
+
 public abstract class AbstractConfigScreen extends Screen {
-    private static final ResourceLocation icon = new ResourceLocation("alinlib", "textures/gui/widget/buttons/reset.png");
 
     protected List<AbstractWidget> widgetList = new ArrayList<>();
     private ConfigureScrolWidget scroller;
@@ -52,7 +52,7 @@ public abstract class AbstractConfigScreen extends Screen {
             assert this.minecraft != null;
             this.minecraft.setScreen(parent);
         }));
-        addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, InterfaceUtils.DesignType.VANILLA, icon, Localization.getText("alinlib.component.reset"), (OnPress) -> {
+        addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, InterfaceUtils.DesignType.VANILLA, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
             for(AbstractWidget widget : widgetList){
                 if(widget instanceof Resetable){
                     ((Resetable) widget).resetValue();
@@ -62,7 +62,7 @@ public abstract class AbstractConfigScreen extends Screen {
             new ToastBuilder()
                     .setTitle(title)
                     .setMessage(Component.translatable("alinlib.component.reset.toast"))
-                    .setIcon(icon)
+                    .setIcon(RESET)
                     .show(this.minecraft.getToasts());
             AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
         }));
@@ -74,12 +74,7 @@ public abstract class AbstractConfigScreen extends Screen {
 
             for(AbstractWidget widget : widgetList){
                 if(widget.visible){
-//                    if (widget instanceof CategoryBox && scroller.innerHeight > 5) {
-//                        scroller.innerHeight += 10;
-//                    }
-
                     widget.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
-
                     scroller.innerHeight += (widget.getHeight()+5);
                 } else widget.setY(-widget.getHeight());
             }
@@ -116,14 +111,11 @@ public abstract class AbstractConfigScreen extends Screen {
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
-
         if (!scr && scroller != null) {
             scr = scroller.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
         }
-
         return scr;
     }
-    //
 
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f){
