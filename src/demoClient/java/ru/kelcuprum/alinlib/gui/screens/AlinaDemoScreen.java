@@ -30,7 +30,7 @@ import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 public class AlinaDemoScreen extends AbstractConfigScreen {
     private static final ResourceLocation icon = new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/well.png");
-    private static final Component TITLE = Component.literal("AlinLib");
+    private static final Component TITLE = Component.translatable("alinlibtest.name");
     private static final Component CONFIGURE_CATEGORY = Component.literal("Configuration widgets");
     private static final Component BASE_CATEGORY = Component.literal("Base widgets");
     private static final Component BOOLEAN = Component.literal("Boolean");
@@ -88,7 +88,7 @@ public class AlinaDemoScreen extends AbstractConfigScreen {
         EditBoxConfigString stringEditBoxSecret = new EditBoxConfigString(140, 80, width, 20, true, type, AlinLib.bariumConfig, "SECRET", "Alina doesn't have a boyfriend", SECRET_EDIT_BOX);
         configure.addValue(stringEditBoxSecret);
         //
-        EditBoxLocalization localizationEditBox = new EditBoxLocalization(140, 105, width, 20, type, AlinLib.localization, "hi", LOCALIZATION_EDIT_BOX);
+        EditBoxLocalization localizationEditBox = new EditBoxLocalization(140, 105, width, 20, type, AlinLibTest.localization, "hi", LOCALIZATION_EDIT_BOX);
         configure.addValue(localizationEditBox);
         //
         EditBoxColor colorEditBox = new EditBoxColor(140, 130, width, 20, type, AlinLib.bariumConfig, "Color", InterfaceUtils.Colors.TETRA, COLOR_EDIT_BOX);

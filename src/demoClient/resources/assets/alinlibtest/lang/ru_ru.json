@@ -1,4 +1,7 @@
 {
   "alinlib.something": "fire in the hole",
-  "alinlib.something.oops": "fire in the hole"
+  "alinlib.something.oops": "fire in the hole",
+
+  "alinlibtest.name": "AlinLib > Демо",
+  "alinlibtest.hi": "Привет, человек!"
 }

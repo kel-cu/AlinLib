@@ -66,7 +66,7 @@ public class Localization {
         String text;
         try {
             JsonObject JSONLocalization = getJSONFile();
-            if(JSONLocalization.get(key) != null && !JSONLocalization.get(key).isJsonNull()) text = getText(modID+ "." + key).getString();
+            if(JSONLocalization.get(key) == null && !JSONLocalization.get(key).isJsonNull()) text = getText(modID+ "." + key).getString();
             else text = JSONLocalization.get(key).getAsString();
         } catch (Exception ex) {
             AlinLib.log(ex.getLocalizedMessage());
