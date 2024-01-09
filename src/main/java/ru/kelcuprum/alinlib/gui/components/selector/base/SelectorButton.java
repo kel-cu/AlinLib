@@ -10,11 +10,17 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class SelectorButton extends Button {
     protected String[] list;
     protected int position;
     protected String buttonMessage;
     protected OnPress onPress;
+    public SelectorButton(int x, int y, InterfaceUtils.DesignType type, int color, String[] list, int position, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, color, list, position, label, onPress);
+    }
     public SelectorButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, String[] list, int position, Component label, OnPress onPress) {
         super(x, y, width, height, type, color, label, null);
         this.list = list;

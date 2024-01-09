@@ -8,12 +8,25 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class ButtonBoolean extends Button {
     public boolean value;
     public Component volumeState;
     private OnPress onPress;
     public final String buttonMessage;
 
+    public ButtonBoolean(int x, int y, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, label, onPress);
+    }
+    public ButtonBoolean(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, true, label, onPress);
+    }
+    public ButtonBoolean(int x, int y, InterfaceUtils.DesignType type, Boolean current, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, current, label, onPress);
+    }
+    ////
     public ButtonBoolean(int x, int y, int width, int height, Component label, OnPress onPress) {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, label, onPress);
     }

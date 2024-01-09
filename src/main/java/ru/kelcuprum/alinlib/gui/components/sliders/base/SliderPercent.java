@@ -9,11 +9,33 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class SliderPercent extends AbstractSliderButton {
     public final InterfaceUtils.DesignType type;
     public final String buttonMessage;
     public OnPress onPress;
 
+    public SliderPercent(int x, int y, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, 0, label, null);
+    }
+    public SliderPercent(int x, int y, InterfaceUtils.DesignType type, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, 0, label, null);
+    }
+    public SliderPercent(int x, int y, InterfaceUtils.DesignType type, double position, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, position, label, null);
+    }
+    //
+    public SliderPercent(int x, int y, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, 0, label, onPress);
+    }
+    public SliderPercent(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, 0, label, onPress);
+    }
+    public SliderPercent(int x, int y, InterfaceUtils.DesignType type, double position, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, position, label, onPress);
+    }
     //
     public SliderPercent(int x, int y, int width, int height, Component label) {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, 0, label, null);

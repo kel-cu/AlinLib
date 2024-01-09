@@ -9,10 +9,21 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class TextBox extends AbstractWidget {
     private final boolean isCentred;
     private Component tooltipMessage;
     private final OnPress onPress;
+
+    public TextBox(int x, int y, Component label, boolean isCenter){
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, label, isCenter, null);
+    }
+    public TextBox(int x, int y, Component label, boolean isCenter, OnPress onPress){
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, label, isCenter, onPress);
+    }
+    ///
     public TextBox(int x, int y, int width, int height, Component label, boolean isCenter){
         this(x, y, width, height, label, isCenter, null);
     }

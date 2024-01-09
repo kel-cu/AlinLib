@@ -6,11 +6,23 @@ import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.editbox.base.EditBoxString;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class EditBoxLocalization extends EditBoxString implements Resetable {
     public Localization localization;
     public String key;
 
 
+    public EditBoxLocalization(int x, int y, Localization config, String key, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, key, label);
+    }
+
+    public EditBoxLocalization(int x, int y, InterfaceUtils.DesignType type, Localization localization, String key, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, localization, key, label);
+
+    }
+    //
     public EditBoxLocalization(int x, int y, int width, int height, Localization config, String key, Component label) {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, key, label);
     }

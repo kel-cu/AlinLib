@@ -2,9 +2,6 @@ package ru.kelcuprum.alinlib.gui.screens;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Renderable;
-import net.minecraft.client.gui.components.events.GuiEventListener;
-import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -16,23 +13,20 @@ import ru.kelcuprum.alinlib.gui.components.ConfigureScrolWidget;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
-import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
 
-public abstract class AbstractConfigScreen extends Screen {
+public class AbstractConfigScreen extends Screen {
 
-    protected List<AbstractWidget> widgetList = new ArrayList<>();
     private ConfigureScrolWidget scroller;
-    private final Screen parent;
-    public AbstractConfigScreen(Screen parent, Component title) {
-        super(title);
-        this.parent = parent;
+    private final ConfigScreenBuilder builder;
+    public AbstractConfigScreen(ConfigScreenBuilder builder) {
+        super(builder.title);
+        this.builder = builder;
     }
 
     @Override
@@ -47,13 +41,12 @@ public abstract class AbstractConfigScreen extends Screen {
         // -=-=-=-=-=-=-=-
         // Exit Buttons
         // 85 before reset button
-        addRenderableWidget(new Button(10, height - 30, 85, 20, InterfaceUtils.DesignType.VANILLA, CommonComponents.GUI_BACK, (OnPress) -> {
-            AlinLib.bariumConfig.save();
+        addRenderableWidget(new Button(10, height - 30, 85, 20, builder.type, CommonComponents.GUI_BACK, (OnPress) -> {
             assert this.minecraft != null;
-            this.minecraft.setScreen(parent);
+            this.minecraft.setScreen(builder.parent);
         }));
-        addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, InterfaceUtils.DesignType.VANILLA, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
-            for(AbstractWidget widget : widgetList){
+        addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, builder.type, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
+            for(AbstractWidget widget : builder.widgets){
                 if(widget instanceof Resetable){
                     ((Resetable) widget).resetValue();
                 }
@@ -68,11 +61,14 @@ public abstract class AbstractConfigScreen extends Screen {
         }));
     }
     protected void initCategory(){
-        this.widgetList = new ArrayList<>();
+        int width = this.width - 150;
+        for(AbstractWidget widget : builder.widgets){
+            widget.setWidth(width);
+        }
         this.scroller = addRenderableWidget(new ConfigureScrolWidget(width - 8, 0, 4, height, Component.empty(), scroller -> {
             scroller.innerHeight = 5;
 
-            for(AbstractWidget widget : widgetList){
+            for(AbstractWidget widget : builder.widgets){
                 if(widget.visible){
                     widget.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
                     scroller.innerHeight += (widget.getHeight()+5);
@@ -80,6 +76,8 @@ public abstract class AbstractConfigScreen extends Screen {
             }
         }));
         addRenderableWidget(scroller);
+        addRenderableWidgets(builder.widgets);
+        addRenderableWidgets(builder.panelWidgets);
     }
 
     // Добавление виджетов
@@ -87,19 +85,6 @@ public abstract class AbstractConfigScreen extends Screen {
         for(AbstractWidget widget : widgets){
             addRenderableWidget(widget);
         }
-    }
-    @Override
-    protected <T extends GuiEventListener & Renderable & NarratableEntry> @NotNull T addRenderableWidget(T widget) {
-        return super.addRenderableWidget(widget);
-    }
-    protected void addCategoryWidget(AbstractWidget widget){
-        widgetList.add(widget);
-        addRenderableWidget(widget);
-    };
-    protected void addCategory(CategoryBox category){
-        addCategoryWidget(category);
-        widgetList.addAll(category.getValues());
-        addRenderableWidgets(category.getValues());
     }
 
     // Рендер, скролл, прослушивание кей-биндов

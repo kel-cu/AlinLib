@@ -9,6 +9,9 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class Button extends AbstractButton {
     protected InterfaceUtils.DesignType type;
     int color;
@@ -16,6 +19,22 @@ public class Button extends AbstractButton {
     private OnPress onPress;
 
 
+    public Button(int x, int y, Component label){
+        this( x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, label, null);
+    }
+    public Button(int x, int y, Component label, OnPress onPress){
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, label, onPress);
+    }
+    public Button(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress){
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, label, onPress);
+    }
+    public Button(int x, int y, InterfaceUtils.DesignType type, int color, Component label, OnPress onPress){
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, color, true, label, onPress);
+    }
+    public Button(int x, int y, InterfaceUtils.DesignType type, int color, boolean isCentred, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, color, isCentred, label, onPress);
+    }
+    //////////
     public Button(int x, int y, int width, int height, Component label){
         this(x, y, width, height, label, null);
     }

@@ -10,10 +10,24 @@ import ru.kelcuprum.alinlib.gui.components.selector.base.SelectorButton;
 
 import java.util.Arrays;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class SelectorStringButton extends SelectorButton implements Resetable {
     public final String defaultVolume;
     public Config config;
     public String typeConfig;
+
+    public SelectorStringButton(int x, int y, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, list, config, typeConfig, defaultVolume, label);
+    }
+    public SelectorStringButton(int x, int y, InterfaceUtils.DesignType type, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, list, config, typeConfig, defaultVolume, label);
+    }
+    public SelectorStringButton(int x, int y, InterfaceUtils.DesignType type, int color, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, color, list, config, typeConfig, defaultVolume, label);
+    }
+    ///
     public SelectorStringButton(int x, int y, int width, int height, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, list, config, typeConfig, defaultVolume, label);
     }

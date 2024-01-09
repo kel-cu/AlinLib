@@ -10,9 +10,15 @@ import net.minecraft.network.chat.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class CategoryBox extends TextBox {
     public final List<AbstractWidget> values = new ArrayList<>();
     private boolean state = true;
+    public CategoryBox(int x, int y, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, label);
+    }
     public CategoryBox(int x, int y, int width, int height, Component label) {
         super(x, y, width, height, label, true);
         this.setActive(true);

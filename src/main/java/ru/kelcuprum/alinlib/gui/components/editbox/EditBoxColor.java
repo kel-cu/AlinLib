@@ -8,11 +8,25 @@ import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.editbox.base.EditBoxString;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class EditBoxColor extends EditBoxString implements Resetable {
     public int volume;
     public int defaultConfig;
     public Config config;
     public String typeConfig;
+
+
+    public EditBoxColor(int x, int y, Config config, String typeConfig, int defaultConfig, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+    }
+
+    public EditBoxColor(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, Component label) {
+        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, label);
+    }
+
+    ///
 
 
     public EditBoxColor(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, Component label) {
