@@ -35,7 +35,8 @@
     "modmenu": {
       "links": {
         "modmenu.modrinth": "https://modrinth.com/project/AlinLib",
-        "modmenu.donate": "https://kelcuprum.ru/r/don"
+        "modmenu.donate": "https://kelcuprum.ru/r/don",
+        "modmenu.discord": "https://kelcuprum.ru/r/ds"
       },
       "badges": ["library"]
     }
