@@ -19,13 +19,13 @@ public class SelectorStringButton extends SelectorButton implements Resetable {
     public String typeConfig;
 
     public SelectorStringButton(int x, int y, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, list, config, typeConfig, defaultVolume, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, list, config, typeConfig, defaultVolume, label);
     }
     public SelectorStringButton(int x, int y, InterfaceUtils.DesignType type, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, list, config, typeConfig, defaultVolume, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, list, config, typeConfig, defaultVolume, label);
     }
     public SelectorStringButton(int x, int y, InterfaceUtils.DesignType type, int color, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, color, list, config, typeConfig, defaultVolume, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, list, config, typeConfig, defaultVolume, label);
     }
     ///
     public SelectorStringButton(int x, int y, int width, int height, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {

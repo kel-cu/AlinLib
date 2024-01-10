@@ -6,9 +6,20 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+
 public class ImageWidget extends AbstractWidget {
     protected final ResourceLocation image;
     protected final int imageWidth, imageHeight;
+
+    public ImageWidget(int x, int y, ResourceLocation image, Component message) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, image, DEFAULT_WIDTH(), DEFAULT_HEIGHT, message);
+    }
+    public ImageWidget(int x, int y, ResourceLocation image, int imageWidth, int imageHeight, Component message) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, image, imageWidth, imageHeight, message);
+    }
+    ///
     public ImageWidget(int x, int y, int width, int height, ResourceLocation image, Component message) {
         this(x, y, width, height, image, width, height, message);
     }

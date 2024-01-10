@@ -17,34 +17,37 @@ public class CategoryBox extends TextBox {
     public final List<AbstractWidget> values = new ArrayList<>();
     private boolean state = true;
     public CategoryBox(int x, int y, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label);
     }
     public CategoryBox(int x, int y, int width, int height, Component label) {
         super(x, y, width, height, label, true);
         this.setActive(true);
     }
 
-    public void addValue(AbstractWidget widget) {
+    public CategoryBox addValue(AbstractWidget widget) {
         if (widget == null)
-            return;
+            return this;
 
         values.add(widget);
+        return this;
     }
-    public void addValues(List<AbstractWidget> widgets) {
+    public CategoryBox addValues(List<AbstractWidget> widgets) {
         if (widgets == null)
-            return;
+            return this;
         values.addAll(widgets);
+        return this;
     }
 
     public List<AbstractWidget> getValues(){
         return values;
     }
 
-    public void changeState(){
+    public CategoryBox changeState(){
         state = !state;
         for (AbstractWidget widget : values) {
             widget.visible = state;
         }
+        return this;
     }
 
     @Override

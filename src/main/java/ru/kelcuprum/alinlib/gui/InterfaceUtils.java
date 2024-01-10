@@ -77,7 +77,9 @@ public class InterfaceUtils {
         int size = Minecraft.getInstance().font.width(message) + ((height.intValue() - 8) / 2) * 2;
         return size > width.intValue();
     }
-    public static final int DEFAULT_WIDTH = 20;
+    public static int DEFAULT_WIDTH(){
+        return Minecraft.getInstance().getWindow().getWidth()-150;
+    }
     public static final int DEFAULT_HEIGHT = 20;
     public enum DesignType {
         ALINA(0),

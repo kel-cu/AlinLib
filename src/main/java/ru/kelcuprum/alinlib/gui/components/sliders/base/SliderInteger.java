@@ -17,18 +17,18 @@ public class SliderInteger extends SliderPercent {
     public String typeInteger = "";
     public OnPress onPress;
     public SliderInteger(int x, int y, int position, int min, int max, Component component) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, position, min, max, component);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, position, min, max, component);
     }
     public SliderInteger(int x, int y, InterfaceUtils.DesignType type, int position, int min, int max, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, position, min, max, label, null);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, min, max, label, null);
 
     }
 
     public SliderInteger(int x, int y, int position, int min, int max, Component component, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, position, min, max, component, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, position, min, max, component, onPress);
     }
     public SliderInteger(int x, int y, InterfaceUtils.DesignType type, int position, int min, int max, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, position, min, max, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, min, max, label, onPress);
     }
     ////
     public SliderInteger(int x, int y, int width, int height, int position, int min, int max, Component component) {
@@ -52,11 +52,13 @@ public class SliderInteger extends SliderPercent {
     }
     // Получить
     // Заменить
-    public void setTypeInteger(String type){
+    public SliderInteger setTypeInteger(String type){
         this.typeInteger = type;
+        return this;
     }
-    public void setOnPress(OnPress onPress){
+    public SliderInteger setOnPress(OnPress onPress){
         this.onPress = onPress;
+        return this;
     }
     @Override
     public Component getComponentValue(){

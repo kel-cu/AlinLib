@@ -20,19 +20,19 @@ public class Button extends AbstractButton {
 
 
     public Button(int x, int y, Component label){
-        this( x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, label, null);
+        this( x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, null);
     }
     public Button(int x, int y, Component label, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, label, onPress);
     }
     public Button(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, label, onPress);
     }
     public Button(int x, int y, InterfaceUtils.DesignType type, int color, Component label, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, color, true, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, true, label, onPress);
     }
     public Button(int x, int y, InterfaceUtils.DesignType type, int color, boolean isCentred, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, color, isCentred, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, isCentred, label, onPress);
     }
     //////////
     public Button(int x, int y, int width, int height, Component label){

@@ -18,13 +18,13 @@ public class ButtonBoolean extends Button {
     public final String buttonMessage;
 
     public ButtonBoolean(int x, int y, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, label, onPress);
     }
     public ButtonBoolean(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, true, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, true, label, onPress);
     }
     public ButtonBoolean(int x, int y, InterfaceUtils.DesignType type, Boolean current, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, current, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, current, label, onPress);
     }
     ////
     public ButtonBoolean(int x, int y, int width, int height, Component label, OnPress onPress) {
@@ -67,7 +67,8 @@ public class ButtonBoolean extends Button {
         this.setColor(this.value ? InterfaceUtils.Colors.SEADRIVE : InterfaceUtils.Colors.GROUPIE);
         this.setMessage(Component.literal(buttonMessage +": ").append(volumeState));
         return this;
-    }public ButtonBoolean setOnPress(OnPress onPress){
+    }
+    public ButtonBoolean setOnPress(OnPress onPress){
         this.onPress = onPress;
         return this;
     }

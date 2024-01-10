@@ -65,7 +65,7 @@ public class AbstractConfigScreen extends Screen {
         for(AbstractWidget widget : builder.widgets){
             widget.setWidth(width);
         }
-        this.scroller = addRenderableWidget(new ConfigureScrolWidget(width - 8, 0, 4, height, Component.empty(), scroller -> {
+        this.scroller = addRenderableWidget(new ConfigureScrolWidget(this.width - 8, 0, 4, this.height, Component.empty(), scroller -> {
             scroller.innerHeight = 5;
 
             for(AbstractWidget widget : builder.widgets){

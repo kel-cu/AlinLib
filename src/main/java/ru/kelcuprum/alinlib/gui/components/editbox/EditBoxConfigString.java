@@ -19,15 +19,15 @@ public class EditBoxConfigString extends EditBoxString implements Resetable {
 
 
     public EditBoxConfigString(int x, int y, Config config, String typeConfig, String defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, false, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
     }
 
     public EditBoxConfigString(int x, int y, boolean secret, Config config, String typeConfig, String defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, secret, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
     }
 
     public EditBoxConfigString(int x, int y, boolean secret, InterfaceUtils.DesignType type, Config config, String typeConfig, String defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, secret, type, config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, type, config, typeConfig, defaultConfig, label);
 
     }
     //

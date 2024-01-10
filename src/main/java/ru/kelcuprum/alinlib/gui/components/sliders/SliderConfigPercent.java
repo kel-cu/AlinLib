@@ -15,10 +15,10 @@ public class SliderConfigPercent extends SliderPercent implements Resetable {
     public final String typeConfig;
 
     public SliderConfigPercent(int x, int y, Config config, String typeConfig, int defaultConfig, Component component) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, component);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, component);
     }
     public SliderConfigPercent(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, double defaultConfig, Component component) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, component);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, component);
     }
     ///
     public SliderConfigPercent(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, Component component) {

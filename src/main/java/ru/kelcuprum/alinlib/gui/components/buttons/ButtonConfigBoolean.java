@@ -14,10 +14,10 @@ public class ButtonConfigBoolean extends ButtonBoolean implements Resetable {
     public final Config config;
     public final String typeConfig;
     public ButtonConfigBoolean(int x, int y, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
     }
     public ButtonConfigBoolean(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, label);
     }
     public ButtonConfigBoolean(int x, int y, int width, int height, Config config, String typeConfig, boolean defaultConfig, Component label) {
         this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);

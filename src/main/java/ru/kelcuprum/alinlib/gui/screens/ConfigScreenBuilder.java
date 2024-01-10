@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.toast.AlinaToast;
 
 import java.util.ArrayList;
@@ -58,7 +59,10 @@ public class ConfigScreenBuilder {
     }
 
     public ConfigScreenBuilder addWidget(AbstractWidget widget){
-        this.widgets.add(widget);
+        if(widget instanceof CategoryBox){
+            this.widgets.add(widget);
+            this.widgets.addAll(((CategoryBox) widget).getValues());
+        } else this.widgets.add(widget);
         return this;
     }
     //

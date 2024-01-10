@@ -21,51 +21,51 @@ public class EditBoxString extends EditBox {
 
     ///
     public EditBoxString(int i, int j, boolean secret, Component component) {
-        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, secret, "", InterfaceUtils.DesignType.ALINA, component, null);
+        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, "", InterfaceUtils.DesignType.ALINA, component, null);
     }
     public EditBoxString(int i, int j, Component component) {
-        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, false, "", InterfaceUtils.DesignType.ALINA, component, null);
+        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, "", InterfaceUtils.DesignType.ALINA, component, null);
     }
     public EditBoxString(int i, int j, boolean secret, InterfaceUtils.DesignType type, Component component) {
-        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, secret, "", type, component, null);
+        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, "", type, component, null);
     }
     public EditBoxString(int i, int j, InterfaceUtils.DesignType type, Component component) {
-        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, false, "", type, component, null);
+        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, "", type, component, null);
     }
 
     // NO FONT
     public EditBoxString(int i, int j, boolean secret, String value, Component component, Consumer<String> responder) {
-        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
     }
 
 
     public EditBoxString(int i, int j, String value, Component component, Consumer<String> responder) {
-        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
     }
 
     public EditBoxString(int i, int j, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
-        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, false, value, type, component, responder);
+        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, value, type, component, responder);
     }
     public EditBoxString(int i, int j, boolean secret, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
-        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, secret, value, type, component, responder);
+        this(Minecraft.getInstance().font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, value, type, component, responder);
 
     }
     // FONT
     public EditBoxString(Font font, int i, int j, boolean secret, String value, Component component, Consumer<String> responder) {
-        this(font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
     }
 
 
     public EditBoxString(Font font, int i, int j, String value, Component component, Consumer<String> responder) {
-        this(font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
     }
 
     public EditBoxString(Font font, int i, int j, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
-        this(font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, false, value, type, component, responder);
+        this(font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, value, type, component, responder);
     }
 
     public EditBoxString(Font font, int i, int j, boolean secret, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
-        this(font, i, j, DEFAULT_WIDTH, DEFAULT_HEIGHT, secret, value, type, component, responder);
+        this(font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, value, type, component, responder);
     }
 
     ////
@@ -137,8 +137,9 @@ public class EditBoxString extends EditBox {
         return (getError() ? InterfaceUtils.Colors.GROUPIE : isFocused() ? InterfaceUtils.Colors.CLOWNFISH : InterfaceUtils.Colors.SEADRIVE);
     }
 
-    public void setError(boolean error) {
+    public EditBoxString setError(boolean error) {
         this.isError = error;
+        return this;
     }
     public boolean getError() { return this.isError; }
 

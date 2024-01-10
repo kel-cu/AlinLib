@@ -19,7 +19,7 @@ public class AlinLibCommand {
                 .then(literal("demo_screen")
                         .executes(context -> {
                             Minecraft client = context.getSource().getClient();
-                            client.tell(() -> client.setScreen(new AlinaDemoScreen(client.screen)));
+                            client.tell(() -> client.setScreen(new AlinaDemoScreen().build(client.screen)));
                             return 1;
                         })
                 )

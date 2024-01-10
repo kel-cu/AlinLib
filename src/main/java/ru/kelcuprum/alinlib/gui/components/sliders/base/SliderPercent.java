@@ -18,23 +18,23 @@ public class SliderPercent extends AbstractSliderButton {
     public OnPress onPress;
 
     public SliderPercent(int x, int y, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, 0, label, null);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, 0, label, null);
     }
     public SliderPercent(int x, int y, InterfaceUtils.DesignType type, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, 0, label, null);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, 0, label, null);
     }
     public SliderPercent(int x, int y, InterfaceUtils.DesignType type, double position, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, position, label, null);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, label, null);
     }
     //
     public SliderPercent(int x, int y, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, 0, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, 0, label, onPress);
     }
     public SliderPercent(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, 0, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, 0, label, onPress);
     }
     public SliderPercent(int x, int y, InterfaceUtils.DesignType type, double position, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, position, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, label, onPress);
     }
     //
     public SliderPercent(int x, int y, int width, int height, Component label) {
@@ -69,11 +69,13 @@ public class SliderPercent extends AbstractSliderButton {
     }
 
     // Заменить
-    public void setActive(boolean active){
+    public SliderPercent setActive(boolean active){
         this.active = active;
+        return this;
     }
-    public void setOnPress(OnPress onPress){
+    public SliderPercent setOnPress(OnPress onPress){
         this.onPress = onPress;
+        return this;
     }
 
     // Рендер

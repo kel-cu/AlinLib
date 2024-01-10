@@ -19,11 +19,11 @@ public class EditBoxColor extends EditBoxString implements Resetable {
 
 
     public EditBoxColor(int x, int y, Config config, String typeConfig, int defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
     }
 
     public EditBoxColor(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, label);
     }
 
     ///

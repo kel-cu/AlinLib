@@ -19,7 +19,7 @@ public class SelectorButton extends Button {
     protected String buttonMessage;
     protected OnPress onPress;
     public SelectorButton(int x, int y, InterfaceUtils.DesignType type, int color, String[] list, int position, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, color, list, position, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, list, position, label, onPress);
     }
     public SelectorButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, String[] list, int position, Component label, OnPress onPress) {
         super(x, y, width, height, type, color, label, null);

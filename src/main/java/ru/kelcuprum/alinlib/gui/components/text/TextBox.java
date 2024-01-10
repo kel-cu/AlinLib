@@ -18,10 +18,10 @@ public class TextBox extends AbstractWidget {
     private final OnPress onPress;
 
     public TextBox(int x, int y, Component label, boolean isCenter){
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, label, isCenter, null);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, null);
     }
     public TextBox(int x, int y, Component label, boolean isCenter, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, label, isCenter, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, onPress);
     }
     ///
     public TextBox(int x, int y, int width, int height, Component label, boolean isCenter){

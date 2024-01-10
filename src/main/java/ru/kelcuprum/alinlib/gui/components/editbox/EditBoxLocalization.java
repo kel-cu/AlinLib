@@ -15,11 +15,11 @@ public class EditBoxLocalization extends EditBoxString implements Resetable {
 
 
     public EditBoxLocalization(int x, int y, Localization config, String key, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, key, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, key, label);
     }
 
     public EditBoxLocalization(int x, int y, InterfaceUtils.DesignType type, Localization localization, String key, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, localization, key, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, localization, key, label);
 
     }
     //

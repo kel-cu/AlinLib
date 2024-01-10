@@ -15,10 +15,10 @@ public class SliderConfigInteger extends SliderInteger implements Resetable {
     public final String typeConfig;
 
     public SliderConfigInteger(int x, int y, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, min, max, component);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, min, max, component);
     }
     public SliderConfigInteger(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, int min, int max, Component label) {
-        this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, min, max, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, min, max, label);
     }
     ///
     public SliderConfigInteger(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
