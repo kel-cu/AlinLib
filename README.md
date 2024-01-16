@@ -23,8 +23,7 @@ dependencies {
 ```
 ## Скриншоты
 ### Интерфейс
-![interface](https://kelcuprum.ru/ass/alinlib/interface.png)
+![interface](https://kelcuprum.ru/ass/alinlib/interface.png?)
 ### Уведомления
-![toast](https://kelcuprum.ru/ass/alinlib/toast.png)
-### Кастомные уведомления
-![custom_toast](https://kelcuprum.ru/ass/alinlib/custom_toast.png)
+![toast](https://kelcuprum.ru/ass/alinlib/toast.png?)
+![custom_toast](https://kelcuprum.ru/ass/alinlib/custom_toast.png?)
