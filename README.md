@@ -21,6 +21,7 @@ dependencies {
     modImplementation("ru.kelcuprum.alinlib:AlinLib:VERSION");
 }
 ```
+Для указания в fabric.mod.json указывайте ID: `alinlib`
 ## Скриншоты
 ### Интерфейс
 ![interface](https://kelcuprum.ru/ass/alinlib/interface.png?)
