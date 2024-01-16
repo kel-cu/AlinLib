@@ -25,8 +25,8 @@ public class Config {
     /**
      * Сохранение конфигурации
      */
-    public void save(){
-        if(!_isFile) return;
+    public Config save(){
+        if(!_isFile) return this;
         Minecraft mc = Minecraft.getInstance();
         final Path configFile = mc.gameDirectory.toPath().resolve(_filePath);
 
@@ -36,13 +36,14 @@ public class Config {
         } catch (IOException e) {
             AlinLib.log(e.getLocalizedMessage(), Level.ERROR);
         }
+        return this;
     }
 
     /**
      * Загрузка файла конфигов
      */
-    public void load(){
-        if(!_isFile) return;
+    public Config load(){
+        if(!_isFile) return this;
         Minecraft mc = Minecraft.getInstance();
         final Path configFile = mc.gameDirectory.toPath().resolve(_filePath);
         try{
@@ -51,14 +52,15 @@ public class Config {
             AlinLib.log(e.getLocalizedMessage(), Level.ERROR);
             save();
         }
-
+        return this;
     }
     /**
      * Сброс конфигурации
      */
-    public void reset(){
+    public Config reset(){
         this._jsonConfiguration = new JsonObject();
         save();
+        return this;
     }
     /**
      * Преобразование в JSON
@@ -97,9 +99,10 @@ public class Config {
     /**
      * Задать значения Boolean
      */
-    public void setBoolean(String type, boolean newValue){
+    public Config setBoolean(String type, boolean newValue){
         this._jsonConfiguration.addProperty(type, newValue);
         save();
+        return this;
     }
     /**
      * Получение String значения
@@ -113,9 +116,10 @@ public class Config {
     /**
      * Задать значения String
      */
-    public void setString(String type, String newValue){
+    public Config setString(String type, String newValue){
         this._jsonConfiguration.addProperty(type, newValue);
         save();
+        return this;
     }
 
     /**
@@ -130,8 +134,9 @@ public class Config {
     /**
      * Задать значения Number
      */
-    public void setNumber(String type, Number newValue){
+    public Config setNumber(String type, Number newValue){
         this._jsonConfiguration.addProperty(type, newValue);
         save();
+        return this;
     }
 }

@@ -19,11 +19,12 @@ import java.net.http.HttpResponse;
 public class AlinLib implements ClientModInitializer {
     public static final String MODID = "alinlib";
     public static final Logger LOG = LogManager.getLogger("AlinaLib");
-    public static Config bariumConfig = new Config("config/AlinLib/config.json");
+    public static Config bariumConfig = new Config("config/AlinLib/config.json").load();
     public static HttpClient webClient = HttpClient.newHttpClient();
     @Override
     public void onInitializeClient() {
-        bariumConfig.load();
+        log("This world goes round and round like a carousel in a circus.");
+        log("Maybe the world is a circus?)");
     }
     public static void log(Component message) { log(message, Level.INFO);}
     public static void log(Component message, Level level) { log(message.getString(), level);}
