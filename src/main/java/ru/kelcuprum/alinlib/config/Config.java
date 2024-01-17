@@ -17,6 +17,7 @@ public class Config {
     public Config(String filePath){
         this._filePath = filePath;
         this._isFile = true;
+        load();
     }
     public Config(JsonObject jsonConfiguration){
         this._jsonConfiguration = jsonConfiguration;
@@ -25,8 +26,8 @@ public class Config {
     /**
      * Сохранение конфигурации
      */
-    public Config save(){
-        if(!_isFile) return this;
+    public void save(){
+        if(!_isFile) return;
         Minecraft mc = Minecraft.getInstance();
         final Path configFile = mc.gameDirectory.toPath().resolve(_filePath);
 
@@ -36,14 +37,13 @@ public class Config {
         } catch (IOException e) {
             AlinLib.log(e.getLocalizedMessage(), Level.ERROR);
         }
-        return this;
     }
 
     /**
      * Загрузка файла конфигов
      */
-    public Config load(){
-        if(!_isFile) return this;
+    public void load(){
+        if(!_isFile) return;
         Minecraft mc = Minecraft.getInstance();
         final Path configFile = mc.gameDirectory.toPath().resolve(_filePath);
         try{
@@ -52,7 +52,6 @@ public class Config {
             AlinLib.log(e.getLocalizedMessage(), Level.ERROR);
             save();
         }
-        return this;
     }
     /**
      * Сброс конфигурации
