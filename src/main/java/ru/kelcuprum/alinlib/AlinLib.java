@@ -19,7 +19,7 @@ import java.net.http.HttpResponse;
 public class AlinLib implements ClientModInitializer {
     public static final String MODID = "alinlib";
     public static final Logger LOG = LogManager.getLogger("AlinaLib");
-    public static Config bariumConfig = new Config("config/AlinLib/config.json").load();
+    public static Config bariumConfig = new Config("config/AlinLib/config.json");
     public static HttpClient webClient = HttpClient.newHttpClient();
     @Override
     public void onInitializeClient() {
