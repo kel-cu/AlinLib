@@ -15,7 +15,6 @@ import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
 public class TextBox extends AbstractWidget implements Description {
     private final boolean isCentred;
-    private Component tooltipMessage;
     private final OnPress onPress;
 
     public TextBox(int x, int y, Component label, boolean isCenter){
@@ -35,9 +34,6 @@ public class TextBox extends AbstractWidget implements Description {
         this.setActive(this.onPress != null);
     }
 
-    public void setTooltip(Component tooltipMessage){
-        this.tooltipMessage = tooltipMessage;
-    }
     public void setActive(boolean active){
         this.active = active;
     }
@@ -66,9 +62,6 @@ public class TextBox extends AbstractWidget implements Description {
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-        if(isHovered() && tooltipMessage != null){
-            guiGraphics.renderTooltip(Minecraft.getInstance().font, tooltipMessage, i, j);
-        }
         if(isDoesNotFit()) this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
         else if(this.isCentred) guiGraphics.drawCenteredString(Minecraft.getInstance().font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
         else guiGraphics.drawString(Minecraft.getInstance().font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);

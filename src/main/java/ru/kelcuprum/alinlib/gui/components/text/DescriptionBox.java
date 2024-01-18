@@ -50,9 +50,7 @@ public class DescriptionBox extends AbstractWidget{
     public void setPosition(int x, int y) {
         super.setPosition(x, y);
     }
-    public void onPress() {
-
-    }
+    public void onPress() {}
 
     @Override
     public void setMessage(Component component) {
