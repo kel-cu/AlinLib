@@ -18,7 +18,7 @@ public class ConfigScreenBuilder {
     protected Screen parent;
 
     public ConfigScreenBuilder(Screen parent) {
-        this(parent, Component.translatable("alinlib.change_title_pls"));
+        this(parent, Component.literal("Change me please"));
     }
     public ConfigScreenBuilder(Screen parent, Component title) {
         this(parent, title, InterfaceUtils.DesignType.ALINA);
