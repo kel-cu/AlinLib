@@ -5,6 +5,7 @@ import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.selector.base.SelectorButton;
+import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
@@ -46,5 +47,15 @@ public class SelectorIntegerButton extends SelectorButton implements Resetable {
     public void resetValue() {
         setPosition(defaultVolume);
         if(this.config != null) this.config.setNumber(this.typeConfig, getPosition());
+    }
+
+
+    protected Component description;
+    public SelectorIntegerButton setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

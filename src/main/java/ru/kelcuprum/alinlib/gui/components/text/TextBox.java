@@ -8,11 +8,12 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.gui.components.Description;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
-public class TextBox extends AbstractWidget {
+public class TextBox extends AbstractWidget implements Description {
     private final boolean isCentred;
     private Component tooltipMessage;
     private final OnPress onPress;
@@ -103,5 +104,14 @@ public class TextBox extends AbstractWidget {
     @Environment(EnvType.CLIENT)
     public interface OnPress {
         void onPress(TextBox button);
+    }
+
+    protected Component description;
+    public TextBox setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

@@ -82,4 +82,13 @@ public class CategoryBox extends TextBox {
             guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, 0xFFFFFFFF);
         }
     }
+
+    protected Component description;
+    public CategoryBox setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
+    }
 }

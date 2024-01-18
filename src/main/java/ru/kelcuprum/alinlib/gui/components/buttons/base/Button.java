@@ -8,11 +8,12 @@ import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.Description;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
-public class Button extends AbstractButton {
+public class Button extends AbstractButton implements Description {
     protected InterfaceUtils.DesignType type;
     int color;
     private final boolean isCentred;
@@ -108,5 +109,14 @@ public class Button extends AbstractButton {
     @Environment(EnvType.CLIENT)
     public interface OnPress {
         void onPress(Button button);
+    }
+
+    protected Component description;
+    public Button setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

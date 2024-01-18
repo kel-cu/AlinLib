@@ -5,6 +5,7 @@ import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.ButtonBoolean;
+import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
@@ -36,5 +37,15 @@ public class ButtonConfigBoolean extends ButtonBoolean implements Resetable {
     public void resetValue() {
         this.setValue(defaultConfig);
         if(config != null) config.setBoolean(typeConfig, this.getValue());
+    }
+
+
+    protected Component description;
+    public ButtonConfigBoolean setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

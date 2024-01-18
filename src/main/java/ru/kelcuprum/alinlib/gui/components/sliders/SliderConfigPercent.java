@@ -5,6 +5,7 @@ import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderPercent;
+import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
@@ -39,5 +40,14 @@ public class SliderConfigPercent extends SliderPercent implements Resetable {
     public void resetValue() {
         if(this.config != null) this.config.setNumber(this.typeConfig, this.defaultConfig);
         this.setValue(this.defaultConfig);
+    }
+
+    protected Component description;
+    public SliderConfigPercent setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
-public class ImageWidget extends AbstractWidget {
+public class ImageWidget extends AbstractWidget implements Description {
     protected final ResourceLocation image;
     protected final int imageWidth, imageHeight;
 
@@ -39,5 +39,15 @@ public class ImageWidget extends AbstractWidget {
     @Override
     protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
         this.defaultButtonNarrationText(narrationElementOutput);
+    }
+
+
+    protected Component description;
+    public ImageWidget setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

@@ -7,6 +7,7 @@ import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.selector.base.SelectorButton;
+import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 import java.util.Arrays;
 
@@ -61,5 +62,14 @@ public class SelectorStringButton extends SelectorButton implements Resetable {
             setPosition(0);
         }
         if(this.config != null) this.config.setString(this.typeConfig, getList()[getPosition()]);
+    }
+
+    protected Component description;
+    public SelectorStringButton setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

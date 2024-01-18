@@ -5,6 +5,7 @@ import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderInteger;
+import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
@@ -41,5 +42,14 @@ public class SliderConfigInteger extends SliderInteger implements Resetable {
             this.config.setNumber(this.typeConfig, this.displayValue);
             this.setValue(((config.getNumber(typeConfig, defaultConfig).doubleValue() - min) /(max-min)));
         }
+    }
+
+    protected Component description;
+    public SliderConfigInteger setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

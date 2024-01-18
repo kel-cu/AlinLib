@@ -6,13 +6,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.Description;
 
 import java.util.function.Consumer;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
-public class EditBoxString extends EditBox {
+public class EditBoxString extends EditBox implements Description {
     private final InterfaceUtils.DesignType type;
     private final boolean secret;
     private boolean tweakBorder;
@@ -171,5 +172,13 @@ public class EditBoxString extends EditBox {
             return false;
         }
         return super.isBordered();
+    }
+    protected Component description;
+    public EditBoxString setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

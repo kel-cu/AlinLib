@@ -72,6 +72,27 @@ public class AlinaDemoScreen {
         return build(parent, InterfaceUtils.DesignType.ALINA);
     }
     public Screen build(Screen parent, InterfaceUtils.DesignType type){
+        Component description = Component.literal("FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "FIRE IN THE HOLE! "+
+                "something");
+        Component config = Component.translatable("alinlibtest.description.configure_widgets");
+        Component base = Component.translatable("alinlibtest.description.base_widgets");
         ConfigScreenBuilder screen = new ConfigScreenBuilder(parent)
                 .setTitle(Component.translatable("alinlibtest.name"))
                 .setType(InterfaceUtils.DesignType.VANILLA)
@@ -112,6 +133,7 @@ public class AlinaDemoScreen {
                 ///
                 .addWidget(
                         new CategoryBox(140, 5, CONFIGURE_CATEGORY)
+                                .setDescription(config)
                                 .addValue(new ButtonConfigBoolean(140, 30, type, AlinLib.bariumConfig, "Boolean", true, BOOLEAN))
                                 .addValue(new EditBoxConfigString(140, 55, false, type, AlinLib.bariumConfig, "HELLO", "Hello, world", EDIT_BOX))
                                 .addValue(new EditBoxConfigString(140, 80, true, type, AlinLib.bariumConfig, "SECRET", "Alina doesn't have a boyfriend", SECRET_EDIT_BOX))
@@ -125,6 +147,7 @@ public class AlinaDemoScreen {
                 )
                 .addWidget(
                         new CategoryBox(140, 280, BASE_CATEGORY)
+                                .setDescription(base)
                                 .addValue(new Button(140, 280, type, BUTTON, (s) ->
                                         new ToastBuilder()
                                                 .setTitle(Component.literal("AlinLib"))
@@ -160,7 +183,7 @@ public class AlinaDemoScreen {
                                 .addValue(new TextBox(140, 455, Component.literal("Not center"), false))
                                 .addValue(new TextBox(140, 455, Component.literal("Center"), true))
                 )
-                .addWidget(new ImageWidget(140, 505, DEFAULT_WIDTH(), 60, new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png"), 20, 20, Component.empty()))
+                .addWidget(new ImageWidget(140, 505, DEFAULT_WIDTH(), 60, new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png"), 20, 20, Component.empty()).setDescription(description))
                 .addWidget(new TextBox(140, 570, DEFAULT_WIDTH(), 20, SOMETHING, true, (OnPress) -> {
                     if (!this.isFollow) {
                         this.isFollow = true;
@@ -176,7 +199,7 @@ public class AlinaDemoScreen {
                         AlinLib.log(Component.translatable("alinlib.something.oops"));
                         MINECRAFT.stop();
                     }
-                }));
+                }).setDescription(description));
         return screen.build();
     }
 }

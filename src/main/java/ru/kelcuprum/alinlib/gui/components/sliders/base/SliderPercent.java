@@ -8,11 +8,13 @@ import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.Description;
+import ru.kelcuprum.alinlib.gui.components.editbox.base.EditBoxString;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
-public class SliderPercent extends AbstractSliderButton {
+public class SliderPercent extends AbstractSliderButton implements Description {
     public final InterfaceUtils.DesignType type;
     public final String buttonMessage;
     public OnPress onPress;
@@ -124,5 +126,14 @@ public class SliderPercent extends AbstractSliderButton {
     @Environment(EnvType.CLIENT)
     public interface OnPress {
         void onPress(double value);
+    }
+
+    protected Component description;
+    public SliderPercent setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }

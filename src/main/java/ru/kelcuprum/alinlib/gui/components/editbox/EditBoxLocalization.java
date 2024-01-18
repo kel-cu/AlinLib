@@ -5,6 +5,7 @@ import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.editbox.base.EditBoxString;
+import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
@@ -43,5 +44,15 @@ public class EditBoxLocalization extends EditBoxString implements Resetable {
     public void resetValue() {
         this.localization.resetLocalization(this.key);
         this.setValue(this.localization.getLocalization(key, false, false));
+    }
+
+
+    protected Component description;
+    public EditBoxLocalization setDescription(Component description){
+        this.description = description;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
 }
