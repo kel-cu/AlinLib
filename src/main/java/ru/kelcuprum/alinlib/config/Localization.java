@@ -63,6 +63,9 @@ public class Localization {
         return getLocalization(key, clearColor, true);
     }
     public String getLocalization(String key, boolean clearColor, boolean parse){
+        return getLocalization(key, clearColor, true, parse);
+    }
+    public String getLocalization(String key, boolean clearColor, boolean fixFormatCodes, boolean parse){
         String text;
         try {
             JsonObject JSONLocalization = getJSONFile();
@@ -72,7 +75,7 @@ public class Localization {
             AlinLib.log(ex.getLocalizedMessage());
             text = getDefaultLocalization(key);
         }
-        text = clearColor ? clearFormatCodes(text) : fixFormatCodes(text);
+        text = clearColor ? clearFormatCodes(text) : fixFormatCodes ? fixFormatCodes(text) : text;
         return parse ? getParsedText(text) : text;
     }
     public String getParsedText(String content){
