@@ -133,4 +133,8 @@ public class AbstractConfigScreen extends Screen {
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
     }
+    public void onClose() {
+        assert this.minecraft != null;
+        this.minecraft.setScreen(builder.parent);
+    }
 }
