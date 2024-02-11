@@ -16,6 +16,7 @@ import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 public class CategoryBox extends TextBox {
     public final List<AbstractWidget> values = new ArrayList<>();
     private boolean state = true;
+
     public CategoryBox(int x, int y, Component label) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label);
     }
@@ -43,13 +44,15 @@ public class CategoryBox extends TextBox {
     }
 
     public CategoryBox changeState(){
-        state = !state;
+        return changeState(!state);
+    }
+    public CategoryBox changeState(boolean state){
+        this.state = state;
         for (AbstractWidget widget : values) {
             widget.visible = state;
         }
         return this;
     }
-
     @Override
     public void onClick(double d, double e) {
         changeState();

@@ -182,6 +182,7 @@ public class AlinaDemoScreen {
                                 .addValue(new SliderInteger(140, 430, type, 50, 0, 100, SLIDER))
                                 .addValue(new TextBox(140, 455, Component.literal("Not center"), false))
                                 .addValue(new TextBox(140, 455, Component.literal("Center"), true))
+                                .changeState(false)
                 )
                 .addWidget(new ImageWidget(140, 505, DEFAULT_WIDTH(), 60, new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png"), 20, 20, Component.empty()).setDescription(description))
                 .addWidget(new TextBox(140, 570, DEFAULT_WIDTH(), 20, SOMETHING, true, (OnPress) -> {

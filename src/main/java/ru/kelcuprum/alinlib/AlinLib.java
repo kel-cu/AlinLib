@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.kelcuprum.alinlib.config.Config;
-import ru.kelcuprum.alinlib.config.Localization;
 
 import java.io.IOException;
 import java.net.URI;
