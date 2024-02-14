@@ -1,4 +1,4 @@
-<img width="120pt" src="https://raw.githubusercontent.com/simply-kel/AlinLib/main/src/main/resources/assets/alinlib/icon.png" align="right">
+<img width="120pt" src="https://cdn.kelcuprum.ru/icons/alinlib.png" align="right">
 
 # AlinLib
 Библиотека для облегчения разработки интерфейса, уведомлений и т.д.<br>
