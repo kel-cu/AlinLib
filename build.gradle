@@ -1,113 +1,57 @@
 plugins {
-    id 'dev.architectury.loom' version '1.4-SNAPSHOT'
-    id 'maven-publish'
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "io.github.p03w.machete" version "2.+" apply false
+    id "dev.architectury.loom" version "1.4-SNAPSHOT" apply false
+    id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
 }
-def getGitHash = { ->
-    def stdout = new ByteArrayOutputStream()
-    exec {
-        commandLine 'git', 'rev-parse', '--short', 'HEAD'
-        standardOutput = stdout
+
+architectury {
+    minecraft = rootProject.minecraft_version
+}
+
+subprojects {
+    apply plugin: "dev.architectury.loom"
+    apply plugin: "io.github.p03w.machete"
+    loom {
+        accessWidenerPath = file("${project.rootDir}/Common/src/main/resources/alinlib.accesswidener")
     }
-    return stdout.toString().trim()
-}
-
-archivesBaseName = project.archives_base_name
-version_public = project.version_public
-version = version_public == "true" ? project.mod_version : "${project.mod_version}+git.${getGitHash()}"
-group = project.maven_group
-
-sourceSets {
-    demoClient {
-        compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
-
-        compileClasspath += main.output
-        runtimeClasspath += main.output
-    }
-}
-
-loom {
-    silentMojangMappingsLicense()
-
-    runs {
-        demoClient {
-            client()
-            name = "Demo Client"
-            source sourceSets.demoClient
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${rootProject.minecraft_version}:${rootProject.parchment_version}@zip")
         }
     }
-
-    accessWidenerPath = file("src/main/resources/alinlib.accesswidener")
 }
 
-repositories {
-    mavenCentral()
-    maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
-    maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
-}
+allprojects {
+    apply plugin: "java"
+    apply plugin: "maven-publish"
 
-dependencies {
-    // Minecraft/Fabric libs
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment "org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip"
-    }
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    archivesBaseName = rootProject.archives_base_name
+    version = rootProject.mod_version
+    group = rootProject.maven_group
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-}
-
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.mod_version
-    }
-}
-
-def targetJavaVersion = 17
-tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
-    it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release = targetJavaVersion
-    }
-}
-
-// Produce additional distributions
-java {
-    withSourcesJar()
-}
-
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
-    }
-}
-
-// configure the maven publication
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        maven {
-            name = "KelCuprum"
-            url = "https://repo.kelcuprum.ru/developer"
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
+        mavenCentral()
+        maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
+        maven { url = "https://maven.neoforged.net/releases/" } // NEOFORGE
+        maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+
+        // The Minecraft launcher currently installs Java 8 for users, so your mod probably wants to target Java 8 too
+        // JDK 9 introduced a new way of specifying this that will make sure no newer classes or methods are used.
+        // We'll use that if it's available, but otherwise we'll use the older option.
+        def targetVersion = 17
+        if (JavaVersion.current().isJava9Compatible()) {
+            options.release = targetVersion
         }
+    }
+
+    java {
+        withSourcesJar()
     }
 }
