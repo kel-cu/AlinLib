@@ -10,6 +10,8 @@ import ru.kelcuprum.alinlib.AlinLib;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Config {
     private String _filePath;
@@ -26,6 +28,55 @@ public class Config {
         this._jsonConfiguration = jsonConfiguration;
         this._isFile = false;
     }
+    // -=-=-=-=-=-=-=-=-=-=-=-
+    // EXPERIMENT
+    // -=-=-=-=-=-=-=-=-=-=-=-
+    private final Map<String, Boolean> booleanDefaults = new HashMap<>();
+    private final Map<String, String> stringDefaults = new HashMap<>();
+    private final Map<String, Number> numberDefaults = new HashMap<>();
+    private final Map<String, JsonObject> jsonObjectDefaults = new HashMap<>();
+    private final Map<String, JsonArray> jsonArrayDefaults = new HashMap<>();
+    public Config registerValue(String key, Boolean value){
+        booleanDefaults.put(key, value);
+        return this;
+    }
+    public Boolean getBoolean(String key){
+        if(booleanDefaults.get(key) == null) return getBoolean(key, false);
+        else return getBoolean(key, booleanDefaults.get(key));
+    }
+    public Config registerValue(String key, String value){
+        stringDefaults.put(key, value);
+        return this;
+    }
+    public String getString(String key){
+        if(stringDefaults.get(key) == null) return getString(key, "");
+        else return getString(key, stringDefaults.get(key));
+    }
+    public Config registerValue(String key, Number value){
+        numberDefaults.put(key, value);
+        return this;
+    }
+    public Number getNumber(String key){
+        if(numberDefaults.get(key) == null) return getNumber(key, 0);
+        else return getNumber(key, numberDefaults.get(key));
+    }
+    public Config registerValue(String key, JsonObject value){
+        jsonObjectDefaults.put(key, value);
+        return this;
+    }
+    public JsonObject getJsonObject(String key){
+        if(jsonObjectDefaults.get(key) == null) return getJsonObject(key, new JsonObject());
+        else return getJsonObject(key, jsonObjectDefaults.get(key));
+    }
+    public Config registerValue(String key, JsonArray value){
+        jsonArrayDefaults.put(key, value);
+        return this;
+    }
+    public JsonArray getJsonArray(String key){
+        if(jsonArrayDefaults.get(key) == null) return getJsonArray(key, new JsonArray());
+        else return getJsonArray(key, jsonArrayDefaults.get(key));
+    }
+    // -=-=-=-=-=-=-=-=-=-=-=-
 
     /**
      * Сохранение конфигурации
