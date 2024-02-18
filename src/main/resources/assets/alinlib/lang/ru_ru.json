@@ -1,8 +1,0 @@
-{
-  "alinlib.editbox.secret": "Секрет :)",
-
-  "alinlib.component.reset": "Сброс",
-  "alinlib.component.reset.toast": "Конфиги категории были сброшены",
-
-  "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"
-}

@@ -1,8 +1,0 @@
-{
-  "alinlib.editbox.secret": "Secret :)",
-
-  "alinlib.component.reset": "Reset",
-  "alinlib.component.reset.toast": "The category configs have been reset",
-
-  "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum"
-}

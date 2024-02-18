@@ -1,0 +1,23 @@
+archivesBaseName = rootProject.archives_base_name + "-neoforge"
+
+loom {
+    accessWidenerPath = file("${project.rootDir}/Common/src/main/resources/alinlib.accesswidener")
+}
+dependencies {
+    implementation ("net.neoforged:neoforge:${rootProject.forge_version}")
+
+    sourceSets.main.java.srcDirs += "${project.rootDir}/Common/src/main/java"
+    sourceSets.main.resources.srcDirs += "${project.rootDir}/Common/src/main/resources"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}
