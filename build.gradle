@@ -12,7 +12,9 @@ architectury {
 subprojects {
     apply plugin: "dev.architectury.loom"
     apply plugin: "io.github.p03w.machete"
-
+    loom {
+        accessWidenerPath = file("${project.rootDir}/Common/src/main/resources/alinlib.accesswidener")
+    }
     dependencies {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
         mappings loom.layered() {

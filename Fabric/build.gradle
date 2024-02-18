@@ -30,8 +30,6 @@ loom {
             source sourceSets.demoClient
         }
     }
-
-    accessWidenerPath = file("${project.rootDir}/Common/src/main/resources/alinlib.accesswidener")
 }
 test {
     useJUnitPlatform()

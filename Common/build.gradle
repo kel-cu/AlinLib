@@ -1,0 +1,1 @@
+archivesBaseName = rootProject.archives_base_name + "-common"

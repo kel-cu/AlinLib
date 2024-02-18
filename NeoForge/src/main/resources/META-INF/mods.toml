@@ -13,7 +13,7 @@ updateJSONURL = "https://api.modrinth.com/updates/alinlib/forge_updates.json"
 authors = "Im_Kel (Kel Cuprum)"
 credits = "dima_dencep"
 description = "A library to facilitate mod development by Kel Cuprum"
-logoFile = "assets/alinlib/icon.png"
+logoFile = "assets/alinlib/icon_forge.png"
 
 [[dependencies.alinlib]]
 modId = "neoforge"
