@@ -5,24 +5,24 @@ license="MIT"
 
 [[mods]]
 displayTest = "IGNORE_ALL_VERSION"
-modId = "alinlib"
+modId = "alinlibtest"
 version = "${version}"
 displayURL = "https://modrinth.com/mod/alinlib"
-displayName = "AlinLib"
+displayName = "AlinLib Demo"
 updateJSONURL = "https://api.modrinth.com/updates/alinlib/forge_updates.json"
 authors = "Im_Kel (Kel Cuprum)"
 credits = "dima_dencep"
 description = "A library to facilitate mod development by Kel Cuprum"
-logoFile = "assets/alinlib/icon_forge.png"
+logoFile = "assets/alinlibtest/textures/gui/widget/test/well.png"
 
-[[dependencies.alinlib]]
+[[dependencies.alinlibtest]]
 modId = "neoforge"
 type = "required"
 versionRange = "*"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.alinlib]]
+[[dependencies.alinlibtest]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.20,)"
