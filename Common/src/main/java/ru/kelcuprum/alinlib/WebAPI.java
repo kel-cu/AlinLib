@@ -12,16 +12,16 @@ import java.net.http.HttpResponse;
 
 public class WebAPI {
     public static HttpClient webClient = HttpClient.newHttpClient();
-    public static JsonObject getJsonObject(String url) throws IOException, InterruptedException {
+    public static String getString(String url) throws IOException, InterruptedException {
         if(webClient == null) webClient = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
         HttpResponse<String> response = webClient.send(request, HttpResponse.BodyHandlers.ofString());
-        return GsonHelper.parse(response.body());
+        return response.body();
+    }
+    public static JsonObject getJsonObject(String url) throws IOException, InterruptedException {
+        return GsonHelper.parse(getString(url));
     }
     public static JsonArray getJsonArray(String url) throws IOException, InterruptedException {
-        if (webClient == null) webClient = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
-        HttpResponse<String> response = webClient.send(request, HttpResponse.BodyHandlers.ofString());
-        return GsonHelper.parseArray(response.body());
+        return GsonHelper.parseArray(getString(url));
     }
 }
