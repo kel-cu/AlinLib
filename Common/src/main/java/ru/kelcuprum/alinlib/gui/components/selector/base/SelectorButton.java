@@ -1,6 +1,5 @@
 package ru.kelcuprum.alinlib.gui.components.selector.base;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
@@ -69,11 +68,11 @@ public class SelectorButton extends Button {
             } else {
                 this.setMessage(Component.literal(buttonMessage).append(": ").append(getValue()));
             }
-            this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
+            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
         } else {
-            guiGraphics.drawString(Minecraft.getInstance().font, buttonMessage, getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+            guiGraphics.drawString(AlinLib.MINECRAFT.font, buttonMessage, getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
             // VOLUME
-            guiGraphics.drawString(Minecraft.getInstance().font, getValue(), getX() + getWidth() - Minecraft.getInstance().font.width(getValue()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+            guiGraphics.drawString(AlinLib.MINECRAFT.font, getValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getValue()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
         }
     }
 

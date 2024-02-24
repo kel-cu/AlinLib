@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +11,8 @@ public class AlinLib {
     public static final String MODID = "alinlib";
     public static final Logger LOG = LogManager.getLogger("AlinaLib");
     public static Config bariumConfig = new Config("config/AlinLib/config.json");
-
+    public static Minecraft MINECRAFT = Minecraft.getInstance();
+    
     public static void onInitializeClient() {
         log("This world goes round and round like a carousel in a circus.");
         log("Maybe the world is a circus?)");

@@ -1,11 +1,11 @@
 package ru.kelcuprum.alinlib.gui.components.text;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class CategoryBox extends TextBox {
     public boolean keyPressed(int i, int j, int k) {
         if (this.active && this.visible) {
             if (CommonInputs.selected(i)) {
-                this.playDownSound(Minecraft.getInstance().getSoundManager());
+                this.playDownSound(AlinLib.MINECRAFT.getSoundManager());
                 changeState();
                 return true;
             } else {
@@ -77,7 +77,7 @@ public class CategoryBox extends TextBox {
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
         if (visible) {
             int y = getY() + (getHeight() - 8) / 2;
-            Font font = Minecraft.getInstance().font;
+            Font font = AlinLib.MINECRAFT.font;
             guiGraphics.drawString(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, -1);
             guiGraphics.drawCenteredString(font, getMessage(), getX() + getWidth() / 2, y, -1);
             int textWidth = font.width(getMessage());

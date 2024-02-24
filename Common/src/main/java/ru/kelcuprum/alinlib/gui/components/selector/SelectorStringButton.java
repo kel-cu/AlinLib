@@ -7,7 +7,6 @@ import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.selector.base.SelectorButton;
-import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 import java.util.Arrays;
 

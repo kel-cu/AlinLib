@@ -1,12 +1,12 @@
 package ru.kelcuprum.alinlib.gui.components.text;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
+import ru.kelcuprum.alinlib.AlinLib;
 
 import java.util.List;
 
@@ -56,14 +56,14 @@ public class DescriptionBox extends AbstractWidget{
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-        List<FormattedCharSequence> list = Minecraft.getInstance().font.split(this.description, width);
+        List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(this.description, width);
         int l = 0;
         for(FormattedCharSequence text : list){
-            if(getHeight() > ((Minecraft.getInstance().font.lineHeight+3)*(l+2))) {
-                guiGraphics.drawString(Minecraft.getInstance().font, text, getX(), getY() + ((Minecraft.getInstance().font.lineHeight+3) * l), -1);
+            if(getHeight() > ((AlinLib.MINECRAFT.font.lineHeight+3)*(l+2))) {
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, getX(), getY() + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
                 l++;
             } else {
-                guiGraphics.drawString(Minecraft.getInstance().font, "...", getX(), getY() + ((Minecraft.getInstance().font.lineHeight+3) * l), -1);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, "...", getX(), getY() + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
                 break;
             };
         }
@@ -80,7 +80,7 @@ public class DescriptionBox extends AbstractWidget{
     public boolean keyPressed(int i, int j, int k) {
         if (this.active && this.visible) {
             if (CommonInputs.selected(i)) {
-                this.playDownSound(Minecraft.getInstance().getSoundManager());
+                this.playDownSound(AlinLib.MINECRAFT.getSoundManager());
                 this.onPress();
                 return true;
             } else {

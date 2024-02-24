@@ -1,11 +1,11 @@
 package ru.kelcuprum.alinlib.gui.components.text;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.Description;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
@@ -60,12 +60,12 @@ public class TextBox extends AbstractWidget implements Description {
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-        if(isDoesNotFit()) this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
-        else if(this.isCentred) guiGraphics.drawCenteredString(Minecraft.getInstance().font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
-        else guiGraphics.drawString(Minecraft.getInstance().font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+        if(isDoesNotFit()) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+        else if(this.isCentred) guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+        else guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
     }
     private boolean isDoesNotFit(){
-        int size = Minecraft.getInstance().font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
+        int size = AlinLib.MINECRAFT.font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
         return size > getWidth();
     }
 
@@ -81,7 +81,7 @@ public class TextBox extends AbstractWidget implements Description {
     public boolean keyPressed(int i, int j, int k) {
         if (this.active && this.visible) {
             if (CommonInputs.selected(i)) {
-                this.playDownSound(Minecraft.getInstance().getSoundManager());
+                this.playDownSound(AlinLib.MINECRAFT.getSoundManager());
                 this.onPress();
                 return true;
             } else {

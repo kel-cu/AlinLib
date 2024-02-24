@@ -35,14 +35,14 @@ public class Localization {
     // Получить
     private String getCodeLocalization(){
         try{
-            return Minecraft.getInstance().options.languageCode;
+            return AlinLib.MINECRAFT.options.languageCode;
         } catch (Exception e){
             return "en_us";
         }
     }
     public JsonObject getJSONFile(){
         try {
-            Minecraft CLIENT = Minecraft.getInstance();
+            Minecraft CLIENT = AlinLib.MINECRAFT;
             Path localizationFile = CLIENT.gameDirectory.toPath().resolve(String.format("%s/%s.json", filePath, getCodeLocalization()));//new File(CLIENT.gameDirectory + filePath + getCodeLocalization() + ".json");
             if (localizationFile.toFile().exists()) {
                 return GsonHelper.parse(Files.readString(localizationFile));
@@ -94,7 +94,7 @@ public class Localization {
         try {
             JsonObject JSONLocalization = getJSONFile();
             JSONLocalization.addProperty(type, text);
-            Minecraft CLIENT = Minecraft.getInstance();
+            Minecraft CLIENT = AlinLib.MINECRAFT;
             Path localizationFile = CLIENT.gameDirectory.toPath().resolve(String.format("%s/%s.json", filePath, getCodeLocalization()));
             Files.createDirectories(localizationFile.getParent());
             Files.writeString(localizationFile, JSONLocalization.toString());

@@ -1,9 +1,9 @@
 package ru.kelcuprum.alinlib.gui.components.sliders.base;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
@@ -95,14 +95,14 @@ public class SliderPercent extends AbstractSliderButton implements Description {
             } else {
                 this.setMessage(Component.literal(buttonMessage).append(": ").append(getComponentValue()));
             }
-            this.renderScrollingString(guiGraphics, Minecraft.getInstance().font, 2, 0xFFFFFF);
+            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
         } else {
             if(isHovered()){
-                guiGraphics.drawString(Minecraft.getInstance().font, getComponentValue(), getX() + (getWidth()/2) - (Minecraft.getInstance().font.width(getComponentValue().getString())/2), getY() + (getHeight() - 8) / 2, 0xffffff);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getX() + (getWidth()/2) - (AlinLib.MINECRAFT.font.width(getComponentValue().getString())/2), getY() + (getHeight() - 8) / 2, 0xffffff);
             } else {
-                guiGraphics.drawString(Minecraft.getInstance().font, buttonMessage, getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, buttonMessage, getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
                 // VOLUME
-                guiGraphics.drawString(Minecraft.getInstance().font, getComponentValue(), getX() + getWidth() - Minecraft.getInstance().font.width(getComponentValue().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getComponentValue().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
             }
         }
     }

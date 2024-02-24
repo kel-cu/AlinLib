@@ -74,7 +74,7 @@ public class InterfaceUtils {
     }
 
     public static boolean isDoesNotFit(Component message, Number width, Number height){
-        int size = Minecraft.getInstance().font.width(message) + ((height.intValue() - 8) / 2) * 2;
+        int size = AlinLib.MINECRAFT.font.width(message) + ((height.intValue() - 8) / 2) * 2;
         return size > width.intValue();
     }
     public static int DEFAULT_WIDTH(){
@@ -119,7 +119,7 @@ public class InterfaceUtils {
                     if(isHoveredOrFocused){
                         int xS = x + (int)(position * (double)(width - 4));
                         int yS = y+(height - 8) / 2;
-                        guiGraphics.fill(xS, yS, xS+4, yS+Minecraft.getInstance().font.lineHeight, Colors.CLOWNFISH);
+                        guiGraphics.fill(xS, yS, xS+4, yS+AlinLib.MINECRAFT.font.lineHeight, Colors.CLOWNFISH);
                     }
                 }
                 case 1 -> {
@@ -127,7 +127,7 @@ public class InterfaceUtils {
                     if(isHoveredOrFocused){
                         int xS = x + (int)(position * (double)(width - 4));
                         int yS = y+(height - 8) / 2;
-                        guiGraphics.fill(xS, yS, xS+4, yS+Minecraft.getInstance().font.lineHeight, Colors.CLOWNFISH);
+                        guiGraphics.fill(xS, yS, xS+4, yS+AlinLib.MINECRAFT.font.lineHeight, Colors.CLOWNFISH);
                     }
                 }
                 default -> {

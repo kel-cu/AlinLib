@@ -7,6 +7,8 @@ import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
+import ru.kelcuprum.alinlib.AlinLib;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
@@ -28,7 +30,7 @@ public class AlinaToast implements Toast {
         if (builder.type != ToastBuilder.Type.FLAT)
             guiGraphics.fill(0, height() - 1, width(), height(), builder.type.color);
 
-        Font font = toastComponent.getMinecraft().font;
+        Font font = AlinLib.MINECRAFT.font;
 
         List<FormattedCharSequence> list = font.split(builder.message, 125);
         int i = 16777215;

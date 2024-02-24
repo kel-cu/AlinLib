@@ -1,14 +1,12 @@
 package ru.kelcuprum.alinlib.gui.screens;
 
 import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.AlinLibTest;
-import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.ImageWidget;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.ButtonBoolean;
@@ -34,7 +32,6 @@ import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
 public class AlinaDemoScreen {
     private static final ResourceLocation icon = new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/well.png");
-    private static final Component TITLE = Component.translatable("alinlibtest.name");
     private static final Component CONFIGURE_CATEGORY = Component.literal("Configuration widgets");
     private static final Component BASE_CATEGORY = Component.literal("Base widgets");
     private static final Component BOOLEAN = Component.literal("Boolean");
