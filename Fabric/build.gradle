@@ -8,24 +8,8 @@ architectury {
     fabric()
 }
 
-sourceSets {
-    demoClient {
-        compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
-
-        compileClasspath += main.output
-        runtimeClasspath += main.output
-    }
-}
 loom {
     accessWidenerPath = project(":Common").loom.accessWidenerPath
-    runs {
-        demoClient {
-            client()
-            name = "Demo Client"
-            source sourceSets.demoClient
-        }
-    }
 }
 
 configurations {
@@ -43,6 +27,26 @@ dependencies {
 
     common(project(path: ":Common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":Common", configuration: "transformProductionFabric")) { transitive false }
+}
+
+sourceSets {
+    demoClient {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+
+        compileClasspath += main.output
+        runtimeClasspath += main.output
+    }
+}
+
+loom {
+    runs {
+        demoClient {
+            client()
+            name = "Demo Client"
+            source sourceSets.demoClient
+        }
+    }
 }
 
 shadowJar {

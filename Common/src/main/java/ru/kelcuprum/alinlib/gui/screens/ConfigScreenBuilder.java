@@ -15,6 +15,7 @@ public class ConfigScreenBuilder {
     protected InterfaceUtils.DesignType type;
     protected List<AbstractWidget> panelWidgets = new ArrayList<>();
     protected List<AbstractWidget> widgets = new ArrayList<>();
+    protected OnTick onTick;
     protected Screen parent;
 
     public ConfigScreenBuilder(Screen parent) {
@@ -57,6 +58,14 @@ public class ConfigScreenBuilder {
         return this;
     }
     //
+    public ConfigScreenBuilder setOnTick(OnTick onTick){
+        this.onTick = onTick;
+        return this;
+    }
+    public OnTick getOnTick(){
+        return this.onTick;
+    }
+    //
     public ConfigScreenBuilder setParent(Screen parent){
         this.parent = parent;
         return this;
@@ -65,5 +74,9 @@ public class ConfigScreenBuilder {
     public AbstractConfigScreen build() {
         Objects.requireNonNull(this.title, "title == null");
         return new AbstractConfigScreen(this);
+    }
+
+    public interface OnTick {
+        void onTick(ConfigScreenBuilder value);
     }
 }

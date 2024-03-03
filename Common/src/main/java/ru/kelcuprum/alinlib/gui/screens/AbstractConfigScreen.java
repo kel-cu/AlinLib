@@ -112,6 +112,7 @@ public class AbstractConfigScreen extends Screen {
     @Override
     public void tick(){
         if(scroller != null) scroller.onScroll.accept(scroller);
+        if(builder.onTick != null) builder.onTick.onTick(builder);
     }
 
     @Override
@@ -126,7 +127,7 @@ public class AbstractConfigScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f){
         assert this.minecraft != null;
-        InterfaceUtils.renderBackground(guiGraphics, this.minecraft);
+        super.renderBackground(guiGraphics, i, j, f);
         InterfaceUtils.renderLeftPanel(guiGraphics, 130, this.height);
     }
 
