@@ -145,19 +145,17 @@ public class AbstractConfigScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
         if(mouseX <= 130){
-            boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
             if (!scr && scroller_panel != null) {
                 scr = scroller_panel.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
             }
-            return scr;
         } else {
-            boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
             if (!scr && scroller != null) {
                 scr = scroller.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
             }
-            return scr;
         }
+        return scr;
     }
 
     @Override
