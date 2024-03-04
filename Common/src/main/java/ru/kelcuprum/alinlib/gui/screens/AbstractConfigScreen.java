@@ -25,6 +25,7 @@ import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
 public class AbstractConfigScreen extends Screen {
 
     private ConfigureScrolWidget scroller;
+    private ConfigureScrolWidget scroller_panel;
     private final ConfigScreenBuilder builder;
     private DescriptionBox descriptionBox;
     private boolean lastCheck = false;
@@ -38,22 +39,24 @@ public class AbstractConfigScreen extends Screen {
         initPanelButtons();
         initCategory();
     }
-
+    AbstractWidget titleW;
+    AbstractWidget back;
+    AbstractWidget reset;
     protected void initPanelButtons(){
         // -=-=-=-=-=-=-=-
-        addRenderableWidget(new TextBox(10, 15, 110, this.font.lineHeight, this.title, true));
+        titleW = addRenderableWidget(new TextBox(10, 5, 110, 30, this.title, true));
         // -=-=-=-=-=-=-=-
-        this.descriptionBox = new DescriptionBox(10, 20+this.font.lineHeight, 110, height - 55- this.font.lineHeight, Component.empty());
+        this.descriptionBox = new DescriptionBox(10, 40, 110, height - 75, Component.empty());
         this.descriptionBox.visible = false;
         addRenderableWidget(this.descriptionBox);
         // -=-=-=-=-=-=-=-
         // Exit Buttons
         // 85 before reset button
-        addRenderableWidget(new Button(10, height - 30, 85, 20, builder.type, CommonComponents.GUI_BACK, (OnPress) -> {
+        back = addRenderableWidget(new Button(10, height - 30, 85, 20, builder.type, CommonComponents.GUI_BACK, (OnPress) -> {
             assert this.minecraft != null;
             this.minecraft.setScreen(builder.parent);
         }));
-        addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, builder.type, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
+        reset = addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, builder.type, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
             for(AbstractWidget widget : builder.widgets){
                 if(widget instanceof Resetable){
                     ((Resetable) widget).resetValue();
@@ -67,6 +70,31 @@ public class AbstractConfigScreen extends Screen {
                     .show(this.minecraft.getToasts());
             AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
         }));
+        this.scroller_panel = addRenderableWidget(new ConfigureScrolWidget(-8, 0, 4, this.height, Component.empty(), scroller -> {
+            scroller.innerHeight = 5;
+            if(lastCheck){
+                titleW.setY(5);
+                back.setY(height-30);
+                reset.setY(height-30);
+            } else {
+                titleW.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
+                scroller.innerHeight+=titleW.getHeight()+5;
+
+                for(AbstractWidget widget : builder.panelWidgets){
+                    if(widget.visible){
+                        widget.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
+                        scroller.innerHeight += (widget.getHeight()+5);
+                    } else widget.setY(-widget.getHeight());
+                }
+                if(scroller.innerHeight >= height-30){
+                    back.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
+                    reset.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
+                    scroller.innerHeight += (20);
+                }
+            }
+        }));
+        addRenderableWidget(scroller_panel);
+        addRenderableWidgets(builder.panelWidgets);
     }
     protected void initCategory(){
         int width = this.width - 150;
@@ -98,7 +126,6 @@ public class AbstractConfigScreen extends Screen {
         }));
         addRenderableWidget(scroller);
         addRenderableWidgets(builder.widgets);
-        addRenderableWidgets(builder.panelWidgets);
     }
 
     // Добавление виджетов
@@ -112,16 +139,25 @@ public class AbstractConfigScreen extends Screen {
     @Override
     public void tick(){
         if(scroller != null) scroller.onScroll.accept(scroller);
+        if(scroller_panel != null) scroller_panel.onScroll.accept(scroller_panel);
         if(builder.onTick != null) builder.onTick.onTick(builder);
     }
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
-        if (!scr && scroller != null) {
-            scr = scroller.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        if(mouseX <= 130){
+            boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+            if (!scr && scroller_panel != null) {
+                scr = scroller_panel.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+            }
+            return scr;
+        } else {
+            boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+            if (!scr && scroller != null) {
+                scr = scroller.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+            }
+            return scr;
         }
-        return scr;
     }
 
     @Override
