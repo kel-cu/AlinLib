@@ -1,99 +1,57 @@
 plugins {
-    id 'dev.architectury.loom' version '1.4-SNAPSHOT'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
-    id 'maven-publish'
+    id "com.github.johnrengelman.shadow" version "8.1.1" apply false
+    id "architectury-plugin" version "3.4+"
+    id "dev.architectury.loom" version "1.4+" apply false
+    id "io.github.p03w.machete" version "2.+" apply false
 }
 
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
-
-loom {
-    silentMojangMappingsLicense()
-
-    accessWidenerPath = file("src/main/resources/alinlib.accesswidener")
-}
-repositories {
-    mavenCentral()
-    maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
-    maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
+architectury {
+    minecraft = rootProject.minecraft_version
 }
 
-configurations {
-    shade
-}
-
-dependencies {
-    // Minecraft/Fabric libs
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment "org.parchmentmc.data:parchment-${project.minecraft_version}:${project.parchment_version}@zip"
+subprojects {
+    apply plugin: "dev.architectury.loom"
+    apply plugin: "io.github.p03w.machete"
+    loom {
+        silentMojangMappingsLicense()
     }
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-}
-
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.mod_version
-    }
-}
-
-def targetJavaVersion = 17
-tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
-    it.options.encoding = "UTF-8"
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        it.options.release = targetJavaVersion
-    }
-}
-
-// Produce additional distributions
-java {
-    withSourcesJar()
-}
-
-// Produce a fat-jar of all shaded dependencies
-shadowJar {
-    configurations = [project.configurations.shade]
-    destinationDirectory.set(layout.buildDirectory.dir('devlibs'))
-}
-
-/*remapJar {
-    dependsOn tasks.shadowJar
-    inputFile.set(tasks.shadowJar.archiveFile)
-}*/
-
-components.java.withVariantsFromConfiguration(configurations.shadowRuntimeElements) { skip() }
-
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
-    }
-}
-
-// configure the maven publication
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${rootProject.mc_parchment_version}:${rootProject.parchment_version}@zip")
         }
     }
 
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    machete {
+        ignoredTasks.add("shadowJar")
+        ignoredTasks.add("jar")
+    }
+
+}
+
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
+
+    archivesBaseName = rootProject.archives_base_name
+    version = rootProject.mod_version
+    group = rootProject.maven_group
+
     repositories {
-        // Add repositories to publish to here.
-        // Notice: This block does NOT have the same function as the block in the top level.
-        // The repositories here will be used for publishing your artifact, not for
-        // retrieving dependencies.
+        mavenCentral()
+        maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
+        maven { url = "https://maven.neoforged.net/releases/" } // NEOFORGE
+        maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+        options.release.set(17)
+    }
+
+    java {
+        withSourcesJar()
     }
 }

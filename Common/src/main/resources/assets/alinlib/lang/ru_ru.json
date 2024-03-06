@@ -1,0 +1,12 @@
+{
+  "alinlib.editbox.secret": "Секрет :)",
+
+  "alinlib.component.reset": "Сброс",
+  "alinlib.component.reset.toast": "Конфиги категории были сброшены",
+
+  "alinlib.april_fools.white": "У вас спина белая!",
+  "alinlib.april_fools.welcome": "Добро пожаловать в Удивительный Цифровой Интерфейс™",
+  "alinlib.april_fools.clownfish": "Карусель крутится и никогда останавливается.",
+
+  "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"
+}

@@ -1,4 +1,4 @@
-<img width="120pt" src="https://raw.githubusercontent.com/simply-kel/AlinLib/main/src/main/resources/assets/alinlib/icon.png" align="right">
+<img width="120pt" src="https://cdn.kelcuprum.ru/icons/alinlib.png" align="right">
 
 # AlinLib
 Библиотека для облегчения разработки интерфейса, уведомлений и т.д.<br>
@@ -21,10 +21,10 @@ dependencies {
     modImplementation("ru.kelcuprum.alinlib:AlinLib:VERSION");
 }
 ```
+Для указания в fabric.mod.json указывайте ID: `alinlib`
 ## Скриншоты
 ### Интерфейс
-![interface](https://kelcuprum.ru/ass/alinlib/interface.png)
+![interface](https://kelcuprum.ru/ass/alinlib/interface.png?)
 ### Уведомления
-![toast](https://kelcuprum.ru/ass/alinlib/toast.png)
-### Кастомные уведомления
-![custom_toast](https://kelcuprum.ru/ass/alinlib/custom_toast.png)
+![toast](https://kelcuprum.ru/ass/alinlib/toast.png?)
+![custom_toast](https://kelcuprum.ru/ass/alinlib/custom_toast.png?)
