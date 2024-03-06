@@ -17,6 +17,8 @@ public class ConfigScreenBuilder {
     protected List<AbstractWidget> widgets = new ArrayList<>();
     protected OnTick onTick;
     protected Screen parent;
+    protected int yL = 40;
+    protected int yC = 5;
 
     public ConfigScreenBuilder(Screen parent) {
         this(parent, Component.literal("Change me please"));
@@ -46,6 +48,9 @@ public class ConfigScreenBuilder {
     //
     public ConfigScreenBuilder addPanelWidget(AbstractWidget widget){
         widget.setWidth(110);
+        widget.setX(10);
+        widget.setY(yL);
+        yL+=widget.getHeight()+5;
         this.panelWidgets.add(widget);
         return this;
     }
@@ -53,8 +58,21 @@ public class ConfigScreenBuilder {
     public ConfigScreenBuilder addWidget(AbstractWidget widget){
         if(widget instanceof CategoryBox){
             this.widgets.add(widget);
-            this.widgets.addAll(((CategoryBox) widget).getValues());
-        } else this.widgets.add(widget);
+            widget.setX(140);
+            widget.setY(yC);
+            yC+=widget.getHeight()+5;
+            for(AbstractWidget cW : ((CategoryBox) widget).getValues()){
+                this.widgets.add(cW);
+                cW.setX(140);
+                cW.setY(yC);
+                yC+=cW.getHeight()+5;
+            }
+        } else {
+            this.widgets.add(widget);
+            widget.setY(yC);
+            widget.setX(140);
+            yC+=widget.getHeight()+5;
+        }
         return this;
     }
     //
