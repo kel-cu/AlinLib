@@ -15,6 +15,13 @@ public class TextBox extends AbstractWidget implements Description {
     private final boolean isCentred;
     private final OnPress onPress;
 
+    public TextBox(Component label, boolean isCenter){
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, null);
+    }
+    public TextBox(Component label, boolean isCenter, OnPress onPress){
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, onPress);
+    }
+    ///
     public TextBox(int x, int y, Component label, boolean isCenter){
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, null);
     }

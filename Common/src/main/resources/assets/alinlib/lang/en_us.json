@@ -4,5 +4,9 @@
   "alinlib.component.reset": "Reset",
   "alinlib.component.reset.toast": "The category configs have been reset",
 
+  "alinlib.april_fools.white": "Your back is white!",
+  "alinlib.april_fools.welcome": "Welcome to The Amazing Digital Interface™",
+  "alinlib.april_fools.clownfish": "The cackling carousel, it spins & never stops",
+
   "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum"
 }

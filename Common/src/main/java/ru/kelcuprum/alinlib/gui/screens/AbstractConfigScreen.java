@@ -36,6 +36,7 @@ public class AbstractConfigScreen extends Screen {
 
     @Override
     protected void init() {
+        AlinLib.isAprilFool();
         initPanelButtons();
         initCategory();
     }
