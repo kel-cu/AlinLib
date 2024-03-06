@@ -106,6 +106,11 @@ public class EditBoxBuilder {
         this.isColor = true;
         return this;
     }
+    // Value
+    public EditBoxBuilder setValue(String value){
+        this.value = value;
+        return this;
+    }
 
     public EditBoxString build(){
         if(this.config != null && this.configType != null) {

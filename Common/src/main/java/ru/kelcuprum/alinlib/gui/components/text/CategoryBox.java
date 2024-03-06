@@ -17,6 +17,9 @@ public class CategoryBox extends TextBox {
     public final List<AbstractWidget> values = new ArrayList<>();
     private boolean state = true;
 
+    public CategoryBox(Component label) {
+        this(0, 0, label);
+    }
     public CategoryBox(int x, int y, Component label) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label);
     }
