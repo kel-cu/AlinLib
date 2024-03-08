@@ -78,6 +78,12 @@ public class SliderPercentBuilder {
         this.defaultValue = defaultValue;
         return this;
     }
+    //
+    public SelectorBuilder setConfig(Config config, String configType){
+        this.config = config;
+        this.configType = configType;
+        return this;
+    }
 
     public SliderPercent build(){
         if(this.config != null && this.configType != null) return new SliderConfigPercent(x, y, width, height, designType, config, configType, defaultValue, title);

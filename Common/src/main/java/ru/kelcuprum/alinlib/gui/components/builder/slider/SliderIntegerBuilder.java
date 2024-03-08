@@ -88,6 +88,12 @@ public class SliderIntegerBuilder {
         this.defaultValue = defaultValue;
         return this;
     }
+    //
+    public SelectorBuilder setConfig(Config config, String configType){
+        this.config = config;
+        this.configType = configType;
+        return this;
+    }
 
     public SliderInteger build(){
         if(this.config != null && this.configType != null) return new SliderConfigInteger(x, y, width, height, designType, config, configType, defaultValue, min, max, title);
