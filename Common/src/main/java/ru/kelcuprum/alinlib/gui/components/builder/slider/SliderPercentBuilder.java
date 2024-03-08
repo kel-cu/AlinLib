@@ -79,7 +79,7 @@ public class SliderPercentBuilder {
         return this;
     }
     //
-    public SelectorBuilder setConfig(Config config, String configType){
+    public SliderPercentBuilder setConfig(Config config, String configType){
         this.config = config;
         this.configType = configType;
         return this;

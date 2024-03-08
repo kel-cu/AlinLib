@@ -89,7 +89,7 @@ public class SliderIntegerBuilder {
         return this;
     }
     //
-    public SelectorBuilder setConfig(Config config, String configType){
+    public SliderIntegerBuilder setConfig(Config config, String configType){
         this.config = config;
         this.configType = configType;
         return this;
