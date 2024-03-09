@@ -3,100 +3,99 @@ package ru.kelcuprum.alinlib.gui.components.builder.slider;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
-import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
-import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
-import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderInteger;
+import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigDouble;
+import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderDouble;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
-public class SliderIntegerBuilder {
+public class SliderDoubleBuilder {
     protected int x = 0;
     protected int y = 0;
-    protected int min = 0;
-    protected int max = 1;
+    protected double min = 0;
+    protected double max = 1;
 
     protected int width = DEFAULT_WIDTH();
     protected int height = DEFAULT_HEIGHT;
     protected Component title = Component.empty();
     protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
-    protected SliderInteger.OnPress onPress = null;
+    protected SliderDouble.OnPress onPress = null;
     protected Config config;
     protected String configType;
-    protected int defaultValue;
-    public SliderIntegerBuilder(){
+    protected double defaultValue;
+    public SliderDoubleBuilder(){
         this(Component.empty());
     }
-    public SliderIntegerBuilder(Component title){
+    public SliderDoubleBuilder(Component title){
         this(title, null);
     }
-    public SliderIntegerBuilder(Component title, SliderInteger.OnPress onPress){
+    public SliderDoubleBuilder(Component title, SliderDouble.OnPress onPress){
         this.title = title;
         this.onPress = onPress;
     }
     // DesignType
-    public SliderIntegerBuilder setDesignType(InterfaceUtils.DesignType designType){
+    public SliderDoubleBuilder setDesignType(InterfaceUtils.DesignType designType){
         this.designType = designType;
         return this;
     }
     // OnPress
-    public SliderIntegerBuilder setOnPress(SliderInteger.OnPress onPress){
+    public SliderDoubleBuilder setOnPress(SliderDouble.OnPress onPress){
         this.onPress = onPress;
         return this;
     }
     // Title
-    public SliderIntegerBuilder setTitle(Component title){
+    public SliderDoubleBuilder setTitle(Component title){
         this.title = title;
         return this;
     }
     // Position
-    public SliderIntegerBuilder setPosition(int x, int y){
+    public SliderDoubleBuilder setPosition(int x, int y){
         setX(x).setY(y);
         return this;
     }
-    public SliderIntegerBuilder setX(int x){
+    public SliderDoubleBuilder setX(int x){
         this.x = x;
         return this;
     }
-    public SliderIntegerBuilder setY(int y){
+    public SliderDoubleBuilder setY(int y){
         this.y = y;
         return this;
     }
     // Size
-    public SliderIntegerBuilder setSize(int width, int height){
+    public SliderDoubleBuilder setSize(int width, int height){
         setWidth(width).setHeight(height);
         return this;
     }
-    public SliderIntegerBuilder setWidth(int width){
+    public SliderDoubleBuilder setWidth(int width){
         this.width = width;
         return this;
     }
-    public SliderIntegerBuilder setHeight(int height){
+    public SliderDoubleBuilder setHeight(int height){
         this.height = height;
         return this;
     }
     //
-    public SliderIntegerBuilder setMin(int min){
+    public SliderDoubleBuilder setMin(double min){
         this.min = min;
         return this;
     }
-    public SliderIntegerBuilder setMax(int max){
+    public SliderDoubleBuilder setMax(double max){
         this.max = max;
         return this;
     }
-    public SliderIntegerBuilder setDefaultValue(int defaultValue){
+    public SliderDoubleBuilder setDefaultValue(double defaultValue){
         this.defaultValue = defaultValue;
         return this;
     }
     //
-    public SliderIntegerBuilder setConfig(Config config, String configType){
+    public SliderDoubleBuilder setConfig(Config config, String configType){
         this.config = config;
         this.configType = configType;
         return this;
     }
 
-    public SliderInteger build(){
-        if(this.config != null && this.configType != null) return new SliderConfigInteger(x, y, width, height, designType, config, configType, defaultValue, min, max, title);
-        return new SliderInteger(x, y, width, height, designType, defaultValue, min, max, title, onPress);
+    public SliderDouble build(){
+        if(this.config != null && this.configType != null) return new SliderConfigDouble(x, y, width, height, designType, config, configType, defaultValue, min, max, title);
+        return new SliderDouble(x, y, width, height, designType, defaultValue, min, max, title, onPress);
     }
 }

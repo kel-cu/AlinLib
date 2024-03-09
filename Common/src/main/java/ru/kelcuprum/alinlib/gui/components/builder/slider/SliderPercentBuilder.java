@@ -74,7 +74,7 @@ public class SliderPercentBuilder {
         this.height = height;
         return this;
     }
-    public SliderPercentBuilder setDefaultValue(int defaultValue){
+    public SliderPercentBuilder setDefaultValue(double defaultValue){
         this.defaultValue = defaultValue;
         return this;
     }
