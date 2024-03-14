@@ -111,6 +111,11 @@ public class EditBoxBuilder {
         this.value = value;
         return this;
     }
+    // Secret
+    public EditBoxBuilder setSecret(boolean secret){
+        this.secret = secret;
+        return this;
+    }
 
     public EditBoxString build(){
         if(this.config != null && this.configType != null) {
