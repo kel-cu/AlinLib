@@ -20,9 +20,9 @@ public class ButtonSpriteBuilder {
 
     protected int textureWidth = DEFAULT_WIDTH();
     protected int textureHeight = DEFAULT_HEIGHT;
-    protected ResourceLocation icon = new ResourceLocation("alinlib", "textures/gui/widget/buttons");
+    protected ResourceLocation icon;
     protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
-    protected Button.OnPress onPress = null;
+    protected Button.OnPress onPress;
     public ButtonSpriteBuilder(ResourceLocation icon){
         this(icon, null);
     }

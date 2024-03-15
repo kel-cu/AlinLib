@@ -18,9 +18,9 @@ public class SliderIntegerBuilder {
 
     protected int width = DEFAULT_WIDTH();
     protected int height = DEFAULT_HEIGHT;
-    protected Component title = Component.empty();
+    protected Component title;
     protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
-    protected SliderInteger.OnPress onPress = null;
+    protected SliderInteger.OnPress onPress;
     protected Config config;
     protected String configType;
     protected int defaultValue;

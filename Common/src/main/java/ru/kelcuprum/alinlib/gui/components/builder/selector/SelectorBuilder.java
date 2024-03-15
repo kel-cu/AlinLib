@@ -17,12 +17,12 @@ public class SelectorBuilder {
     protected int width = DEFAULT_WIDTH();
     protected int height = DEFAULT_HEIGHT;
     protected int color = InterfaceUtils.Colors.CLOWNFISH;
-    protected Component title = Component.empty();
+    protected Component title;
     protected String[] list;
     protected int defaultInt;
     protected String defaultString;
     protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
-    protected SelectorButton.OnPress onPress = null;
+    protected SelectorButton.OnPress onPress;
     protected Config config;
     protected String configType;
     public SelectorBuilder(){

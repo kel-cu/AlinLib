@@ -14,9 +14,9 @@ public class ButtonBuilder {
     protected int width = DEFAULT_WIDTH();
     protected int height = DEFAULT_HEIGHT;
     protected int color = InterfaceUtils.Colors.CLOWNFISH;
-    protected Component title = Component.empty();
+    protected Component title;
     protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
-    protected Button.OnPress onPress = null;
+    protected Button.OnPress onPress;
     public ButtonBuilder(){
         this(Component.empty());
     }

@@ -17,9 +17,9 @@ public class SliderPercentBuilder {
 
     protected int width = DEFAULT_WIDTH();
     protected int height = DEFAULT_HEIGHT;
-    protected Component title = Component.empty();
+    protected Component title;
     protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
-    protected SliderPercent.OnPress onPress = null;
+    protected SliderPercent.OnPress onPress;
     protected Config config;
     protected String configType;
     protected double defaultValue;

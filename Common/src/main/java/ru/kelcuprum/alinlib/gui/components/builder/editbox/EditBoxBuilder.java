@@ -27,10 +27,10 @@ public class EditBoxBuilder {
     protected int height = DEFAULT_HEIGHT;
     protected boolean secret = false;
     protected String value = "";
-    protected Component title = Component.empty();
+    protected Component title;
     protected Font font = MINECRAFT.font;
     protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
-    protected Consumer<String> responder = null;
+    protected Consumer<String> responder;
     protected Config config;
     protected String configType;
     protected Localization localization;
