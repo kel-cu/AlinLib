@@ -122,6 +122,14 @@ public class Localization {
     public static Component getText(String key){
         return Component.translatable(key);
     }
+    /**
+     * Получение локализации через функцию Minecraft, но в виде String
+     * @param key
+     * @return
+     */
+    public static String getStringText(String key){
+        return toString(getText(key));
+    }
 
     /**
      * Перевод String в MutableText
