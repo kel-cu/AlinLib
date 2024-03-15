@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.sliders.base;
 
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
@@ -58,7 +59,7 @@ public class SliderDouble extends SliderPercent {
     }
     @Override
     public Component getComponentValue(){
-        return Component.literal(displayValue + typeInteger);
+        return Component.literal(Localization.getRounding(displayValue) + typeInteger);
     }
 
     @Override
