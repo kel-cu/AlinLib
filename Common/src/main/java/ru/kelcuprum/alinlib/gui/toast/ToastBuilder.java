@@ -20,6 +20,7 @@ public class ToastBuilder {
     protected ResourceLocation icon;
     protected PlayerSkin playerIcon;
     protected Type type = Type.INFO;
+    protected Number color;
     protected int displayTime = 5000;
     protected Function<Toast.Visibility, Toast.Visibility> visibilityVisitor;
 
@@ -66,6 +67,11 @@ public class ToastBuilder {
 
     public ToastBuilder setType(Type type) {
         this.type = type;
+        return this;
+    }
+
+    public ToastBuilder setType(int type) {
+        this.color = type;
         return this;
     }
 

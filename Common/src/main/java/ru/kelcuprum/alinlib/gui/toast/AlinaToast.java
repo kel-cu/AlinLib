@@ -27,7 +27,8 @@ public class AlinaToast implements Toast {
         final int colorBackground = (int) (255.0F * fc);
 
         guiGraphics.fill(0, 0, width(), height() - 1, colorBackground / 2 << 24);
-        if (builder.type != ToastBuilder.Type.FLAT)
+        if(builder.color != null) guiGraphics.fill(0, height() - 1, width(), height(), builder.color.intValue());
+        else if (builder.type != ToastBuilder.Type.FLAT)
             guiGraphics.fill(0, height() - 1, width(), height(), builder.type.color);
         else guiGraphics.fill(0, height() - 1, width(), height(), colorBackground / 2 << 24);
 
