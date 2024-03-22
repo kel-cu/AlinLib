@@ -14,8 +14,8 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public class ToastBuilder {
-    protected Component title;
-    protected Component message;
+    protected Component title = Component.empty();
+    protected Component message = Component.empty();
     protected ItemStack itemIcon;
     protected ResourceLocation icon;
     protected PlayerSkin playerIcon;
