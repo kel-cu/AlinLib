@@ -29,26 +29,6 @@ dependencies {
     shadowCommon(project(path: ":Common", configuration: "transformProductionFabric")) { transitive false }
 }
 
-sourceSets {
-    demoClient {
-        compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
-
-        compileClasspath += main.output
-        runtimeClasspath += main.output
-    }
-}
-
-loom {
-    runs {
-        demoClient {
-            client()
-            name = "Demo Client"
-            source sourceSets.demoClient
-        }
-    }
-}
-
 shadowJar {
     configurations = [project.configurations.shadowCommon]
     archiveClassifier.set "dev-shadow"

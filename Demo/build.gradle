@@ -1,50 +1,41 @@
 plugins {
     id "com.github.johnrengelman.shadow"
 }
-archivesBaseName = rootProject.archives_base_name + "-neoforge"
+archivesBaseName = rootProject.archives_base_name + "-demo"
 
 architectury {
     platformSetupLoomIde()
-    neoForge()
+    fabric()
 }
+
 loom {
     accessWidenerPath = project(":Common").loom.accessWidenerPath
 }
+
 configurations {
     common
     shadowCommon
     compileClasspath.extendsFrom common
     runtimeClasspath.extendsFrom common
-    developmentNeoForge.extendsFrom common
+    developmentFabric.extendsFrom common
 }
 
 dependencies {
-    neoForge "net.neoforged:neoforge:${rootProject.forge_version}"
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
     common(project(path: ":Common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":Common", configuration: "transformProductionNeoForge")) { transitive = false }
-}
-test {
-    useJUnitPlatform()
-}
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("META-INF/mods.toml") {
-        expand "version": project.version
-    }
+    shadowCommon(project(path: ":Common", configuration: "transformProductionFabric")) { transitive false }
 }
 
 shadowJar {
-    exclude "fabric.mod.json"
-
     configurations = [project.configurations.shadowCommon]
     archiveClassifier.set "dev-shadow"
 }
 
 remapJar {
-    atAccessWideners.add(loom.accessWidenerPath.get().asFile.name)
+    injectAccessWidener = true
 
     inputFile.set shadowJar.archiveFile
     dependsOn shadowJar
@@ -61,3 +52,18 @@ sourcesJar {
     from commonSources.archiveFile.map { zipTree(it) }
 }
 
+test {
+    useJUnitPlatform()
+}
+
+processResources {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    inputs.property "version", project.version
+
+    from "${project.rootDir}/LICENSE"
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+
+}

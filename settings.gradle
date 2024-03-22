@@ -15,4 +15,5 @@ plugins {
 include 'Common'
 include 'Fabric'
 include 'NeoForge'
+include 'Demo'
 

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "AlinLib (Test)",
   "id": "alinlibtest",
-  "version": "0.0-demo",
+  "version": "${version}",
   "description": "Demo mod for AlinLib",
   "authors": [
     "Kel Cuprum (Im_Kel)"
