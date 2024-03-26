@@ -130,6 +130,9 @@ public class AlinaDemoScreen {
                 .addPanelWidget(
                         new Button(10, 115, type, GITHUB, (OnPress) -> Util.getPlatform().openUri("https://github.com/simply-kel/AlinLib/"))
                 )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal("AAAAAAAA"), (OnPress) -> new ToastBuilder().setTitle(Component.literal("AAAAAAAAAAAA")).setMessage(Component.literal("DELTARUNE SNOWGRAVE SONG \"Want Some Fun\" (feat. @peanut3423, @Tohru0chan & @Skitzy_VA)")).show(AlinLib.MINECRAFT.getToasts()))
+                )
                 ///
                 .addWidget(
                         new CategoryBox(140, 5, CONFIGURE_CATEGORY)
