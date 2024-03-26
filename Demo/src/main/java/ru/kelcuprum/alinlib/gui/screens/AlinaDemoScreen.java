@@ -4,6 +4,7 @@ import net.minecraft.Util;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.AlinLibTest;
@@ -131,7 +132,40 @@ public class AlinaDemoScreen {
                         new Button(10, 115, type, GITHUB, (OnPress) -> Util.getPlatform().openUri("https://github.com/simply-kel/AlinLib/"))
                 )
                 .addPanelWidget(
-                        new Button(10, 115, type, Component.literal("AAAAAAAA"), (OnPress) -> new ToastBuilder().setTitle(Component.literal("AAAAAAAAAAAA")).setMessage(Component.literal("DELTARUNE SNOWGRAVE SONG \"Want Some Fun\" (feat. @peanut3423, @Tohru0chan & @Skitzy_VA)")).show(AlinLib.MINECRAFT.getToasts()))
+                        new Button(10, 115, type, Component.literal("AAAAAAAA"), (OnPress) -> new ToastBuilder().setTitle(Component.literal("AAAAAAAAAAAA")).setMessage(Component.literal(":) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)")).show(AlinLib.MINECRAFT.getToasts()))
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal("AAAAAAAA v2"), (OnPress) -> new ToastBuilder().setIcon(Items.BARRIER).setTitle(Component.literal("AAAAAAAAAAAA")).setMessage(Component.literal(":) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)")).show(AlinLib.MINECRAFT.getToasts()))
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
+                )
+                .addPanelWidget(
+                        new Button(10, 115, type, Component.literal(":)"), (OnPress) -> AlinLib.MINECRAFT.stop())
                 )
                 ///
                 .addWidget(

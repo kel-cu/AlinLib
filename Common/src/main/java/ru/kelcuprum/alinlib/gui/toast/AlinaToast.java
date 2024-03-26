@@ -33,7 +33,7 @@ public class AlinaToast implements Toast {
         List<FormattedCharSequence> texts = new ObjectArrayList<>();
         texts.addAll(AlinLib.MINECRAFT.font.split(builder.title, textWidth()));
         texts.addAll(AlinLib.MINECRAFT.font.split(builder.message, textWidth()));
-        return texts.size() == 2 ? 32 : 14+(10*(texts.size()));
+        return texts.size() == 2 ? 32 : 12+(11*(texts.size()));
     }
 
     @Override
