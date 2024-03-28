@@ -6,6 +6,9 @@ import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.kelcuprum.alinlib.api.EventRegisters;
+import ru.kelcuprum.alinlib.api.clients.lifecycle.ClientStartEvent;
+import ru.kelcuprum.alinlib.api.clients.lifecycle.ClientStopEvent;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
@@ -20,8 +23,10 @@ public class AlinLib {
     public static Minecraft MINECRAFT = Minecraft.getInstance();
     
     public static void onInitializeClient() {
-        log("This world goes round and round like a carousel in a circus.");
-        log("Maybe the world is a circus?)");
+        EventRegisters.registerEvent(new ClientStopEvent(minecraft -> {
+            log("This world goes round and round like a carousel in a circus.");
+            log("Maybe the world is a circus?)");
+        }));
     }
     public static void isAprilFool(){
         if(LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 1){

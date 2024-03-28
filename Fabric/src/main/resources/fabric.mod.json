@@ -24,6 +24,9 @@
       "ru.kelcuprum.alinlib.fabric.AlinLibFabric"
     ]
   },
+  "mixins": [
+    "alinlib.mixin.json"
+  ],
   "accessWidener": "alinlib.accesswidener",
   "icon": "assets/alinlib/icon.png",
   "depends": {

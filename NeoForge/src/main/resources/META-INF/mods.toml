@@ -15,6 +15,9 @@ credits = "dima_dencep"
 description = "A library to facilitate mod development by Kel Cuprum"
 logoFile = "assets/alinlib/icon_forge.png"
 
+[[mixins]]
+config = "alinlib.mixin.json"
+
 [[dependencies.alinlib]]
 modId = "neoforge"
 type = "required"
@@ -25,6 +28,6 @@ side = "BOTH"
 [[dependencies.alinlib]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.20,)"
+versionRange = "[1.20.2,)"
 ordering = "NONE"
 side = "BOTH"
