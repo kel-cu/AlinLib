@@ -7,6 +7,7 @@ public class AlinLibFabric implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        AlinLib.isFabricLoader = true;
         AlinLib.onInitializeClient();
     }
 }

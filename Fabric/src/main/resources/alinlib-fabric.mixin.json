@@ -4,10 +4,6 @@
   "package": "ru.kelcuprum.alinlib.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "events.client.GuiMixin",
-    "events.client.MinecraftMixin",
-    "keybinding.KeyBindingAccessor",
-    "keybinding.OptionsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

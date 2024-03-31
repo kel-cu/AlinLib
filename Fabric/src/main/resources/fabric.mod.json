@@ -25,7 +25,8 @@
     ]
   },
   "mixins": [
-    "alinlib.mixin.json"
+    "alinlib.mixin.json",
+    "alinlib-fabric.mixin.json"
   ],
   "accessWidener": "alinlib.accesswidener",
   "icon": "assets/alinlib/icon.png",
