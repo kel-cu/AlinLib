@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 
@@ -15,7 +16,7 @@ public class ButtonBuilder {
     protected int height = DEFAULT_HEIGHT;
     protected int color = InterfaceUtils.Colors.CLOWNFISH;
     protected Component title;
-    protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
+    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
     protected Button.OnPress onPress;
     public ButtonBuilder(){
         this(Component.empty());

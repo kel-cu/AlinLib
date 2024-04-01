@@ -8,5 +8,16 @@
   "alinlib.april_fools.welcome": "Добро пожаловать в Удивительный Цифровой Интерфейс™",
   "alinlib.april_fools.clownfish": "Карусель крутится и никогда останавливается.",
 
+  "alinlib.date.time": "HH:mm",
+  "alinlib.time.morning": "Утро",
+  "alinlib.time.day": "День",
+  "alinlib.time.evening": "Вечер",
+  "alinlib.time.night": "Ночь",
+  "alinlib.north": "Север",
+  "alinlib.south": "Юг",
+  "alinlib.west": "Запад",
+  "alinlib.east": "Восток",
+  "alinlib.unknown": "Неизвестно",
+
   "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"
 }

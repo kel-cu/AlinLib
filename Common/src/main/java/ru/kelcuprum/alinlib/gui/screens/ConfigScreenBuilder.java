@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib.gui.screens;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 
@@ -24,7 +25,7 @@ public class ConfigScreenBuilder {
         this(parent, Component.literal("Change me please"));
     }
     public ConfigScreenBuilder(Screen parent, Component title) {
-        this(parent, title, InterfaceUtils.DesignType.ALINA);
+        this(parent, title, AlinLib.getDefaultDesignType());
     }
     public ConfigScreenBuilder(Screen parent, Component title, InterfaceUtils.DesignType type){
         this.parent = parent;

@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib.gui.components.buttons;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 
@@ -15,7 +16,7 @@ public class ButtonSprite extends Button {
     // DEFAULT_WIDTH, DEFAULT_HEIGHT
 
     public ButtonSprite(int x, int y, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, icon, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), icon, label, onPress);
     }
     public ButtonSprite(int x, int y, InterfaceUtils.DesignType type, ResourceLocation icon, Component label, OnPress onPress) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, icon, label, onPress);
@@ -35,7 +36,7 @@ public class ButtonSprite extends Button {
     }
     //////
     public ButtonSprite(int x, int y, int width, int height, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, icon, label, onPress);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), icon, label, onPress);
     }
     public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, ResourceLocation icon, Component label, OnPress onPress) {
         this(x, y, width, height, type, InterfaceUtils.Colors.SEADRIVE, icon, label, onPress);

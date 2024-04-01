@@ -2,6 +2,7 @@ package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
@@ -21,7 +22,7 @@ public class ButtonSpriteBuilder {
     protected int textureWidth = DEFAULT_WIDTH();
     protected int textureHeight = DEFAULT_HEIGHT;
     protected ResourceLocation icon;
-    protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
+    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
     protected Button.OnPress onPress;
     public ButtonSpriteBuilder(ResourceLocation icon){
         this(icon, null);

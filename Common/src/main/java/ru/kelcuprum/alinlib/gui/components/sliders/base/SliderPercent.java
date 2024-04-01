@@ -17,7 +17,7 @@ public class SliderPercent extends AbstractSliderButton implements Description {
     public OnPress onPress;
 
     public SliderPercent(int x, int y, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, 0, label, null);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), 0, label, null);
     }
     public SliderPercent(int x, int y, InterfaceUtils.DesignType type, Component label) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, 0, label, null);
@@ -27,7 +27,7 @@ public class SliderPercent extends AbstractSliderButton implements Description {
     }
     //
     public SliderPercent(int x, int y, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, 0, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), 0, label, onPress);
     }
     public SliderPercent(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, 0, label, onPress);
@@ -37,7 +37,7 @@ public class SliderPercent extends AbstractSliderButton implements Description {
     }
     //
     public SliderPercent(int x, int y, int width, int height, Component label) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, 0, label, null);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), 0, label, null);
     }
     public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label) {
         this(x, y, width, height, type, 0, label, null);
@@ -47,7 +47,7 @@ public class SliderPercent extends AbstractSliderButton implements Description {
     }
     //
     public SliderPercent(int x, int y, int width, int height, Component label, OnPress onPress) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, 0, label, onPress);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), 0, label, onPress);
     }
     public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
         this(x, y, width, height, type, 0, label, onPress);

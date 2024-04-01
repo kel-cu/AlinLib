@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
@@ -17,7 +18,7 @@ public class ButtonBooleanBuilder {
     protected int width = DEFAULT_WIDTH();
     protected int height = DEFAULT_HEIGHT;
     protected Component title;
-    protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
+    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
     protected ButtonBoolean.OnPress onPress;
     protected Config config;
     protected String configType;

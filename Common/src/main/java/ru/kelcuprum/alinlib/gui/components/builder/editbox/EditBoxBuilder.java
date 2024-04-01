@@ -2,6 +2,7 @@ package ru.kelcuprum.alinlib.gui.components.builder.editbox;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
@@ -29,7 +30,7 @@ public class EditBoxBuilder {
     protected String value = "";
     protected Component title;
     protected Font font = MINECRAFT.font;
-    protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
+    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
     protected Consumer<String> responder;
     protected Config config;
     protected String configType;

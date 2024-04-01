@@ -6,16 +6,20 @@ import net.minecraft.network.chat.Component;
 
 import net.minecraft.util.GsonHelper;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.config.parser.StarScript;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Localization {
-    private Parser parser;
+    public static DecimalFormat DF = new DecimalFormat("#.##");
+    public static Parser defaultParser = (s) -> StarScript.run(StarScript.compile(s));
+    private Parser parser = defaultParser;
     private static final int codes = 23;
     private static final Map<String, String> formatCodes = IntStream.range(0, codes)
             .boxed()

@@ -22,10 +22,10 @@ public class EditBoxString extends EditBox implements Description {
 
     ///
     public EditBoxString(int i, int j, boolean secret, Component component) {
-        this(AlinLib.MINECRAFT.font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, "", InterfaceUtils.DesignType.ALINA, component, null);
+        this(AlinLib.MINECRAFT.font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, "", AlinLib.getDefaultDesignType(), component, null);
     }
     public EditBoxString(int i, int j, Component component) {
-        this(AlinLib.MINECRAFT.font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, "", InterfaceUtils.DesignType.ALINA, component, null);
+        this(AlinLib.MINECRAFT.font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, "", AlinLib.getDefaultDesignType(), component, null);
     }
     public EditBoxString(int i, int j, boolean secret, InterfaceUtils.DesignType type, Component component) {
         this(AlinLib.MINECRAFT.font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, "", type, component, null);
@@ -36,12 +36,12 @@ public class EditBoxString extends EditBox implements Description {
 
     // NO FONT
     public EditBoxString(int i, int j, boolean secret, String value, Component component, Consumer<String> responder) {
-        this(AlinLib.MINECRAFT.font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(AlinLib.MINECRAFT.font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, value, AlinLib.getDefaultDesignType(), component, responder);
     }
 
 
     public EditBoxString(int i, int j, String value, Component component, Consumer<String> responder) {
-        this(AlinLib.MINECRAFT.font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(AlinLib.MINECRAFT.font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, value, AlinLib.getDefaultDesignType(), component, responder);
     }
 
     public EditBoxString(int i, int j, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
@@ -53,12 +53,12 @@ public class EditBoxString extends EditBox implements Description {
     }
     // FONT
     public EditBoxString(Font font, int i, int j, boolean secret, String value, Component component, Consumer<String> responder) {
-        this(font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, secret, value, AlinLib.getDefaultDesignType(), component, responder);
     }
 
 
     public EditBoxString(Font font, int i, int j, String value, Component component, Consumer<String> responder) {
-        this(font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(font, i, j, DEFAULT_WIDTH(), DEFAULT_HEIGHT, false, value, AlinLib.getDefaultDesignType(), component, responder);
     }
 
     public EditBoxString(Font font, int i, int j, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
@@ -73,10 +73,10 @@ public class EditBoxString extends EditBox implements Description {
 
 
     public EditBoxString(int i, int j, int k, int l, boolean secret, Component component) {
-        this(AlinLib.MINECRAFT.font, i, j, k, l, secret, "", InterfaceUtils.DesignType.ALINA, component, null);
+        this(AlinLib.MINECRAFT.font, i, j, k, l, secret, "", AlinLib.getDefaultDesignType(), component, null);
     }
     public EditBoxString(int i, int j, int k, int l, Component component) {
-        this(AlinLib.MINECRAFT.font, i, j, k, l, false, "", InterfaceUtils.DesignType.ALINA, component, null);
+        this(AlinLib.MINECRAFT.font, i, j, k, l, false, "", AlinLib.getDefaultDesignType(), component, null);
     }
     public EditBoxString(int i, int j, int k, int l, boolean secret, InterfaceUtils.DesignType type, Component component) {
         this(AlinLib.MINECRAFT.font, i, j, k, l, secret, "", type, component, null);
@@ -87,12 +87,12 @@ public class EditBoxString extends EditBox implements Description {
 
     // NO FONT
     public EditBoxString(int i, int j, int k, int l, boolean secret, String value, Component component, Consumer<String> responder) {
-        this(AlinLib.MINECRAFT.font, i, j, k, l, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(AlinLib.MINECRAFT.font, i, j, k, l, secret, value, AlinLib.getDefaultDesignType(), component, responder);
     }
 
 
     public EditBoxString(int i, int j, int k, int l, String value, Component component, Consumer<String> responder) {
-        this(AlinLib.MINECRAFT.font, i, j, k, l, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(AlinLib.MINECRAFT.font, i, j, k, l, false, value, AlinLib.getDefaultDesignType(), component, responder);
     }
 
     public EditBoxString(int i, int j, int k, int l, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {
@@ -104,12 +104,12 @@ public class EditBoxString extends EditBox implements Description {
     }
     // FONT
     public EditBoxString(Font font, int i, int j, int k, int l, boolean secret, String value, Component component, Consumer<String> responder) {
-        this(font, i, j, k, l, secret, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(font, i, j, k, l, secret, value, AlinLib.getDefaultDesignType(), component, responder);
     }
 
 
     public EditBoxString(Font font, int i, int j, int k, int l, String value, Component component, Consumer<String> responder) {
-        this(font, i, j, k, l, false, value, InterfaceUtils.DesignType.ALINA, component, responder);
+        this(font, i, j, k, l, false, value, AlinLib.getDefaultDesignType(), component, responder);
     }
 
     public EditBoxString(Font font, int i, int j, int k, int l, String value, InterfaceUtils.DesignType type, Component component, Consumer<String> responder) {

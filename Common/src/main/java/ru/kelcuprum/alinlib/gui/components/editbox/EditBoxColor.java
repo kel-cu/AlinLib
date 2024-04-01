@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib.gui.components.editbox;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
@@ -19,7 +20,7 @@ public class EditBoxColor extends EditBoxString implements Resetable {
 
 
     public EditBoxColor(int x, int y, Config config, String typeConfig, int defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, label);
     }
 
     public EditBoxColor(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, Component label) {
@@ -30,7 +31,7 @@ public class EditBoxColor extends EditBoxString implements Resetable {
 
 
     public EditBoxColor(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, Component label) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, label);
     }
 
     public EditBoxColor(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, Component label) {
