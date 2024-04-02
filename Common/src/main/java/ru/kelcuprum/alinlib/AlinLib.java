@@ -28,8 +28,10 @@ public class AlinLib {
     public static void onInitializeClient() {
         StarScript.init();
         ClientLifecycleEvents.CLIENT_STARTED.register((client) -> AlinLib.log(String.format("Client started. MC Version: %s", client.getLaunchedVersion())));
-        ClientLifecycleEvents.CLIENT_FULL_STARTED.register((client) -> AlinLib.log(String.format("Client full started. MC Version: %s", client.getLaunchedVersion())));
-        GuiRenderEvents.RENDER.register((guiGraphics, partialTick) -> guiGraphics.drawString(MINECRAFT.font, "Hello, im Alina!", 5, 5, -1, true));
+        ClientLifecycleEvents.CLIENT_FULL_STARTED.register((client) -> {
+            AlinLib.log(String.format("Client full started. MC Version: %s", client.getLaunchedVersion()));
+            isAprilFool();
+        });
         ClientLifecycleEvents.CLIENT_STOPPING.register((client) -> {
             log("This world goes round and round like a carousel in a circus.");
             log("Maybe the world is a circus?)");
