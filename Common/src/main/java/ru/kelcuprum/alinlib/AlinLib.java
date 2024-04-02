@@ -23,10 +23,13 @@ public class AlinLib {
     public static Config bariumConfig = new Config("config/AlinLib/config.json");
     public static Localization localization = new Localization("alinlib","config/AlinLib/lang");
     public static Minecraft MINECRAFT = Minecraft.getInstance();
+    protected static long start = 0;
     
     public static void onInitializeClient() {
         StarScript.init();
-        ClientLifecycleEvents.CLIENT_STARTED.register((client) -> AlinLib.log(String.format("Client started. MC Version: %s", client.getLaunchedVersion())));
+        ClientLifecycleEvents.CLIENT_STARTED.register((client) -> {
+            AlinLib.log(String.format("Client started. MC Version: %s", client.getLaunchedVersion()));
+        });
         ClientLifecycleEvents.CLIENT_FULL_STARTED.register((client) -> {
             AlinLib.log(String.format("Client full started. MC Version: %s", client.getLaunchedVersion()));
             isAprilFool();
