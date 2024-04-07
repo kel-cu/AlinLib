@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.util.GsonHelper;
+import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
 
@@ -100,7 +101,7 @@ public class Localization {
             Files.createDirectories(localizationFile.getParent());
             Files.writeString(localizationFile, JSONLocalization.toString());
         } catch (Exception e){
-            e.printStackTrace();
+            AlinLib.log(e.getLocalizedMessage(), Level.ERROR);
         }
     }
     public void setParser(Parser parser){
@@ -115,35 +116,19 @@ public class Localization {
         return text;
     }
 
-    /**
-     * Получение локализации через функцию Minecraft
-     * @param key
-     * @return
-     */
     public static Component getText(String key){
         return Component.translatable(key);
     }
-    /**
-     * Получение локализации через функцию Minecraft, но в виде String
-     * @param key
-     * @return
-     */
+
     public static String getStringText(String key){
         return toString(getText(key));
     }
 
-    /**
-     * Перевод String в MutableText
-     * @return MutableText
-     */
+
     public static Component toText(String text){
         return Component.literal(text);
     }
 
-    /**
-     * Перевод Text в String
-     * @return MutableText
-     */
     public static String toString(Component text){
         return text.getString();
     }
