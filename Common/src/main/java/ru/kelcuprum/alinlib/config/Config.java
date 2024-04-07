@@ -2,7 +2,6 @@ package ru.kelcuprum.alinlib.config;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.GsonHelper;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -110,8 +109,7 @@ public class Config {
      */
     public void save() {
         if (!_isFile) return;
-        Minecraft mc = Minecraft.getInstance();
-        final Path configFile = mc.gameDirectory.toPath().resolve(_filePath);
+        final Path configFile = Path.of(_filePath);
 
         try {
             Files.createDirectories(configFile.getParent());
@@ -126,8 +124,7 @@ public class Config {
      */
     public void load() {
         if (!_isFile) return;
-        Minecraft mc = Minecraft.getInstance();
-        final Path configFile = mc.gameDirectory.toPath().resolve(_filePath);
+        final Path configFile = Path.of(_filePath);
         try {
             _jsonConfiguration = configFile.toFile().exists() ? GsonHelper.parse(Files.readString(configFile)) : new JsonObject();
         } catch (Exception e) {

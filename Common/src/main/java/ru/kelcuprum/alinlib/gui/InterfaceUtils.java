@@ -101,9 +101,7 @@ public class InterfaceUtils {
                     guiGraphics.fill(x, y, x + width, y + height-1, background / 2 << 24);
                     guiGraphics.fill(x, y+height-1, x + width, y + height, color);
                 }
-                case 1 -> {
-                    guiGraphics.fill(x, y, x + width, y + height, background / 2 << 24);
-                }
+                case 1 -> guiGraphics.fill(x, y, x + width, y + height, background / 2 << 24);
                 default -> guiGraphics.blitSprite(SPRITES.get(active, isHoveredOrFocused), x, y, width, height);
             }
         }

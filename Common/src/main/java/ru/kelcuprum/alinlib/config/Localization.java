@@ -1,7 +1,6 @@
 package ru.kelcuprum.alinlib.config;
 
 import com.google.gson.JsonObject;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.util.GsonHelper;
@@ -46,8 +45,7 @@ public class Localization {
     }
     public JsonObject getJSONFile(){
         try {
-            Minecraft CLIENT = AlinLib.MINECRAFT;
-            Path localizationFile = CLIENT.gameDirectory.toPath().resolve(String.format("%s/%s.json", filePath, getCodeLocalization()));//new File(CLIENT.gameDirectory + filePath + getCodeLocalization() + ".json");
+            Path localizationFile = Path.of(String.format("%s/%s.json", filePath, getCodeLocalization()));//new File(CLIENT.gameDirectory + filePath + getCodeLocalization() + ".json");
             if (localizationFile.toFile().exists()) {
                 return GsonHelper.parse(Files.readString(localizationFile));
             } else {
@@ -98,8 +96,7 @@ public class Localization {
         try {
             JsonObject JSONLocalization = getJSONFile();
             JSONLocalization.addProperty(type, text);
-            Minecraft CLIENT = AlinLib.MINECRAFT;
-            Path localizationFile = CLIENT.gameDirectory.toPath().resolve(String.format("%s/%s.json", filePath, getCodeLocalization()));
+            Path localizationFile = Path.of(String.format("%s/%s.json", filePath, getCodeLocalization()));
             Files.createDirectories(localizationFile.getParent());
             Files.writeString(localizationFile, JSONLocalization.toString());
         } catch (Exception e){
