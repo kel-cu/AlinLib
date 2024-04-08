@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +34,7 @@ public class AlinLib {
         ClientLifecycleEvents.CLIENT_FULL_STARTED.register((client) -> {
             AlinLib.log(String.format("Client full started. MC Version: %s", client.getLaunchedVersion()));
             isAprilFool();
+            isHBKel();
         });
         ClientLifecycleEvents.CLIENT_STOPPING.register((client) -> {
             log("This world goes round and round like a carousel in a circus.");
@@ -52,6 +54,15 @@ public class AlinLib {
                     .setTitle(Component.literal("AlinLib"))
                     .setMessage(Component.translatable("alinlib.april_fools."+type))
                     .setType(ToastBuilder.Type.WARN)
+                    .show(MINECRAFT.getToasts());
+        }
+    }
+    public static void isHBKel(){
+        if(LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 8){
+            new ToastBuilder()
+                    .setIcon(Items.CAKE)
+                    .setTitle(Component.literal("AlinLib"))
+                    .setMessage(Component.translatable("alinlib.hb"))
                     .show(MINECRAFT.getToasts());
         }
     }
