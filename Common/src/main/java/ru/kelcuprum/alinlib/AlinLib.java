@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib;
 
+import meteordevelopment.starscript.value.ValueMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -8,6 +9,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
+import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
@@ -20,15 +22,17 @@ import java.util.Random;
 public class AlinLib {
     public static boolean isFabricLoader = false;
     public static final String MODID = "alinlib";
+    public static String VERSION = "alinlib";
     public static final Logger LOG = LogManager.getLogger("AlinaLib");
     public static Config bariumConfig = new Config("config/AlinLib/config.json");
     public static Localization localization = new Localization("alinlib","config/AlinLib/lang");
     public static Minecraft MINECRAFT = Minecraft.getInstance();
-    protected static long start = 0;
+    public static StarScript starScript;
     
     public static void onInitializeClient() {
-        StarScript.init();
+        starScript = new StarScript();
         ClientLifecycleEvents.CLIENT_STARTED.register((client) -> {
+            LocalizationEvents.DEFAULT_PARSER_INIT.invoker().onParserInit(starScript);
             AlinLib.log(String.format("Client started. MC Version: %s", client.getLaunchedVersion()));
         });
         ClientLifecycleEvents.CLIENT_FULL_STARTED.register((client) -> {
@@ -40,6 +44,10 @@ public class AlinLib {
             log("This world goes round and round like a carousel in a circus.");
             log("Maybe the world is a circus?)");
         });
+        LocalizationEvents.DEFAULT_PARSER_INIT.register(parser -> parser.ss.set("alinlib", new ValueMap()
+                .set("id", MODID)
+                .set("version", VERSION))
+        );
     }
     public static void isAprilFool(){
         if(LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 1){

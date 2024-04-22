@@ -22,6 +22,9 @@
   "entrypoints": {
     "client": [
       "ru.kelcuprum.alinlib.fabric.AlinLibFabric"
+    ],
+    "modmenu": [
+      "ru.kelcuprum.alinlib.fabric.gui.ModMenuIntegration"
     ]
   },
   "mixins": [

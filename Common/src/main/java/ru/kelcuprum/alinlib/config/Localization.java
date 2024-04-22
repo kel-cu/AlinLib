@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
 
 public class Localization {
     public static DecimalFormat DF = new DecimalFormat("#.##");
-    public static Parser defaultParser = (s) -> StarScript.run(StarScript.compile(s));
+    public static Parser defaultParser = (s) -> AlinLib.starScript.run(AlinLib.starScript.compile(s));
     private Parser parser = defaultParser;
     private static final int codes = 23;
     private static final Map<String, String> formatCodes = IntStream.range(0, codes)

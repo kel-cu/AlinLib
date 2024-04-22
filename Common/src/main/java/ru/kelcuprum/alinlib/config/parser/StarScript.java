@@ -19,11 +19,10 @@ import ru.kelcuprum.alinlib.config.parser.info.World;
 import java.text.SimpleDateFormat;
 
 public class StarScript {
-    public static Starscript ss = new Starscript();
+    public Starscript ss = new Starscript();
 
-    public static void init() {
+    public StarScript() {
         StandardLib.init(ss);
-
         // General
         ss.set("minecraft", new ValueMap()
                 .set("version", SharedConstants.getCurrentVersion().getName())
@@ -66,7 +65,7 @@ public class StarScript {
     }
     // Helpers
 
-    public static Script compile(String source) {
+    public Script compile(String source) {
         Parser.Result result = Parser.parse(source);
 
         if (result.hasErrors()) {
@@ -77,7 +76,7 @@ public class StarScript {
         return Compiler.compile(result);
     }
 
-    public static Section runSection(Script script, StringBuilder sb) {
+    public Section runSection(Script script, StringBuilder sb) {
         try {
             return ss.run(script, sb);
         }
@@ -86,7 +85,7 @@ public class StarScript {
             return null;
         }
     }
-    public static String run(Script script, StringBuilder sb) {
+    public String run(Script script, StringBuilder sb) {
         try {
             Section section = runSection(script, sb);
             return section == null ? "" : section.toString();
@@ -96,7 +95,7 @@ public class StarScript {
         }
     }
 
-    public static String run(Script script) {
+    public String run(Script script) {
         return run(script, new StringBuilder());
     }
 }
