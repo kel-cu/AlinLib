@@ -107,7 +107,7 @@ public class AbstractConfigScreen extends Screen {
             for(AbstractWidget widget : builder.widgets){
                 if(widget.visible){
                     if(widget instanceof Description){
-                        if(widget.isHovered() && ((Description) widget).getDescription() != null && this.descriptionBox != null){
+                        if(widget.isHoveredOrFocused() && ((Description) widget).getDescription() != null && this.descriptionBox != null){
                             descriptionEnable = true;
                             this.descriptionBox.setDescription(((Description) widget).getDescription());
                         }
@@ -119,7 +119,8 @@ public class AbstractConfigScreen extends Screen {
             if(this.lastCheck != descriptionEnable){
                 lastCheck = descriptionEnable;
                 for(AbstractWidget widget : builder.panelWidgets){
-                    widget.setX(lastCheck ? -200 : 10);
+//                    widget.setX(lastCheck ? -200 : 10);
+                    widget.visible = !lastCheck;
                 }
                 this.descriptionBox.visible = lastCheck;
             }

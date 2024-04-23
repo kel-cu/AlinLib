@@ -27,26 +27,6 @@ public final class ClientTickEvents {
         }
     });
 
-    /**
-     * Called at the start of a ClientWorld's tick.
-     */
-    public static final Event<StartLevelTick> START_LEVEL_TICK = EventFactory.createArrayBacked(StartLevelTick.class, callbacks -> world -> {
-        for (StartLevelTick callback : callbacks) {
-            callback.onStartTick(world);
-        }
-    });
-
-    /**
-     * Called at the end of a ClientWorld's tick.
-     *
-     * <p>End of world tick may be used to start async computations for the next tick.
-     */
-    public static final Event<EndLevelTick> END_LEVEL_TICK = EventFactory.createArrayBacked(EndLevelTick.class, callbacks -> world -> {
-        for (EndLevelTick callback : callbacks) {
-            callback.onEndTick(world);
-        }
-    });
-
     @FunctionalInterface
     public interface StartTick {
         void onStartTick(Minecraft client);
@@ -55,15 +35,5 @@ public final class ClientTickEvents {
     @FunctionalInterface
     public interface EndTick {
         void onEndTick(Minecraft client);
-    }
-
-    @FunctionalInterface
-    public interface StartLevelTick {
-        void onStartTick(ClientLevel world);
-    }
-
-    @FunctionalInterface
-    public interface EndLevelTick {
-        void onEndTick(ClientLevel world);
     }
 }

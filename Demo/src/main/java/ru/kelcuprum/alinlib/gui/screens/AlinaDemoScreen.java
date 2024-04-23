@@ -94,7 +94,7 @@ public class AlinaDemoScreen {
         ConfigScreenBuilder screen = new ConfigScreenBuilder(parent)
                 .setTitle(Component.translatable("alinlibtest.name"))
                 .setType(InterfaceUtils.DesignType.VANILLA)
-                .setOnTick((onTick) -> AlinLib.log(String.format("Tick on %s, count panel components: %s, count category components: %s", onTick.title, onTick.panelWidgets.size(), onTick.widgets.size())))
+//                .setOnTick((onTick) -> AlinLib.log(String.format("Tick on %s, count panel components: %s, count category components: %s", onTick.title, onTick.panelWidgets.size(), onTick.widgets.size())))
                 ///
                 .addPanelWidget(
                         new Button(10, 40, InterfaceUtils.DesignType.VANILLA, Component.literal("DesignType.VANILLA"), (OnPress) -> {
