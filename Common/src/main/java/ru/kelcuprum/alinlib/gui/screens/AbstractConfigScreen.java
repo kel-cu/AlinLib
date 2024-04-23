@@ -119,7 +119,6 @@ public class AbstractConfigScreen extends Screen {
             if(this.lastCheck != descriptionEnable){
                 lastCheck = descriptionEnable;
                 for(AbstractWidget widget : builder.panelWidgets){
-//                    widget.setX(lastCheck ? -200 : 10);
                     widget.visible = !lastCheck;
                 }
                 this.descriptionBox.visible = lastCheck;
