@@ -12,7 +12,7 @@ import ru.kelcuprum.alinlib.AlinLib;
 
 public class InterfaceUtils {
     private static final WidgetSprites SPRITES = new WidgetSprites(new ResourceLocation("widget/button"), new ResourceLocation("widget/button_disabled"), new ResourceLocation("widget/button_highlighted"));
-    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation("textures/gui/options_background.png");
+    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation("textures/block/dirt.png");
 
     // BACKGROUND
     public static void renderBackground(GuiGraphics guiGraphics, Minecraft minecraft){

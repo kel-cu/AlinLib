@@ -87,8 +87,8 @@ public class Button extends AbstractButton implements Description {
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         if(InterfaceUtils.isDoesNotFit(getMessage(), getWidth(), getHeight())) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
-        else if(isCentred) InterfaceUtils.drawCenteredString(guiGraphics, AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, type == InterfaceUtils.DesignType.VANILLA);
-        else guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff, type == InterfaceUtils.DesignType.VANILLA);
+        else if(isCentred) InterfaceUtils.drawCenteredString(guiGraphics, AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
+        else guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
     }
 
     // Мелочи
