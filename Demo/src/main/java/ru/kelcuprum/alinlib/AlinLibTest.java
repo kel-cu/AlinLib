@@ -10,8 +10,6 @@ import ru.kelcuprum.alinlib.config.Localization;
 
 public class AlinLibTest implements ClientModInitializer {
     public static final String MODID = "alinlibtest";
-    public static Localization localization = new Localization(MODID, "config/AlinLib/lang/");
-    public static Minecraft MINECRAFT = Minecraft.getInstance();
 
     @Override
     public void onInitializeClient() {
@@ -24,7 +22,7 @@ public class AlinLibTest implements ClientModInitializer {
             AlinLib.log(String.format("Client stopped. MC Version: %s", client.getLaunchedVersion()));
         });
         GuiRenderEvents.RENDER.register((guiGraphics, partialTick) -> {
-            AlinLib.log("Gui ticked?");
+            guiGraphics.drawString(AlinLib.MINECRAFT.font, "Hello, world!", 5, 5, -1, true);
         });
     }
 }

@@ -17,6 +17,7 @@ import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Random;
 
 public class AlinLib {
@@ -26,6 +27,26 @@ public class AlinLib {
     public static final Logger LOG = LogManager.getLogger("AlinaLib");
     public static Config bariumConfig = new Config("config/AlinLib/config.json");
     public static Localization localization = new Localization("alinlib","config/AlinLib/lang");
+    public static HashMap<String, Double> funnyCoordinates = new HashMap<>();
+    public static double getFunnyValueCoordinate(String server, String world){
+        String info =  server + "-" + world;
+        if(funnyCoordinates.containsKey(info)) return funnyCoordinates.get(info);
+        else {
+            double value = 0;
+            while(true){
+                double r = Math.random();
+                int i = Math.random() < 0.5 ? -1 : 1;
+                double m= Math.random() * 10;
+                value = r*i*m;//Math.random();
+                if((value > -1.25 && value < -0.75 ) || (value > 0.75 && value < 1.5)){
+                    funnyCoordinates.put(info, value);
+                    log(info+": "+value);
+                    break;
+                }
+            }
+            return value;
+        }
+    }
     public static Minecraft MINECRAFT = Minecraft.getInstance();
     public static StarScript starScript;
     
