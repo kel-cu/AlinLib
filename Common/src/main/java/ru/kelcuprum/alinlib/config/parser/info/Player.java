@@ -55,8 +55,7 @@ public class Player {
     public static String getX(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return "-";
         double x = AlinLib.MINECRAFT.getCameraEntity().getX();
-        if(AlinLib.bariumConfig.getBoolean("FUNNY.PWGOOD_MOD", false)){
-//            int i = (int) (x-10000*AlinLib.getFunnyValueCoordinate((AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName()));
+        if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false)){
             x*=AlinLib.getFunnyValueCoordinate((AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName());
         }
         return Localization.getRounding(x, !AlinLib.bariumConfig.getBoolean("USE_EXTENDED_COORDINATES", false));
@@ -64,17 +63,12 @@ public class Player {
     public static String getY(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return "-";
         double y = AlinLib.MINECRAFT.getCameraEntity().getY();
-
-//        if(AlinLib.bariumConfig.getBoolean("FUNNY.PWGOOD_MOD", false)){
-//            y*=AlinLib.getFunnyValueCoordinate((AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName());
-//        }
         return Localization.getRounding(y, !AlinLib.bariumConfig.getBoolean("USE_EXTENDED_COORDINATES", false));
     }
     public static String getZ(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return "-";
         double z = AlinLib.MINECRAFT.getCameraEntity().getZ();
-        if(AlinLib.bariumConfig.getBoolean("FUNNY.PWGOOD_MOD", false)){
-//            int i = (int) (z-z*A);
+        if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false)){
             z*=AlinLib.getFunnyValueCoordinate((AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName());
         }
         return Localization.getRounding(z, !AlinLib.bariumConfig.getBoolean("USE_EXTENDED_COORDINATES", false));
@@ -82,7 +76,7 @@ public class Player {
     public static String getDirection(boolean oneSymbol){
         if(AlinLib.MINECRAFT.player == null) return "-";
         Direction direction = AlinLib.MINECRAFT.player.getDirection();
-        if(AlinLib.bariumConfig.getBoolean("FUNNY.PWGOOD_MOD", false)){
+        if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false)){
             double r = Math.random();
             direction = r < 0.25 ? Direction.NORTH : r < 0.5 ? Direction.SOUTH : r < 0.75 ? Direction.WEST : Direction.EAST;
         }

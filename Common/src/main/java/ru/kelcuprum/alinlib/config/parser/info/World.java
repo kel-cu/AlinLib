@@ -26,7 +26,6 @@ public class World {
     public static String getTime(){
         if(AlinLib.MINECRAFT.level == null) return "";
         long daytime = AlinLib.MINECRAFT.level.getDayTime()+6000;
-
         int hours=(int) (daytime / 1000)%24;
         int minutes = (int) ((daytime % 1000)*60/1000);
         int day = (int) daytime / 1000 / 24;

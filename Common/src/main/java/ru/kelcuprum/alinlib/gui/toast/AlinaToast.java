@@ -40,9 +40,11 @@ public class AlinaToast implements Toast {
     public @NotNull Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long l) {
         guiGraphics.fill(0, 0, width(), height() - 1, 0xB3000000);
         if(builder.color != null) guiGraphics.fill(0, height() - 1, width(), height(), builder.color.intValue());
-        else if (builder.type != ToastBuilder.Type.FLAT)
-            guiGraphics.fill(0, height() - 1, width(), height(), builder.type.color);
-        else guiGraphics.fill(0, height() - 1, width(), height(), 0xB3000000);
+        else if (builder.type != ToastBuilder.Type.FLAT) {
+            guiGraphics.fill(0, height() - 1, width(), height(), 0xB3000000);
+            if(AlinLib.bariumConfig.getBoolean("TOAST.TIMELINE")) guiGraphics.fill(0, height() - 1, (int) (width()*(l/(double)builder.displayTime)), height(), builder.type.color);
+            else guiGraphics.fill(0, height() - 1, width(), height(), builder.type.color);
+        } else guiGraphics.fill(0, height() - 1, width(), height(), 0xB3000000);
 
         List<FormattedCharSequence> texts = new ObjectArrayList<>();
         texts.addAll(AlinLib.MINECRAFT.font.split(builder.title, textWidth()));
@@ -52,14 +54,11 @@ public class AlinaToast implements Toast {
             guiGraphics.drawString(AlinLib.MINECRAFT.font, text, builder.hasIcon() ? 30 : 8, y, -1, false);
             y+=11;
         }
-//        guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.title, builder.hasIcon() ? 30 : 8, builder.hasIcon() ? 7 : 8, -1, false);
-//        guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.message, builder.hasIcon() ? 30 : 8, builder.hasIcon() ? 18 : 19, -1, false);
         if (builder.hasIcon()) {
             if (builder.icon != null) guiGraphics.blit(builder.icon, 8, 8, 0.0F, 0.0F, 16, 16, 16, 16);
             else if (builder.itemIcon != null) guiGraphics.renderFakeItem(builder.itemIcon, 8, 8);
             else if (builder.playerIcon != null) PlayerFaceRenderer.draw(guiGraphics, builder.playerIcon, 8, 8, 16);
         }
-
         Visibility visibility = (double) l >= builder.displayTime * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
 
         if (builder.visibilityVisitor != null) visibility = builder.visibilityVisitor.apply(visibility);

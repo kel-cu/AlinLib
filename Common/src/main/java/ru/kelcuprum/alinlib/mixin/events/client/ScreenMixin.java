@@ -14,13 +14,13 @@ import ru.kelcuprum.alinlib.api.events.client.ScreenEvents;
 public class ScreenMixin {
     @Inject(method = "render", at = @At("HEAD"))
     private void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
-        if(AlinLib.MINECRAFT.options.hideGui) return;
+        if (AlinLib.MINECRAFT.options.hideGui) return;
         ScreenEvents.SCREEN_RENDER.invoker().onScreenRender((Screen) (Object) this, guiGraphics, mouseX, mouseY, partialTick);
     }
 
-    @Inject(method = "keyPressed", at = @At("HEAD"))
+    @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = true)
     private void keyPressed(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
-        if(AlinLib.MINECRAFT.options.hideGui) return;
-        ScreenEvents.KEY_PRESS.invoker().onKeyPressed((Screen) (Object) this, keyCode, scanCode, modifiers);
+        if (AlinLib.MINECRAFT.options.hideGui) return;
+        ScreenEvents.KEY_PRESS.invoker().onKeyPressed((Screen) (Object) this, keyCode, scanCode, modifiers, cir);
     }
 }

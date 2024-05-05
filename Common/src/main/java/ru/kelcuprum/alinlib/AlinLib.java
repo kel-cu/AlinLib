@@ -32,7 +32,7 @@ public class AlinLib {
         String info =  server + "-" + world;
         if(funnyCoordinates.containsKey(info)) return funnyCoordinates.get(info);
         else {
-            double value = 0;
+            double value;
             while(true){
                 double r = Math.random();
                 int i = Math.random() < 0.5 ? -1 : 1;

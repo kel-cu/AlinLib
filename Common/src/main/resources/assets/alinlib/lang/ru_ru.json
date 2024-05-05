@@ -11,6 +11,8 @@
 
   "alinlib.config": "Конфиги",
   "alinlib.config.default_design_type": "Стандартный тип дизайна",
+  "alinlib.config.streamer.stealth": "Режим Стримера",
+  "alinlib.config.toast.timeline": "Временная шкала в уведомлений",
   "alinlib.localization": "Локализация",
   "alinlib.localization.date.time": "Формат времени",
   "alinlib.localization.unknown": "Неизвестно",

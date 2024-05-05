@@ -12,6 +12,8 @@
 
   "alinlib.config": "Configs",
   "alinlib.config.default_design_type": "Default Design Type",
+  "alinlib.config.streamer.stealth": "Streamer mode",
+  "alinlib.config.toast.timeline": "Toast timeline",
   "alinlib.localization": "Localizations",
   "alinlib.localization.date.time": "Time format",
   "alinlib.localization.unknown": "Unknown",

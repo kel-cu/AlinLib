@@ -17,7 +17,8 @@ public class ConfigScreen {
 
         builder.addWidget(new TextBox(Component.translatable("alinlib.config"), true))
                 .addWidget(new SelectorBuilder(Component.translatable("alinlib.config.default_design_type")).setValue(1).setList(new String[]{"Alina", "Flat", "Vanilla"}).setConfig(AlinLib.bariumConfig, "DEFAULT_DESIGN_TYPE").build())
-//                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.funny.pwgood_mod"), false).setConfig(AlinLib.bariumConfig, "FUNNY.PWGOOD_MOD").build())
+//                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.streamer.stealth"), false).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH").build())
+                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.toast.timeline"), true).setConfig(AlinLib.bariumConfig, "TOAST.TIMELINE").build())
         ;
         return builder.build();
     }

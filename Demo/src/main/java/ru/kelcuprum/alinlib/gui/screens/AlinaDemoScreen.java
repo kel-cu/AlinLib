@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib.gui.screens;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.AlinLibTest;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
@@ -13,6 +14,7 @@ import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.slider.*;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 public class AlinaDemoScreen {
     private static final ResourceLocation icon = new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png");
@@ -36,7 +38,7 @@ public class AlinaDemoScreen {
                 .addWidget(new TextBox(Component.literal("TextBox"), true))
                 .addWidget(new CategoryBox(Component.literal("CategoryBox"))
                         .addValue(new ImageWidget(0,0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_WIDTH(), icon, Component.empty())))
-                .addWidget(new ButtonBuilder(Component.literal("ButtonBuilder")).build())
+                .addWidget(new ButtonBuilder(Component.literal("ButtonBuilder"), (s) -> new ToastBuilder().setIcon(Items.SALMON).setTitle(Component.literal("AlinLib")).setMessage(Component.literal("Good morning, Mr. Sunfish!")).show(AlinLib.MINECRAFT.getToasts())).build())
                 .addWidget(new ButtonBooleanBuilder(Component.literal("ButtonBooleanBuilder"), true).build())
                 .addWidget(new ButtonSpriteBuilder(icon).setSize(20, 20).build())
                 .addWidget(new EditBoxBuilder(Component.literal("EditBoxBuilder")).build())
