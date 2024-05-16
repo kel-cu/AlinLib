@@ -32,7 +32,6 @@ public class ButtonSprite extends Button {
     //
     public ButtonSprite(int x, int y, InterfaceUtils.DesignType type, int color, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, icon, iconWidth, iconHeight, label, onPress);
-
     }
     //////
     public ButtonSprite(int x, int y, int width, int height, ResourceLocation icon, Component label, OnPress onPress) {
@@ -59,6 +58,9 @@ public class ButtonSprite extends Button {
     @Override
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         guiGraphics.blit(this.icon, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), iconWidth, iconHeight);
+        if(!getMessage().getString().isEmpty() && isHovered()){
+            guiGraphics.renderTooltip(AlinLib.MINECRAFT.font, getMessage(), mouseX, mouseY);
+        }
     }
     public ButtonSprite setIcon(ResourceLocation icon){
         this.icon = icon;
