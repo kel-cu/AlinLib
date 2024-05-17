@@ -23,11 +23,11 @@ public class ButtonSpriteBuilder {
     protected int textureHeight = DEFAULT_HEIGHT;
     protected ResourceLocation icon;
     protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
-    protected Button.OnPress onPress;
+    protected ButtonSprite.OnPress onPress;
     public ButtonSpriteBuilder(ResourceLocation icon){
         this(icon, null);
     }
-    public ButtonSpriteBuilder(ResourceLocation icon, Button.OnPress onPress){
+    public ButtonSpriteBuilder(ResourceLocation icon, ButtonSprite.OnPress onPress){
         this.icon = icon;
         this.onPress = onPress;
     }
@@ -47,7 +47,7 @@ public class ButtonSpriteBuilder {
         return this;
     }
     // OnPress
-    public ButtonSpriteBuilder setOnPress(Button.OnPress onPress){
+    public ButtonSpriteBuilder setOnPress(ButtonSprite.OnPress onPress){
         this.onPress = onPress;
         return this;
     }
