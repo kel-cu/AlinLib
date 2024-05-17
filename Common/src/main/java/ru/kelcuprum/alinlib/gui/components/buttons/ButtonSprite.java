@@ -83,7 +83,7 @@ public class ButtonSprite extends Button {
     }
 
     public interface OnPress {
-        void onPress(ButtonSprite button);
+        void onPress(ButtonSprite buttonSprite);
     }
 
     protected Component description;

@@ -27,5 +27,5 @@ side = "BOTH"
 [[dependencies.alinlib]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.20.2,)"
+versionRange = "[1.20.5,)"
 side = "BOTH"
