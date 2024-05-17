@@ -21,11 +21,13 @@ config = "alinlib.mixin.json"
 [[dependencies.alinlib]]
 modId = "neoforge"
 type = "required"
-versionRange = "*"
+versionRange = "[20.6.63-beta,]"
+ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.alinlib]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.20.5,)"
+ordering = "NONE"
 side = "BOTH"
