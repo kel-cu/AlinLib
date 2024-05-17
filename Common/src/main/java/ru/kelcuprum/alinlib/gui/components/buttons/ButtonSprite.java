@@ -13,6 +13,7 @@ import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 public class ButtonSprite extends Button {
     private ResourceLocation icon;
     private final int iconWidth, iconHeight;
+    protected OnPress onPress;
     // DEFAULT_WIDTH, DEFAULT_HEIGHT
 
     public ButtonSprite(int x, int y, ResourceLocation icon, Component label, OnPress onPress) {
@@ -50,7 +51,8 @@ public class ButtonSprite extends Button {
 
     //
     public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
-        super(x, y, width, height, type, color, label, onPress);
+        super(x, y, width, height, type, color, label, null);
+        this.onPress = onPress;
         this.icon = icon;
         this.iconWidth = iconWidth;
         this.iconHeight = iconHeight;
@@ -66,7 +68,16 @@ public class ButtonSprite extends Button {
         this.icon = icon;
         return this;
     }
-
+    @Override
+    public void onPress() {
+        if(this.onPress != null) {
+            this.onPress.onPress(this);
+            setFocused(false);
+        }
+    }
+    public interface OnPress {
+        void onPress(Button button);
+    }
 
     protected Component description;
     public ButtonSprite setDescription(Component description){
