@@ -68,6 +68,12 @@ public class ButtonSprite extends Button {
         this.icon = icon;
         return this;
     }
+
+    public ButtonSprite setOnPress(OnPress onPress) {
+        this.onPress = onPress;
+        return this;
+    }
+
     @Override
     public void onPress() {
         if(this.onPress != null) {
@@ -75,8 +81,9 @@ public class ButtonSprite extends Button {
             setFocused(false);
         }
     }
+
     public interface OnPress {
-        void onPress(Button button);
+        void onPress(ButtonSprite button);
     }
 
     protected Component description;
