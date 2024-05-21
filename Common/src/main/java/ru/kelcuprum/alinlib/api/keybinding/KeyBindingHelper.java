@@ -31,4 +31,20 @@ public final class KeyBindingHelper {
     public static InputConstants.Key getBoundKeyOf(KeyMapping KeyMapping) {
         return ((KeyBindingAccessor) KeyMapping).alinlib_getBoundKey();
     }
+
+    public static KeyMapping registerKeyMapping(String name, InputConstants.Type type, int key, String category){
+        return registerKeyMapping(new KeyMapping(
+                name,
+                type,
+                key,
+                category
+        ));
+    }
+    public static KeyMapping registerKeyMapping(String name, int key, String category){
+        return registerKeyMapping(new KeyMapping(
+                name,
+                key,
+                category
+        ));
+    }
 }
