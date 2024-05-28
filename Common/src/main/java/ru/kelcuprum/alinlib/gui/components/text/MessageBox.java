@@ -83,7 +83,7 @@ public class MessageBox extends AbstractWidget implements Description {
         for(FormattedCharSequence text : list){
             if(isCentred) guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
             else guiGraphics.drawString(AlinLib.MINECRAFT.font, text, getX()+6, getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
-                l++;
+            l++;
         }
     }
     @Override
