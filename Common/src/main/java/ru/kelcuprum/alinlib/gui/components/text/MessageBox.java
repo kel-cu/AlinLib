@@ -21,43 +21,43 @@ public class MessageBox extends AbstractWidget implements Description {
     private final InterfaceUtils.DesignType type;
 
     public MessageBox(Component label){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, null);
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, AlinLib.getDefaultDesignType(), null);
     }
     public MessageBox(Component label, OnPress onPress){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, onPress);
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, AlinLib.getDefaultDesignType(), onPress);
     }
     public MessageBox(Component label, InterfaceUtils.DesignType type, OnPress onPress){
         this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, type, onPress);
     }
     ///
     public MessageBox(Component label, boolean isCenter){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, null);
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, AlinLib.getDefaultDesignType(), null);
     }
     public MessageBox(Component label, boolean isCenter, OnPress onPress){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, onPress);
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, AlinLib.getDefaultDesignType(), onPress);
     }
     public MessageBox(Component label, boolean isCenter, InterfaceUtils.DesignType type, OnPress onPress){
         this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, type, onPress);
     }
     ///
     public MessageBox(int x, int y, Component label, boolean isCenter){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, null);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, AlinLib.getDefaultDesignType(), null);
     }
     public MessageBox(int x, int y, Component label, boolean isCenter, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, AlinLib.getDefaultDesignType(), onPress);
     }
     public MessageBox(int x, int y, Component label, boolean isCenter, InterfaceUtils.DesignType type, OnPress onPress){
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, type, onPress);
     }
     ///
     public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter){
-        this(x, y, width, height, label, isCenter, null);
+        this(x, y, width, height, label, isCenter, AlinLib.getDefaultDesignType(), null);
     }
     public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter, OnPress onPress) {
         this(x, y, width, height, label, isCenter, AlinLib.getDefaultDesignType(), onPress);
     }
     public MessageBox(int x, int y, int width, int height, Component label, InterfaceUtils.DesignType type, boolean isCenter){
-        this(x, y, width, height, label, isCenter, null);
+        this(x, y, width, height, label, isCenter, type, null);
     }
 
     public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter, InterfaceUtils.DesignType type, OnPress onPress){
