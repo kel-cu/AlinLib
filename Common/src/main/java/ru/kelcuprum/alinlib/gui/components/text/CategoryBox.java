@@ -49,6 +49,7 @@ public class CategoryBox extends TextBox {
     public CategoryBox changeState(){
         return changeState(!state);
     }
+
     public CategoryBox changeState(boolean state){
         this.state = state;
         for (AbstractWidget widget : values) {

@@ -75,10 +75,12 @@ public class ButtonSpriteBuilder {
         return this;
     }
     public ButtonSpriteBuilder setWidth(int width){
+        if(this.width == textureWidth) this.textureWidth = width;
         this.width = width;
         return this;
     }
     public ButtonSpriteBuilder setHeight(int height){
+        if(this.height == textureHeight) this.textureHeight = height;
         this.height = height;
         return this;
     }

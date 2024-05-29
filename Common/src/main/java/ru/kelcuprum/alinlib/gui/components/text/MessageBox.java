@@ -7,6 +7,7 @@ import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
 
 import java.util.List;
@@ -17,12 +18,16 @@ import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 public class MessageBox extends AbstractWidget implements Description {
     private final boolean isCentred;
     private final MessageBox.OnPress onPress;
+    private final InterfaceUtils.DesignType type;
 
     public MessageBox(Component label){
         this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, null);
     }
     public MessageBox(Component label, OnPress onPress){
         this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, onPress);
+    }
+    public MessageBox(Component label, InterfaceUtils.DesignType type, OnPress onPress){
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, type, onPress);
     }
     ///
     public MessageBox(Component label, boolean isCenter){
@@ -31,6 +36,9 @@ public class MessageBox extends AbstractWidget implements Description {
     public MessageBox(Component label, boolean isCenter, OnPress onPress){
         this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, onPress);
     }
+    public MessageBox(Component label, boolean isCenter, InterfaceUtils.DesignType type, OnPress onPress){
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, type, onPress);
+    }
     ///
     public MessageBox(int x, int y, Component label, boolean isCenter){
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, null);
@@ -38,14 +46,25 @@ public class MessageBox extends AbstractWidget implements Description {
     public MessageBox(int x, int y, Component label, boolean isCenter, OnPress onPress){
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, onPress);
     }
+    public MessageBox(int x, int y, Component label, boolean isCenter, InterfaceUtils.DesignType type, OnPress onPress){
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, type, onPress);
+    }
     ///
     public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter){
         this(x, y, width, height, label, isCenter, null);
     }
-    public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter, OnPress onPress){
+    public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter, OnPress onPress) {
+        this(x, y, width, height, label, isCenter, AlinLib.getDefaultDesignType(), onPress);
+    }
+    public MessageBox(int x, int y, int width, int height, Component label, InterfaceUtils.DesignType type, boolean isCenter){
+        this(x, y, width, height, label, isCenter, null);
+    }
+
+    public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter, InterfaceUtils.DesignType type, OnPress onPress){
         super(x, y, width, height, label);
         this.isCentred = isCenter;
         this.onPress = onPress;
+        this.type = type;
         this.setActive(this.onPress != null);
     }
 
@@ -66,7 +85,9 @@ public class MessageBox extends AbstractWidget implements Description {
     public void setPosition(int x, int y) {
         super.setPosition(x, y);
     }
-    public void onPress() {}
+    public void onPress() {
+        if(onPress != null) this.onPress.onPress(this);
+    }
 
     @Override
     public void setMessage(Component component) {
@@ -74,10 +95,20 @@ public class MessageBox extends AbstractWidget implements Description {
     }
         @Override
     public int getHeight(){
-        return 21+((AlinLib.MINECRAFT.font.lineHeight+3)*(AlinLib.MINECRAFT.font.split(getMessage(), width).size()-1));
+        this.height = 8+(AlinLib.MINECRAFT.font.lineHeight+3)*(AlinLib.MINECRAFT.font.split(getMessage(), width-12).size());
+        return this.height;
     }
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
+    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        if (visible) {
+            if(onPress != null) renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
+            renderText(guiGraphics, mouseX, mouseY, partialTicks);
+        }
+    }
+    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
+        if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), 0xFFFFFFFF);
+    }
+    public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(getMessage(), width-12);
         int l = 0;
         for(FormattedCharSequence text : list){
