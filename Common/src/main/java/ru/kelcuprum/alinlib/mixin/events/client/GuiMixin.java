@@ -11,7 +11,7 @@ import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 
 @Mixin(value = Gui.class)
 public class GuiMixin {
-    @Inject(method = "render", at = @At("HEAD"))
+    @Inject(method = "render", at = @At("RETURN"))
     private void render(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
         if(AlinLib.MINECRAFT.options.hideGui) return;
         GuiRenderEvents.RENDER.invoker().onRender(guiGraphics, partialTick);

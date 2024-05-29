@@ -61,15 +61,16 @@ public class DescriptionBox extends AbstractWidget{
 //    }
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-        List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(this.description, width);
+        List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(this.description, width-12);
+        guiGraphics.fill(getX(), getY(), getX()+width, getY()+height, 0x75000000);
         int l = 0;
         for(FormattedCharSequence text : list){
             if(getHeight() > ((AlinLib.MINECRAFT.font.lineHeight+3)*(l+2))) {
-                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX()+(getWidth()/2), getY() + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
+                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
                 l++;
             } else {
 //                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, getX(), getY() + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
-                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, "...", getX()+(getWidth()/2), getY() + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
+                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, "...", getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
                 break;
             };
         }

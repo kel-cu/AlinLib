@@ -39,7 +39,8 @@ public class AlinaDemoScreen {
                 .addPanelWidget(new ButtonBuilder(Component.literal("Button #8"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
                 .addPanelWidget(new ButtonBuilder(Component.literal("Button #9"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
 
-                .addWidget(new TextBox(Component.literal("TextBox"), true))
+                .addWidget(new TextBox(Component.literal("TextBox"), true)
+                        .setDescription(Component.literal("Hello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\n")))
                 .addWidget(new ButtonBuilder(Component.literal("ButtonBuilder"), (s) -> new ToastBuilder().setIcon(Items.SALMON).setTitle(Component.literal("AlinLib")).setMessage(Component.literal("Good morning, Mr. Sunfish!")).show(AlinLib.MINECRAFT.getToasts())).build())
                 .addWidget(new ButtonBooleanBuilder(Component.literal("ButtonBooleanBuilder"), true).build())
                 .addWidget(new ButtonSpriteBuilder(icon).setSize(20, 20).build())
