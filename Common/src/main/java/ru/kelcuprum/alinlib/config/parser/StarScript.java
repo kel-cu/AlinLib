@@ -41,9 +41,9 @@ public class StarScript {
                 .set("direction_symbol", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getDirection(true) : ""))
                 .set("hunger", () -> Value.number(AlinLib.MINECRAFT.player != null ? AlinLib.MINECRAFT.player.getFoodData().getFoodLevel() : 0))
                 .set("pos", new ValueMap()
-                        .set("x", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getX() : ""))
-                        .set("y", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getY() : ""))
-                        .set("z", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getZ() : ""))
+                        .set("x", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getX() : 404))
+                        .set("y", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getY() : 404))
+                        .set("z", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getZ() : 404))
                 )
 
                 .set("item", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getItemName() : ""))

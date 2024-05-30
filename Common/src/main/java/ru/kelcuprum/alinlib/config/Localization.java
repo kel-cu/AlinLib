@@ -6,7 +6,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.GsonHelper;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.config.parser.StarScript;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -109,11 +108,22 @@ public class Localization {
     }
 
     // FOR EVERYTHING FUNCTION NOT IN THIS CLASS
-    public static String getRounding(double number){return getRounding(number, false);}
+
+    public static String getRounding(double number){
+        return String.valueOf(getRounding(number, false));
+    }
     public static String getRounding(double number, boolean isToInt){
-        String text = String.format("%.3f", number);
-        if(isToInt) text = text.substring(0, text.length()-4);
-        return text;
+        String value = String.valueOf(getDoubleRounding(number, isToInt));
+        if(isToInt) value = value.split("\\.")[0];
+        return value;
+    }
+
+    public static double getDoubleRounding(double number){return getDoubleRounding(number, false);}
+    public static double getDoubleRounding(double number, boolean isToInt){
+//        String text = String.format("%.3f", number);
+//        if(isToInt) text = text.substring(0, text.length()-4);
+
+        return isToInt ? (int) number : round(number, 3);
     }
 
     public static Component getText(String key){
@@ -124,6 +134,13 @@ public class Localization {
         return toString(getText(key));
     }
 
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
 
     public static Component toText(String text){
         return Component.literal(text);

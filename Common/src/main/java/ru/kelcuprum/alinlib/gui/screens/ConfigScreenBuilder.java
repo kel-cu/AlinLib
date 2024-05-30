@@ -18,6 +18,7 @@ public class ConfigScreenBuilder {
     protected List<AbstractWidget> widgets = new ArrayList<>();
     protected OnTick onTick;
     protected Screen parent;
+    protected int panelSize = AlinLib.bariumConfig.getBoolean("CONFIG_SCREEN.SMALL_PANEL_SIZE", false) ?  130 : 190;
     protected int yL = 40;
     protected int yC = 5;
 
@@ -41,14 +42,28 @@ public class ConfigScreenBuilder {
         this.title = component;
         return this;
     }
+    public Component getTitle(){
+        return this.title;
+    }
     //
     public ConfigScreenBuilder setType(InterfaceUtils.DesignType type) {
         this.type = type;
         return this;
     }
+    public InterfaceUtils.DesignType getType() {
+        return this.type;
+    }
+    //
+    public ConfigScreenBuilder setPanelSize(int panelSize) {
+        this.panelSize = panelSize;
+        return this;
+    }
+    public int getPanelSize() {
+        return this.panelSize;
+    }
     //
     public ConfigScreenBuilder addPanelWidget(AbstractWidget widget){
-        widget.setWidth(110);
+        widget.setWidth(this.panelSize-20);
         widget.setX(10);
         widget.setY(yL);
         yL+=widget.getHeight()+5;

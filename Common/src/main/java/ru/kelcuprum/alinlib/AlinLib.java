@@ -13,6 +13,7 @@ import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
+import ru.kelcuprum.alinlib.config.parser.info.Player;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
@@ -27,25 +28,53 @@ public class AlinLib {
     public static final Logger LOG = LogManager.getLogger("AlinaLib");
     public static Config bariumConfig = new Config("config/AlinLib/config.json");
     public static Localization localization = new Localization("alinlib","config/AlinLib/lang");
-    public static HashMap<String, Double> funnyCoordinates = new HashMap<>();
-    public static double getFunnyValueCoordinate(String server, String world){
+    public static HashMap<String, Double> funnyCoordinatesX = new HashMap<>();
+    public static HashMap<String, Double> funnyCoordinatesZ = new HashMap<>();
+    public static double getFunnyValueCoordinate(double coordinate, String server, String world, boolean isX){
+        return switch (bariumConfig.getNumber("STREAMER.STEALTH.TYPE", 0).intValue()){
+            case 1 -> getFunnyValueCoordinate$kelVersion(coordinate, server, world, isX);
+            default -> getFunnyValueCoordinate$ImGRUIVersion(coordinate, server, world, isX);
+        };
+    }
+    public static double getFunnyValueCoordinate$kelVersion(double coordinate, String server, String world, boolean isX){
         String info =  server + "-" + world;
-        if(funnyCoordinates.containsKey(info)) return funnyCoordinates.get(info);
+        double value;
+        if(isX ? funnyCoordinatesX.containsKey(info) : funnyCoordinatesZ.containsKey(info)) value = isX ? funnyCoordinatesX.get(info) : funnyCoordinatesZ.get(info);
         else {
-            double value;
             while(true){
                 double r = Math.random();
                 int i = Math.random() < 0.5 ? -1 : 1;
                 double m= Math.random() * 10;
                 value = r*i*m;//Math.random();
                 if((value > -1.25 && value < -0.75 ) || (value > 0.75 && value < 1.5)){
-                    funnyCoordinates.put(info, value);
-                    log(info+": "+value);
+                    if(isX) funnyCoordinatesX.put(info, value); else funnyCoordinatesZ.put(info, value);
+                    log(info+": "+value+(isX ? " x" : " z"));
                     break;
                 }
             }
-            return value;
         }
+        return coordinate * value;
+    }
+
+    public static double getFunnyValueCoordinate$ImGRUIVersion(double coordinate, String server, String world, boolean isX){
+        String info =  server + "-" + world;
+        double value;
+        if(isX ? funnyCoordinatesX.containsKey(info) : funnyCoordinatesZ.containsKey(info)) value = isX ? funnyCoordinatesX.get(info) : funnyCoordinatesZ.get(info);
+        else {
+            while(true){
+                value = 2*Math.random();
+                if(value > 0.75 && value < 1.25){
+                    if(isX) funnyCoordinatesX.put(info, value); else funnyCoordinatesZ.put(info, value);
+                    log(info+": "+value+(isX ? " x" : " z"));
+                    break;
+                }
+            }
+        }
+        if(!isX) {
+            if (Player.getX() > 0 && coordinate > 0) value *= -1;
+            else if (Player.getX() < 0 && coordinate < 0) value *= -1;
+        }
+        return coordinate*value;
     }
     public static Minecraft MINECRAFT = Minecraft.getInstance();
     public static StarScript starScript;

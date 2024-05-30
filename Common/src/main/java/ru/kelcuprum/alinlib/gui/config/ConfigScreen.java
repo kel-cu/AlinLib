@@ -17,7 +17,9 @@ public class ConfigScreen {
 
         builder.addWidget(new TextBox(Component.translatable("alinlib.config"), true))
                 .addWidget(new SelectorBuilder(Component.translatable("alinlib.config.default_design_type")).setValue(1).setList(new String[]{"Alina", "Flat", "Vanilla"}).setConfig(AlinLib.bariumConfig, "DEFAULT_DESIGN_TYPE").build())
+                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.config_screen.small_panel_size"), false).setConfig(AlinLib.bariumConfig, "CONFIG_SCREEN.SMALL_PANEL_SIZE").build())
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.streamer.stealth"), false).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH").build())
+                .addWidget(new SelectorBuilder(Component.translatable("alinlib.config.streamer.stealth.type")).setValue(0).setList(new String[]{"ImGRUI Version", "AlinLib"}).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH.TYPE").build())
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.toast.timeline"), true).setConfig(AlinLib.bariumConfig, "TOAST.TIMELINE").build())
         ;
         return builder.build();

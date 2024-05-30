@@ -12,7 +12,9 @@
 
   "alinlib.config": "Configs",
   "alinlib.config.default_design_type": "Default Design Type",
-  "alinlib.config.streamer.stealth": "Streamer mode",
+  "alinlib.config.config_screen.small_panel_size": "Shortened version of the panel",
+  "alinlib.config.streamer.stealth": "Stealth mode",
+  "alinlib.config.streamer.stealth.type": "Stealth Algorithm",
   "alinlib.config.toast.timeline": "Toast timeline",
   "alinlib.localization": "Localizations",
   "alinlib.localization.date.time": "Time format",

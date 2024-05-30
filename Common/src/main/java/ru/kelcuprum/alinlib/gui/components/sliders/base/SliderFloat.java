@@ -60,7 +60,7 @@ public class SliderFloat extends SliderPercent {
     }
     @Override
     public Component getComponentValue(){
-        return Component.literal(Localization.getRounding(displayValue) + typeInteger);
+        return Component.literal(Localization.getDoubleRounding(displayValue) + typeInteger);
     }
 
     @Override

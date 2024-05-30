@@ -11,23 +11,21 @@ import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.ImageWidget;
 import ru.kelcuprum.alinlib.gui.components.builder.button.*;
 import ru.kelcuprum.alinlib.gui.components.builder.editbox.EditBoxBuilder;
-import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.slider.*;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.MessageBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
+import ru.kelcuprum.alinlib.gui.config.ConfigScreen;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 public class AlinaDemoScreen {
     private static final ResourceLocation icon = new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png");
     private static final ResourceLocation ImFine = new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/imfine.png");
-    private static final String[] list = {
-            "Welcome", "to", "The", "Amazing", "Digital", "Interface", "™"
-    };
 
     public Screen build(Screen parent) {
         ConfigScreenBuilder screen = new ConfigScreenBuilder(parent)
                 .setTitle(Component.translatable("alinlibtest.name"))
+                .addPanelWidget(new ButtonBuilder(Component.literal("AlinLib Conf"), (s) -> AlinLib.MINECRAFT.setScreen(ConfigScreen.build(parent))).build())
                 .addPanelWidget(new ButtonBuilder(Component.literal("Button #0"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
                 .addPanelWidget(new ButtonBuilder(Component.literal("Button #1"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
                 .addPanelWidget(new ButtonBuilder(Component.literal("Button #2"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())

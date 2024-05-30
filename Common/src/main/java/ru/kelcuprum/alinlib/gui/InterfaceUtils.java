@@ -78,7 +78,7 @@ public class InterfaceUtils {
         return size > width.intValue();
     }
     public static int DEFAULT_WIDTH(){
-        return Minecraft.getInstance().getWindow().getWidth()-150;
+        return Minecraft.getInstance().getWindow().getWidth()-((AlinLib.bariumConfig.getBoolean("CONFIG_SCREEN.SMALL_PANEL_SIZE", false) ?  130 : 190)-20);
     }
     public static final int DEFAULT_HEIGHT = 20;
     public enum DesignType {

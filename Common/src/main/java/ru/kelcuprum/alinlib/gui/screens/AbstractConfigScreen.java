@@ -44,19 +44,19 @@ public class AbstractConfigScreen extends Screen {
     AbstractWidget reset;
     protected void initPanelButtons(){
         // -=-=-=-=-=-=-=-
-        titleW = addRenderableWidget(new TextBox(10, 5, 110, 30, this.title, true));
+        titleW = addRenderableWidget(new TextBox(10, 5, this.builder.panelSize-20, 30, this.title, true));
         // -=-=-=-=-=-=-=-
-        this.descriptionBox = new DescriptionBox(10, 40, 110, height - 75, Component.empty());
+        this.descriptionBox = new DescriptionBox(10, 40, this.builder.panelSize-20, height - 75, Component.empty());
         this.descriptionBox.visible = false;
         addRenderableWidget(this.descriptionBox);
         // -=-=-=-=-=-=-=-
         // Exit Buttons
         // 85 before reset button
-        back = addRenderableWidget(new Button(10, height - 30, 85, 20, builder.type, CommonComponents.GUI_BACK, (OnPress) -> {
+        back = addRenderableWidget(new Button(10, height - 30, this.builder.panelSize-45, 20, builder.type, CommonComponents.GUI_BACK, (OnPress) -> {
             assert this.minecraft != null;
             this.minecraft.setScreen(builder.parent);
         }));
-        reset = addRenderableWidget(new ButtonSprite(100, height-30, 20, 20, builder.type, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
+        reset = addRenderableWidget(new ButtonSprite(this.builder.panelSize-30, height-30, 20, 20, builder.type, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
             for(AbstractWidget widget : builder.widgets){
                 if(widget instanceof Resetable){
                     ((Resetable) widget).resetValue();
@@ -97,9 +97,10 @@ public class AbstractConfigScreen extends Screen {
         addRenderableWidgets(builder.panelWidgets);
     }
     protected void initCategory(){
-        int width = this.width - 150;
+        int width = this.width - this.builder.panelSize - 20;
         for(AbstractWidget widget : builder.widgets){
             widget.setWidth(width);
+            widget.setX(this.builder.panelSize+10);
         }
         this.scroller = addRenderableWidget(new ConfigureScrolWidget(this.width - 8, 0, 4, this.height, Component.empty(), scroller -> {
             scroller.innerHeight = 5;
@@ -146,7 +147,7 @@ public class AbstractConfigScreen extends Screen {
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
-        if(mouseX <= 130){
+        if(mouseX <= this.builder.panelSize){
             if (!scr && scroller_panel != null) {
                 scr = scroller_panel.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
             }
@@ -162,7 +163,7 @@ public class AbstractConfigScreen extends Screen {
     public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f){
         assert this.minecraft != null;
         super.renderBackground(guiGraphics, i, j, f);
-        InterfaceUtils.renderLeftPanel(guiGraphics, 130, this.height);
+        InterfaceUtils.renderLeftPanel(guiGraphics, this.builder.panelSize, this.height);
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
