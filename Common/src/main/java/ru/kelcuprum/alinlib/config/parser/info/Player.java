@@ -36,21 +36,25 @@ public class Player {
             else return main_hand.getCount();
         }
     }
-    public static String getHealth(){
-        if(AlinLib.MINECRAFT.player == null) return "-";
-        return Localization.DF.format(AlinLib.MINECRAFT.player.getHealth()/2);
+    public static double getHealth(){
+        if(AlinLib.MINECRAFT.player == null) return 0;
+        return Localization.round(AlinLib.MINECRAFT.player.getHealth()/2, 2);
     }
-    public static String getMaxHealth(){
-        if(AlinLib.MINECRAFT.player == null) return "-";
-        return Localization.DF.format(AlinLib.MINECRAFT.player.getAttributeValue(Attributes.MAX_HEALTH)/2);
+    public static double getMaxHealth(){
+        if(AlinLib.MINECRAFT.player == null) return 0;
+        return Localization.round(AlinLib.MINECRAFT.player.getAttributeValue(Attributes.MAX_HEALTH)/2, 2);
     }
-    public static String getPercentHealth(){
-        if(AlinLib.MINECRAFT.player == null) return "-";
-        return Localization.DF.format((AlinLib.MINECRAFT.player.getHealth()*100)/AlinLib.MINECRAFT.player.getMaxHealth());
+    public static double getPercentHealth(){
+        if(AlinLib.MINECRAFT.player == null) return 0;
+        return Localization.round((AlinLib.MINECRAFT.player.getHealth()*100)/AlinLib.MINECRAFT.player.getMaxHealth(), 2);
     }
-    public static String getArmor(){
-        if(AlinLib.MINECRAFT.player == null) return "-";
-        return Localization.DF.format(AlinLib.MINECRAFT.player.getArmorValue()/2);
+    public static double getArmor(){
+        if(AlinLib.MINECRAFT.player == null) return 0;
+        return Localization.round((double) AlinLib.MINECRAFT.player.getArmorValue() /2, 2);
+    }
+    public static int getHunger(){
+        if(AlinLib.MINECRAFT.player == null) return 0;
+        return AlinLib.MINECRAFT.player.getFoodData().getFoodLevel();
     }
     public static double getX(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return 404;
@@ -58,12 +62,12 @@ public class Player {
         if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false)){
             x = AlinLib.getFunnyValueCoordinate(x, (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), true);
         }
-        return Localization.getDoubleRounding(x, !AlinLib.bariumConfig.getBoolean("USE_EXTENDED_COORDINATES", false));
+        return Localization.getDoubleRounding(x, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
     }
     public static double getY(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return 404;
         double y = AlinLib.MINECRAFT.getCameraEntity().getY();
-        return Localization.getDoubleRounding(y, !AlinLib.bariumConfig.getBoolean("USE_EXTENDED_COORDINATES", false));
+        return Localization.getDoubleRounding(y, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
     }
     public static double getZ(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return 404;
@@ -71,7 +75,7 @@ public class Player {
         if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false)){
             z = AlinLib.getFunnyValueCoordinate(z, (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), false);
         }
-        return Localization.getDoubleRounding(z, !AlinLib.bariumConfig.getBoolean("USE_EXTENDED_COORDINATES", false));
+        return Localization.getDoubleRounding(z, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
     }
     public static String getDirection(boolean oneSymbol){
         if(AlinLib.MINECRAFT.player == null) return "-";

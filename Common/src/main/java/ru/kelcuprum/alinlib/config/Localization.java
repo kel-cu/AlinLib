@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Localization {
-    public static DecimalFormat DF = new DecimalFormat("#.##");
     public static Parser defaultParser = (s) -> AlinLib.starScript.run(AlinLib.starScript.compile(s));
     private Parser parser = defaultParser;
     private static final int codes = 23;

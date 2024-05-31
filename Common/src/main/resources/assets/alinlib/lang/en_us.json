@@ -11,13 +11,20 @@
   "alinlib.hb": "It's Kel's birthday! Congratulate him on Discord @Kel_Cu / kelcu.ru/ds",
 
   "alinlib.config": "Configs",
+
   "alinlib.config.design": "Design",
   "alinlib.config.default_design_type": "Default Design Type",
   "alinlib.config.config_screen.small_panel_size": "Shortened version of the panel",
   "alinlib.config.toast.timeline": "Toast timeline",
+
+  "alinlib.config.localization": "Localization",
+  "alinlib.config.localization.extended_coordinates": "Extended Coordinates",
+
   "alinlib.config.stealth": "Stealth",
   "alinlib.config.streamer.stealth": "Stealth mode",
   "alinlib.config.streamer.stealth.type": "Stealth Algorithm",
+
+
   "alinlib.localization": "Localizations",
   "alinlib.localization.date.time": "Time format",
   "alinlib.localization.unknown": "Unknown",
