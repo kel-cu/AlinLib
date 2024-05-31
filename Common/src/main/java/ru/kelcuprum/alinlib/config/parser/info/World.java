@@ -44,7 +44,7 @@ public class World {
 
     }
     public static String getCodeName(){
-        return AlinLib.MINECRAFT.level == null ? "abi:unknown" : AlinLib.MINECRAFT.level.dimension().location().toString();
+        return AlinLib.MINECRAFT.level == null ? "unknown" : AlinLib.MINECRAFT.level.dimension().location().toString();
     }
     public static String getName(){
         String world = getCodeName();
