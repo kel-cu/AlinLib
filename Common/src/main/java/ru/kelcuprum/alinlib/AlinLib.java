@@ -28,8 +28,34 @@ public class AlinLib {
     public static final Logger LOG = LogManager.getLogger("AlinaLib");
     public static Config bariumConfig = new Config("config/AlinLib/config.json");
     public static Localization localization = new Localization("alinlib","config/AlinLib/lang");
+    public static Minecraft MINECRAFT = Minecraft.getInstance();
+    public static StarScript starScript;
     public static HashMap<String, Double> funnyCoordinatesX = new HashMap<>();
     public static HashMap<String, Double> funnyCoordinatesZ = new HashMap<>();
+
+    // Init
+    public static void onInitializeClient() {
+        starScript = new StarScript();
+        ClientLifecycleEvents.CLIENT_STARTED.register((client) -> {
+            LocalizationEvents.DEFAULT_PARSER_INIT.invoker().onParserInit(starScript);
+            AlinLib.log(String.format("Client started. MC Version: %s", client.getLaunchedVersion()));
+        });
+        ClientLifecycleEvents.CLIENT_FULL_STARTED.register((client) -> {
+            AlinLib.log(String.format("Client full started. MC Version: %s", client.getLaunchedVersion()));
+            isAprilFool();
+            isHBKel();
+        });
+        ClientLifecycleEvents.CLIENT_STOPPING.register((client) -> {
+            log("This world goes round and round like a carousel in a circus.");
+            log("Maybe the world is a circus?)");
+        });
+        LocalizationEvents.DEFAULT_PARSER_INIT.register(parser -> parser.ss.set("alinlib", new ValueMap()
+                .set("id", MODID)
+                .set("version", VERSION))
+        );
+    }
+
+    // Stealth
     public static double getFunnyValueCoordinate(double coordinate, String server, String world, boolean isX){
         return switch (bariumConfig.getNumber("STREAMER.STEALTH.TYPE", 0).intValue()){
             case 1 -> getFunnyValueCoordinate$kelVersion(coordinate, server, world, isX);
@@ -55,7 +81,6 @@ public class AlinLib {
         }
         return coordinate * value;
     }
-
     public static double getFunnyValueCoordinate$ImGRUIVersion(double coordinate, String server, String world, boolean isX){
         String info =  server + "-" + world;
         double value;
@@ -76,29 +101,17 @@ public class AlinLib {
         }
         return coordinate*value;
     }
-    public static Minecraft MINECRAFT = Minecraft.getInstance();
-    public static StarScript starScript;
-    
-    public static void onInitializeClient() {
-        starScript = new StarScript();
-        ClientLifecycleEvents.CLIENT_STARTED.register((client) -> {
-            LocalizationEvents.DEFAULT_PARSER_INIT.invoker().onParserInit(starScript);
-            AlinLib.log(String.format("Client started. MC Version: %s", client.getLaunchedVersion()));
-        });
-        ClientLifecycleEvents.CLIENT_FULL_STARTED.register((client) -> {
-            AlinLib.log(String.format("Client full started. MC Version: %s", client.getLaunchedVersion()));
-            isAprilFool();
-            isHBKel();
-        });
-        ClientLifecycleEvents.CLIENT_STOPPING.register((client) -> {
-            log("This world goes round and round like a carousel in a circus.");
-            log("Maybe the world is a circus?)");
-        });
-        LocalizationEvents.DEFAULT_PARSER_INIT.register(parser -> parser.ss.set("alinlib", new ValueMap()
-                .set("id", MODID)
-                .set("version", VERSION))
-        );
+
+    // Design
+    public static InterfaceUtils.DesignType getDefaultDesignType(){
+        return switch (bariumConfig.getNumber("DEFAULT_DESIGN_TYPE", 1).intValue()){
+            case 0 -> InterfaceUtils.DesignType.ALINA;
+            case 2 -> InterfaceUtils.DesignType.VANILLA;
+            default -> InterfaceUtils.DesignType.FLAT;
+        };
     }
+
+    // Funny
     public static void isAprilFool(){
         if(LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 1){
             String[] types = {
@@ -124,13 +137,8 @@ public class AlinLib {
                     .show(MINECRAFT.getToasts());
         }
     }
-    public static InterfaceUtils.DesignType getDefaultDesignType(){
-        return switch (bariumConfig.getNumber("DEFAULT_DESIGN_TYPE", 1).intValue()){
-            case 0 -> InterfaceUtils.DesignType.ALINA;
-            case 2 -> InterfaceUtils.DesignType.VANILLA;
-            default -> InterfaceUtils.DesignType.FLAT;
-        };
-    }
+
+    // Logs
     public static void log(Component message) { log(message, Level.INFO);}
     public static void log(Component message, Level level) { log(message.getString(), level);}
     public static void log(String message) { log(message, Level.INFO);}
