@@ -157,6 +157,20 @@ public class InterfaceUtils {
         ResourceLocation LIST = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/list.png");
         ResourceLocation ADD = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/add.png");
         ResourceLocation REMOVE = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/remove.png");
+
+
+        ResourceLocation BOTTOM = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/button.png");
+        ResourceLocation DISLIKE = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/dislike.png");
+        ResourceLocation DONT = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/dont.png");
+        ResourceLocation LEFT = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/left.png");
+        ResourceLocation LIKE = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/like.png");
+        ResourceLocation MUSIC = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/music.png");
+        ResourceLocation NOTES = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/notes.png");
+        ResourceLocation RIGHT = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/right.png");
+        ResourceLocation TOP = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/top.png");
+        ResourceLocation WARN = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/warn.png");
+        ResourceLocation WARNING = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/warning.png");
+        ResourceLocation WHAT = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/what.png");
     }
 }
 
