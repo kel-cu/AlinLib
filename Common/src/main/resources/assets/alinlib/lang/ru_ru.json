@@ -21,7 +21,7 @@
 
   "alinlib.config.stealth": "Скрытность",
   "alinlib.config.streamer.stealth": "Режим стелса",
-  "alinlib.config.streamer.stealth.type": "Stealth Algorithm",
+  "alinlib.config.streamer.stealth.type": "Алгоритм скрытности",
 
 
   "alinlib.localization": "Локализация",
