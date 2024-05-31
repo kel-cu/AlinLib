@@ -81,14 +81,21 @@ public class Player {
         if(AlinLib.MINECRAFT.player == null) return "-";
         Direction direction = AlinLib.MINECRAFT.player.getDirection();
         if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false)){
-            double r = Math.random();
-            direction = r < 0.25 ? Direction.NORTH : r < 0.5 ? Direction.SOUTH : r < 0.75 ? Direction.WEST : Direction.EAST;
+            switch (direction) {
+                case NORTH -> direction = Direction.EAST;
+                case SOUTH -> direction = Direction.WEST;
+
+                case WEST -> direction = Direction.NORTH;
+                case EAST -> direction = Direction.SOUTH;
+            }
         }
-        return switch (direction) {
+        return  switch (direction) {
             case NORTH -> oneSymbol ? "N" : AlinLib.localization.getLocalization("north", false, false);
             case SOUTH -> oneSymbol ? "S" : AlinLib.localization.getLocalization("south", false, false);
+
             case WEST -> oneSymbol ? "W" : AlinLib.localization.getLocalization("west", false, false);
             case EAST -> oneSymbol ? "E" : AlinLib.localization.getLocalization("east", false, false);
+
             default -> oneSymbol ? "?" : AlinLib.localization.getLocalization("unknown", false, false);
         };
     }
