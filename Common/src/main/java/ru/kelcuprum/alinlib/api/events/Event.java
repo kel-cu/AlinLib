@@ -43,7 +43,7 @@ public abstract class Event<T> {
      * The ResourceLocation of the default phase.
      * Have a look at {@link EventFactory#createWithPhases} for an explanation of event phases.
      */
-    public static final ResourceLocation DEFAULT_PHASE = new ResourceLocation("fabric", "default");
+    public static final ResourceLocation DEFAULT_PHASE = ResourceLocation.fromNamespaceAndPath("alinlib", "default");
 
     /**
      * Register a listener to the event for the specified phase.

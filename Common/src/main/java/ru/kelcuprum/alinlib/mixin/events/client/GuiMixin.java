@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.mixin.events.client;
 
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,8 +13,8 @@ import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 @Mixin(value = Gui.class)
 public class GuiMixin {
     @Inject(method = "render", at = @At("RETURN"))
-    private void render(GuiGraphics guiGraphics, float partialTick, CallbackInfo ci) {
+    private void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if(AlinLib.MINECRAFT.options.hideGui) return;
-        GuiRenderEvents.RENDER.invoker().onRender(guiGraphics, partialTick);
+        GuiRenderEvents.RENDER.invoker().onRender(guiGraphics, deltaTracker);
     }
 }

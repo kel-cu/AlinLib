@@ -19,8 +19,8 @@ import ru.kelcuprum.alinlib.gui.config.ConfigScreen;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 public class AlinaDemoScreen {
-    private static final ResourceLocation icon = new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png");
-    private static final ResourceLocation ImFine = new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/imfine.png");
+    private static final ResourceLocation icon = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/normal.png");
+    private static final ResourceLocation ImFine = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/imfine.png");
 
     public Screen build(Screen parent) {
         ConfigScreenBuilder screen = new ConfigScreenBuilder(parent)

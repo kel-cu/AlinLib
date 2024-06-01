@@ -11,8 +11,8 @@ import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
 
 public class InterfaceUtils {
-    private static final WidgetSprites SPRITES = new WidgetSprites(new ResourceLocation("widget/button"), new ResourceLocation("widget/button_disabled"), new ResourceLocation("widget/button_highlighted"));
-    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation("textures/block/dirt.png");
+    private static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.withDefaultNamespace("widget/button"), ResourceLocation.withDefaultNamespace("widget/button_disabled"), ResourceLocation.withDefaultNamespace("widget/button_highlighted"));
+    public static final ResourceLocation BACKGROUND_LOCATION = ResourceLocation.withDefaultNamespace("textures/block/dirt.png");
 
     // BACKGROUND
     public static void renderBackground(GuiGraphics guiGraphics, Minecraft minecraft){
@@ -152,25 +152,25 @@ public class InterfaceUtils {
         int BLACK_ALPHA = 0x37000000;
     }
     public interface Icons {
-        ResourceLocation RESET = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/reset.png");
-        ResourceLocation OPTIONS = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/options.png");
-        ResourceLocation LIST = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/list.png");
-        ResourceLocation ADD = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/add.png");
-        ResourceLocation REMOVE = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/remove.png");
+        ResourceLocation RESET = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/reset.png");
+        ResourceLocation OPTIONS = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/options.png");
+        ResourceLocation LIST = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/list.png");
+        ResourceLocation ADD = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/add.png");
+        ResourceLocation REMOVE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/remove.png");
 
 
-        ResourceLocation BOTTOM = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/button.png");
-        ResourceLocation DISLIKE = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/dislike.png");
-        ResourceLocation DONT = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/dont.png");
-        ResourceLocation LEFT = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/left.png");
-        ResourceLocation LIKE = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/like.png");
-        ResourceLocation MUSIC = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/music.png");
-        ResourceLocation NOTES = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/notes.png");
-        ResourceLocation RIGHT = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/right.png");
-        ResourceLocation TOP = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/top.png");
-        ResourceLocation WARN = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/warn.png");
-        ResourceLocation WARNING = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/warning.png");
-        ResourceLocation WHAT = new ResourceLocation(AlinLib.MODID, "textures/gui/widget/buttons/what.png");
+        ResourceLocation BOTTOM = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/button.png");
+        ResourceLocation DISLIKE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/dislike.png");
+        ResourceLocation DONT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/dont.png");
+        ResourceLocation LEFT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/left.png");
+        ResourceLocation LIKE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/like.png");
+        ResourceLocation MUSIC = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/music.png");
+        ResourceLocation NOTES = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/notes.png");
+        ResourceLocation RIGHT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/right.png");
+        ResourceLocation TOP = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/top.png");
+        ResourceLocation WARN = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/warn.png");
+        ResourceLocation WARNING = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/warning.png");
+        ResourceLocation WHAT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/what.png");
     }
 }
 

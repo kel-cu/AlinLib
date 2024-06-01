@@ -10,6 +10,6 @@ pluginManagement {
 
 include 'Common'
 include 'Fabric'
-include 'NeoForge'
+//include 'NeoForge'
 include 'Demo'
 

@@ -121,7 +121,7 @@ public class AlinLib {
             };
             String type = types[new Random().nextInt(types.length)];
             new ToastBuilder()
-                    .setIcon(new ResourceLocation("alinlib", "textures/gui/widget/toast/clownfish.png"))
+                    .setIcon(ResourceLocation.fromNamespaceAndPath("alinlib", "textures/gui/widget/toast/clownfish.png"))
                     .setTitle(Component.literal("AlinLib"))
                     .setMessage(Component.translatable("alinlib.april_fools."+type))
                     .setType(ToastBuilder.Type.WARN)

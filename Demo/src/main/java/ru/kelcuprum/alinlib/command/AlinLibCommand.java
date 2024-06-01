@@ -50,7 +50,7 @@ public class AlinLibCommand {
                                 ToastBuilder tmrl = new ToastBuilder()
                                         .setTitle(Component.literal("AlibLib (TMRl)"))
                                         .setMessage(Component.literal("Title, msg, resource location"))
-                                        .setIcon(new ResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/well.png"));
+                                        .setIcon(ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/well.png"));
 
                                 tmrl.show(client.getToasts());
                                 tmrl.setType(ToastBuilder.Type.WARN)
