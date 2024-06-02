@@ -30,8 +30,11 @@ public class AlinLib {
     public static Localization localization = new Localization("alinlib","config/AlinLib/lang");
     public static Minecraft MINECRAFT = Minecraft.getInstance();
     public static StarScript starScript;
-    public static HashMap<String, Double> funnyCoordinatesX = new HashMap<>();
-    public static HashMap<String, Double> funnyCoordinatesZ = new HashMap<>();
+    public static HashMap<String, Double> funnyCoordinatesX$alinLib = new HashMap<>();
+    public static HashMap<String, Double> funnyCoordinatesZ$alinLib = new HashMap<>();
+    ///
+    public static HashMap<String, Double> funnyCoordinatesX$imGRUI = new HashMap<>();
+    public static HashMap<String, Double> funnyCoordinatesZ$imGRUI = new HashMap<>();
 
     // Init
     public static void onInitializeClient() {
@@ -65,15 +68,15 @@ public class AlinLib {
     public static double getFunnyValueCoordinate$kelVersion(double coordinate, String server, String world, boolean isX){
         String info =  server + "-" + world;
         double value;
-        if(isX ? funnyCoordinatesX.containsKey(info) : funnyCoordinatesZ.containsKey(info)) value = isX ? funnyCoordinatesX.get(info) : funnyCoordinatesZ.get(info);
+        if(isX ? funnyCoordinatesX$alinLib.containsKey(info) : funnyCoordinatesZ$alinLib.containsKey(info)) value = isX ? funnyCoordinatesX$alinLib.get(info) : funnyCoordinatesZ$alinLib.get(info);
         else {
             while(true){
                 double r = Math.random();
                 int i = Math.random() < 0.5 ? -1 : 1;
                 double m= Math.random() * 10;
                 value = r*i*m;//Math.random();
-                if((value > -1.25 && value < -0.75 ) || (value > 0.75 && value < 1.5)){
-                    if(isX) funnyCoordinatesX.put(info, value); else funnyCoordinatesZ.put(info, value);
+                if((value > -1.25 && value < -0.75 ) || (value > 0.75 && value < 1.25)){
+                    if(isX) funnyCoordinatesX$alinLib.put(info, value); else funnyCoordinatesZ$alinLib.put(info, value);
                     log(info+": "+value+(isX ? " x" : " z"));
                     break;
                 }
@@ -84,20 +87,20 @@ public class AlinLib {
     public static double getFunnyValueCoordinate$ImGRUIVersion(double coordinate, String server, String world, boolean isX){
         String info =  server + "-" + world;
         double value;
-        if(isX ? funnyCoordinatesX.containsKey(info) : funnyCoordinatesZ.containsKey(info)) value = isX ? funnyCoordinatesX.get(info) : funnyCoordinatesZ.get(info);
+        if(isX ? funnyCoordinatesX$imGRUI.containsKey(info) : funnyCoordinatesZ$imGRUI.containsKey(info)) value = isX ? funnyCoordinatesX$imGRUI.get(info) : funnyCoordinatesZ$imGRUI.get(info);
         else {
             while(true){
-                value = 2*Math.random();
-                if(value > 0.75 && value < 1.25){
-                    if(isX) funnyCoordinatesX.put(info, value); else funnyCoordinatesZ.put(info, value);
+                int i = Math.random() < 0.5 ? -1 : 1;
+                value = 2*Math.random()*i;
+                if((value > -1.25 && value < -0.75 ) || (value > 0.75 && value < 1.25)){
+                    if(isX) funnyCoordinatesX$imGRUI.put(info, value); else funnyCoordinatesZ$imGRUI.put(info, value);
                     log(info+": "+value+(isX ? " x" : " z"));
                     break;
                 }
             }
         }
         if(!isX) {
-            if (Player.getX() > 0 && coordinate > 0) value *= -1;
-            else if (Player.getX() < 0 && coordinate < 0) value *= -1;
+            if (Player.getX() > 0 && coordinate > 0 && value > 0) value *= -1;
         }
         return coordinate*value;
     }

@@ -33,8 +33,10 @@ public class AlinLibTest implements ClientModInitializer {
         ));
         ClientTickEvents.END_CLIENT_TICK.register((s) -> {
             while (key.consumeClick()) {
-                AlinLib.funnyCoordinatesX.clear();
-                AlinLib.funnyCoordinatesZ.clear();
+                AlinLib.funnyCoordinatesX$alinLib.clear();
+                AlinLib.funnyCoordinatesZ$alinLib.clear();
+                AlinLib.funnyCoordinatesX$imGRUI.clear();
+                AlinLib.funnyCoordinatesZ$imGRUI.clear();
             }
             while (tkey.consumeClick()) {
                 AlinLib.bariumConfig.setBoolean("STREAMER.STEALTH", !AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false));
