@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib.gui.components.selector.base;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
+import org.jetbrains.annotations.NotNull;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
@@ -24,7 +25,6 @@ public class SelectorButton extends Button {
         this.onPress = onPress;
         this.position = position;
         this.buttonMessage = label.getString();
-        this.setMessage(Component.literal(buttonMessage).append(": ").append(getValue()));
     }
 
 
@@ -62,7 +62,7 @@ public class SelectorButton extends Button {
     // Рендер
     @Override
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        if(InterfaceUtils.isDoesNotFit(getMessage(), getWidth(), getHeight())){
+        if(InterfaceUtils.isDoesNotFit(Component.literal(buttonMessage).append(": ").append(getValue()), getWidth(), getHeight())){
             if(isHoveredOrFocused()){
                 this.setMessage(getValue());
             } else {

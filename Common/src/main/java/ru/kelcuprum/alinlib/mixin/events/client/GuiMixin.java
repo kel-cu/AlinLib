@@ -15,6 +15,6 @@ public class GuiMixin {
     @Inject(method = "render", at = @At("RETURN"))
     private void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if(AlinLib.MINECRAFT.options.hideGui) return;
-        GuiRenderEvents.RENDER.invoker().onRender(guiGraphics, deltaTracker);
+        GuiRenderEvents.RENDER.invoker().onRender(guiGraphics, deltaTracker.getGameTimeDeltaTicks());
     }
 }

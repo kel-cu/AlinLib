@@ -74,7 +74,7 @@ public class InterfaceUtils {
     }
 
     public static boolean isDoesNotFit(Component message, Number width, Number height){
-        int size = AlinLib.MINECRAFT.font.width(message) + ((height.intValue() - 8) / 2) * 2;
+        int size = AlinLib.MINECRAFT.font.width(message) + (height.intValue() - 8) * 2;
         return size > width.intValue();
     }
     public static int DEFAULT_WIDTH(){
@@ -136,6 +136,12 @@ public class InterfaceUtils {
                 }
             }
         }
+    }
+    public ResourceLocation getResourceLocation(String path){
+        return ResourceLocation.withDefaultNamespace(path);
+    }
+    public ResourceLocation getResourceLocation(String id, String path){
+        return ResourceLocation.fromNamespaceAndPath(id, path);
     }
     public interface Colors {
         int SEADRIVE = 0xFF79c738;

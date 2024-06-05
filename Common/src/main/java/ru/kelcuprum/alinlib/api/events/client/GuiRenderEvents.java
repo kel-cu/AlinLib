@@ -1,6 +1,5 @@
 package ru.kelcuprum.alinlib.api.events.client;
 
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphics;
 import ru.kelcuprum.alinlib.api.events.Event;
 import ru.kelcuprum.alinlib.api.events.EventFactory;
@@ -15,5 +14,5 @@ public interface  GuiRenderEvents {
             event.onRender(guiGraphics, deltaTracker);
         }
     });
-    void onRender(GuiGraphics guiGraphics, DeltaTracker deltaTracker);
+    void onRender(GuiGraphics guiGraphics, float partialTick);
 }

@@ -5,20 +5,20 @@
   "version": "${version}",
   "description": "A library to facilitate mod development by Kel Cuprum",
   "authors": [
-    "Kel Cuprum (Im_Kel)"
+    "Kel Cuprum"
   ],
   "contributors": [
-    "Im_Kel [Developer, Tester, Translator]",
+    "Kel Cuprum [Developer, Tester, Translator]",
     "@dima_dencep [#1, #4, #5]",
     "ImGRUI [Stealth mode algorithm]"
   ],
   "contact": {
-    "sources": "https://github.com/simply-kel/AlinLib",
+    "sources": "https://github.com/kel-cu/AlinLib",
     "homepage": "https://modrinth.com/project/AlinLib",
-    "issues": "https://github.com/simply-kel/AlinLib/issues",
+    "issues": "https://github.com/kel-cu/AlinLib/issues",
     "email": "me@kelcuprum.ru"
   },
-  "license": "MIT",
+  "license": "GPL 3.0",
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -37,14 +37,14 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": [">=1.21"]
+    "minecraft": [">1.20.6"]
   },
   "custom": {
     "modmenu": {
       "links": {
         "modmenu.modrinth": "https://modrinth.com/project/AlinLib",
-        "modmenu.donate": "https://kelcuprum.ru/r/don",
-        "modmenu.discord": "https://kelcuprum.ru/r/ds"
+        "modmenu.donate": "https://kelcu.ru/don",
+        "modmenu.discord": "https://kelcu.ru/ds"
       },
       "badges": ["library"]
     }
