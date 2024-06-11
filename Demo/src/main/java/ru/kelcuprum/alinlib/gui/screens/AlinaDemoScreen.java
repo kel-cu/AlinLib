@@ -23,6 +23,7 @@ import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 public class AlinaDemoScreen {
     private static final ResourceLocation icon = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/normal.png");
     private static final ResourceLocation ImFine = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/imfine.png");
+    private static final ResourceLocation something = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/something.png");
 
     public Screen build(Screen parent) {
         ConfigScreenBuilder screen = new ConfigScreenBuilder(parent)
@@ -58,7 +59,9 @@ public class AlinaDemoScreen {
                 .addWidget(new SliderIntegerBuilder(Component.literal("SliderIntegerBuilder")).build())
                 .addWidget(new SliderPercentBuilder(Component.literal("SliderPercentBuilder")).build())
                 .addWidget(new CategoryBox(Component.literal("CategoryBox"))
-                        .addValue(new ImageWidget(0, 0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_WIDTH(), ImFine, 20 ,20, Component.empty())));
+                        .addValue(new ImageWidget(0, 0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_HEIGHT, ImFine, 20 ,20, false, Component.empty()))
+                        .addValue(new MessageBox(Component.literal("Чувак, ты думал что-то здесь будет? О, нет. От тебя воняет говном, даже отсюда чувствую. Закрывай, закрывай менюшку, иди нахуй. Разраб крутой, а ты лохонулся сука. Аа, блядь. АА")))
+                        .addValue(new ImageWidget(0, 0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_WIDTH(), something, 480 ,270, true, Component.empty())));
         return screen.build();
     }
 }

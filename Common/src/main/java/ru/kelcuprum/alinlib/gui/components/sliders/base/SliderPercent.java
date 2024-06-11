@@ -89,7 +89,7 @@ public class SliderPercent extends AbstractSliderButton implements Description {
         this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value, this);
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
-        if(InterfaceUtils.isDoesNotFit(getMessage(), getWidth(), getHeight())){
+        if(InterfaceUtils.isDoesNotFit(Component.literal(buttonMessage).append(": ").append(getComponentValue()), getWidth(), getHeight())){
             if(isHoveredOrFocused()){
                 this.setMessage(getComponentValue());
             } else {

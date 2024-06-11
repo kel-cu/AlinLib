@@ -38,6 +38,12 @@
   "alinlib.localization.time.evening": "Вечер",
   "alinlib.localization.time.night": "Ночь",
 
+  "alinlib.localization.world": "Миры",
+  "alinlib.localization.world.overworld": "Верхний мир",
+  "alinlib.localization.world.nether": "Ад",
+  "alinlib.localization.world.the_end": "The End?",
+  "alinlib.localization.world.moon": "Луна",
+
   "alinlib.date.time": "HH:mm",
   "alinlib.time.morning": "Утро",
   "alinlib.time.day": "День",
@@ -47,6 +53,10 @@
   "alinlib.south": "Юг",
   "alinlib.west": "Запад",
   "alinlib.east": "Восток",
+  "alinlib.world.overworld": "Верхний мир",
+  "alinlib.world.nether": "Ад",
+  "alinlib.world.the_end": "The End?",
+  "alinlib.world.moon": "Луна",
   "alinlib.unknown": "Неизвестно",
 
   "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"

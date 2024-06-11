@@ -30,7 +30,13 @@ public class LocalizationScreen {
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.localization.time.day")).setLocalization(AlinLib.localization, "time.day").build())
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.localization.time.evening")).setLocalization(AlinLib.localization, "time.evening").build())
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.localization.time.night")).setLocalization(AlinLib.localization, "time.night").build())
-                );
+                )
+                .addWidget(new CategoryBox(Component.translatable("alinlib.localization.world"))
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.localization.world.overworld")).setLocalization(AlinLib.localization, "world.overworld").build())
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.localization.world.nether")).setLocalization(AlinLib.localization, "world.nether").build())
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.localization.world.the_end")).setLocalization(AlinLib.localization, "world.the_end").build())
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.localization.world.moon")).setLocalization(AlinLib.localization, "world.moon").build())
+                );;
         return builder.build();
     }
 }

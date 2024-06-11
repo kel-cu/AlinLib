@@ -6,6 +6,7 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 public class CategoryBox extends TextBox {
     public final List<AbstractWidget> values = new ArrayList<>();
     private boolean state = true;
+    private Component name;
 
     public CategoryBox(Component label) {
         this(0, 0, label);
@@ -25,6 +27,7 @@ public class CategoryBox extends TextBox {
     }
     public CategoryBox(int x, int y, int width, int height, Component label) {
         super(x, y, width, height, label, true);
+        this.name = label;
         this.setActive(true);
     }
 
@@ -41,7 +44,13 @@ public class CategoryBox extends TextBox {
         values.addAll(widgets);
         return this;
     }
-
+    public CategoryBox setName(Component name){
+        this.name = name;
+        return this;
+    }
+    public Component getName(){
+        return name;
+    }
     public List<AbstractWidget> getValues(){
         return values;
     }
@@ -82,11 +91,19 @@ public class CategoryBox extends TextBox {
         if (visible) {
             int y = getY() + (getHeight() - 8) / 2;
             Font font = AlinLib.MINECRAFT.font;
-            guiGraphics.drawString(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, -1);
-            guiGraphics.drawCenteredString(font, getMessage(), getX() + getWidth() / 2, y, -1);
-            int textWidth = font.width(getMessage());
-            int x = (getX() + getWidth() / 2) - (textWidth/2);
-            guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, 0xFFFFFFFF);
+            if(InterfaceUtils.isDoesNotFit(Component.literal(state ? "▼" : "▶").append("   ").append(getName()), getWidth(), getHeight())){
+                this.setMessage(Component.literal(state ? "▼" : "▶").append("   ").append(getName()));
+                this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+                int textWidth = font.width(getMessage());
+                int x = (getX() + getWidth() / 2) - (textWidth/2);
+                guiGraphics.fill(Math.max(x, getX()), y+font.lineHeight+1, Math.max(x, getX())+Math.min(textWidth, getWidth()), y+font.lineHeight+2, 0xFFFFFFFF);
+            } else {
+                guiGraphics.drawString(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, -1);
+                guiGraphics.drawCenteredString(font, getName(), getX() + getWidth() / 2, y, -1);
+                int textWidth = font.width(getName());
+                int x = (getX() + getWidth() / 2) - (textWidth/2);
+                guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, 0xFFFFFFFF);
+            }
         }
     }
 

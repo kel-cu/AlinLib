@@ -39,6 +39,12 @@
   "alinlib.localization.time.evening": "Evening",
   "alinlib.localization.time.night": "Night",
 
+  "alinlib.localization.world": "Worlds",
+  "alinlib.localization.world.overworld": "Overworld",
+  "alinlib.localization.world.nether": "Nether",
+  "alinlib.localization.world.the_end": "The End?",
+  "alinlib.localization.world.moon": "The Moon",
+
   "alinlib.date.time": "hh:mm",
   "alinlib.time.morning": "Morning",
   "alinlib.time.day": "Day",
@@ -48,6 +54,10 @@
   "alinlib.south": "South",
   "alinlib.west": "West",
   "alinlib.east": "East",
+  "alinlib.world.overworld": "Overworld",
+  "alinlib.world.nether": "Nether",
+  "alinlib.world.the_end": "The End?",
+  "alinlib.world.moon": "The Moon",
   "alinlib.unknown": "Unknown",
 
   "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum"
