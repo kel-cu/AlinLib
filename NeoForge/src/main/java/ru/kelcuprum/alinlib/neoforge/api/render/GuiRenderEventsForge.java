@@ -5,6 +5,6 @@ import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 
 public class GuiRenderEventsForge {
     public static void onPostRenderGui(RenderGuiEvent.Post event) {
-        GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick());
+        GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick().getGameTimeDeltaTicks());
     }
 }

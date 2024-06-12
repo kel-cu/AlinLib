@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib;
 
 import meteordevelopment.starscript.value.ValueMap;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -8,8 +9,11 @@ import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.glfw.GLFW;
+import ru.kelcuprum.alinlib.api.KeyMappingHelper;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
+import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
@@ -39,6 +43,21 @@ public class AlinLib {
     // Init
     public static void onInitializeClient() {
         starScript = new StarScript();
+
+        KeyMapping toggleStealth = KeyMappingHelper.register(new KeyMapping(
+                "alinlib.key.stealth",
+                GLFW.GLFW_KEY_UNKNOWN,
+                "alinlib"
+        ));
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            assert client.player != null;
+            while (toggleStealth.consumeClick()) {
+                bariumConfig.setBoolean("STREAMER.STEALTH", !bariumConfig.getBoolean("STREAMER.STEALTH", false));
+                bariumConfig.save();
+            }
+        });
+
         ClientLifecycleEvents.CLIENT_STARTED.register((client) -> {
             LocalizationEvents.DEFAULT_PARSER_INIT.invoker().onParserInit(starScript);
             AlinLib.log(String.format("Client started. MC Version: %s", client.getLaunchedVersion()));

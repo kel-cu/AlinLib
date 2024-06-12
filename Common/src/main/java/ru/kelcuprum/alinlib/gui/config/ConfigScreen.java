@@ -6,7 +6,6 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
-import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;

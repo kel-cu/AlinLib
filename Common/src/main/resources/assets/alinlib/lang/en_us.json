@@ -2,6 +2,8 @@
   "alinlib": "AlinLib",
   "alinlib.editbox.secret": "Secret :)",
 
+  "alinlib.key.stealth": "Stealth mode",
+
   "alinlib.component.reset": "Reset",
   "alinlib.component.reset.toast": "The category configs have been reset",
 

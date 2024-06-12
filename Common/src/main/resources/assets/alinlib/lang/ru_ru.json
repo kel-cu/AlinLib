@@ -1,6 +1,8 @@
 {
   "alinlib.editbox.secret": "Секрет :)",
 
+  "alinlib.key.stealth": "Режим стелса",
+
   "alinlib.component.reset": "Сброс",
   "alinlib.component.reset.toast": "Конфиги категории были сброшены",
 

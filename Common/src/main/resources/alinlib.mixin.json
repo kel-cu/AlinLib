@@ -5,9 +5,7 @@
   "client": [
     "events.client.GuiMixin",
     "events.client.MinecraftMixin",
-    "events.client.ScreenMixin",
-    "keybinding.KeyBindingAccessor",
-    "keybinding.OptionsMixin"
+    "events.client.ScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

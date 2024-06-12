@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
 import org.lwjgl.glfw.GLFW;
+import ru.kelcuprum.alinlib.api.KeyMappingHelper;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
@@ -17,19 +18,21 @@ public class AlinLibTest implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         AlinLib.VERSION = FabricLoader.getInstance().getModContainer(MODID).get().getMetadata().getVersion().getFriendlyString();
+        KeyMappingHelper.onRegister = KeyBindingHelper::registerKeyBinding;
         AlinLib.onInitializeClient();
         ClientCommandRegistrationCallback.EVENT.register(AlinLibCommand::register);
 
-        KeyMapping key = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+
+        KeyMapping key = KeyMappingHelper.register(new KeyMapping(
                 "alinlibtest.resetCoords",
                 GLFW.GLFW_KEY_0,
-                "alinlib.name"
+                "alinlib"
         ));
 
-        KeyMapping tkey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        KeyMapping tkey = KeyMappingHelper.register(new KeyMapping(
                 "alinlibtest.toggleCoords",
                 GLFW.GLFW_KEY_0,
-                "alinlib.name"
+                "alinlib"
         ));
         ClientTickEvents.END_CLIENT_TICK.register((s) -> {
             while (key.consumeClick()) {
