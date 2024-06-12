@@ -54,11 +54,7 @@ public class DescriptionBox extends AbstractWidget{
     public void setMessage(Component component) {
         super.setMessage(component);
     }
-//    @Override
-//    public int getHeight(){
-//        List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(this.description, width);
-//        return 3+((AlinLib.MINECRAFT.font.lineHeight+3)*(list.size()-1));
-//    }
+
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
         List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(this.description, width-12);
@@ -69,7 +65,6 @@ public class DescriptionBox extends AbstractWidget{
                 guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
                 l++;
             } else {
-//                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, getX(), getY() + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
                 guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, "...", getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
                 break;
             };

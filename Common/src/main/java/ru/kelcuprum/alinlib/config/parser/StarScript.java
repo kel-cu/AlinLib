@@ -17,6 +17,7 @@ import ru.kelcuprum.alinlib.config.parser.info.Player;
 import ru.kelcuprum.alinlib.config.parser.info.World;
 
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 public class StarScript {
     public Starscript ss = new Starscript();
@@ -64,36 +65,59 @@ public class StarScript {
         );
     }
     // Helpers
-
+    public String lastExceptionRunSection;
+    public String lastExceptionRun;
+    public String lastError;
+    public long lastExceptionRunSectionCheck = 0;
+    public long lastExceptionRunCheck = 0;
+    public long lastErrorCheck = 0;
     public Script compile(String source) {
         Parser.Result result = Parser.parse(source);
 
         if (result.hasErrors()) {
-            for (Error error : result.errors) AlinLib.log(error.message, Level.ERROR);
+            for (Error error : result.errors) {
+                if(!Objects.equals(lastError, error.message) && System.currentTimeMillis()-lastErrorCheck > 500){
+                    lastError = error.message;
+                    AlinLib.log("[StarScript/Errors] "+error.message, Level.ERROR);
+                }
+                lastErrorCheck = System.currentTimeMillis();
+            }
             return null;
         }
-
+        if(lastError != null) lastError = null;
         return Compiler.compile(result);
     }
 
+
     public Section runSection(Script script, StringBuilder sb) {
         try {
+            if(lastExceptionRunSection != null) lastExceptionRunSection = null;
             return ss.run(script, sb);
         }
         catch (StarscriptError error) {
-            AlinLib.log(error.getLocalizedMessage(), Level.ERROR);
+            if(!Objects.equals(lastExceptionRunSection, error.getLocalizedMessage()) && System.currentTimeMillis()-lastExceptionRunSectionCheck > 500){
+                lastExceptionRunSection = error.getLocalizedMessage();
+                AlinLib.log("[StarScript/runSection] "+error.getLocalizedMessage(), Level.ERROR);
+            }
+            lastExceptionRunSectionCheck = System.currentTimeMillis();
             return null;
         }
     }
     public String run(Script script, StringBuilder sb) {
         try {
             Section section = runSection(script, sb);
+            if(lastExceptionRun != null) lastExceptionRun = null;
             return section == null ? "" : section.toString();
-        } catch (Exception e){
-            AlinLib.log(e.getLocalizedMessage(), Level.ERROR);
-            return e.getLocalizedMessage();
+        } catch (Exception error){
+            if(!Objects.equals(lastExceptionRun, error.getLocalizedMessage()) && System.currentTimeMillis()-lastExceptionRunCheck > 500){
+                lastExceptionRun = error.getLocalizedMessage();
+                AlinLib.log("[StarScript/run] "+error.getLocalizedMessage(), Level.ERROR);
+            }
+            lastExceptionRunCheck = System.currentTimeMillis();
+            return "[AlinLib] StarScript error occurred, please check the console";
         }
     }
+
 
     public String run(Script script) {
         return run(script, new StringBuilder());

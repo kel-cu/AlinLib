@@ -9,7 +9,6 @@ import ru.kelcuprum.alinlib.AlinLib;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -44,7 +43,7 @@ public class Localization {
     }
     public JsonObject getJSONFile(){
         try {
-            Path localizationFile = Path.of(String.format("%s/%s.json", filePath, getCodeLocalization()));//new File(CLIENT.gameDirectory + filePath + getCodeLocalization() + ".json");
+            Path localizationFile = Path.of(String.format("%s/%s.json", filePath, getCodeLocalization()));
             if (localizationFile.toFile().exists()) {
                 return GsonHelper.parse(Files.readString(localizationFile));
             } else {
@@ -119,9 +118,6 @@ public class Localization {
 
     public static double getDoubleRounding(double number){return getDoubleRounding(number, false);}
     public static double getDoubleRounding(double number, boolean isToInt){
-//        String text = String.format("%.3f", number);
-//        if(isToInt) text = text.substring(0, text.length()-4);
-
         return isToInt ? (int) number : round(number, 3);
     }
 

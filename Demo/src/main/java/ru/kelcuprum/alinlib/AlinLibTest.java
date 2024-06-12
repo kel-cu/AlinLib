@@ -46,6 +46,10 @@ public class AlinLibTest implements ClientModInitializer {
 
         ClientLifecycleEvents.CLIENT_STARTED.register((client) -> AlinLib.log(String.format("Client started. MC Version: %s", client.getLaunchedVersion())));
         ClientLifecycleEvents.CLIENT_STOPPING.register((client) -> AlinLib.log(String.format("Client stopped. MC Version: %s", client.getLaunchedVersion())));
-        GuiRenderEvents.RENDER.register((guiGraphics, partialTick) -> guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, AlinLib.localization.getParsedText("{minecraft.version}, Test coords: {player.pos.x} {player.pos.y} {player.pos.z}"), guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-70, -1));
+        GuiRenderEvents.RENDER.register((guiGraphics, partialTick) -> {
+            guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, AlinLib.localization.getParsedText("{minecraft.version}, Test coords: {player.pos.x} {player.pos.y} {player.pos.z}"), guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-70, -1);
+            guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, AlinLib.localization.getParsedText("{world.name} {player.item} {player.item_count}"), guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-80, -1);
+            guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, AlinLib.localization.getParsedText("{world.name.}"), guiGraphics.guiWidth()/2, guiGraphics.guiHeight()-90, -1);
+        });
     }
 }

@@ -144,6 +144,7 @@ public class InterfaceUtils {
         return ResourceLocation.fromNamespaceAndPath(id, path);
     }
     public interface Colors {
+        int[] SPECKLE = {0xFFffdc78, 0xFFcbbaa6};
         int SEADRIVE = 0xFF79c738;
         int CLOWNFISH = 0xFFf1ae31;
         int SELFISH = 0xFFff366e;

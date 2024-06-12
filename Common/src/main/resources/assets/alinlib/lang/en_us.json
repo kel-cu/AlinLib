@@ -19,6 +19,7 @@
 
   "alinlib.config.localization": "Localization",
   "alinlib.config.localization.extended_coordinates": "Extended Coordinates",
+  "alinlib.config.view.item_off_hand": "Show Item in Offhand",
 
   "alinlib.config.stealth": "Stealth",
   "alinlib.config.streamer.stealth": "Stealth mode",

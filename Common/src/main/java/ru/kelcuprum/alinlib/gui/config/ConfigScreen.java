@@ -25,8 +25,7 @@ public class ConfigScreen {
                 )
                 .addWidget(new CategoryBox(Component.translatable("alinlib.config.localization"))
                         .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.localization.extended_coordinates"), false).setConfig(AlinLib.bariumConfig, "LOCALIZATION.EXTENDED_COORDINATES").build())
-
-//                        .addWidget(new ButtonConfigBoolean(140, 80, designType, ActionBarInfo.config, "USE_EXTENDED_COORDINATES", false, useExtendedCoordinatesText))
+                        .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.view.item_off_hand"), false).setConfig(AlinLib.bariumConfig, "VIEW.ITEM_OFF_HAND").build())
                 )
                 .addWidget(new CategoryBox(Component.translatable("alinlib.config.stealth"))
                         .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.streamer.stealth"), false).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH").build())

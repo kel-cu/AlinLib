@@ -8,34 +8,24 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 
 public class Player {
+
     public static String getItemName(){
-        if(AlinLib.MINECRAFT.player == null) return "-";
+        if(AlinLib.MINECRAFT.player == null) return "";
         ItemStack main_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND);
-        String main_hand_item = main_hand.getItem().toString();
-        if(main_hand_item.equals("air") && AlinLib.bariumConfig.getBoolean("VIEW_ITEM_OFF_HAND", false)){
-            ItemStack off_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND);
-            String off_hand_item = off_hand.getItem().toString();
-            if(off_hand_item.equals("air")) return null;
-            else return off_hand.getHoverName().getString();
-        } else {
-            if(main_hand_item.equals("air")) return null;
-            else return main_hand.getHoverName().getString();
-        }
+        ItemStack off_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND);
+        if(!main_hand.isEmpty()) return main_hand.getHoverName().getString();
+        else if(!off_hand.isEmpty() && AlinLib.bariumConfig.getBoolean("VIEW.ITEM_OFF_HAND", false)) return off_hand.getHoverName().getString();
+        else return "";
     }
     public static int getItemCount(){
         if(AlinLib.MINECRAFT.player == null) return 0;
         ItemStack main_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND);
-        String main_hand_item = main_hand.getItem().toString();
-        if(main_hand_item.equals("air") && AlinLib.bariumConfig.getBoolean("VIEW_ITEM_OFF_HAND", false)){
-            ItemStack off_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND);
-            String off_hand_item = off_hand.getItem().toString();
-            if(off_hand_item.equals("air")) return 0;
-            else return off_hand.getCount();
-        } else {
-            if(main_hand_item.equals("air")) return 0;
-            else return main_hand.getCount();
-        }
+        ItemStack off_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND);
+        if(!main_hand.isEmpty()) return main_hand.getCount();
+        else if(!off_hand.isEmpty() && AlinLib.bariumConfig.getBoolean("VIEW.ITEM_OFF_HAND", false)) return off_hand.getCount();
+        else return 0;
     }
+
     public static double getHealth(){
         if(AlinLib.MINECRAFT.player == null) return 0;
         return Localization.round(AlinLib.MINECRAFT.player.getHealth()/2, 2);

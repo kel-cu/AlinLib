@@ -18,6 +18,7 @@
 
   "alinlib.config.localization": "Локализация",
   "alinlib.config.localization.extended_coordinates": "Расширенные координаты",
+  "alinlib.config.view.item_off_hand": "Показывать предмет второй руки",
 
   "alinlib.config.stealth": "Скрытность",
   "alinlib.config.streamer.stealth": "Режим стелса",
