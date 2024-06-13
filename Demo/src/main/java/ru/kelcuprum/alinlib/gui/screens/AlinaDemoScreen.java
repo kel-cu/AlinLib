@@ -13,36 +13,77 @@ import ru.kelcuprum.alinlib.gui.components.builder.button.*;
 import ru.kelcuprum.alinlib.gui.components.builder.editbox.EditBoxBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.slider.*;
-import ru.kelcuprum.alinlib.gui.components.selector.base.SelectorButton;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.MessageBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.config.ConfigScreen;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.CLOWNFISH;
+
 public class AlinaDemoScreen {
     private static final ResourceLocation icon = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/normal.png");
     private static final ResourceLocation ImFine = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/imfine.png");
     private static final ResourceLocation something = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/something.png");
-
+    private static boolean isRelaod = false;
+    private static boolean isSomething = false;
     public Screen build(Screen parent) {
         ConfigScreenBuilder screen = new ConfigScreenBuilder(parent)
                 .setTitle(Component.translatable("alinlibtest.name"))
+                .setOnTickScreen((b, s) ->{
+                    if(isRelaod){
+                        isRelaod = false;
+                        if(isSomething){
+                            isSomething = false;
+                            s.removePanelWidgetFromBuilder();
+                            s.removeWidgetFromBuilder();
+                            b.addWidget(new MessageBox(Component.literal("Чувак, ты думал что-то здесь будет? О, нет. От тебя воняет говном, даже отсюда чувствую. Закрывай, закрывай менюшку, иди нахуй. Разраб крутой, а ты лохонулся сука. Аа, блядь. АА")))
+                                    .addWidget(new ImageWidget(0, 0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_WIDTH(), something, 480 ,270, true, Component.empty()))
+                                    .addPanelWidget(new ButtonBuilder(Component.literal("AlinLib Conf"), (ss) -> AlinLib.MINECRAFT.setScreen(ConfigScreen.build(parent))).build())
+                                    .addPanelWidget(new ImageWidget(0,0, 10, 10,CLOWNFISH, 512, 512, true, Component.empty()));
+                        }
+                        s.rebuildCategory();
+                        s.rebuildPanel();
+                    }
+                })
                 .addPanelWidget(new ButtonBuilder(Component.literal("AlinLib Conf"), (s) -> AlinLib.MINECRAFT.setScreen(ConfigScreen.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #0"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #1"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #2"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #3"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #4"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #5"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #6"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #7"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #8"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.literal("Button #9"), (s) -> AlinLib.MINECRAFT.setScreen(this.build(parent))).build())
+                .addPanelWidget(new ButtonWithIconBuilder(Component.literal("ЯЙЦАААААААААААААААААААААААААААААААААААА"), CLOWNFISH).build())
+                .addPanelWidget(new ButtonWithIconBuilder(Component.literal("Кнопка с клоуном"), CLOWNFISH).build())
+                .addPanelWidget(new ButtonWithIconBuilder(Component.literal("Button #-1"), CLOWNFISH).setCentered(false).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #0"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #1"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #2"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #3"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #4"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #5"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #6"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #7"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #8"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #9"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #10"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #11"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #12"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #13"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #14"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #15"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #16"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #17"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #18"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #19"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #20"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #21"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #22"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #23"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Button #24"), (s) -> isRelaod = true).build())
+                .addPanelWidget(new ButtonBuilder(Component.literal("Secret..."), (s) -> {
+                    isRelaod = true;
+                    isSomething = true;
+                }).build())
 
                 .addWidget(new TextBox(Component.literal("TextBox"), true)
                         .setDescription(Component.literal("Hello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\n")))
                 .addWidget(new ButtonBuilder(Component.literal("ButtonBuilder"), (s) -> new ToastBuilder().setIcon(Items.SALMON).setTitle(Component.literal("AlinLib")).setMessage(Component.literal("Good morning, Mr. Sunfish!")).show(AlinLib.MINECRAFT.getToasts())).build())
+                .addWidget(new ButtonWTLBuilder(Component.literal("ButtonDouble"), Component.literal("Builder"), (s) -> new ToastBuilder().setIcon(Items.SALMON).setTitle(Component.literal("AlinLib")).setMessage(Component.literal("Good morning, Mr. Sunfish!")).show(AlinLib.MINECRAFT.getToasts())).build())
                 .addWidget(new ButtonBooleanBuilder(Component.literal("ButtonBooleanBuilder"), true).build())
                 .addWidget(new ButtonSpriteBuilder(icon).setSize(20, 20).build())
                 .addWidget(new EditBoxBuilder(Component.literal("EditBoxBuilder")).build())
@@ -59,9 +100,7 @@ public class AlinaDemoScreen {
                 .addWidget(new SliderIntegerBuilder(Component.literal("SliderIntegerBuilder")).build())
                 .addWidget(new SliderPercentBuilder(Component.literal("SliderPercentBuilder")).build())
                 .addWidget(new CategoryBox(Component.literal("CategoryBox"))
-                        .addValue(new ImageWidget(0, 0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_HEIGHT, ImFine, 20 ,20, false, Component.empty()))
-                        .addValue(new MessageBox(Component.literal("Чувак, ты думал что-то здесь будет? О, нет. От тебя воняет говном, даже отсюда чувствую. Закрывай, закрывай менюшку, иди нахуй. Разраб крутой, а ты лохонулся сука. Аа, блядь. АА")))
-                        .addValue(new ImageWidget(0, 0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_WIDTH(), something, 480 ,270, true, Component.empty())));
+                        .addValue(new ImageWidget(0, 0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_HEIGHT, ImFine, 20 ,20, false, Component.empty())));
         return screen.build();
     }
 }

@@ -17,6 +17,7 @@ public class ConfigScreenBuilder {
     protected List<AbstractWidget> panelWidgets = new ArrayList<>();
     protected List<AbstractWidget> widgets = new ArrayList<>();
     protected OnTick onTick;
+    protected OnTickScreen onTickScreen;
     protected Screen parent;
     protected int panelSize = AlinLib.bariumConfig.getBoolean("CONFIG_SCREEN.SMALL_PANEL_SIZE", false) ?  130 : 190;
     protected int yL = 40;
@@ -96,6 +97,10 @@ public class ConfigScreenBuilder {
         this.onTick = onTick;
         return this;
     }
+    public ConfigScreenBuilder setOnTickScreen(OnTickScreen onTickScreen){
+        this.onTickScreen = onTickScreen;
+        return this;
+    }
     public OnTick getOnTick(){
         return this.onTick;
     }
@@ -111,6 +116,9 @@ public class ConfigScreenBuilder {
     }
 
     public interface OnTick {
-        void onTick(ConfigScreenBuilder value);
+        void onTick(ConfigScreenBuilder builder);
+    }
+    public interface OnTickScreen {
+        void onTick(ConfigScreenBuilder builder, AbstractConfigScreen screen);
     }
 }

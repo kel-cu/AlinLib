@@ -25,6 +25,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Random;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.CLOWNFISH;
+
 public class AlinLib {
     public static boolean isFabricLoader = false;
     public static final String MODID = "alinlib";
@@ -143,7 +145,7 @@ public class AlinLib {
             };
             String type = types[new Random().nextInt(types.length)];
             new ToastBuilder()
-                    .setIcon(ResourceLocation.fromNamespaceAndPath("alinlib", "textures/gui/widget/toast/clownfish.png"))
+                    .setIcon(CLOWNFISH)
                     .setTitle(Component.literal("AlinLib"))
                     .setMessage(Component.translatable("alinlib.april_fools."+type))
                     .setType(ToastBuilder.Type.WARN)

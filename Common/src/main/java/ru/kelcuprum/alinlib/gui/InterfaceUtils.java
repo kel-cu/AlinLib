@@ -143,6 +143,7 @@ public class InterfaceUtils {
     public ResourceLocation getResourceLocation(String id, String path){
         return ResourceLocation.fromNamespaceAndPath(id, path);
     }
+
     public interface Colors {
         int[] SPECKLE = {0xFFffdc78, 0xFFcbbaa6};
         int SEADRIVE = 0xFF79c738;
@@ -158,26 +159,28 @@ public class InterfaceUtils {
         int BLACK = 0xFF000000;
         int BLACK_ALPHA = 0x37000000;
     }
+
     public interface Icons {
-        ResourceLocation RESET = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/reset.png");
-        ResourceLocation OPTIONS = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/options.png");
-        ResourceLocation LIST = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/list.png");
-        ResourceLocation ADD = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/add.png");
-        ResourceLocation REMOVE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/remove.png");
+        ResourceLocation RESET = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/reset.png");
+        ResourceLocation OPTIONS = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/options.png");
+        ResourceLocation LIST = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/list.png");
+        ResourceLocation ADD = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/add.png");
+        ResourceLocation REMOVE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/remove.png");
 
 
-        ResourceLocation BOTTOM = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/button.png");
-        ResourceLocation DISLIKE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/dislike.png");
-        ResourceLocation DONT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/dont.png");
-        ResourceLocation LEFT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/left.png");
-        ResourceLocation LIKE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/like.png");
-        ResourceLocation MUSIC = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/music.png");
-        ResourceLocation NOTES = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/notes.png");
-        ResourceLocation RIGHT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/right.png");
-        ResourceLocation TOP = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/top.png");
-        ResourceLocation WARN = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/warn.png");
-        ResourceLocation WARNING = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/warning.png");
-        ResourceLocation WHAT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/widget/buttons/what.png");
+        ResourceLocation BOTTOM = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/button.png");
+        ResourceLocation DISLIKE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/dislike.png");
+        ResourceLocation DONT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/dont.png");
+        ResourceLocation LEFT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/left.png");
+        ResourceLocation LIKE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/like.png");
+        ResourceLocation MUSIC = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/music.png");
+        ResourceLocation NOTES = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/notes.png");
+        ResourceLocation RIGHT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/right.png");
+        ResourceLocation TOP = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/top.png");
+        ResourceLocation WARN = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/warn.png");
+        ResourceLocation WARNING = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/warning.png");
+        ResourceLocation WHAT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/what.png");
+        ResourceLocation CLOWNFISH = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/clownfish.png");
     }
 }
 

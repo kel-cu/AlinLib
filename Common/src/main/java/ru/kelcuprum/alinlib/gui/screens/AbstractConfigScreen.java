@@ -44,7 +44,7 @@ public class AbstractConfigScreen extends Screen {
     AbstractWidget reset;
     protected void initPanelButtons(){
         // -=-=-=-=-=-=-=-
-        titleW = addRenderableWidget(new TextBox(10, 5, this.builder.panelSize-20, 30, this.title, true));
+        titleW = addRenderableWidget(new TextBox(10, 5, this.builder.panelSize-20, 30, this.builder.title, true));
         // -=-=-=-=-=-=-=-
         this.descriptionBox = new DescriptionBox(10, 40, this.builder.panelSize-20, height - 75, Component.empty());
         this.descriptionBox.visible = false;
@@ -93,7 +93,6 @@ public class AbstractConfigScreen extends Screen {
                 }
             }
         }));
-        addRenderableWidget(scroller_panel);
         addRenderableWidgets(builder.panelWidgets);
     }
     protected void initCategory(){
@@ -125,8 +124,42 @@ public class AbstractConfigScreen extends Screen {
                 this.descriptionBox.visible = lastCheck;
             }
         }));
-        addRenderableWidget(scroller);
         addRenderableWidgets(builder.widgets);
+    }
+
+    public void removeWidgetFromBuilder(){
+        for (AbstractWidget widget : this.builder.widgets) {
+            removeWidget(widget);
+        }
+        this.builder.widgets.clear();
+    }
+    public void removePanelWidgetFromBuilder(){
+        for (AbstractWidget widget : this.builder.panelWidgets) {
+            removeWidget(widget);
+        }
+        this.builder.panelWidgets.clear();
+    }
+
+    public void rebuildPanel(){
+        removeWidget(scroller_panel);
+        scroller_panel = null;
+        removeWidget(titleW);
+        removeWidget(back);
+        removeWidget(reset);
+        removeWidget(descriptionBox);
+        for (AbstractWidget widget : this.builder.panelWidgets) {
+            removeWidget(widget);
+        }
+        initPanelButtons();
+    }
+
+    public void rebuildCategory(){
+        removeWidget(scroller);
+        scroller = null;
+        for (AbstractWidget widget : this.builder.widgets) {
+            removeWidget(widget);
+        }
+        initCategory();
     }
 
     // Добавление виджетов
@@ -142,6 +175,7 @@ public class AbstractConfigScreen extends Screen {
         if(scroller != null) scroller.onScroll.accept(scroller);
         if(scroller_panel != null) scroller_panel.onScroll.accept(scroller_panel);
         if(builder.onTick != null) builder.onTick.onTick(builder);
+        if(builder.onTickScreen != null) builder.onTickScreen.onTick(builder, this);
     }
 
     @Override
