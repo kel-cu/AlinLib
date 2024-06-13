@@ -4,7 +4,6 @@ import meteordevelopment.starscript.value.ValueMap;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -95,7 +94,7 @@ public class AlinLib {
                 double r = Math.random();
                 int i = Math.random() < 0.5 ? -1 : 1;
                 double m= Math.random() * 10;
-                value = r*i*m;//Math.random();
+                value = r*i*m;
                 if((value > -1.25 && value < -0.75 ) || (value > 0.75 && value < 1.25)){
                     if(isX) funnyCoordinatesX$alinLib.put(info, value); else funnyCoordinatesZ$alinLib.put(info, value);
                     log(info+": "+value+(isX ? " x" : " z"));
