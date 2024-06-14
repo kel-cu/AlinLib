@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.config.parser.info;
 
+import net.minecraft.util.TimeUtil;
 import ru.kelcuprum.alinlib.AlinLib;
 
 import java.text.DateFormat;
@@ -10,7 +11,7 @@ import java.util.GregorianCalendar;
 public class World {
     public static String getTimeType(){
         if(AlinLib.MINECRAFT.level == null) return "";
-        long currentTime = AlinLib.MINECRAFT.level.getDayTime() % 24000;
+        long currentTime = getDayTime();
         if (currentTime < 6000 && currentTime > 0) {
             return AlinLib.localization.getLocalization("time.morning", false, false);
         } else if (currentTime < 12000 && currentTime > 6000) {
@@ -23,9 +24,9 @@ public class World {
             return "";
         }
     }
-    public static String getTime(){
+    public static String getFormattedTime(){
         if(AlinLib.MINECRAFT.level == null) return "";
-        long daytime = AlinLib.MINECRAFT.level.getDayTime()+6000;
+        long daytime = getTime()+6000;
         int hours=(int) (daytime / 1000)%24;
         int minutes = (int) ((daytime % 1000)*60/1000);
         int day = (int) daytime / 1000 / 24;
@@ -43,6 +44,19 @@ public class World {
         return clock;
 
     }
+    public static long getTime(){
+        if(AlinLib.MINECRAFT.level == null) return -1;
+        return AlinLib.MINECRAFT.level.getDayTime();
+    }
+    public static long getDayTime(){
+        if(AlinLib.MINECRAFT.level == null) return -1;
+        return AlinLib.MINECRAFT.level.getDayTime() % 24000;
+    }
+    public static int getDays(){
+        if(AlinLib.MINECRAFT.level == null) return -1;
+        return (int) (AlinLib.MINECRAFT.level.getDayTime() / 24000L);
+    }
+
     public static String getCodeName(){
         return AlinLib.MINECRAFT.level == null ? "unknown" : AlinLib.MINECRAFT.level.dimension().location().toString();
     }

@@ -29,6 +29,14 @@ public class StarScript {
                 .set("version", SharedConstants.getCurrentVersion().getName())
                 .set("loader", AlinLib.MINECRAFT.getVersionType())
                 .set("fps", () -> Value.number(AlinLib.MINECRAFT.getFps()))
+                .set("window", new ValueMap()
+                        .set("width", () -> Value.number(AlinLib.MINECRAFT.getWindow().getWidth()))
+                        .set("height", () -> Value.number(AlinLib.MINECRAFT.getWindow().getHeight()))
+                        .set("scaled_width", () -> Value.number(AlinLib.MINECRAFT.getWindow().getGuiScaledWidth()))
+                        .set("scaled_height", () -> Value.number(AlinLib.MINECRAFT.getWindow().getGuiScaledHeight()))
+                        .set("fullscreen", () -> Value.bool(AlinLib.MINECRAFT.getWindow().isFullscreen()))
+                        .set("vsync", () -> Value.bool(AlinLib.MINECRAFT.options.enableVsync().get()))
+                )
         );
         ss.set("time", () -> Value.string(new SimpleDateFormat(AlinLib.localization.getLocalization("date.time")).format(System.currentTimeMillis())));
         // Player
@@ -60,7 +68,10 @@ public class StarScript {
         ss.set("world", new ValueMap()
                 .set("name", () -> Value.string(AlinLib.MINECRAFT.level != null ? World.getName() : ""))
                 .set("time_type", () -> Value.string(AlinLib.MINECRAFT.level != null ? World.getTimeType() : ""))
-                .set("time", () -> Value.string(AlinLib.MINECRAFT.level != null ? World.getTime() : ""))
+                .set("time_formatted", () -> Value.string(AlinLib.MINECRAFT.level != null ? World.getFormattedTime() : ""))
+                .set("time", () -> Value.number(AlinLib.MINECRAFT.level != null ? World.getTime() : -1))
+                .set("day_time", () -> Value.number(AlinLib.MINECRAFT.level != null ? World.getTime() : -1))
+                .set("days", () -> Value.number(AlinLib.MINECRAFT.level != null ? World.getDays() : -1))
                 .set("difficulty", () -> Value.string(AlinLib.MINECRAFT.level != null ? AlinLib.MINECRAFT.level.getDifficulty().getDisplayName().getString() : ""))
         );
     }
