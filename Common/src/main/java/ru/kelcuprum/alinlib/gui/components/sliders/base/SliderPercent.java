@@ -4,11 +4,13 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;
+import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
@@ -169,6 +171,22 @@ public class SliderPercent extends AbstractSliderButton implements Description {
             if(d > getXComponent()) this.setValueFromMouse(d);
         }
         else super.onDrag(d, e, f, g);
+    }
+
+    @Override
+    public boolean keyPressed(int i, int j, int k) {
+        if(i == GLFW.GLFW_KEY_DELETE && (this instanceof Resetable)) {
+            ((Resetable) this).resetValue();
+            assert AlinLib.MINECRAFT != null;
+            new ToastBuilder()
+                    .setTitle(Component.literal(buttonMessage))
+                    .setMessage(Component.translatable("alinlib.component.value_reset.toast"))
+                    .setIcon(RESET)
+                    .show(AlinLib.MINECRAFT.getToasts());
+            AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
+            return true;
+        }
+        return super.keyPressed(i, j, k);
     }
     //
 

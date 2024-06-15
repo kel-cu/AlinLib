@@ -5,10 +5,12 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
@@ -18,6 +20,7 @@ public class Button extends AbstractButton implements Description {
     protected InterfaceUtils.DesignType type;
     int color;
     private final boolean isCentred;
+    public final String buttonMessage;
     private OnPress onPress;
 
 
@@ -51,6 +54,7 @@ public class Button extends AbstractButton implements Description {
     }
     public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, boolean isCentred, Component label, OnPress onPress) {
         super(x, y, width, height, label);
+        this.buttonMessage = label.getString();
         this.type = type;
         this.color = color;
         this.onPress = onPress;
@@ -128,6 +132,21 @@ public class Button extends AbstractButton implements Description {
         int width = isReset ? 20 : getWidth()-22;
         boolean isHovered = guiGraphics.containsPointInScissor(mouseX, mouseY) && mouseX >= x && mouseY >= this.getY() && mouseX < x + width && mouseY < this.getY() + this.height;
         return isHovered || isFocused();
+    }
+    @Override
+    public boolean keyPressed(int i, int j, int k) {
+        if(i == GLFW.GLFW_KEY_DELETE && (this instanceof Resetable)) {
+            ((Resetable) this).resetValue();
+            assert AlinLib.MINECRAFT != null;
+            new ToastBuilder()
+                    .setTitle(Component.literal(buttonMessage))
+                    .setMessage(Component.translatable("alinlib.component.value_reset.toast"))
+                    .setIcon(RESET)
+                    .show(AlinLib.MINECRAFT.getToasts());
+            AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
+            return true;
+        }
+        return super.keyPressed(i, j, k);
     }
 
     // Мелочи
