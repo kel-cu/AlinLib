@@ -18,6 +18,7 @@
   "alinlib.config.default_design_type": "Стандартный тип дизайна",
   "alinlib.config.config_screen.small_panel_size": "Сокращенная версия панели",
   "alinlib.config.toast.timeline": "Временная шкала в уведомлений",
+  "alinlib.config.button.enable_reset_button": "Кнопка сброса",
 
   "alinlib.config.localization": "Локализация",
   "alinlib.config.localization.extended_coordinates": "Расширенные координаты",
