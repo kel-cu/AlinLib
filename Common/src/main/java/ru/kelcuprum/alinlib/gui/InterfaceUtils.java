@@ -181,6 +181,7 @@ public class InterfaceUtils {
         ResourceLocation WARNING = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/warning.png");
         ResourceLocation WHAT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/what.png");
         ResourceLocation CLOWNFISH = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/clownfish.png");
+        ResourceLocation WIKI = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/wiki.png");
     }
 }
 

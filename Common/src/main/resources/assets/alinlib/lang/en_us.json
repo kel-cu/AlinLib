@@ -6,6 +6,7 @@
 
   "alinlib.component.reset": "Reset",
   "alinlib.component.reset.toast": "The category configs have been reset",
+  "alinlib.component.value_reset.toast": "The value have been reset",
 
   "alinlib.april_fools.white": "Your back is white!",
   "alinlib.april_fools.welcome": "Welcome to The Amazing Digital Interface™",

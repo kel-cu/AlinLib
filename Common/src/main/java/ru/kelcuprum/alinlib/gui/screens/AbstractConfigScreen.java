@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
+import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
@@ -38,6 +39,19 @@ public class AbstractConfigScreen extends Screen {
     protected void init() {
         initPanelButtons();
         initCategory();
+        if(!this.builder.panelWidgets.isEmpty()) this.setFocused(getFirstActiveWidget(this.builder.panelWidgets));
+        else if(!this.builder.widgets.isEmpty()) this.setFocused(getFirstActiveWidget(this.builder.widgets));
+        else this.setFocused(back);
+    }
+    protected AbstractWidget getFirstActiveWidget(List<AbstractWidget> widgets){
+        AbstractWidget widget = widgets.getFirst();
+        for(AbstractWidget abstractWidget : widgets){
+            if(abstractWidget.isActive()) {
+                widget = abstractWidget;
+                break;
+            }
+        }
+        return widget;
     }
     AbstractWidget titleW;
     AbstractWidget back;
@@ -198,6 +212,17 @@ public class AbstractConfigScreen extends Screen {
         assert this.minecraft != null;
         super.renderBackground(guiGraphics, i, j, f);
         InterfaceUtils.renderLeftPanel(guiGraphics, this.builder.panelSize, this.height);
+    }
+
+    @Override
+    public boolean keyPressed(int i, int j, int k) {
+        if(i == GLFW.GLFW_KEY_ESCAPE){
+            if(getFocused() != null && getFocused().isFocused()) {
+                getFocused().setFocused(false);
+                return true;
+            }
+        }
+        return super.keyPressed(i, j, k);
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {

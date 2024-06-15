@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.components.buttons.base;
 
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -7,9 +8,11 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
 
 public class Button extends AbstractButton implements Description {
     protected InterfaceUtils.DesignType type;
@@ -83,12 +86,48 @@ public class Button extends AbstractButton implements Description {
         }
     }
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
-        if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.color);
+        if(isResetable()){
+            if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY), this.color);
+            guiGraphics.blit(RESET, getX()+2, getY()+2, 0f, 0f, getHeight()-4, getHeight()-4, getHeight()-4, getHeight()-4);
+            if(type != null) this.type.renderBackground(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY), this.color);
+        }
+        else if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.color);
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
-        if(InterfaceUtils.isDoesNotFit(getMessage(), getWidth(), getHeight())) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
-        else if(isCentred) InterfaceUtils.drawCenteredString(guiGraphics, AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
-        else guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
+        if(InterfaceUtils.isDoesNotFit(getMessage(), getWidthComponent(), getHeight())) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+        else if(isCentred) InterfaceUtils.drawCenteredString(guiGraphics, AlinLib.MINECRAFT.font, getMessage(), getXComponent() + getWidthComponent() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
+        else guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
+    }
+    // Мелочи V2
+    protected int getWidthComponent(){
+        return isResetable() ? getWidth()-getHeight()-2 : getWidth();
+    }
+    protected int getXComponent(){
+        return isResetable() ? getX()+getHeight()+2 : getX();
+    }
+    protected boolean isResetable(){
+        return this instanceof Resetable && AlinLib.bariumConfig.getBoolean("BUTTON.ENABLE_RESET_BUTTON", true);
+    }
+
+    @Override
+    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j) {
+        int k = this.getX() + i;
+        int l = this.getX() + this.getWidth() - i;
+        if(isResetable()) k+=22;
+        renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j);
+    }
+
+    @Override
+    public void onClick(double d, double e) {
+        if(isResetable() && (getX() < d && d < getX()+getHeight())) ((Resetable) this).resetValue();
+        else super.onClick(d, e);
+    }
+
+    public boolean isHoveredOrFocused(boolean isReset, GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        int x = isReset ? getX() : getX()+22;
+        int width = isReset ? 20 : getWidth()-22;
+        boolean isHovered = guiGraphics.containsPointInScissor(mouseX, mouseY) && mouseX >= x && mouseY >= this.getY() && mouseX < x + width && mouseY < this.getY() + this.height;
+        return isHovered || isFocused();
     }
 
     // Мелочи

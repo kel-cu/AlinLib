@@ -5,6 +5,7 @@
 
   "alinlib.component.reset": "Сброс",
   "alinlib.component.reset.toast": "Конфиги категории были сброшены",
+  "alinlib.component.value_reset.toast": "Значение было сброшено",
 
   "alinlib.april_fools.white": "У вас спина белая!",
   "alinlib.april_fools.welcome": "Добро пожаловать в Удивительный Цифровой Интерфейс™",

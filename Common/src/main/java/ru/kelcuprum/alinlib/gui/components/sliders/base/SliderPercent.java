@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.components.sliders.base;
 
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 import net.minecraft.network.chat.Component;
@@ -7,9 +8,11 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
 
 public class SliderPercent extends AbstractSliderButton implements Description {
     public final InterfaceUtils.DesignType type;
@@ -86,7 +89,11 @@ public class SliderPercent extends AbstractSliderButton implements Description {
         }
     }
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
-        this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value, this);
+        if(isResetable()){
+            if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY), this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY) ? InterfaceUtils.Colors.CLOWNFISH : InterfaceUtils.Colors.SEADRIVE);
+            guiGraphics.blit(RESET, getX()+2, getY()+2, 0f, 0f, getHeight()-4, getHeight()-4, getHeight()-4, getHeight()-4);
+            if(type != null) this.type.renderSliderBackground(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY), this.value, this);
+        } else this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value, this);
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
         if(InterfaceUtils.isDoesNotFit(Component.literal(buttonMessage).append(": ").append(getComponentValue()), getWidth(), getHeight())){
@@ -98,9 +105,9 @@ public class SliderPercent extends AbstractSliderButton implements Description {
             this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
         } else {
             if(isHovered()){
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getX() + (getWidth()/2) - (AlinLib.MINECRAFT.font.width(getComponentValue().getString())/2), getY() + (getHeight() - 8) / 2, 0xffffff);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getXComponent() + (getWidthComponent()/2) - (AlinLib.MINECRAFT.font.width(getComponentValue().getString())/2), getY() + (getHeight() - 8) / 2, 0xffffff);
             } else {
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, buttonMessage, getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, buttonMessage, getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
                 // VOLUME
                 guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getComponentValue().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
             }
@@ -114,6 +121,56 @@ public class SliderPercent extends AbstractSliderButton implements Description {
     protected void updateMessage() {
 
     }
+    // Мелочи V2
+    protected int getWidthComponent(){
+        return isResetable() ? getWidth()-getHeight()-2 : getWidth();
+    }
+    protected int getXComponent(){
+        return isResetable() ? getX()+getHeight()+2 : getX();
+    }
+    protected boolean isResetable(){
+        return this instanceof Resetable && AlinLib.bariumConfig.getBoolean("BUTTON.ENABLE_RESET_BUTTON", true);
+    }
+
+    @Override
+    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j) {
+        int k = this.getX() + i;
+        int l = this.getX() + this.getWidth() - i;
+        if(isResetable()) k+=22;
+        renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j);
+    }
+
+    @Override
+    public void onClick(double d, double e) {
+        if(isResetable()){
+            if(getX() < d && d < getX()+getHeight()){
+                ((Resetable) this).resetValue();
+            } else {
+                this.setValueFromMouse(d);
+            }
+        } else super.onClick(d, e);
+    }
+
+    public boolean isHoveredOrFocused(boolean isReset, GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        int x = isReset ? getX() : getX()+22;
+        int width = isReset ? 20 : getWidth()-22;
+        boolean isHovered = guiGraphics.containsPointInScissor(mouseX, mouseY) && mouseX >= x && mouseY >= this.getY() && mouseX < x + width && mouseY < this.getY() + this.height;
+        return isHovered || isFocused();
+    }
+    // Мелочи v2 Slider
+    private void setValueFromMouse(double d) {
+        this.setValue((d - (double)(this.getXComponent() + 4)) / (double)(getWidthComponent() - 8));
+    }
+
+
+    @Override
+    protected void onDrag(double d, double e, double f, double g) {
+        if(isResetable()) {
+            if(d > getXComponent()) this.setValueFromMouse(d);
+        }
+        else super.onDrag(d, e, f, g);
+    }
+    //
 
     @Override
     protected void applyValue(){

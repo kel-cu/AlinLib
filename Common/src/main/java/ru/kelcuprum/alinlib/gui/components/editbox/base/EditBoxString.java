@@ -4,14 +4,18 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
+import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import java.util.function.Consumer;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
 
 public class EditBoxString extends EditBox implements Description {
     private final InterfaceUtils.DesignType type;
@@ -157,6 +161,23 @@ public class EditBoxString extends EditBox implements Description {
             }
         }
     }
+
+    @Override
+    public boolean keyPressed(int i, int j, int k) {
+        if(i == GLFW.GLFW_KEY_DELETE && (this instanceof Resetable)) {
+            ((Resetable) this).resetValue();
+            assert AlinLib.MINECRAFT != null;
+            new ToastBuilder()
+                    .setTitle(getMessage())
+                    .setMessage(Component.translatable("alinlib.component.value_reset.toast"))
+                    .setIcon(RESET)
+                    .show(AlinLib.MINECRAFT.getToasts());
+            AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
+            return true;
+        }
+        return super.keyPressed(i, j, k);
+    }
+
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick){
         this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.getColor());
     }

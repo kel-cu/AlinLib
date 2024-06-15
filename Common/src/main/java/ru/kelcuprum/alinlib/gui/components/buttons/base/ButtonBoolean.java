@@ -49,10 +49,10 @@ public class ButtonBoolean extends Button {
 
     @Override
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        if(InterfaceUtils.isDoesNotFit(getMessage(), getWidth(), getHeight())){
+        if(InterfaceUtils.isDoesNotFit(getMessage(), getWidthComponent(), getHeight())){
             this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
         } else {
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, buttonMessage, getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+            guiGraphics.drawString(AlinLib.MINECRAFT.font, buttonMessage, getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
             guiGraphics.drawString(AlinLib.MINECRAFT.font, volumeState, getX() + getWidth()-AlinLib.MINECRAFT.font.width(volumeState.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
         }
     }

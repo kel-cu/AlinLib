@@ -3,18 +3,19 @@ package ru.kelcuprum.alinlib.gui.config;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
+import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonWithIconBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.editbox.EditBoxBuilder;
-import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 
+import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.*;
+
 public class LocalizationScreen {
     public static Screen build(Screen parent) {
         ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("alinlib"))
-                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.config"), (s) -> AlinLib.MINECRAFT.setScreen(ConfigScreen.build(parent))).build())
-                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).build());
+                .addPanelWidget(new ButtonWithIconBuilder(Component.translatable("alinlib.config"), OPTIONS, (s) -> AlinLib.MINECRAFT.setScreen(ConfigScreen.build(parent))).setCentered(false).build())
+                .addPanelWidget(new ButtonWithIconBuilder(Component.translatable("alinlib.localization"), LIST, (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setCentered(false).build());
 
         builder.addWidget(new TextBox(Component.translatable("alinlib.localization"), true))
                 .addWidget(new EditBoxBuilder(Component.translatable("alinlib.localization.date.time")).setLocalization(AlinLib.localization, "date.time").build())
