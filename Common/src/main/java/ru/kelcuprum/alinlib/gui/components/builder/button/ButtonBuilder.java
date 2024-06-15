@@ -1,23 +1,13 @@
 package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
-
-public class ButtonBuilder {
-    protected int x = 0;
-    protected int y = 0;
-
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected int color = InterfaceUtils.Colors.CLOWNFISH;
-    protected Component title;
-    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
-    protected Button.OnPress onPress;
+public class ButtonBuilder extends AbstractBuilder {
+    public Button.OnPress onPress;
+    public boolean isCentered;
     public ButtonBuilder(){
         this(Component.empty());
     }
@@ -25,54 +15,69 @@ public class ButtonBuilder {
         this(title, null);
     }
     public ButtonBuilder(Component title, Button.OnPress onPress){
+        super(title);
         this.title = title;
         this.onPress = onPress;
     }
-    // DesignType
+    //
+    // Title
+    public ButtonBuilder setTitle(String title){
+        return (ButtonBuilder) super.setTitle(title);
+    }
+    public ButtonBuilder setTitle(Component title){
+        return (ButtonBuilder) super.setTitle(title);
+    }
+    // Description
+    public ButtonBuilder setDescription(String description){
+        return (ButtonBuilder) super.setDescription(description);
+    }
+    public ButtonBuilder setDescription(Component description){
+        return (ButtonBuilder) super.setDescription(description);
+    }
+    //
     public ButtonBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
+        return (ButtonBuilder) super.setDesignType(designType);
     }
     // Color
     public ButtonBuilder setColor(int color){
-        this.color = color;
+        return (ButtonBuilder) super.setColor(color);
+    }
+    // Position
+    public ButtonBuilder setPosition(int x, int y){
+        return (ButtonBuilder) super.setPosition(x, y);
+    }
+    public ButtonBuilder setX(int x){
+        return (ButtonBuilder) super.setX(x);
+    }
+    public ButtonBuilder setY(int y){
+        return (ButtonBuilder) super.setY(y);
+    }
+    // Size
+    public ButtonBuilder setSize(int width, int height){
+        return (ButtonBuilder) super.setSize(width, height);
+    }
+    public ButtonBuilder setWidth(int width){
+        return (ButtonBuilder) super.setWidth(width);
+    }
+    public ButtonBuilder setHeight(int height){
+        return (ButtonBuilder) super.setHeight(height);
+    }
+    //
+
+    public ButtonBuilder setCentered(boolean bl){
+        this.isCentered = bl;
         return this;
+    }
+    public boolean getCentered(){
+        return this.isCentered;
     }
     // OnPress
     public ButtonBuilder setOnPress(Button.OnPress onPress){
         this.onPress = onPress;
         return this;
     }
-    // Title
-    public ButtonBuilder setTitle(Component title){
-        this.title = title;
-        return this;
-    }
-    // Position
-    public ButtonBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
-    }
-    public ButtonBuilder setX(int x){
-        this.x = x;
-        return this;
-    }
-    public ButtonBuilder setY(int y){
-        this.y = y;
-        return this;
-    }
-    // Size
-    public ButtonBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
-    }
-    public ButtonBuilder setWidth(int width){
-        this.width = width;
-        return this;
-    }
-    public ButtonBuilder setHeight(int height){
-        this.height = height;
-        return this;
+    public Button.OnPress getOnPress(){
+        return this.onPress;
     }
 
     public Button build(){

@@ -2,13 +2,10 @@ package ru.kelcuprum.alinlib.gui.components.builder.editbox;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
-import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
-import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
-import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxColor;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxConfigString;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxLocalization;
@@ -17,26 +14,16 @@ import ru.kelcuprum.alinlib.gui.components.editbox.base.EditBoxString;
 import java.util.function.Consumer;
 
 import static ru.kelcuprum.alinlib.AlinLib.MINECRAFT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
-public class EditBoxBuilder {
-    protected int x = 0;
-    protected int y = 0;
-
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected boolean secret = false;
-    protected String value = "";
-    protected Component title;
-    protected Font font = MINECRAFT.font;
-    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
-    protected Consumer<String> responder;
-    protected Config config;
-    protected String configType;
-    protected Localization localization;
-    protected boolean isColor = false;
-    protected int color;
+public class EditBoxBuilder extends AbstractBuilder {
+    public boolean secret = false;
+    public String value = "";
+    public Font font = MINECRAFT.font;
+    public Consumer<String> responder;
+    public Config config;
+    public String configType;
+    public Localization localization;
+    public boolean isColor = false;
 
     public EditBoxBuilder(){
         this(Component.empty());
@@ -45,48 +32,52 @@ public class EditBoxBuilder {
         this(title, null);
     }
     public EditBoxBuilder(Component title, Consumer<String> responder){
-        this.title = title;
+        super(title);
         this.responder = responder;
     }
-    // DesignType
-    public EditBoxBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
-    }
-    // OnPress
-    public EditBoxBuilder setResponder(Consumer<String> responder){
-        this.responder = responder;
-        return this;
-    }
+    //
     // Title
+    public EditBoxBuilder setTitle(String title){
+        return (EditBoxBuilder) super.setTitle(title);
+    }
     public EditBoxBuilder setTitle(Component title){
-        this.title = title;
-        return this;
+        return (EditBoxBuilder) super.setTitle(title);
+    }
+    // Description
+    public EditBoxBuilder setDescription(String description){
+        return (EditBoxBuilder) super.setDescription(description);
+    }
+    public EditBoxBuilder setDescription(Component description){
+        return (EditBoxBuilder) super.setDescription(description);
+    }
+    //
+    public EditBoxBuilder setDesignType(InterfaceUtils.DesignType designType){
+        return (EditBoxBuilder) super.setDesignType(designType);
     }
     // Position
     public EditBoxBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
+        return (EditBoxBuilder) super.setPosition(x, y);
     }
     public EditBoxBuilder setX(int x){
-        this.x = x;
-        return this;
+        return (EditBoxBuilder) super.setX(x);
     }
     public EditBoxBuilder setY(int y){
-        this.y = y;
-        return this;
+        return (EditBoxBuilder) super.setY(y);
     }
     // Size
     public EditBoxBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
+        return (EditBoxBuilder) super.setSize(width, height);
     }
     public EditBoxBuilder setWidth(int width){
-        this.width = width;
-        return this;
+        return (EditBoxBuilder) super.setWidth(width);
     }
     public EditBoxBuilder setHeight(int height){
-        this.height = height;
+        return (EditBoxBuilder) super.setHeight(height);
+    }
+    //
+    // OnPress
+    public EditBoxBuilder setResponder(Consumer<String> responder){
+        this.responder = responder;
         return this;
     }
     // Config
@@ -102,6 +93,7 @@ public class EditBoxBuilder {
         return this;
     }
     // Color
+    @Override
     public EditBoxBuilder setColor(int color){
         this.color = color;
         this.isColor = true;

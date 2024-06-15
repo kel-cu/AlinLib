@@ -1,28 +1,18 @@
 package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.ButtonBoolean;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
-
-public class ButtonBooleanBuilder {
-    protected int x = 0;
-    protected int y = 0;
-
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected Component title;
-    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
-    protected ButtonBoolean.OnPress onPress;
-    protected Config config;
-    protected String configType;
-    protected boolean defaultValue;
+public class ButtonBooleanBuilder extends AbstractBuilder {
+    public ButtonBoolean.OnPress onPress;
+    public Config config;
+    public String configType;
+    public boolean defaultValue;
     public ButtonBooleanBuilder(boolean defaultValue){
         this(Component.empty(), defaultValue);
     }
@@ -30,55 +20,66 @@ public class ButtonBooleanBuilder {
         this(title, defaultValue, null);
     }
     public ButtonBooleanBuilder(Component title, boolean defaultValue, ButtonBoolean.OnPress onPress){
-        this.title = title;
+        super(title);
         this.defaultValue = defaultValue;
         this.onPress = onPress;
     }
-    // DesignType
-    public ButtonBooleanBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
+    //
+    // Title
+    public ButtonBooleanBuilder setTitle(String title){
+        return (ButtonBooleanBuilder) super.setTitle(title);
     }
+    public ButtonBooleanBuilder setTitle(Component title){
+        return (ButtonBooleanBuilder) super.setTitle(title);
+    }
+    // Description
+    public ButtonBooleanBuilder setDescription(String description){
+        return (ButtonBooleanBuilder) super.setDescription(description);
+    }
+    public ButtonBooleanBuilder setDescription(Component description){
+        return (ButtonBooleanBuilder) super.setDescription(description);
+    }
+    //
+    public ButtonBooleanBuilder setDesignType(InterfaceUtils.DesignType designType){
+        return (ButtonBooleanBuilder) super.setDesignType(designType);
+    }
+    // Color
+    public ButtonBooleanBuilder setColor(int color){
+        return (ButtonBooleanBuilder) super.setColor(color);
+    }
+    // Position
+    public ButtonBooleanBuilder setPosition(int x, int y){
+        return (ButtonBooleanBuilder) super.setPosition(x, y);
+    }
+    public ButtonBooleanBuilder setX(int x){
+        return (ButtonBooleanBuilder) super.setX(x);
+    }
+    public ButtonBooleanBuilder setY(int y){
+        return (ButtonBooleanBuilder) super.setY(y);
+    }
+    // Size
+    public ButtonBooleanBuilder setSize(int width, int height){
+        return (ButtonBooleanBuilder) super.setSize(width, height);
+    }
+    public ButtonBooleanBuilder setWidth(int width){
+        return (ButtonBooleanBuilder) super.setWidth(width);
+    }
+    public ButtonBooleanBuilder setHeight(int height){
+        return (ButtonBooleanBuilder) super.setHeight(height);
+    }
+    //
     // OnPress
     public ButtonBooleanBuilder setOnPress(ButtonBoolean.OnPress onPress){
         this.onPress = onPress;
         return this;
     }
+    public ButtonBoolean.OnPress getOnPress(){
+        return this.onPress;
+    }
     // Config
     public ButtonBooleanBuilder setConfig(Config config, String configType){
         this.config = config;
         this.configType = configType;
-        return this;
-    }
-    // Title
-    public ButtonBooleanBuilder setTitle(Component title){
-        this.title = title;
-        return this;
-    }
-    // Position
-    public ButtonBooleanBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
-    }
-    public ButtonBooleanBuilder setX(int x){
-        this.x = x;
-        return this;
-    }
-    public ButtonBooleanBuilder setY(int y){
-        this.y = y;
-        return this;
-    }
-    // Size
-    public ButtonBooleanBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
-    }
-    public ButtonBooleanBuilder setWidth(int width){
-        this.width = width;
-        return this;
-    }
-    public ButtonBooleanBuilder setHeight(int height){
-        this.height = height;
         return this;
     }
 

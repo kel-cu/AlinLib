@@ -1,29 +1,20 @@
 package ru.kelcuprum.alinlib.gui.components.builder.slider;
 
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigFloat;
 import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderFloat;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+public class SliderFloatBuilder extends AbstractBuilder {
+    public float min = 0;
+    public float max = 1;
 
-public class SliderFloatBuilder {
-    protected int x = 0;
-    protected int y = 0;
-    protected float min = 0;
-    protected float max = 1;
-
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected Component title;
-    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
-    protected SliderFloat.OnPress onPress;
-    protected Config config;
-    protected String configType;
-    protected float defaultValue;
+    public SliderFloat.OnPress onPress;
+    public Config config;
+    public String configType;
+    public float defaultValue;
     public SliderFloatBuilder(){
         this(Component.empty());
     }
@@ -31,49 +22,61 @@ public class SliderFloatBuilder {
         this(title, null);
     }
     public SliderFloatBuilder(Component title, SliderFloat.OnPress onPress){
-        this.title = title;
+        super(title);
         this.onPress = onPress;
     }
-    // DesignType
-    public SliderFloatBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
+
+    //
+    // Title
+    public SliderFloatBuilder setTitle(String title){
+        return (SliderFloatBuilder) super.setTitle(title);
     }
+    public SliderFloatBuilder setTitle(Component title){
+        return (SliderFloatBuilder) super.setTitle(title);
+    }
+    // Description
+    public SliderFloatBuilder setDescription(String description){
+        return (SliderFloatBuilder) super.setDescription(description);
+    }
+    public SliderFloatBuilder setDescription(Component description){
+        return (SliderFloatBuilder) super.setDescription(description);
+    }
+    //
+    public SliderFloatBuilder setDesignType(InterfaceUtils.DesignType designType){
+        return (SliderFloatBuilder) super.setDesignType(designType);
+    }
+    // Color
+    public SliderFloatBuilder setColor(int color){
+        return (SliderFloatBuilder) super.setColor(color);
+    }
+    // Position
+    public SliderFloatBuilder setPosition(int x, int y){
+        return (SliderFloatBuilder) super.setPosition(x, y);
+    }
+    public SliderFloatBuilder setX(int x){
+        return (SliderFloatBuilder) super.setX(x);
+    }
+    public SliderFloatBuilder setY(int y){
+        return (SliderFloatBuilder) super.setY(y);
+    }
+    // Size
+    public SliderFloatBuilder setSize(int width, int height){
+        return (SliderFloatBuilder) super.setSize(width, height);
+    }
+    public SliderFloatBuilder setWidth(int width){
+        return (SliderFloatBuilder) super.setWidth(width);
+    }
+    public SliderFloatBuilder setHeight(int height){
+        return (SliderFloatBuilder) super.setHeight(height);
+    }
+    //
     // OnPress
     public SliderFloatBuilder setOnPress(SliderFloat.OnPress onPress){
         this.onPress = onPress;
         return this;
     }
-    // Title
-    public SliderFloatBuilder setTitle(Component title){
-        this.title = title;
-        return this;
-    }
-    // Position
-    public SliderFloatBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
-    }
-    public SliderFloatBuilder setX(int x){
-        this.x = x;
-        return this;
-    }
-    public SliderFloatBuilder setY(int y){
-        this.y = y;
-        return this;
-    }
-    // Size
-    public SliderFloatBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
-    }
-    public SliderFloatBuilder setWidth(int width){
-        this.width = width;
-        return this;
-    }
-    public SliderFloatBuilder setHeight(int height){
-        this.height = height;
-        return this;
+    public SliderFloat.OnPress getOnPress(){
+        return this.onPress;
     }
     //
     public SliderFloatBuilder setMin(float min){

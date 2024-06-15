@@ -1,30 +1,19 @@
 package ru.kelcuprum.alinlib.gui.components.builder.slider;
 
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
-import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
 import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderInteger;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
-
-public class SliderIntegerBuilder {
-    protected int x = 0;
-    protected int y = 0;
-    protected int min = 0;
-    protected int max = 1;
-
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected Component title;
-    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
-    protected SliderInteger.OnPress onPress;
-    protected Config config;
-    protected String configType;
-    protected int defaultValue;
+public class SliderIntegerBuilder extends AbstractBuilder {
+    public int min = 0;
+    public int max = 1;
+    public SliderInteger.OnPress onPress;
+    public Config config;
+    public String configType;
+    public int defaultValue;
     public SliderIntegerBuilder(){
         this(Component.empty());
     }
@@ -32,49 +21,61 @@ public class SliderIntegerBuilder {
         this(title, null);
     }
     public SliderIntegerBuilder(Component title, SliderInteger.OnPress onPress){
-        this.title = title;
+        super(title);
         this.onPress = onPress;
     }
-    // DesignType
-    public SliderIntegerBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
+
+    //
+    // Title
+    public SliderIntegerBuilder setTitle(String title){
+        return (SliderIntegerBuilder) super.setTitle(title);
     }
+    public SliderIntegerBuilder setTitle(Component title){
+        return (SliderIntegerBuilder) super.setTitle(title);
+    }
+    // Description
+    public SliderIntegerBuilder setDescription(String description){
+        return (SliderIntegerBuilder) super.setDescription(description);
+    }
+    public SliderIntegerBuilder setDescription(Component description){
+        return (SliderIntegerBuilder) super.setDescription(description);
+    }
+    //
+    public SliderIntegerBuilder setDesignType(InterfaceUtils.DesignType designType){
+        return (SliderIntegerBuilder) super.setDesignType(designType);
+    }
+    // Color
+    public SliderIntegerBuilder setColor(int color){
+        return (SliderIntegerBuilder) super.setColor(color);
+    }
+    // Position
+    public SliderIntegerBuilder setPosition(int x, int y){
+        return (SliderIntegerBuilder) super.setPosition(x, y);
+    }
+    public SliderIntegerBuilder setX(int x){
+        return (SliderIntegerBuilder) super.setX(x);
+    }
+    public SliderIntegerBuilder setY(int y){
+        return (SliderIntegerBuilder) super.setY(y);
+    }
+    // Size
+    public SliderIntegerBuilder setSize(int width, int height){
+        return (SliderIntegerBuilder) super.setSize(width, height);
+    }
+    public SliderIntegerBuilder setWidth(int width){
+        return (SliderIntegerBuilder) super.setWidth(width);
+    }
+    public SliderIntegerBuilder setHeight(int height){
+        return (SliderIntegerBuilder) super.setHeight(height);
+    }
+    //
     // OnPress
     public SliderIntegerBuilder setOnPress(SliderInteger.OnPress onPress){
         this.onPress = onPress;
         return this;
     }
-    // Title
-    public SliderIntegerBuilder setTitle(Component title){
-        this.title = title;
-        return this;
-    }
-    // Position
-    public SliderIntegerBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
-    }
-    public SliderIntegerBuilder setX(int x){
-        this.x = x;
-        return this;
-    }
-    public SliderIntegerBuilder setY(int y){
-        this.y = y;
-        return this;
-    }
-    // Size
-    public SliderIntegerBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
-    }
-    public SliderIntegerBuilder setWidth(int width){
-        this.width = width;
-        return this;
-    }
-    public SliderIntegerBuilder setHeight(int height){
-        this.height = height;
-        return this;
+    public SliderInteger.OnPress getOnPress(){
+        return this.onPress;
     }
     //
     public SliderIntegerBuilder setMin(int min){

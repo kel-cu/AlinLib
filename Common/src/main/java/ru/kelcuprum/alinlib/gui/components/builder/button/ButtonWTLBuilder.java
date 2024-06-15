@@ -1,25 +1,15 @@
 package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonWithTwoLabels;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
-
-public class ButtonWTLBuilder {
-    protected int x = 0;
-    protected int y = 0;
-
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected int color = InterfaceUtils.Colors.SPECKLE[0];
-    protected Component leftLabel;
-    protected Component rightLabel;
-    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
-    protected ButtonWithTwoLabels.OnPress onPress;
+public class ButtonWTLBuilder extends AbstractBuilder {
+    public Component leftLabel;
+    public Component rightLabel;
+    public ButtonWithTwoLabels.OnPress onPress;
     public ButtonWTLBuilder(){
         this(Component.empty(), Component.empty());
     }
@@ -27,24 +17,62 @@ public class ButtonWTLBuilder {
         this(leftLabel, rightLabel, null);
     }
     public ButtonWTLBuilder(Component leftLabel, Component rightLabel, ButtonWithTwoLabels.OnPress onPress){
+        super(Component.empty());
         this.leftLabel = leftLabel;
         this.rightLabel = rightLabel;
         this.onPress = onPress;
     }
-    // DesignType
+    //
+    // Title
+    public ButtonWTLBuilder setTitle(String title){
+        return (ButtonWTLBuilder) super.setTitle(title);
+    }
+    public ButtonWTLBuilder setTitle(Component title){
+        return (ButtonWTLBuilder) super.setTitle(title);
+    }
+    // Description
+    public ButtonWTLBuilder setDescription(String description){
+        return (ButtonWTLBuilder) super.setDescription(description);
+    }
+    public ButtonWTLBuilder setDescription(Component description){
+        return (ButtonWTLBuilder) super.setDescription(description);
+    }
+    //
     public ButtonWTLBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
+        return (ButtonWTLBuilder) super.setDesignType(designType);
     }
     // Color
     public ButtonWTLBuilder setColor(int color){
-        this.color = color;
-        return this;
+        return (ButtonWTLBuilder) super.setColor(color);
     }
+    // Position
+    public ButtonWTLBuilder setPosition(int x, int y){
+        return (ButtonWTLBuilder) super.setPosition(x, y);
+    }
+    public ButtonWTLBuilder setX(int x){
+        return (ButtonWTLBuilder) super.setX(x);
+    }
+    public ButtonWTLBuilder setY(int y){
+        return (ButtonWTLBuilder) super.setY(y);
+    }
+    // Size
+    public ButtonWTLBuilder setSize(int width, int height){
+        return (ButtonWTLBuilder) super.setSize(width, height);
+    }
+    public ButtonWTLBuilder setWidth(int width){
+        return (ButtonWTLBuilder) super.setWidth(width);
+    }
+    public ButtonWTLBuilder setHeight(int height){
+        return (ButtonWTLBuilder) super.setHeight(height);
+    }
+    //
     // OnPress
     public ButtonWTLBuilder setOnPress(ButtonWithTwoLabels.OnPress onPress){
         this.onPress = onPress;
         return this;
+    }
+    public ButtonWithTwoLabels.OnPress getOnPress(){
+        return this.onPress;
     }
     // Title
     public ButtonWTLBuilder setLeftLabel(Component leftLabel){
@@ -58,32 +86,6 @@ public class ButtonWTLBuilder {
     public ButtonWTLBuilder setMessages(Component leftLabel, Component rightLabel){
         setLeftLabel(leftLabel);
         setRightLabel(rightLabel);
-        return this;
-    }
-    // Position
-    public ButtonWTLBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
-    }
-    public ButtonWTLBuilder setX(int x){
-        this.x = x;
-        return this;
-    }
-    public ButtonWTLBuilder setY(int y){
-        this.y = y;
-        return this;
-    }
-    // Size
-    public ButtonWTLBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
-    }
-    public ButtonWTLBuilder setWidth(int width){
-        this.width = width;
-        return this;
-    }
-    public ButtonWTLBuilder setHeight(int height){
-        this.height = height;
         return this;
     }
 

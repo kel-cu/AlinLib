@@ -1,31 +1,20 @@
 package ru.kelcuprum.alinlib.gui.components.builder.selector;
 
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorIntegerButton;
 import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
 import ru.kelcuprum.alinlib.gui.components.selector.base.SelectorButton;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
-
-public class SelectorBuilder {
-    protected int x = 0;
-    protected int y = 0;
-
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected int color = InterfaceUtils.Colors.CLOWNFISH;
-    protected Component title;
-    protected String[] list;
-    protected int defaultInt;
-    protected String defaultString;
-    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
-    protected SelectorButton.OnPress onPress;
-    protected Config config;
-    protected String configType;
+public class SelectorBuilder extends AbstractBuilder {
+    public String[] list;
+    public int defaultInt;
+    public String defaultString;
+    public SelectorButton.OnPress onPress;
+    public Config config;
+    public String configType;
     public SelectorBuilder(){
         this(Component.empty());
     }
@@ -33,54 +22,61 @@ public class SelectorBuilder {
         this(title, null);
     }
     public SelectorBuilder(Component title, SelectorButton.OnPress onPress){
-        this.title = title;
+        super(title);
         this.onPress = onPress;
     }
-    // DesignType
+
+    //
+    // Title
+    public SelectorBuilder setTitle(String title){
+        return (SelectorBuilder) super.setTitle(title);
+    }
+    public SelectorBuilder setTitle(Component title){
+        return (SelectorBuilder) super.setTitle(title);
+    }
+    // Description
+    public SelectorBuilder setDescription(String description){
+        return (SelectorBuilder) super.setDescription(description);
+    }
+    public SelectorBuilder setDescription(Component description){
+        return (SelectorBuilder) super.setDescription(description);
+    }
+    //
     public SelectorBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
+        return (SelectorBuilder) super.setDesignType(designType);
     }
     // Color
     public SelectorBuilder setColor(int color){
-        this.color = color;
-        return this;
+        return (SelectorBuilder) super.setColor(color);
     }
+    // Position
+    public SelectorBuilder setPosition(int x, int y){
+        return (SelectorBuilder) super.setPosition(x, y);
+    }
+    public SelectorBuilder setX(int x){
+        return (SelectorBuilder) super.setX(x);
+    }
+    public SelectorBuilder setY(int y){
+        return (SelectorBuilder) super.setY(y);
+    }
+    // Size
+    public SelectorBuilder setSize(int width, int height){
+        return (SelectorBuilder) super.setSize(width, height);
+    }
+    public SelectorBuilder setWidth(int width){
+        return (SelectorBuilder) super.setWidth(width);
+    }
+    public SelectorBuilder setHeight(int height){
+        return (SelectorBuilder) super.setHeight(height);
+    }
+    //
     // OnPress
     public SelectorBuilder setOnPress(SelectorButton.OnPress onPress){
         this.onPress = onPress;
         return this;
     }
-    // Title
-    public SelectorBuilder setTitle(Component title){
-        this.title = title;
-        return this;
-    }
-    // Position
-    public SelectorBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
-    }
-    public SelectorBuilder setX(int x){
-        this.x = x;
-        return this;
-    }
-    public SelectorBuilder setY(int y){
-        this.y = y;
-        return this;
-    }
-    // Size
-    public SelectorBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
-    }
-    public SelectorBuilder setWidth(int width){
-        this.width = width;
-        return this;
-    }
-    public SelectorBuilder setHeight(int height){
-        this.height = height;
-        return this;
+    public SelectorButton.OnPress getOnPress(){
+        return this.onPress;
     }
     //
     public SelectorBuilder setList(String[] list){

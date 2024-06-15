@@ -2,27 +2,17 @@ package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonWithIcon;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.CLOWNFISH;
 
-public class ButtonWithIconBuilder {
-    protected int x = 0;
-    protected int y = 0;
-
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected int color = InterfaceUtils.Colors.SPECKLE[0];
-    protected boolean isCenter = true;
-    protected Component title;
-    protected ResourceLocation icon;
-    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
-    protected ButtonWithIcon.OnPress onPress;
+public class ButtonWithIconBuilder extends AbstractBuilder {
+    public boolean isCenter = true;
+    public ResourceLocation icon;
+    public ButtonWithIcon.OnPress onPress;
     public ButtonWithIconBuilder(){
         this(Component.empty(), CLOWNFISH);
     }
@@ -30,20 +20,54 @@ public class ButtonWithIconBuilder {
         this(title, icon, null);
     }
     public ButtonWithIconBuilder(Component title, ResourceLocation icon, ButtonWithIcon.OnPress onPress){
-        this.title = title;
+        super(title);
         this.icon = icon;
         this.onPress = onPress;
     }
-    // DesignType
+    //
+    // Title
+    public ButtonWithIconBuilder setTitle(String title){
+        return (ButtonWithIconBuilder) super.setTitle(title);
+    }
+    public ButtonWithIconBuilder setTitle(Component title){
+        return (ButtonWithIconBuilder) super.setTitle(title);
+    }
+    // Description
+    public ButtonWithIconBuilder setDescription(String description){
+        return (ButtonWithIconBuilder) super.setDescription(description);
+    }
+    public ButtonWithIconBuilder setDescription(Component description){
+        return (ButtonWithIconBuilder) super.setDescription(description);
+    }
+    //
     public ButtonWithIconBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
+        return (ButtonWithIconBuilder) super.setDesignType(designType);
     }
     // Color
     public ButtonWithIconBuilder setColor(int color){
-        this.color = color;
-        return this;
+        return (ButtonWithIconBuilder) super.setColor(color);
     }
+    // Position
+    public ButtonWithIconBuilder setPosition(int x, int y){
+        return (ButtonWithIconBuilder) super.setPosition(x, y);
+    }
+    public ButtonWithIconBuilder setX(int x){
+        return (ButtonWithIconBuilder) super.setX(x);
+    }
+    public ButtonWithIconBuilder setY(int y){
+        return (ButtonWithIconBuilder) super.setY(y);
+    }
+    // Size
+    public ButtonWithIconBuilder setSize(int width, int height){
+        return (ButtonWithIconBuilder) super.setSize(width, height);
+    }
+    public ButtonWithIconBuilder setWidth(int width){
+        return (ButtonWithIconBuilder) super.setWidth(width);
+    }
+    public ButtonWithIconBuilder setHeight(int height){
+        return (ButtonWithIconBuilder) super.setHeight(height);
+    }
+    //
     // Center
     public ButtonWithIconBuilder setCentered(boolean center){
         this.isCenter = center;
@@ -54,40 +78,8 @@ public class ButtonWithIconBuilder {
         this.onPress = onPress;
         return this;
     }
-    // Title
-    public ButtonWithIconBuilder setTitle(Component title){
-        this.title = title;
-        return this;
-    }
-    public ButtonWithIconBuilder setIcon(ResourceLocation icon){
-        this.icon = icon;
-        return this;
-    }
-    // Position
-    public ButtonWithIconBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
-    }
-    public ButtonWithIconBuilder setX(int x){
-        this.x = x;
-        return this;
-    }
-    public ButtonWithIconBuilder setY(int y){
-        this.y = y;
-        return this;
-    }
-    // Size
-    public ButtonWithIconBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
-    }
-    public ButtonWithIconBuilder setWidth(int width){
-        this.width = width;
-        return this;
-    }
-    public ButtonWithIconBuilder setHeight(int height){
-        this.height = height;
-        return this;
+    public ButtonWithIcon.OnPress getOnPress(){
+        return this.onPress;
     }
 
     public Button build(){
