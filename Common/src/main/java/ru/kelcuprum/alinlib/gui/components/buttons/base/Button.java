@@ -18,7 +18,6 @@ import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
 
 public class Button extends AbstractButton implements Description {
     protected InterfaceUtils.DesignType type;
-    int color;
     private final boolean isCentred;
     public final String buttonMessage;
     private OnPress onPress;
@@ -28,35 +27,28 @@ public class Button extends AbstractButton implements Description {
         this( x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, null);
     }
     public Button(int x, int y, Component label, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.FLAT, label, onPress);
     }
     public Button(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, true, label, onPress);
     }
-    public Button(int x, int y, InterfaceUtils.DesignType type, int color, Component label, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, true, label, onPress);
-    }
-    public Button(int x, int y, InterfaceUtils.DesignType type, int color, boolean isCentred, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, isCentred, label, onPress);
+    public Button(int x, int y, InterfaceUtils.DesignType type, boolean isCentred, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, isCentred, label, onPress);
     }
     //////////
     public Button(int x, int y, int width, int height, Component label){
         this(x, y, width, height, label, null);
     }
     public Button(int x, int y, int width, int height, Component label, OnPress onPress){
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, label, onPress);
+        this(x, y, width, height, InterfaceUtils.DesignType.FLAT, label, onPress);
     }
     public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress){
-        this(x, y, width, height, type, InterfaceUtils.Colors.SEADRIVE, label, onPress);
+        this(x, y, width, height, type, true, label, onPress);
     }
-    public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, Component label, OnPress onPress){
-        this(x, y, width, height, type, color, true, label, onPress);
-    }
-    public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, boolean isCentred, Component label, OnPress onPress) {
+    public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, boolean isCentred, Component label, OnPress onPress) {
         super(x, y, width, height, label);
         this.buttonMessage = label.getString();
         this.type = type;
-        this.color = color;
         this.onPress = onPress;
         this.isCentred = isCentred;
     }
@@ -69,10 +61,6 @@ public class Button extends AbstractButton implements Description {
     }
     public Button setActive(boolean active){
         this.active = active;
-        return this;
-    }
-    public Button setColor(int color) {
-        this.color = color;
         return this;
     }
     public Button setOnPress(OnPress onPress) {
@@ -91,11 +79,11 @@ public class Button extends AbstractButton implements Description {
     }
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         if(isResetable()){
-            if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY), this.color);
+            if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY));
             guiGraphics.blit(RESET, getX()+2, getY()+2, 0f, 0f, getHeight()-4, getHeight()-4, getHeight()-4, getHeight()-4);
-            if(type != null) this.type.renderBackground(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY), this.color);
+            if(type != null) this.type.renderBackground(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY));
         }
-        else if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.color);
+        else if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         if(InterfaceUtils.isDoesNotFit(getMessage(), getWidthComponent(), getHeight())) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
@@ -131,7 +119,7 @@ public class Button extends AbstractButton implements Description {
         int x = isReset ? getX() : getX()+22;
         int width = isReset ? 20 : getWidth()-22;
         boolean isHovered = guiGraphics.containsPointInScissor(mouseX, mouseY) && mouseX >= x && mouseY >= this.getY() && mouseX < x + width && mouseY < this.getY() + this.height;
-        return isHovered || isFocused();
+        return isHovered || (!isReset && isFocused());
     }
     @Override
     public boolean keyPressed(int i, int j, int k) {

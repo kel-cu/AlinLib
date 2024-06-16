@@ -16,7 +16,7 @@ public class ButtonBoolean extends Button {
     public final String buttonMessage;
 
     public ButtonBoolean(int x, int y, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.FLAT, label, onPress);
     }
     public ButtonBoolean(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, true, label, onPress);
@@ -26,7 +26,7 @@ public class ButtonBoolean extends Button {
     }
     ////
     public ButtonBoolean(int x, int y, int width, int height, Component label, OnPress onPress) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, label, onPress);
+        this(x, y, width, height, InterfaceUtils.DesignType.FLAT, label, onPress);
     }
     public ButtonBoolean(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
         this(x, y, width, height, type, true, label, onPress);
@@ -36,7 +36,6 @@ public class ButtonBoolean extends Button {
         this.buttonMessage = label.getString();
         this.value = current;
         this.onPress = onPress;
-        this.setColor(this.value ? InterfaceUtils.Colors.SEADRIVE : InterfaceUtils.Colors.GROUPIE);
         volumeState = this.value ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF;
         this.setMessage(Component.literal(buttonMessage +": ").append(volumeState));
     }
@@ -62,7 +61,6 @@ public class ButtonBoolean extends Button {
     public ButtonBoolean setValue(boolean value){
         this.value = value;
         this.volumeState = this.value ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF;
-        this.setColor(this.value ? InterfaceUtils.Colors.SEADRIVE : InterfaceUtils.Colors.GROUPIE);
         this.setMessage(Component.literal(buttonMessage +": ").append(volumeState));
         return this;
     }

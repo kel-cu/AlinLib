@@ -42,10 +42,6 @@ public class ButtonSpriteBuilder extends AbstractBuilder {
     public ButtonSpriteBuilder setDesignType(InterfaceUtils.DesignType designType){
         return (ButtonSpriteBuilder) super.setDesignType(designType);
     }
-    // Color
-    public ButtonSpriteBuilder setColor(int color){
-        return (ButtonSpriteBuilder) super.setColor(color);
-    }
     // Position
     public ButtonSpriteBuilder setPosition(int x, int y){
         return (ButtonSpriteBuilder) super.setPosition(x, y);
@@ -102,6 +98,6 @@ public class ButtonSpriteBuilder extends AbstractBuilder {
     }
 
     public ButtonSprite build(){
-        return new ButtonSprite(x, y, width, height, designType, color, icon, textureWidth, textureHeight, title, onPress);
+        return new ButtonSprite(x, y, width, height, designType, icon, textureWidth, textureHeight, title, onPress);
     }
 }

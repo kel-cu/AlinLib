@@ -3,7 +3,6 @@ package ru.kelcuprum.alinlib.gui.components.selector.base;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
-import org.jetbrains.annotations.NotNull;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
@@ -16,11 +15,11 @@ public class SelectorButton extends Button {
     protected int position;
     protected String buttonMessage;
     protected OnPress onPress;
-    public SelectorButton(int x, int y, InterfaceUtils.DesignType type, int color, String[] list, int position, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, list, position, label, onPress);
+    public SelectorButton(int x, int y, InterfaceUtils.DesignType type, String[] list, int position, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, list, position, label, onPress);
     }
-    public SelectorButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, String[] list, int position, Component label, OnPress onPress) {
-        super(x, y, width, height, type, color, label, null);
+    public SelectorButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, String[] list, int position, Component label, OnPress onPress) {
+        super(x, y, width, height, type, label, null);
         this.list = list;
         this.onPress = onPress;
         this.position = position;

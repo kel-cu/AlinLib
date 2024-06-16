@@ -45,10 +45,6 @@ public class SelectorBuilder extends AbstractBuilder {
     public SelectorBuilder setDesignType(InterfaceUtils.DesignType designType){
         return (SelectorBuilder) super.setDesignType(designType);
     }
-    // Color
-    public SelectorBuilder setColor(int color){
-        return (SelectorBuilder) super.setColor(color);
-    }
     // Position
     public SelectorBuilder setPosition(int x, int y){
         return (SelectorBuilder) super.setPosition(x, y);
@@ -104,6 +100,6 @@ public class SelectorBuilder extends AbstractBuilder {
             if(this.defaultString != null) return new SelectorStringButton(x, y, width, height, designType, list, config, configType, defaultString, title);
             else return new SelectorIntegerButton(x, y, width, height, designType, list, config, configType, defaultInt, title);
         }
-        return new SelectorButton(x, y, width, height, designType, color, list, defaultInt, title, onPress);
+        return new SelectorButton(x, y, width, height, designType, list, defaultInt, title, onPress);
     }
 }

@@ -18,6 +18,7 @@ import static ru.kelcuprum.alinlib.AlinLib.MINECRAFT;
 public class EditBoxBuilder extends AbstractBuilder {
     public boolean secret = false;
     public String value = "";
+    public int color;
     public Font font = MINECRAFT.font;
     public Consumer<String> responder;
     public Config config;
@@ -93,7 +94,6 @@ public class EditBoxBuilder extends AbstractBuilder {
         return this;
     }
     // Color
-    @Override
     public EditBoxBuilder setColor(int color){
         this.color = color;
         this.isColor = true;

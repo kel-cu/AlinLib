@@ -25,13 +25,10 @@ public class ButtonWithTwoLabels extends Button {
         this(x, y, width, height, AlinLib.getDefaultDesignType(), leftLabel, rightLabel);
     }
     public ButtonWithTwoLabels(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component leftLabel, Component rightLabel) {
-        this(x, y, width, height, type, InterfaceUtils.Colors.SPECKLE[0], leftLabel, rightLabel);
+        this(x, y, width, height, type, leftLabel, rightLabel, null);
     }
-    public ButtonWithTwoLabels(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, Component leftLabel, Component rightLabel) {
-        this(x, y, width, height, type, color, leftLabel, rightLabel, null);
-    }
-    public ButtonWithTwoLabels(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, Component leftLabel, Component rightLabel, OnPress onPress) {
-        super(x, y, width, height, type, color, false, Component.empty(), null);
+    public ButtonWithTwoLabels(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component leftLabel, Component rightLabel, OnPress onPress) {
+        super(x, y, width, height, type, false, Component.empty(), null);
         this.rightLabel = rightLabel;
         this.leftLabel = leftLabel;
         setMessage(Component.empty().append(leftLabel).append(": ").append(rightLabel));

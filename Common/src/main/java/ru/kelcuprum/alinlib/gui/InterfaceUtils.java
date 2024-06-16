@@ -11,8 +11,8 @@ import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
 
 public class InterfaceUtils {
-    private static final WidgetSprites SPRITES = new WidgetSprites(ResourceLocation.withDefaultNamespace("widget/button"), ResourceLocation.withDefaultNamespace("widget/button_disabled"), ResourceLocation.withDefaultNamespace("widget/button_highlighted"));
-    public static final ResourceLocation BACKGROUND_LOCATION = ResourceLocation.withDefaultNamespace("textures/block/dirt.png");
+    private static final WidgetSprites SPRITES = new WidgetSprites(getResourceLocation("widget/button"), getResourceLocation("widget/button_disabled"), getResourceLocation("widget/button_highlighted"));
+    public static final ResourceLocation BACKGROUND_LOCATION = getResourceLocation("textures/block/dirt.png");
 
     // BACKGROUND
     public static void renderBackground(GuiGraphics guiGraphics, Minecraft minecraft){
@@ -82,8 +82,9 @@ public class InterfaceUtils {
     }
     public static final int DEFAULT_HEIGHT = 20;
     public enum DesignType {
-        ALINA(0),
-        FLAT(1),
+//        @Deprecated ALINA(0),
+        FLAT(0),
+        MODERN(1),
         VANILLA(2);
 
 
@@ -92,16 +93,22 @@ public class InterfaceUtils {
         DesignType(Integer type) {
             this.type = type;
         }
-        public void renderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, int color){
+        public void renderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused){
             float state = !active ? 3 : isHoveredOrFocused ? 2 : 1;
             final float f = state / 2 * 0.9F + 0.1F;
             final int background = (int) (255.0F * f);
             switch (this.type){
-                case 0 -> {
-                    guiGraphics.fill(x, y, x + width, y + height-1, background / 2 << 24);
-                    guiGraphics.fill(x, y+height-1, x + width, y + height, color);
+                case 0 -> guiGraphics.fill(x, y, x + width, y + height, background / 2 << 24);
+                case 1 -> {
+                    guiGraphics.fill(x, y, x + width, y + height, background / 2 << 24);
+                    if(isHoveredOrFocused){
+                        guiGraphics.fill(x-1, y-1, x+1+width, y, 0xFFFFFFFF);
+                        guiGraphics.fill(x-1, y+height, x+1+width, y+height+1, 0xFFFFFFFF);
+
+                        guiGraphics.fill(x-1, y, x, y+height, 0xFFFFFFFF);
+                        guiGraphics.fill(x+width, y, x+1+width, y+height, 0xFFFFFFFF);
+                    }
                 }
-                case 1 -> guiGraphics.fill(x, y, x + width, y + height, background / 2 << 24);
                 default -> guiGraphics.blitSprite(SPRITES.get(active, isHoveredOrFocused), x, y, width, height);
             }
         }
@@ -111,21 +118,19 @@ public class InterfaceUtils {
             final int background = (int) (255.0F * f);
 
             switch (this.type){
-                case 0 -> {
-                    guiGraphics.fill(x, y, x + width, y + height-1, background / 2 << 24);
-                    guiGraphics.fill(x, y + height-1, x + width, y + height, isHoveredOrFocused ? Colors.CLOWNFISH : Colors.SEADRIVE);
-                    if(isHoveredOrFocused){
-                        int xS = x + (int)(position * (double)(width - 4));
-                        int yS = y+(height - 8) / 2;
-                        guiGraphics.fill(xS, yS, xS+4, yS+AlinLib.MINECRAFT.font.lineHeight, Colors.CLOWNFISH);
-                    }
-                }
-                case 1 -> {
+                case 0, 1 -> {
                     guiGraphics.fill(x, y, x + width, y + height, background / 2 << 24);
                     if(isHoveredOrFocused){
                         int xS = x + (int)(position * (double)(width - 4));
                         int yS = y+(height - 8) / 2;
                         guiGraphics.fill(xS, yS, xS+4, yS+AlinLib.MINECRAFT.font.lineHeight, Colors.CLOWNFISH);
+                        if(this.type == 1){
+                            guiGraphics.fill(x-1, y-1, x+1+width, y, 0xFFFFFFFF);
+                            guiGraphics.fill(x-1, y+height, x+1+width, y+height+1, 0xFFFFFFFF);
+
+                            guiGraphics.fill(x-1, y, x, y+height, 0xFFFFFFFF);
+                            guiGraphics.fill(x+width, y, x+1+width, y+height, 0xFFFFFFFF);
+                        }
                     }
                 }
                 default -> {
@@ -137,10 +142,10 @@ public class InterfaceUtils {
             }
         }
     }
-    public ResourceLocation getResourceLocation(String path){
+    public static ResourceLocation getResourceLocation(String path){
         return ResourceLocation.withDefaultNamespace(path);
     }
-    public ResourceLocation getResourceLocation(String id, String path){
+    public static ResourceLocation getResourceLocation(String id, String path){
         return ResourceLocation.fromNamespaceAndPath(id, path);
     }
 
@@ -161,27 +166,27 @@ public class InterfaceUtils {
     }
 
     public interface Icons {
-        ResourceLocation RESET = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/reset.png");
-        ResourceLocation OPTIONS = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/options.png");
-        ResourceLocation LIST = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/list.png");
-        ResourceLocation ADD = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/add.png");
-        ResourceLocation REMOVE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/remove.png");
+        ResourceLocation RESET = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/reset.png");
+        ResourceLocation OPTIONS = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/options.png");
+        ResourceLocation LIST = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/list.png");
+        ResourceLocation ADD = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/add.png");
+        ResourceLocation REMOVE = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/remove.png");
 
 
-        ResourceLocation BOTTOM = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/button.png");
-        ResourceLocation DISLIKE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/dislike.png");
-        ResourceLocation DONT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/dont.png");
-        ResourceLocation LEFT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/left.png");
-        ResourceLocation LIKE = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/like.png");
-        ResourceLocation MUSIC = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/music.png");
-        ResourceLocation NOTES = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/notes.png");
-        ResourceLocation RIGHT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/right.png");
-        ResourceLocation TOP = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/top.png");
-        ResourceLocation WARN = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/warn.png");
-        ResourceLocation WARNING = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/warning.png");
-        ResourceLocation WHAT = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/what.png");
-        ResourceLocation CLOWNFISH = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/clownfish.png");
-        ResourceLocation WIKI = ResourceLocation.fromNamespaceAndPath(AlinLib.MODID, "textures/gui/sprites/wiki.png");
+        ResourceLocation BOTTOM = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/button.png");
+        ResourceLocation DISLIKE = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/dislike.png");
+        ResourceLocation DONT = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/dont.png");
+        ResourceLocation LEFT = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/left.png");
+        ResourceLocation LIKE = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/like.png");
+        ResourceLocation MUSIC = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/music.png");
+        ResourceLocation NOTES = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/notes.png");
+        ResourceLocation RIGHT = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/right.png");
+        ResourceLocation TOP = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/top.png");
+        ResourceLocation WARN = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/warn.png");
+        ResourceLocation WARNING = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/warning.png");
+        ResourceLocation WHAT = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/what.png");
+        ResourceLocation CLOWNFISH = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/clownfish.png");
+        ResourceLocation WIKI = getResourceLocation(AlinLib.MODID, "textures/gui/sprites/wiki.png");
     }
 }
 

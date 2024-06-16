@@ -44,10 +44,6 @@ public class SliderIntegerBuilder extends AbstractBuilder {
     public SliderIntegerBuilder setDesignType(InterfaceUtils.DesignType designType){
         return (SliderIntegerBuilder) super.setDesignType(designType);
     }
-    // Color
-    public SliderIntegerBuilder setColor(int color){
-        return (SliderIntegerBuilder) super.setColor(color);
-    }
     // Position
     public SliderIntegerBuilder setPosition(int x, int y){
         return (SliderIntegerBuilder) super.setPosition(x, y);

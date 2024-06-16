@@ -38,10 +38,6 @@ public class ButtonBuilder extends AbstractBuilder {
     public ButtonBuilder setDesignType(InterfaceUtils.DesignType designType){
         return (ButtonBuilder) super.setDesignType(designType);
     }
-    // Color
-    public ButtonBuilder setColor(int color){
-        return (ButtonBuilder) super.setColor(color);
-    }
     // Position
     public ButtonBuilder setPosition(int x, int y){
         return (ButtonBuilder) super.setPosition(x, y);
@@ -81,6 +77,6 @@ public class ButtonBuilder extends AbstractBuilder {
     }
 
     public Button build(){
-        return new Button(x, y, width, height, designType, color, title, onPress);
+        return new Button(x, y, width, height, designType, title, onPress);
     }
 }

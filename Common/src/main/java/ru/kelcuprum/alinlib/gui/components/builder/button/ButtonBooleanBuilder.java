@@ -43,10 +43,6 @@ public class ButtonBooleanBuilder extends AbstractBuilder {
     public ButtonBooleanBuilder setDesignType(InterfaceUtils.DesignType designType){
         return (ButtonBooleanBuilder) super.setDesignType(designType);
     }
-    // Color
-    public ButtonBooleanBuilder setColor(int color){
-        return (ButtonBooleanBuilder) super.setColor(color);
-    }
     // Position
     public ButtonBooleanBuilder setPosition(int x, int y){
         return (ButtonBooleanBuilder) super.setPosition(x, y);

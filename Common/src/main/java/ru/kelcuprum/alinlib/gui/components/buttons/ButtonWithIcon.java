@@ -26,17 +26,14 @@ public class ButtonWithIcon extends Button {
     public ButtonWithIcon(int x, int y, int width, int height, Component leftLabel, ResourceLocation icon) {
         this(x, y, width, height, AlinLib.getDefaultDesignType(), leftLabel, icon);
     }
-    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component leftLabel, ResourceLocation icon) {
-        this(x, y, width, height, type, InterfaceUtils.Colors.SPECKLE[0], leftLabel, icon);
+    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component leftLabel,ResourceLocation icon) {
+        this(x, y, width, height, type, leftLabel, icon, true);
     }
-    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, Component leftLabel,ResourceLocation icon) {
-        this(x, y, width, height, type, color, leftLabel, icon, true);
+    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component leftLabel,ResourceLocation icon, boolean isCenter) {
+        this(x, y, width, height, type, leftLabel, icon, isCenter, null);
     }
-    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, Component leftLabel,ResourceLocation icon, boolean isCenter) {
-        this(x, y, width, height, type, color, leftLabel, icon, isCenter, null);
-    }
-    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, Component label, ResourceLocation icon, boolean isCenter, OnPress onPress) {
-        super(x, y, width, height, type, color, false, label, null);
+    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, ResourceLocation icon, boolean isCenter, OnPress onPress) {
+        super(x, y, width, height, type, false, label, null);
         this.isCenter = isCenter;
         this.onPress = onPress;
         this.icon = icon;

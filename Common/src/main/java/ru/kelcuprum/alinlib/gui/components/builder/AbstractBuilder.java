@@ -14,7 +14,6 @@ public abstract class AbstractBuilder {
 
     protected int width = DEFAULT_WIDTH();
     protected int height = DEFAULT_HEIGHT;
-    protected int color = InterfaceUtils.Colors.CLOWNFISH;
     protected Component title;
     protected Component description;
     protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
@@ -56,14 +55,6 @@ public abstract class AbstractBuilder {
     }
     public InterfaceUtils.DesignType getDesignType(){
         return this.designType;
-    }
-    // Color
-    public AbstractBuilder setColor(int color){
-        this.color = color;
-        return this;
-    }
-    public int getColor(){
-        return this.color;
     }
     // Position
     public AbstractBuilder setPosition(int x, int y){

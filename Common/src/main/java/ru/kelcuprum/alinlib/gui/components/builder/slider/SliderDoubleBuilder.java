@@ -44,10 +44,6 @@ public class SliderDoubleBuilder extends AbstractBuilder {
     public SliderDoubleBuilder setDesignType(InterfaceUtils.DesignType designType){
         return (SliderDoubleBuilder) super.setDesignType(designType);
     }
-    // Color
-    public SliderDoubleBuilder setColor(int color){
-        return (SliderDoubleBuilder) super.setColor(color);
-    }
     // Position
     public SliderDoubleBuilder setPosition(int x, int y){
         return (SliderDoubleBuilder) super.setPosition(x, y);

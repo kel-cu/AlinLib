@@ -106,7 +106,7 @@ public class MessageBox extends AbstractWidget implements Description {
         }
     }
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
-        if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), 0xFFFFFFFF);
+        if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(getMessage(), width-12);

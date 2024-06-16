@@ -48,6 +48,7 @@ public class StarScript {
                 .set("armor", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getArmor() : 0))
                 .set("direction", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getDirection(false) : ""))
                 .set("direction_symbol", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getDirection(true) : ""))
+                .set("ping", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getPing() : -1))
                 .set("hunger", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getHunger() : 0))
                 .set("pos", new ValueMap()
                         .set("x", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getX() : 0))

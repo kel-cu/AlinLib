@@ -41,10 +41,6 @@ public class ButtonWTLBuilder extends AbstractBuilder {
     public ButtonWTLBuilder setDesignType(InterfaceUtils.DesignType designType){
         return (ButtonWTLBuilder) super.setDesignType(designType);
     }
-    // Color
-    public ButtonWTLBuilder setColor(int color){
-        return (ButtonWTLBuilder) super.setColor(color);
-    }
     // Position
     public ButtonWTLBuilder setPosition(int x, int y){
         return (ButtonWTLBuilder) super.setPosition(x, y);
@@ -90,6 +86,6 @@ public class ButtonWTLBuilder extends AbstractBuilder {
     }
 
     public Button build(){
-        return new ButtonWithTwoLabels(x, y, width, height, designType, color, leftLabel, rightLabel, onPress);
+        return new ButtonWithTwoLabels(x, y, width, height, designType, leftLabel, rightLabel, onPress);
     }
 }

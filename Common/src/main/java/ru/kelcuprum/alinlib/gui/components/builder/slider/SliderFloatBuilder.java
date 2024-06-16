@@ -45,10 +45,6 @@ public class SliderFloatBuilder extends AbstractBuilder {
     public SliderFloatBuilder setDesignType(InterfaceUtils.DesignType designType){
         return (SliderFloatBuilder) super.setDesignType(designType);
     }
-    // Color
-    public SliderFloatBuilder setColor(int color){
-        return (SliderFloatBuilder) super.setColor(color);
-    }
     // Position
     public SliderFloatBuilder setPosition(int x, int y){
         return (SliderFloatBuilder) super.setPosition(x, y);

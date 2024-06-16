@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.config.parser.info;
 
+import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -66,6 +67,11 @@ public class Player {
             z = AlinLib.getFunnyValueCoordinate(z, (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), false);
         }
         return Localization.getDoubleRounding(z, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
+    }
+    public static int getPing(){
+        if(AlinLib.MINECRAFT.getCameraEntity() == null && !(AlinLib.MINECRAFT.isSingleplayer() || AlinLib.MINECRAFT.isLocalServer()) && AlinLib.MINECRAFT.getConnection() == null) return -1;
+        if(AlinLib.MINECRAFT.getConnection().getPlayerInfo(AlinLib.MINECRAFT.getCameraEntity().getUUID()) != null) return AlinLib.MINECRAFT.getConnection().getPlayerInfo(AlinLib.MINECRAFT.player.getUUID()).getLatency();
+        return 0;
     }
     public static String getDirection(boolean oneSymbol){
         if(AlinLib.MINECRAFT.player == null) return "-";

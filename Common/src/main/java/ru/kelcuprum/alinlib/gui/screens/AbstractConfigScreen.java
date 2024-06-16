@@ -44,7 +44,7 @@ public class AbstractConfigScreen extends Screen {
         else this.setFocused(back);
     }
     protected AbstractWidget getFirstActiveWidget(List<AbstractWidget> widgets){
-        AbstractWidget widget = widgets.getFirst();
+        AbstractWidget widget = widgets.get(0);
         for(AbstractWidget abstractWidget : widgets){
             if(abstractWidget.isActive()) {
                 widget = abstractWidget;

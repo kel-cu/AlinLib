@@ -20,38 +20,24 @@ public class ButtonSprite extends Button {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), icon, label, onPress);
     }
     public ButtonSprite(int x, int y, InterfaceUtils.DesignType type, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, icon, label, onPress);
-    }
-    public ButtonSprite(int x, int y, InterfaceUtils.DesignType type, int color, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, icon, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, icon, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, onPress);
     }
     //
     public ButtonSprite(int x, int y, InterfaceUtils.DesignType type, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, icon, iconWidth, iconHeight, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, icon, iconWidth, iconHeight, label, onPress);
     }
 
-    //
-    public ButtonSprite(int x, int y, InterfaceUtils.DesignType type, int color, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, icon, iconWidth, iconHeight, label, onPress);
-    }
     //////
     public ButtonSprite(int x, int y, int width, int height, ResourceLocation icon, Component label, OnPress onPress) {
         this(x, y, width, height, AlinLib.getDefaultDesignType(), icon, label, onPress);
     }
     public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, width, height, type, InterfaceUtils.Colors.SEADRIVE, icon, label, onPress);
-    }
-    public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, width, height, type, color, icon, width, height, label, onPress);
-    }
-    //
-    public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
-        this(x, y, width, height, type, InterfaceUtils.Colors.SEADRIVE, icon, iconWidth, iconHeight, label, onPress);
+        this(x, y, width, height, type, icon, width, height, label, onPress);
     }
 
     //
-    public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
-        super(x, y, width, height, type, color, label, null);
+    public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
+        super(x, y, width, height, type, label, null);
         this.onPress = onPress;
         this.icon = icon;
         this.iconWidth = iconWidth;

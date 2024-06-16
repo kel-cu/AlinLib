@@ -92,7 +92,7 @@ public class SliderPercent extends AbstractSliderButton implements Description {
     }
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
         if(isResetable()){
-            if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY), this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY) ? InterfaceUtils.Colors.CLOWNFISH : InterfaceUtils.Colors.SEADRIVE);
+            if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY));
             guiGraphics.blit(RESET, getX()+2, getY()+2, 0f, 0f, getHeight()-4, getHeight()-4, getHeight()-4, getHeight()-4);
             if(type != null) this.type.renderSliderBackground(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY), this.value, this);
         } else this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value, this);
@@ -157,7 +157,7 @@ public class SliderPercent extends AbstractSliderButton implements Description {
         int x = isReset ? getX() : getX()+22;
         int width = isReset ? 20 : getWidth()-22;
         boolean isHovered = guiGraphics.containsPointInScissor(mouseX, mouseY) && mouseX >= x && mouseY >= this.getY() && mouseX < x + width && mouseY < this.getY() + this.height;
-        return isHovered || isFocused();
+        return isHovered || (!isReset && isFocused());
     }
     // Мелочи v2 Slider
     private void setValueFromMouse(double d) {

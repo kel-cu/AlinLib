@@ -42,10 +42,6 @@ public class SliderPercentBuilder extends AbstractBuilder {
     public SliderPercentBuilder setDesignType(InterfaceUtils.DesignType designType){
         return (SliderPercentBuilder) super.setDesignType(designType);
     }
-    // Color
-    public SliderPercentBuilder setColor(int color){
-        return (SliderPercentBuilder) super.setColor(color);
-    }
     // Position
     public SliderPercentBuilder setPosition(int x, int y){
         return (SliderPercentBuilder) super.setPosition(x, y);
