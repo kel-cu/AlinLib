@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.sliders;
 
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
@@ -15,14 +16,14 @@ public class SliderConfigInteger extends SliderInteger implements Resetable {
     public final String typeConfig;
 
     public SliderConfigInteger(int x, int y, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, min, max, component);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, min, max, component);
     }
     public SliderConfigInteger(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, int min, int max, Component label) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, min, max, label);
     }
     ///
     public SliderConfigInteger(int x, int y, int width, int height, Config config, String typeConfig, int defaultConfig, int min, int max, Component component) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, min, max, component);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, min, max, component);
     }
     public SliderConfigInteger(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, int defaultConfig, int min, int max, Component label) {
         super(x, y, width, height, type, config.getNumber(typeConfig, defaultConfig).intValue(), min, max, label);

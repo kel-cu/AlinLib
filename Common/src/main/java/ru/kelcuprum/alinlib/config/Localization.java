@@ -1,10 +1,10 @@
 package ru.kelcuprum.alinlib.config;
 
 import com.google.gson.JsonObject;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.util.GsonHelper;
+import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
 
 import java.nio.file.Files;
@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Localization {
-    private Parser parser;
+    public static Parser defaultParser = (s) -> AlinLib.starScript.run(AlinLib.starScript.compile(s));
+    private Parser parser = defaultParser;
     private static final int codes = 23;
     private static final Map<String, String> formatCodes = IntStream.range(0, codes)
             .boxed()
@@ -42,8 +43,7 @@ public class Localization {
     }
     public JsonObject getJSONFile(){
         try {
-            Minecraft CLIENT = AlinLib.MINECRAFT;
-            Path localizationFile = CLIENT.gameDirectory.toPath().resolve(String.format("%s/%s.json", filePath, getCodeLocalization()));//new File(CLIENT.gameDirectory + filePath + getCodeLocalization() + ".json");
+            Path localizationFile = Path.of(String.format("%s/%s.json", filePath, getCodeLocalization()));
             if (localizationFile.toFile().exists()) {
                 return GsonHelper.parse(Files.readString(localizationFile));
             } else {
@@ -94,12 +94,11 @@ public class Localization {
         try {
             JsonObject JSONLocalization = getJSONFile();
             JSONLocalization.addProperty(type, text);
-            Minecraft CLIENT = AlinLib.MINECRAFT;
-            Path localizationFile = CLIENT.gameDirectory.toPath().resolve(String.format("%s/%s.json", filePath, getCodeLocalization()));
+            Path localizationFile = Path.of(String.format("%s/%s.json", filePath, getCodeLocalization()));
             Files.createDirectories(localizationFile.getParent());
             Files.writeString(localizationFile, JSONLocalization.toString());
         } catch (Exception e){
-            e.printStackTrace();
+            AlinLib.log(e.getLocalizedMessage(), Level.ERROR);
         }
     }
     public void setParser(Parser parser){
@@ -107,42 +106,41 @@ public class Localization {
     }
 
     // FOR EVERYTHING FUNCTION NOT IN THIS CLASS
-    public static String getRounding(double number){return getRounding(number, false);}
+
+    public static String getRounding(double number){
+        return String.valueOf(getRounding(number, false));
+    }
     public static String getRounding(double number, boolean isToInt){
-        String text = String.format("%.3f", number);
-        if(isToInt) text = text.substring(0, text.length()-4);
-        return text;
+        String value = String.valueOf(getDoubleRounding(number, isToInt));
+        if(isToInt) value = value.split("\\.")[0];
+        return value;
     }
 
-    /**
-     * Получение локализации через функцию Minecraft
-     * @param key
-     * @return
-     */
+    public static double getDoubleRounding(double number){return getDoubleRounding(number, false);}
+    public static double getDoubleRounding(double number, boolean isToInt){
+        return isToInt ? (int) number : round(number, 3);
+    }
+
     public static Component getText(String key){
         return Component.translatable(key);
     }
-    /**
-     * Получение локализации через функцию Minecraft, но в виде String
-     * @param key
-     * @return
-     */
+
     public static String getStringText(String key){
         return toString(getText(key));
     }
 
-    /**
-     * Перевод String в MutableText
-     * @return MutableText
-     */
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+
     public static Component toText(String text){
         return Component.literal(text);
     }
 
-    /**
-     * Перевод Text в String
-     * @return MutableText
-     */
     public static String toString(Component text){
         return text.getString();
     }

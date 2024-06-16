@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "name": "AlinLib (Test)",
+  "id": "alinlibtest",
+  "version": "${version}",
+  "description": "Demo mod for AlinLib",
+  "authors": [
+    "Kel Cuprum (Im_Kel)"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "icon": "assets/alinlibtest/textures/gui/widget/test/well.png",
+  "mixins": [
+    "alinlib.mixin.json"
+  ],
+  "entrypoints": {
+    "client": [
+      "ru.kelcuprum.alinlib.AlinLibTest"
+    ],
+    "modmenu": [
+      "ru.kelcuprum.alinlib.gui.ModMenuIntegration"
+    ]
+  }
+}

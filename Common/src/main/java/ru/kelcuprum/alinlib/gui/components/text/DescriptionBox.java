@@ -28,6 +28,7 @@ public class DescriptionBox extends AbstractWidget{
     }
     public DescriptionBox(int x, int y, int width, int height, Component label, OnPress onPress){
         super(x, y, width, height, label);
+
         this.setActive(false);
     }
     public void setActive(boolean active){
@@ -56,14 +57,15 @@ public class DescriptionBox extends AbstractWidget{
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-        List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(this.description, width);
+        List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(this.description, width-12);
+        guiGraphics.fill(getX(), getY(), getX()+width, getY()+height, 0x75000000);
         int l = 0;
         for(FormattedCharSequence text : list){
             if(getHeight() > ((AlinLib.MINECRAFT.font.lineHeight+3)*(l+2))) {
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, getX(), getY() + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
+                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
                 l++;
             } else {
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, "...", getX(), getY() + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
+                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, "...", getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
                 break;
             };
         }

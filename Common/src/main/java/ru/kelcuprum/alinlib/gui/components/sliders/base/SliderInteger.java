@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.sliders.base;
 
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
@@ -13,7 +14,7 @@ public class SliderInteger extends SliderPercent {
     public String typeInteger = "";
     public OnPress onPress;
     public SliderInteger(int x, int y, int position, int min, int max, Component component) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, position, min, max, component);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), position, min, max, component);
     }
     public SliderInteger(int x, int y, InterfaceUtils.DesignType type, int position, int min, int max, Component label) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, min, max, label, null);
@@ -21,14 +22,14 @@ public class SliderInteger extends SliderPercent {
     }
 
     public SliderInteger(int x, int y, int position, int min, int max, Component component, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, position, min, max, component, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), position, min, max, component, onPress);
     }
     public SliderInteger(int x, int y, InterfaceUtils.DesignType type, int position, int min, int max, Component label, OnPress onPress) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, min, max, label, onPress);
     }
     ////
     public SliderInteger(int x, int y, int width, int height, int position, int min, int max, Component component) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, position, min, max, component);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), position, min, max, component);
     }
     public SliderInteger(int x, int y, int width, int height, InterfaceUtils.DesignType type, int position, int min, int max, Component label) {
         this(x, y, width, height, type, position, min, max, label, null);
@@ -36,7 +37,7 @@ public class SliderInteger extends SliderPercent {
     }
 
     public SliderInteger(int x, int y, int width, int height, int position, int min, int max, Component component, OnPress onPress) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, position, min, max, component, onPress);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), position, min, max, component, onPress);
     }
     public SliderInteger(int x, int y, int width, int height, InterfaceUtils.DesignType type, int position, int min, int max, Component label, OnPress onPress) {
         super(x, y, width, height, type, label);

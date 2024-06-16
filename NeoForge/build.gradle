@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow"
+    id "io.github.goooler.shadow"
 }
 archivesBaseName = rootProject.archives_base_name + "-neoforge"
 
@@ -7,24 +7,8 @@ architectury {
     platformSetupLoomIde()
     neoForge()
 }
-sourceSets {
-    demoClientForge {
-        compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
-
-        compileClasspath += main.output
-        runtimeClasspath += main.output
-    }
-}
 loom {
     accessWidenerPath = project(":Common").loom.accessWidenerPath
-    runs {
-        demoClientForge {
-            client()
-            name = "Demo Client Forge"
-            source sourceSets.demoClientForge
-        }
-    }
 }
 configurations {
     common
@@ -40,6 +24,15 @@ dependencies {
     common(project(path: ":Common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":Common", configuration: "transformProductionNeoForge")) { transitive = false }
 }
+
+def targetJavaVersion = 21
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.encoding = "UTF-8"
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        it.options.release = targetJavaVersion
+    }
+}
 test {
     useJUnitPlatform()
 }
@@ -47,7 +40,7 @@ test {
 processResources {
     inputs.property "version", project.version
 
-    filesMatching("META-INF/mods.toml") {
+    filesMatching("META-INF/neoforge.mods.toml") {
         expand "version": project.version
     }
 }

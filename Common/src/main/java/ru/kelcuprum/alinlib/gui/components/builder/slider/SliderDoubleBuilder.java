@@ -3,26 +3,17 @@ package ru.kelcuprum.alinlib.gui.components.builder.slider;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigDouble;
 import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderDouble;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
-
-public class SliderDoubleBuilder {
-    protected int x = 0;
-    protected int y = 0;
-    protected double min = 0;
-    protected double max = 1;
-
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected Component title;
-    protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
-    protected SliderDouble.OnPress onPress;
-    protected Config config;
-    protected String configType;
-    protected double defaultValue;
+public class SliderDoubleBuilder extends AbstractBuilder {
+    public double min = 0;
+    public double max = 1;
+    public SliderDouble.OnPress onPress;
+    public Config config;
+    public String configType;
+    public double defaultValue;
     public SliderDoubleBuilder(){
         this(Component.empty());
     }
@@ -30,49 +21,57 @@ public class SliderDoubleBuilder {
         this(title, null);
     }
     public SliderDoubleBuilder(Component title, SliderDouble.OnPress onPress){
-        this.title = title;
+        super(title);
         this.onPress = onPress;
     }
-    // DesignType
-    public SliderDoubleBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
+
+    //
+    // Title
+    public SliderDoubleBuilder setTitle(String title){
+        return (SliderDoubleBuilder) super.setTitle(title);
     }
+    public SliderDoubleBuilder setTitle(Component title){
+        return (SliderDoubleBuilder) super.setTitle(title);
+    }
+    // Description
+    public SliderDoubleBuilder setDescription(String description){
+        return (SliderDoubleBuilder) super.setDescription(description);
+    }
+    public SliderDoubleBuilder setDescription(Component description){
+        return (SliderDoubleBuilder) super.setDescription(description);
+    }
+    //
+    public SliderDoubleBuilder setDesignType(InterfaceUtils.DesignType designType){
+        return (SliderDoubleBuilder) super.setDesignType(designType);
+    }
+    // Position
+    public SliderDoubleBuilder setPosition(int x, int y){
+        return (SliderDoubleBuilder) super.setPosition(x, y);
+    }
+    public SliderDoubleBuilder setX(int x){
+        return (SliderDoubleBuilder) super.setX(x);
+    }
+    public SliderDoubleBuilder setY(int y){
+        return (SliderDoubleBuilder) super.setY(y);
+    }
+    // Size
+    public SliderDoubleBuilder setSize(int width, int height){
+        return (SliderDoubleBuilder) super.setSize(width, height);
+    }
+    public SliderDoubleBuilder setWidth(int width){
+        return (SliderDoubleBuilder) super.setWidth(width);
+    }
+    public SliderDoubleBuilder setHeight(int height){
+        return (SliderDoubleBuilder) super.setHeight(height);
+    }
+    //
     // OnPress
     public SliderDoubleBuilder setOnPress(SliderDouble.OnPress onPress){
         this.onPress = onPress;
         return this;
     }
-    // Title
-    public SliderDoubleBuilder setTitle(Component title){
-        this.title = title;
-        return this;
-    }
-    // Position
-    public SliderDoubleBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
-    }
-    public SliderDoubleBuilder setX(int x){
-        this.x = x;
-        return this;
-    }
-    public SliderDoubleBuilder setY(int y){
-        this.y = y;
-        return this;
-    }
-    // Size
-    public SliderDoubleBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
-    }
-    public SliderDoubleBuilder setWidth(int width){
-        this.width = width;
-        return this;
-    }
-    public SliderDoubleBuilder setHeight(int height){
-        this.height = height;
-        return this;
+    public SliderDouble.OnPress getOnPress(){
+        return this.onPress;
     }
     //
     public SliderDoubleBuilder setMin(double min){

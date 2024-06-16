@@ -1,7 +1,7 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "8.1.1" apply false
-    id "architectury-plugin" version "3.4+"
-    id "dev.architectury.loom" version "1.4+" apply false
+    id "io.github.goooler.shadow" version "8.1.7" apply false
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "1.6-SNAPSHOT" apply false
     id "io.github.p03w.machete" version "2.+" apply false
 }
 
@@ -15,12 +15,15 @@ subprojects {
     loom {
         silentMojangMappingsLicense()
     }
+    configurations {shadowCommon}
     dependencies {
+        implementation("com.google.code.gson:gson:2.10.1")
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
         mappings loom.layered() {
             officialMojangMappings()
-            parchment("org.parchmentmc.data:parchment-${rootProject.mc_parchment_version}:${rootProject.parchment_version}@zip")
+//            parchment("org.parchmentmc.data:parchment-${rootProject.mc_parchment_version}:${rootProject.parchment_version}@zip")
         }
+        shadowCommon(implementation("meteordevelopment:starscript:0.2.2"))
     }
 
     machete {
@@ -41,14 +44,20 @@ allprojects {
 
     repositories {
         mavenCentral()
+        mavenLocal()
         maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
         maven { url = "https://maven.neoforged.net/releases/" } // NEOFORGE
+        maven { url = "https://maven.meteordev.org/releases" } // STARSCRIPT
         maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
     }
 
+    def targetJavaVersion = 17
+
     tasks.withType(JavaCompile).configureEach {
-        options.encoding = "UTF-8"
-        options.release.set(17)
+        it.options.encoding = "UTF-8"
+        if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+            it.options.release = targetJavaVersion
+        }
     }
 
     java {

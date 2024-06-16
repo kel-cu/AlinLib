@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.selector;
 
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
@@ -15,23 +16,17 @@ public class SelectorIntegerButton extends SelectorButton implements Resetable {
     public String typeConfig;
 
     public SelectorIntegerButton(int x, int y, String[] list, Config config, String typeConfig, int defaultVolume, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, list, config, typeConfig, defaultVolume, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), list, config, typeConfig, defaultVolume, label);
     }
     public SelectorIntegerButton(int x, int y, InterfaceUtils.DesignType type, String[] list, Config config, String typeConfig, int defaultVolume, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, InterfaceUtils.Colors.SEADRIVE, list, config, typeConfig, defaultVolume, label);
-    }
-    public SelectorIntegerButton(int x, int y, InterfaceUtils.DesignType type, int color, String[] list, Config config, String typeConfig, int defaultVolume, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, list, config, typeConfig, defaultVolume, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, list, config, typeConfig, defaultVolume, label);
     }
     //
     public SelectorIntegerButton(int x, int y, int width, int height, String[] list, Config config, String typeConfig, int defaultVolume, Component label) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, list, config, typeConfig, defaultVolume, label);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), list, config, typeConfig, defaultVolume, label);
     }
     public SelectorIntegerButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, String[] list, Config config, String typeConfig, int defaultVolume, Component label) {
-        this(x, y, width, height, type, InterfaceUtils.Colors.SEADRIVE, list, config, typeConfig, defaultVolume, label);
-    }
-    public SelectorIntegerButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, String[] list, Config config, String typeConfig, int defaultVolume, Component label) {
-        super(x, y, width, height, type, color, list, 0, label, null);
+        super(x, y, width, height, type, list, 0, label, null);
 
         this.defaultVolume = defaultVolume;
         this.typeConfig = typeConfig;

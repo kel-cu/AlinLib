@@ -1,12 +1,69 @@
 {
+  "alinlib": "AlinLib",
   "alinlib.editbox.secret": "Secret :)",
+
+  "alinlib.key.stealth": "Stealth mode",
 
   "alinlib.component.reset": "Reset",
   "alinlib.component.reset.toast": "The category configs have been reset",
+  "alinlib.component.value_reset.toast": "The value have been reset",
 
   "alinlib.april_fools.white": "Your back is white!",
   "alinlib.april_fools.welcome": "Welcome to The Amazing Digital Interface™",
   "alinlib.april_fools.clownfish": "The cackling carousel, it spins & never stops",
+  "alinlib.hb": "It's Kel's birthday! Congratulate him on Discord @Kel_Cu / kelcu.ru/ds",
+
+  "alinlib.config": "Configs",
+
+  "alinlib.config.design": "Design",
+  "alinlib.config.default_design_type": "Default Design Type",
+  "alinlib.config.config_screen.small_panel_size": "Shortened version of the panel",
+  "alinlib.config.toast.timeline": "Toast timeline",
+  "alinlib.config.button.enable_reset_button": "Reset Button",
+
+  "alinlib.config.localization": "Localization",
+  "alinlib.config.localization.extended_coordinates": "Extended Coordinates",
+  "alinlib.config.view.item_off_hand": "Show Item in Offhand",
+
+  "alinlib.config.stealth": "Stealth",
+  "alinlib.config.streamer.stealth": "Stealth mode",
+  "alinlib.config.streamer.stealth.type": "Stealth Algorithm",
+
+
+  "alinlib.localization": "Localizations",
+  "alinlib.localization.date.time": "Time format",
+  "alinlib.localization.unknown": "Unknown",
+  "alinlib.localization.sides": "Sides",
+  "alinlib.localization.north": "North",
+  "alinlib.localization.south": "South",
+  "alinlib.localization.west": "West",
+  "alinlib.localization.east": "East",
+  "alinlib.localization.time": "Time",
+  "alinlib.localization.time.morning": "Morning",
+  "alinlib.localization.time.day": "Day",
+  "alinlib.localization.time.evening": "Evening",
+  "alinlib.localization.time.night": "Night",
+
+  "alinlib.localization.world": "Worlds",
+  "alinlib.localization.world.overworld": "Overworld",
+  "alinlib.localization.world.nether": "Nether",
+  "alinlib.localization.world.the_end": "The End?",
+  "alinlib.localization.world.moon": "The Moon",
+
+  "alinlib.date.time": "hh:mm",
+  "alinlib.time.morning": "Morning",
+  "alinlib.time.day": "Day",
+  "alinlib.time.evening": "Evening",
+  "alinlib.time.night": "Night",
+  "alinlib.north": "North",
+  "alinlib.south": "South",
+  "alinlib.west": "West",
+  "alinlib.east": "East",
+  "alinlib.world.overworld": "Overworld",
+  "alinlib.world.nether": "Nether",
+  "alinlib.world.the_end": "The End?",
+  "alinlib.world.moon": "The Moon",
+  "alinlib.unknown": "Unknown",
 
   "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum"
 }

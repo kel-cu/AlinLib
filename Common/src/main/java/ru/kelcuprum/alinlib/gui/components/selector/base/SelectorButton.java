@@ -15,16 +15,15 @@ public class SelectorButton extends Button {
     protected int position;
     protected String buttonMessage;
     protected OnPress onPress;
-    public SelectorButton(int x, int y, InterfaceUtils.DesignType type, int color, String[] list, int position, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, color, list, position, label, onPress);
+    public SelectorButton(int x, int y, InterfaceUtils.DesignType type, String[] list, int position, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, list, position, label, onPress);
     }
-    public SelectorButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, int color, String[] list, int position, Component label, OnPress onPress) {
-        super(x, y, width, height, type, color, label, null);
+    public SelectorButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, String[] list, int position, Component label, OnPress onPress) {
+        super(x, y, width, height, type, label, null);
         this.list = list;
         this.onPress = onPress;
         this.position = position;
         this.buttonMessage = label.getString();
-        this.setMessage(Component.literal(buttonMessage).append(": ").append(getValue()));
     }
 
 
@@ -62,7 +61,7 @@ public class SelectorButton extends Button {
     // Рендер
     @Override
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        if(InterfaceUtils.isDoesNotFit(getMessage(), getWidth(), getHeight())){
+        if(InterfaceUtils.isDoesNotFit(Component.literal(buttonMessage).append(": ").append(getValue()), getWidthComponent(), getHeight())){
             if(isHoveredOrFocused()){
                 this.setMessage(getValue());
             } else {
@@ -70,7 +69,7 @@ public class SelectorButton extends Button {
             }
             this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
         } else {
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, buttonMessage, getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+            guiGraphics.drawString(AlinLib.MINECRAFT.font, buttonMessage, getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
             // VOLUME
             guiGraphics.drawString(AlinLib.MINECRAFT.font, getValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getValue()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
         }

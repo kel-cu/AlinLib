@@ -14,12 +14,13 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public class ToastBuilder {
-    protected Component title;
-    protected Component message;
+    protected Component title = Component.empty();
+    protected Component message = Component.empty();
     protected ItemStack itemIcon;
     protected ResourceLocation icon;
     protected PlayerSkin playerIcon;
     protected Type type = Type.INFO;
+    protected Number color;
     protected int displayTime = 5000;
     protected Function<Toast.Visibility, Toast.Visibility> visibilityVisitor;
 
@@ -43,7 +44,7 @@ public class ToastBuilder {
     }
 
     public ToastBuilder setIcon(String namespace, String path) {
-        return setIcon(new ResourceLocation(namespace, path));
+        return setIcon(ResourceLocation.fromNamespaceAndPath(namespace, path));
     }
 
     public ToastBuilder setIcon(ResourceLocation icon) {
@@ -66,6 +67,11 @@ public class ToastBuilder {
 
     public ToastBuilder setType(Type type) {
         this.type = type;
+        return this;
+    }
+
+    public ToastBuilder setType(int type) {
+        this.color = type;
         return this;
     }
 

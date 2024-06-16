@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.buttons;
 
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
@@ -14,13 +15,13 @@ public class ButtonConfigBoolean extends ButtonBoolean implements Resetable {
     public final Config config;
     public final String typeConfig;
     public ButtonConfigBoolean(int x, int y, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, label);
     }
     public ButtonConfigBoolean(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, boolean defaultConfig, Component label) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, label);
     }
     public ButtonConfigBoolean(int x, int y, int width, int height, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, typeConfig, defaultConfig, label);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, label);
     }
     public ButtonConfigBoolean(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, boolean defaultConfig, Component label) {
         super(x, y, width, height, type, label, null);

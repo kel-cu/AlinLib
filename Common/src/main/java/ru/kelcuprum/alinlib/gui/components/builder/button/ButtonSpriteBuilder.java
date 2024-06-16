@@ -3,81 +3,83 @@ package ru.kelcuprum.alinlib.gui.components.builder.button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
-import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
 
-public class ButtonSpriteBuilder {
-    protected int x = 0;
-    protected int y = 0;
+public class ButtonSpriteBuilder extends AbstractBuilder {
 
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected int color = InterfaceUtils.Colors.CLOWNFISH;
-    protected Component title = Component.empty();
-
-    protected int textureWidth = DEFAULT_WIDTH();
-    protected int textureHeight = DEFAULT_HEIGHT;
-    protected ResourceLocation icon;
-    protected InterfaceUtils.DesignType designType = InterfaceUtils.DesignType.FLAT;
-    protected Button.OnPress onPress;
+    public int textureWidth = DEFAULT_WIDTH();
+    public int textureHeight = DEFAULT_HEIGHT;
+    public ResourceLocation icon;
+    public ButtonSprite.OnPress onPress;
     public ButtonSpriteBuilder(ResourceLocation icon){
         this(icon, null);
     }
-    public ButtonSpriteBuilder(ResourceLocation icon, Button.OnPress onPress){
+    public ButtonSpriteBuilder(ResourceLocation icon, ButtonSprite.OnPress onPress){
+        super(Component.empty());
         this.icon = icon;
         this.onPress = onPress;
     }
-    // DesignType
-    public ButtonSpriteBuilder setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
-        return this;
+    //
+    // Title
+    public ButtonSpriteBuilder setTitle(String title){
+        return (ButtonSpriteBuilder) super.setTitle(title);
     }
-    // Color
-    public ButtonSpriteBuilder setColor(int color){
-        this.color = color;
-        return this;
-    }
-    // Color
     public ButtonSpriteBuilder setTitle(Component title){
-        this.title = title;
-        return this;
+        return (ButtonSpriteBuilder) super.setTitle(title);
     }
+    // Description
+    public ButtonSpriteBuilder setDescription(String description){
+        return (ButtonSpriteBuilder) super.setDescription(description);
+    }
+    public ButtonSpriteBuilder setDescription(Component description){
+        return (ButtonSpriteBuilder) super.setDescription(description);
+    }
+    //
+    public ButtonSpriteBuilder setDesignType(InterfaceUtils.DesignType designType){
+        return (ButtonSpriteBuilder) super.setDesignType(designType);
+    }
+    // Position
+    public ButtonSpriteBuilder setPosition(int x, int y){
+        return (ButtonSpriteBuilder) super.setPosition(x, y);
+    }
+    public ButtonSpriteBuilder setX(int x){
+        return (ButtonSpriteBuilder) super.setX(x);
+    }
+    public ButtonSpriteBuilder setY(int y){
+        return (ButtonSpriteBuilder) super.setY(y);
+    }
+    // Size
+    public ButtonSpriteBuilder setSize(int width, int height){
+        return (ButtonSpriteBuilder) super.setSize(width, height);
+    }
+    //
     // OnPress
-    public ButtonSpriteBuilder setOnPress(Button.OnPress onPress){
+    public ButtonSpriteBuilder setOnPress(ButtonSprite.OnPress onPress){
         this.onPress = onPress;
         return this;
     }
-    // Title
+    public ButtonSprite.OnPress getOnPress(){
+        return this.onPress;
+    }
+    // Icon
     public ButtonSpriteBuilder setIcon(ResourceLocation icon){
         this.icon = icon;
         return this;
     }
-    // Position
-    public ButtonSpriteBuilder setPosition(int x, int y){
-        setX(x).setY(y);
-        return this;
-    }
-    public ButtonSpriteBuilder setX(int x){
-        this.x = x;
-        return this;
-    }
-    public ButtonSpriteBuilder setY(int y){
-        this.y = y;
-        return this;
-    }
     // Size
-    public ButtonSpriteBuilder setSize(int width, int height){
-        setWidth(width).setHeight(height);
-        return this;
-    }
+    @Override
     public ButtonSpriteBuilder setWidth(int width){
+        if(this.width == textureWidth) this.textureWidth = width;
         this.width = width;
         return this;
     }
+    @Override
     public ButtonSpriteBuilder setHeight(int height){
+        if(this.height == textureHeight) this.textureHeight = height;
         this.height = height;
         return this;
     }
@@ -96,6 +98,6 @@ public class ButtonSpriteBuilder {
     }
 
     public ButtonSprite build(){
-        return new ButtonSprite(x, y, width, height, designType, color, icon, textureWidth, textureHeight, title, onPress);
+        return new ButtonSprite(x, y, width, height, designType, icon, textureWidth, textureHeight, title, onPress);
     }
 }

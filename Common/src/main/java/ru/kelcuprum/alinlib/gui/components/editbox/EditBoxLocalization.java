@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.editbox;
 
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
@@ -15,7 +16,7 @@ public class EditBoxLocalization extends EditBoxString implements Resetable {
 
 
     public EditBoxLocalization(int x, int y, Localization config, String key, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.ALINA, config, key, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), config, key, label);
     }
 
     public EditBoxLocalization(int x, int y, InterfaceUtils.DesignType type, Localization localization, String key, Component label) {
@@ -24,7 +25,7 @@ public class EditBoxLocalization extends EditBoxString implements Resetable {
     }
     //
     public EditBoxLocalization(int x, int y, int width, int height, Localization config, String key, Component label) {
-        this(x, y, width, height, InterfaceUtils.DesignType.ALINA, config, key, label);
+        this(x, y, width, height, AlinLib.getDefaultDesignType(), config, key, label);
     }
 
     public EditBoxLocalization(int x, int y, int width, int height, InterfaceUtils.DesignType type, Localization localization, String key, Component label) {
