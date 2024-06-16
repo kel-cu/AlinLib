@@ -39,9 +39,11 @@ public class AbstractConfigScreen extends Screen {
     protected void init() {
         initPanelButtons();
         initCategory();
-        if(!this.builder.panelWidgets.isEmpty()) this.setFocused(getFirstActiveWidget(this.builder.panelWidgets));
-        else if(!this.builder.widgets.isEmpty()) this.setFocused(getFirstActiveWidget(this.builder.widgets));
-        else this.setFocused(back);
+        if (this.minecraft.getLastInputType().isKeyboard()) {
+            if (!this.builder.panelWidgets.isEmpty()) this.setFocused(getFirstActiveWidget(this.builder.panelWidgets));
+            else if (!this.builder.widgets.isEmpty()) this.setFocused(getFirstActiveWidget(this.builder.widgets));
+            else this.setFocused(back);
+        }
     }
     protected AbstractWidget getFirstActiveWidget(List<AbstractWidget> widgets){
         AbstractWidget widget = widgets.get(0);
