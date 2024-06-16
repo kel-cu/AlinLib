@@ -143,10 +143,10 @@ public class InterfaceUtils {
         }
     }
     public static ResourceLocation getResourceLocation(String path){
-        return ResourceLocation.withDefaultNamespace(path);
+        return new ResourceLocation(path);
     }
     public static ResourceLocation getResourceLocation(String id, String path){
-        return ResourceLocation.fromNamespaceAndPath(id, path);
+        return new ResourceLocation(id, path);
     }
 
     public interface Colors {

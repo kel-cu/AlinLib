@@ -22,9 +22,9 @@ import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.CLOWNFISH;
 
 public class AlinaDemoScreen {
-    private static final ResourceLocation icon = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/normal.png");
-    private static final ResourceLocation ImFine = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/imfine.png");
-    private static final ResourceLocation something = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/something.png");
+    private static final ResourceLocation icon = InterfaceUtils.getResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/normal.png");
+    private static final ResourceLocation ImFine = InterfaceUtils.getResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/imfine.png");
+    private static final ResourceLocation something = InterfaceUtils.getResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/something.png");
     private static boolean isRelaod = false;
     private static boolean isSomething = false;
     public Screen build(Screen parent) {

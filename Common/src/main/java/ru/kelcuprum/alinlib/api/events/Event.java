@@ -2,6 +2,7 @@ package ru.kelcuprum.alinlib.api.events;
 
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.ApiStatus;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 /**
  * Base class for Fabric's event implementations.
@@ -43,7 +44,7 @@ public abstract class Event<T> {
      * The ResourceLocation of the default phase.
      * Have a look at {@link EventFactory#createWithPhases} for an explanation of event phases.
      */
-    public static final ResourceLocation DEFAULT_PHASE = ResourceLocation.fromNamespaceAndPath("alinlib", "default");
+    public static final ResourceLocation DEFAULT_PHASE = InterfaceUtils.getResourceLocation("alinlib", "default");
 
     /**
      * Register a listener to the event for the specified phase.

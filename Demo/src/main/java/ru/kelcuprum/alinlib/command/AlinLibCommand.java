@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import ru.kelcuprum.alinlib.AlinLibTest;
+import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.screens.AlinaDemoScreen;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
@@ -50,7 +51,7 @@ public class AlinLibCommand {
                                 ToastBuilder tmrl = new ToastBuilder()
                                         .setTitle(Component.literal("AlibLib (TMRl)"))
                                         .setMessage(Component.literal("Title, msg, resource location"))
-                                        .setIcon(ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/well.png"));
+                                        .setIcon(InterfaceUtils.getResourceLocation(AlinLibTest.MODID, "textures/gui/widget/test/well.png"));
 
                                 tmrl.show(client.getToasts());
                                 tmrl.setType(ToastBuilder.Type.WARN)

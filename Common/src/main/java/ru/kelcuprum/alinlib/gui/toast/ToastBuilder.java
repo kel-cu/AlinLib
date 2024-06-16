@@ -44,7 +44,7 @@ public class ToastBuilder {
     }
 
     public ToastBuilder setIcon(String namespace, String path) {
-        return setIcon(ResourceLocation.fromNamespaceAndPath(namespace, path));
+        return setIcon(InterfaceUtils.getResourceLocation(namespace, path));
     }
 
     public ToastBuilder setIcon(ResourceLocation icon) {
