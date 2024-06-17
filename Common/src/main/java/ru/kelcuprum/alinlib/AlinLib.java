@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.api.KeyMappingHelper;
+import ru.kelcuprum.alinlib.api.events.alinlib.AlinLibEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
@@ -76,6 +77,7 @@ public class AlinLib {
                 .set("id", MODID)
                 .set("version", VERSION))
         );
+        AlinLibEvents.INIT.invoker().onInit();
     }
 
     // Stealth
