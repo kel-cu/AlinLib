@@ -1,9 +1,7 @@
 package ru.kelcuprum.alinlib.api.events.alinlib;
 
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.api.events.Event;
 import ru.kelcuprum.alinlib.api.events.EventFactory;
-import ru.kelcuprum.alinlib.config.parser.StarScript;
 
 public final class AlinLibEvents {
     private AlinLibEvents() {
