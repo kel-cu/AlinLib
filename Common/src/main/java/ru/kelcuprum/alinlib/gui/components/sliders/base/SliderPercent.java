@@ -156,7 +156,7 @@ public class SliderPercent extends AbstractSliderButton implements Description {
     public boolean isHoveredOrFocused(boolean isReset, GuiGraphics guiGraphics, int mouseX, int mouseY) {
         int x = isReset ? getX() : getX()+22;
         int width = isReset ? 20 : getWidth()-22;
-        boolean isHovered = guiGraphics.containsPointInScissor(mouseX, mouseY) && mouseX >= x && mouseY >= this.getY() && mouseX < x + width && mouseY < this.getY() + this.height;
+        boolean isHovered = mouseX >= x && mouseY >= this.getY() && mouseX < x + width && mouseY < this.getY() + this.height;
         return isHovered || (!isReset && isFocused());
     }
     // Мелочи v2 Slider
