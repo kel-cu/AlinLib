@@ -2,7 +2,6 @@ package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
 
@@ -23,40 +22,6 @@ public class ButtonSpriteBuilder extends AbstractBuilder {
         this.icon = icon;
         this.onPress = onPress;
     }
-    //
-    // Title
-    public ButtonSpriteBuilder setTitle(String title){
-        return (ButtonSpriteBuilder) super.setTitle(title);
-    }
-    public ButtonSpriteBuilder setTitle(Component title){
-        return (ButtonSpriteBuilder) super.setTitle(title);
-    }
-    // Description
-    public ButtonSpriteBuilder setDescription(String description){
-        return (ButtonSpriteBuilder) super.setDescription(description);
-    }
-    public ButtonSpriteBuilder setDescription(Component description){
-        return (ButtonSpriteBuilder) super.setDescription(description);
-    }
-    //
-    public ButtonSpriteBuilder setDesignType(InterfaceUtils.DesignType designType){
-        return (ButtonSpriteBuilder) super.setDesignType(designType);
-    }
-    // Position
-    public ButtonSpriteBuilder setPosition(int x, int y){
-        return (ButtonSpriteBuilder) super.setPosition(x, y);
-    }
-    public ButtonSpriteBuilder setX(int x){
-        return (ButtonSpriteBuilder) super.setX(x);
-    }
-    public ButtonSpriteBuilder setY(int y){
-        return (ButtonSpriteBuilder) super.setY(y);
-    }
-    // Size
-    public ButtonSpriteBuilder setSize(int width, int height){
-        return (ButtonSpriteBuilder) super.setSize(width, height);
-    }
-    //
     // OnPress
     public ButtonSpriteBuilder setOnPress(ButtonSprite.OnPress onPress){
         this.onPress = onPress;

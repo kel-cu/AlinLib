@@ -2,7 +2,6 @@ package ru.kelcuprum.alinlib.gui.components.builder.slider;
 
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigInteger;
 import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderInteger;
@@ -25,46 +24,6 @@ public class SliderIntegerBuilder extends AbstractBuilder {
         this.onPress = onPress;
     }
 
-    //
-    // Title
-    public SliderIntegerBuilder setTitle(String title){
-        return (SliderIntegerBuilder) super.setTitle(title);
-    }
-    public SliderIntegerBuilder setTitle(Component title){
-        return (SliderIntegerBuilder) super.setTitle(title);
-    }
-    // Description
-    public SliderIntegerBuilder setDescription(String description){
-        return (SliderIntegerBuilder) super.setDescription(description);
-    }
-    public SliderIntegerBuilder setDescription(Component description){
-        return (SliderIntegerBuilder) super.setDescription(description);
-    }
-    //
-    public SliderIntegerBuilder setDesignType(InterfaceUtils.DesignType designType){
-        return (SliderIntegerBuilder) super.setDesignType(designType);
-    }
-    // Position
-    public SliderIntegerBuilder setPosition(int x, int y){
-        return (SliderIntegerBuilder) super.setPosition(x, y);
-    }
-    public SliderIntegerBuilder setX(int x){
-        return (SliderIntegerBuilder) super.setX(x);
-    }
-    public SliderIntegerBuilder setY(int y){
-        return (SliderIntegerBuilder) super.setY(y);
-    }
-    // Size
-    public SliderIntegerBuilder setSize(int width, int height){
-        return (SliderIntegerBuilder) super.setSize(width, height);
-    }
-    public SliderIntegerBuilder setWidth(int width){
-        return (SliderIntegerBuilder) super.setWidth(width);
-    }
-    public SliderIntegerBuilder setHeight(int height){
-        return (SliderIntegerBuilder) super.setHeight(height);
-    }
-    //
     // OnPress
     public SliderIntegerBuilder setOnPress(SliderInteger.OnPress onPress){
         this.onPress = onPress;

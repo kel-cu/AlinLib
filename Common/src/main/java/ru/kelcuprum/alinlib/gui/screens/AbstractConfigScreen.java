@@ -91,8 +91,8 @@ public class AbstractConfigScreen extends Screen {
             scroller.innerHeight = 5;
             if(lastCheck){
                 titleW.setY(5);
-                back.setY(height-30);
-                reset.setY(height-30);
+                back.setY(height-25);
+                reset.setY(height-25);
             } else {
                 titleW.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
                 scroller.innerHeight+=titleW.getHeight()+5;
@@ -103,7 +103,7 @@ public class AbstractConfigScreen extends Screen {
                         scroller.innerHeight += (widget.getHeight()+5);
                     } else widget.setY(-widget.getHeight());
                 }
-                if(scroller.innerHeight >= height-30){
+                if(scroller.innerHeight >= height-25){
                     back.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
                     reset.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
                     scroller.innerHeight += (20);

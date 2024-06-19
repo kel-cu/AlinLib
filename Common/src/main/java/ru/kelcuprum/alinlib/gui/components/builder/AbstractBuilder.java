@@ -1,6 +1,9 @@
 package ru.kelcuprum.alinlib.gui.components.builder;
 
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
@@ -25,49 +28,49 @@ public abstract class AbstractBuilder {
         this.title = title;
     }
     // Title
-    public AbstractBuilder setTitle(String title){
+    public <T extends AbstractBuilder> T setTitle(String title){
         this.title = Component.translatable(title);
-        return this;
+        return (T) this;
     }
-    public AbstractBuilder setTitle(Component title){
+    public <T extends AbstractBuilder> T setTitle(Component title){
         this.title = title;
-        return this;
+        return (T) this;
     }
     public Component getTitle(){
         return this.title;
     }
     // Description
-    public AbstractBuilder setDescription(String description){
+    public <T extends AbstractBuilder> T setDescription(String description){
         this.description = Component.translatable(description);
-        return this;
+        return (T) this;
     }
-    public AbstractBuilder setDescription(Component description){
+    public <T extends AbstractBuilder> T setDescription(Component description){
         this.description = description;
-        return this;
+        return (T) this;
     }
     public Component getDescription() {
         return this.description;
     }
     //
-    public AbstractBuilder setDesignType(InterfaceUtils.DesignType designType){
+    public <T extends AbstractBuilder> T setDesignType(InterfaceUtils.DesignType designType){
         this.designType = designType;
-        return this;
+        return (T) this;
     }
     public InterfaceUtils.DesignType getDesignType(){
         return this.designType;
     }
     // Position
-    public AbstractBuilder setPosition(int x, int y){
+    public <T extends AbstractBuilder> T setPosition(int x, int y){
         setX(x).setY(y);
-        return this;
+        return (T) this;
     }
-    public AbstractBuilder setX(int x){
+    public <T extends AbstractBuilder> T setX(int x){
         this.x = x;
-        return this;
+        return (T) this;
     }
-    public AbstractBuilder setY(int y){
+    public <T extends AbstractBuilder> T setY(int y){
         this.y = y;
-        return this;
+        return (T) this;
     }
     public int getX(){
         return this.x;
@@ -76,17 +79,17 @@ public abstract class AbstractBuilder {
         return this.y;
     }
     // Size
-    public AbstractBuilder setSize(int width, int height){
+    public <T extends AbstractBuilder> T setSize(int width, int height){
         setWidth(width).setHeight(height);
-        return this;
+        return (T) this;
     }
-    public AbstractBuilder setWidth(int width){
+    public <T extends AbstractBuilder> T setWidth(int width){
         this.width = width;
-        return this;
+        return (T) this;
     }
-    public AbstractBuilder setHeight(int height){
+    public <T extends AbstractBuilder> T setHeight(int height){
         this.height = height;
-        return this;
+        return (T) this;
     }
     public int getWidth(){
         return this.width;

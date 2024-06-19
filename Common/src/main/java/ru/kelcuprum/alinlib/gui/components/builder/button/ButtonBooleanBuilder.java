@@ -2,7 +2,6 @@ package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
@@ -24,46 +23,6 @@ public class ButtonBooleanBuilder extends AbstractBuilder {
         this.defaultValue = defaultValue;
         this.onPress = onPress;
     }
-    //
-    // Title
-    public ButtonBooleanBuilder setTitle(String title){
-        return (ButtonBooleanBuilder) super.setTitle(title);
-    }
-    public ButtonBooleanBuilder setTitle(Component title){
-        return (ButtonBooleanBuilder) super.setTitle(title);
-    }
-    // Description
-    public ButtonBooleanBuilder setDescription(String description){
-        return (ButtonBooleanBuilder) super.setDescription(description);
-    }
-    public ButtonBooleanBuilder setDescription(Component description){
-        return (ButtonBooleanBuilder) super.setDescription(description);
-    }
-    //
-    public ButtonBooleanBuilder setDesignType(InterfaceUtils.DesignType designType){
-        return (ButtonBooleanBuilder) super.setDesignType(designType);
-    }
-    // Position
-    public ButtonBooleanBuilder setPosition(int x, int y){
-        return (ButtonBooleanBuilder) super.setPosition(x, y);
-    }
-    public ButtonBooleanBuilder setX(int x){
-        return (ButtonBooleanBuilder) super.setX(x);
-    }
-    public ButtonBooleanBuilder setY(int y){
-        return (ButtonBooleanBuilder) super.setY(y);
-    }
-    // Size
-    public ButtonBooleanBuilder setSize(int width, int height){
-        return (ButtonBooleanBuilder) super.setSize(width, height);
-    }
-    public ButtonBooleanBuilder setWidth(int width){
-        return (ButtonBooleanBuilder) super.setWidth(width);
-    }
-    public ButtonBooleanBuilder setHeight(int height){
-        return (ButtonBooleanBuilder) super.setHeight(height);
-    }
-    //
     // OnPress
     public ButtonBooleanBuilder setOnPress(ButtonBoolean.OnPress onPress){
         this.onPress = onPress;

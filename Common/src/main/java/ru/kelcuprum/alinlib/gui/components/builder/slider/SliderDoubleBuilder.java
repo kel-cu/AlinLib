@@ -2,7 +2,6 @@ package ru.kelcuprum.alinlib.gui.components.builder.slider;
 
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.sliders.SliderConfigDouble;
 import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderDouble;
@@ -24,47 +23,6 @@ public class SliderDoubleBuilder extends AbstractBuilder {
         super(title);
         this.onPress = onPress;
     }
-
-    //
-    // Title
-    public SliderDoubleBuilder setTitle(String title){
-        return (SliderDoubleBuilder) super.setTitle(title);
-    }
-    public SliderDoubleBuilder setTitle(Component title){
-        return (SliderDoubleBuilder) super.setTitle(title);
-    }
-    // Description
-    public SliderDoubleBuilder setDescription(String description){
-        return (SliderDoubleBuilder) super.setDescription(description);
-    }
-    public SliderDoubleBuilder setDescription(Component description){
-        return (SliderDoubleBuilder) super.setDescription(description);
-    }
-    //
-    public SliderDoubleBuilder setDesignType(InterfaceUtils.DesignType designType){
-        return (SliderDoubleBuilder) super.setDesignType(designType);
-    }
-    // Position
-    public SliderDoubleBuilder setPosition(int x, int y){
-        return (SliderDoubleBuilder) super.setPosition(x, y);
-    }
-    public SliderDoubleBuilder setX(int x){
-        return (SliderDoubleBuilder) super.setX(x);
-    }
-    public SliderDoubleBuilder setY(int y){
-        return (SliderDoubleBuilder) super.setY(y);
-    }
-    // Size
-    public SliderDoubleBuilder setSize(int width, int height){
-        return (SliderDoubleBuilder) super.setSize(width, height);
-    }
-    public SliderDoubleBuilder setWidth(int width){
-        return (SliderDoubleBuilder) super.setWidth(width);
-    }
-    public SliderDoubleBuilder setHeight(int height){
-        return (SliderDoubleBuilder) super.setHeight(height);
-    }
-    //
     // OnPress
     public SliderDoubleBuilder setOnPress(SliderDouble.OnPress onPress){
         this.onPress = onPress;

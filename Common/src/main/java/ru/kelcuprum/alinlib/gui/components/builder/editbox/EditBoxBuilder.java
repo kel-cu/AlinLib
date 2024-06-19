@@ -4,7 +4,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxColor;
 import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxConfigString;
@@ -36,46 +35,6 @@ public class EditBoxBuilder extends AbstractBuilder {
         super(title);
         this.responder = responder;
     }
-    //
-    // Title
-    public EditBoxBuilder setTitle(String title){
-        return (EditBoxBuilder) super.setTitle(title);
-    }
-    public EditBoxBuilder setTitle(Component title){
-        return (EditBoxBuilder) super.setTitle(title);
-    }
-    // Description
-    public EditBoxBuilder setDescription(String description){
-        return (EditBoxBuilder) super.setDescription(description);
-    }
-    public EditBoxBuilder setDescription(Component description){
-        return (EditBoxBuilder) super.setDescription(description);
-    }
-    //
-    public EditBoxBuilder setDesignType(InterfaceUtils.DesignType designType){
-        return (EditBoxBuilder) super.setDesignType(designType);
-    }
-    // Position
-    public EditBoxBuilder setPosition(int x, int y){
-        return (EditBoxBuilder) super.setPosition(x, y);
-    }
-    public EditBoxBuilder setX(int x){
-        return (EditBoxBuilder) super.setX(x);
-    }
-    public EditBoxBuilder setY(int y){
-        return (EditBoxBuilder) super.setY(y);
-    }
-    // Size
-    public EditBoxBuilder setSize(int width, int height){
-        return (EditBoxBuilder) super.setSize(width, height);
-    }
-    public EditBoxBuilder setWidth(int width){
-        return (EditBoxBuilder) super.setWidth(width);
-    }
-    public EditBoxBuilder setHeight(int height){
-        return (EditBoxBuilder) super.setHeight(height);
-    }
-    //
     // OnPress
     public EditBoxBuilder setResponder(Consumer<String> responder){
         this.responder = responder;
