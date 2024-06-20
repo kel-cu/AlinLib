@@ -2,8 +2,6 @@ package ru.kelcuprum.alinlib.gui.toast;
 
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -18,7 +16,6 @@ public class ToastBuilder {
     protected Component message = Component.empty();
     protected ItemStack itemIcon;
     protected ResourceLocation icon;
-    protected PlayerSkin playerIcon;
     protected Type type = Type.INFO;
     protected Number color;
     protected int displayTime = 5000;
@@ -52,17 +49,8 @@ public class ToastBuilder {
         return this;
     }
 
-    public ToastBuilder setIcon(AbstractClientPlayer player) {
-        return setIcon(player.getSkin());
-    }
-
-    public ToastBuilder setIcon(PlayerSkin playerIcon) {
-        this.playerIcon = playerIcon;
-        return this;
-    }
-
     public boolean hasIcon() {
-        return this.playerIcon != null || this.itemIcon != null || this.icon != null;
+        return this.itemIcon != null || this.icon != null;
     }
 
     public ToastBuilder setType(Type type) {

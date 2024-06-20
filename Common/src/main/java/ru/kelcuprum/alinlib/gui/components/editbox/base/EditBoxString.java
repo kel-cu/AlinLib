@@ -186,14 +186,6 @@ public class EditBoxString extends EditBox implements Description {
         String volume1 = font.plainSubstrByWidth(secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue(), getX() + getWidth() - (getPositionContent(secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue())));
         guiGraphics.drawString(font, formatter.apply(volume1, displayPos), getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? InterfaceUtils.Colors.GROUPIE : -1);
     }
-
-    @Override
-    public boolean isBordered() {
-        if (tweakBorder) {
-            return false;
-        }
-        return super.isBordered();
-    }
     protected Component description;
     public EditBoxString setDescription(Component description){
         this.description = description;

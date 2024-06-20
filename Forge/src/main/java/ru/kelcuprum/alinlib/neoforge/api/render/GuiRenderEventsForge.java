@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.neoforge.api.render;
 
-import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.minecraftforge.client.event.RenderGuiEvent;
 import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 
 public class GuiRenderEventsForge {

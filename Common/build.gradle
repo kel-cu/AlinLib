@@ -1,6 +1,6 @@
 archivesBaseName = rootProject.archives_base_name + "-common"
 architectury {
-    common("neoforge", "fabric")
+    common("forge", "fabric")
 }
 loom{
     accessWidenerPath = file("src/main/resources/alinlib.accesswidener")

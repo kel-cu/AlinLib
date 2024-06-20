@@ -2,7 +2,6 @@ package ru.kelcuprum.alinlib.gui.toast;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.util.FormattedCharSequence;
@@ -57,7 +56,6 @@ public class AlinaToast implements Toast {
         if (builder.hasIcon()) {
             if (builder.icon != null) guiGraphics.blit(builder.icon, 8, 8, 0.0F, 0.0F, 16, 16, 16, 16);
             else if (builder.itemIcon != null) guiGraphics.renderFakeItem(builder.itemIcon, 8, 8);
-            else if (builder.playerIcon != null) PlayerFaceRenderer.draw(guiGraphics, builder.playerIcon, 8, 8, 16);
         }
         Visibility visibility = (double) l >= builder.displayTime * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
 

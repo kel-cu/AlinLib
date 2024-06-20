@@ -4,14 +4,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
-import net.minecraft.client.gui.components.WidgetSprites;
+//import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
 
 public class InterfaceUtils {
-    private static final WidgetSprites SPRITES = new WidgetSprites(getResourceLocation("widget/button"), getResourceLocation("widget/button_disabled"), getResourceLocation("widget/button_highlighted"));
+//    private static final WidgetSprites SPRITES = new WidgetSprites(getResourceLocation("widget/button"), getResourceLocation("widget/button_disabled"), getResourceLocation("widget/button_highlighted"));
     public static final ResourceLocation BACKGROUND_LOCATION = getResourceLocation("textures/block/dirt.png");
 
     // BACKGROUND
@@ -84,8 +84,7 @@ public class InterfaceUtils {
     public enum DesignType {
 //        @Deprecated ALINA(0),
         FLAT(0),
-        MODERN(1),
-        VANILLA(2);
+        MODERN(1);
 
 
         public final Integer type;
@@ -99,7 +98,7 @@ public class InterfaceUtils {
             final int background = (int) (255.0F * f);
             switch (this.type){
                 case 0 -> guiGraphics.fill(x, y, x + width, y + height, background / 2 << 24);
-                case 1 -> {
+                default -> {
                     guiGraphics.fill(x, y, x + width, y + height, background / 2 << 24);
                     if(isHoveredOrFocused){
                         guiGraphics.fill(x-1, y-1, x+1+width, y, 0xFFFFFFFF);
@@ -109,7 +108,6 @@ public class InterfaceUtils {
                         guiGraphics.fill(x+width, y, x+1+width, y+height, 0xFFFFFFFF);
                     }
                 }
-                default -> guiGraphics.blitSprite(SPRITES.get(active, isHoveredOrFocused), x, y, width, height);
             }
         }
         public void renderSliderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position, AbstractSliderButton component){
@@ -118,7 +116,7 @@ public class InterfaceUtils {
             final int background = (int) (255.0F * f);
 
             switch (this.type){
-                case 0, 1 -> {
+                default -> {
                     guiGraphics.fill(x, y, x + width, y + height, background / 2 << 24);
                     if(isHoveredOrFocused){
                         int xS = x + (int)(position * (double)(width - 4));
@@ -131,12 +129,6 @@ public class InterfaceUtils {
                             guiGraphics.fill(x-1, y, x, y+height, 0xFFFFFFFF);
                             guiGraphics.fill(x+width, y, x+1+width, y+height, 0xFFFFFFFF);
                         }
-                    }
-                }
-                default -> {
-                    guiGraphics.blitSprite(component.getSprite(), x, y, width, height);
-                    if(isHoveredOrFocused){
-                        guiGraphics.blitSprite(component.getHandleSprite(), x + (int)(position * (double)(width - 8)), y, 8, height);
                     }
                 }
             }

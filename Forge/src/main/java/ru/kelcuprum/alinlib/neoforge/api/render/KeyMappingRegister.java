@@ -1,8 +1,8 @@
 package ru.kelcuprum.alinlib.neoforge.api.render;
 
 import net.minecraft.client.KeyMapping;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -131,7 +131,6 @@ public class AlinLib {
     public static InterfaceUtils.DesignType getDefaultDesignType(){
         return switch (bariumConfig.getNumber("DEFAULT_DESIGN_TYPE", 0).intValue()){
             case 1 -> InterfaceUtils.DesignType.MODERN;
-            case 2 -> InterfaceUtils.DesignType.VANILLA;
             default -> InterfaceUtils.DesignType.FLAT;
         };
     }

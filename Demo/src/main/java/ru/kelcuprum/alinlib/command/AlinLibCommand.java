@@ -56,15 +56,6 @@ public class AlinLibCommand {
                                 tmrl.show(client.getToasts());
                                 tmrl.setType(ToastBuilder.Type.WARN)
                                         .show(client.getToasts());
-
-                                ToastBuilder tmp = new ToastBuilder()
-                                        .setTitle(Component.literal("AlibLib (TMP)"))
-                                        .setMessage(Component.literal("Title, msg, player"))
-                                        .setIcon(context.getSource().getPlayer());
-
-                                tmp.show(client.getToasts());
-                                tmp.setType(ToastBuilder.Type.WARN)
-                                        .show(client.getToasts());
                             });
 
                             return 1;

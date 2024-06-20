@@ -1,14 +1,13 @@
 package ru.kelcuprum.alinlib.neoforge;
 
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.ModLoadingContext;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.loading.FMLLoader;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforgespi.language.IModInfo;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.ConfigScreenHandler;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.forgespi.language.IModInfo;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.api.KeyMappingHelper;
 import ru.kelcuprum.alinlib.gui.config.ConfigScreen;
@@ -30,11 +29,10 @@ public class AlinLibNeoForge {
         }
         if (FMLLoader.getDist() == Dist.CLIENT) {
             ModLoadingContext.get().registerExtensionPoint(
-                    IConfigScreenFactory.class,
-                () -> (minecraftClient, screen) -> ConfigScreen.build(screen));
-            final IEventBus bus = ModLoadingContext.get().getActiveContainer().getEventBus();
-            bus.addListener(KeyMappingRegister::registerBindings);
-            NeoForge.EVENT_BUS.addListener(GuiRenderEventsForge::onPostRenderGui);
+                    ConfigScreenHandler.ConfigScreenFactory.class,
+                    () -> new ConfigScreenHandler.ConfigScreenFactory(ConfigScreen::build));
+            MinecraftForge.EVENT_BUS.addListener(KeyMappingRegister::registerBindings);
+            MinecraftForge.EVENT_BUS.addListener(GuiRenderEventsForge::onPostRenderGui);
         }
     }
 }

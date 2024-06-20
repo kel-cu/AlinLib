@@ -1,14 +1,20 @@
 plugins {
     id "io.github.goooler.shadow"
 }
-archivesBaseName = rootProject.archives_base_name + "-neoforge"
+archivesBaseName = rootProject.archives_base_name + "-forge"
 
 architectury {
     platformSetupLoomIde()
-    neoForge()
+    forge()
 }
 loom {
     accessWidenerPath = project(":Common").loom.accessWidenerPath
+
+    forge {
+        convertAccessWideners = true
+
+        mixinConfig "alinlib.mixin.json"
+    }
 }
 configurations {
     common
@@ -19,13 +25,15 @@ configurations {
 }
 
 dependencies {
-    neoForge "net.neoforged:neoforge:${rootProject.forge_version}"
+    forge "net.minecraftforge:forge:${rootProject.forge_version}"
+
+    include "io.github.llamalad7:mixinextras-forge:0.3.6"
 
     common(project(path: ":Common", configuration: "namedElements")) { transitive false }
-    shadowCommon(project(path: ":Common", configuration: "transformProductionNeoForge")) { transitive = false }
+    shadowCommon(project(path: ":Common", configuration: "transformProductionForge")) { transitive = false }
 }
 
-def targetJavaVersion = 21
+def targetJavaVersion = 17
 
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
@@ -35,14 +43,6 @@ tasks.withType(JavaCompile).configureEach {
 }
 test {
     useJUnitPlatform()
-}
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("META-INF/neoforge.mods.toml") {
-        expand "version": project.version
-    }
 }
 
 shadowJar {

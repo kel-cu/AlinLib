@@ -195,24 +195,24 @@ public class AbstractConfigScreen extends Screen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
-        if(mouseX <= this.builder.panelSize){
+    public boolean mouseScrolled(double d, double e, double f) {
+        boolean scr = super.mouseScrolled(d, e, f);
+        if(d <= this.builder.panelSize){
             if (!scr && scroller_panel != null) {
-                scr = scroller_panel.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+                scr = scroller_panel.mouseScrolled(d, e, f);
             }
         } else {
             if (!scr && scroller != null) {
-                scr = scroller.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+                scr = scroller.mouseScrolled(d, e, f);
             }
         }
         return scr;
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f){
+    public void renderBackground(GuiGraphics guiGraphics) {
         assert this.minecraft != null;
-        super.renderBackground(guiGraphics, i, j, f);
+        super.renderBackground(guiGraphics);
         InterfaceUtils.renderLeftPanel(guiGraphics, this.builder.panelSize, this.height);
     }
 
@@ -228,6 +228,7 @@ public class AbstractConfigScreen extends Screen {
     }
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
     }
     public void onClose() {

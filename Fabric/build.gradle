@@ -58,12 +58,6 @@ test {
 
 processResources {
     duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
-    inputs.property "version", project.version
 
     from "${project.rootDir}/LICENSE"
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
-
 }
