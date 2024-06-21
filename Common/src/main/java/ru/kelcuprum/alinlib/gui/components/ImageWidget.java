@@ -6,8 +6,8 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class ImageWidget extends AbstractWidget implements Description {
     protected final ResourceLocation image;

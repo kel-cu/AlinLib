@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.Colors;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -107,10 +107,10 @@ public class ToastBuilder {
 
     public enum Type {
         FLAT(null),
-        INFO(InterfaceUtils.Colors.SEADRIVE),
-        WARN(InterfaceUtils.Colors.CLOWNFISH),
-        DEBUG(InterfaceUtils.Colors.TETRA),
-        ERROR(InterfaceUtils.Colors.GROUPIE);
+        INFO(Colors.SEADRIVE),
+        WARN(Colors.CLOWNFISH),
+        DEBUG(Colors.TETRA),
+        ERROR(Colors.GROUPIE);
 
         public final Integer color;
 

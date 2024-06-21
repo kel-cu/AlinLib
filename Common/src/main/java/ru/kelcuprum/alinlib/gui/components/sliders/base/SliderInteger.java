@@ -4,8 +4,8 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class SliderInteger extends SliderPercent {
     public final int min;

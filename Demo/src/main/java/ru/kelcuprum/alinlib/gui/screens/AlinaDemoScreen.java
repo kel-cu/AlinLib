@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.AlinLibTest;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.ImageWidget;
 import ru.kelcuprum.alinlib.gui.components.builder.button.*;
@@ -19,7 +20,7 @@ import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.config.ConfigScreen;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.CLOWNFISH;
+import static ru.kelcuprum.alinlib.gui.Icons.CLOWNFISH;
 
 public class AlinaDemoScreen {
     private static final ResourceLocation icon = ResourceLocation.fromNamespaceAndPath(AlinLibTest.MODID, "textures/gui/widget/test/normal.png");
@@ -38,7 +39,7 @@ public class AlinaDemoScreen {
                             s.removePanelWidgetFromBuilder();
                             s.removeWidgetFromBuilder();
                             b.addWidget(new MessageBox(Component.literal("Чувак, ты думал что-то здесь будет? О, нет. От тебя воняет говном, даже отсюда чувствую. Закрывай, закрывай менюшку, иди нахуй. Разраб крутой, а ты лохонулся сука. Аа, блядь. АА")))
-                                    .addWidget(new ImageWidget(0, 0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_WIDTH(), something, 480 ,270, true, Component.empty()))
+                                    .addWidget(new ImageWidget(0, 0, GuiUtils.DEFAULT_WIDTH(), GuiUtils.DEFAULT_WIDTH(), something, 480 ,270, true, Component.empty()))
                                     .addPanelWidget(new ButtonBuilder(Component.literal("AlinLib Conf"), (ss) -> AlinLib.MINECRAFT.setScreen(ConfigScreen.build(parent))).build())
                                     .addPanelWidget(new ImageWidget(0,0, 10, 10,CLOWNFISH, 512, 512, true, Component.empty()));
                         }
@@ -100,7 +101,7 @@ public class AlinaDemoScreen {
                 .addWidget(new SliderIntegerBuilder(Component.literal("SliderIntegerBuilder")).build())
                 .addWidget(new SliderPercentBuilder(Component.literal("SliderPercentBuilder")).build())
                 .addWidget(new CategoryBox(Component.literal("CategoryBox")).setDescription(Component.literal("Hello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\nHello, world!\n"))
-                        .addValue(new ImageWidget(0, 0, InterfaceUtils.DEFAULT_WIDTH(), InterfaceUtils.DEFAULT_HEIGHT, ImFine, 20 ,20, false, Component.empty())));
+                        .addValue(new ImageWidget(0, 0, GuiUtils.DEFAULT_WIDTH(), GuiUtils.DEFAULT_HEIGHT, ImFine, 20 ,20, false, Component.empty())));
         return screen.build();
     }
 }

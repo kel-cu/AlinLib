@@ -6,6 +6,7 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
@@ -13,9 +14,9 @@ import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import java.util.function.Consumer;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
+import static ru.kelcuprum.alinlib.gui.Icons.RESET;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class EditBoxString extends EditBox implements Description {
     private final InterfaceUtils.DesignType type;
@@ -139,7 +140,7 @@ public class EditBoxString extends EditBox implements Description {
     }
 
     protected int getColor() {
-        return (getError() ? InterfaceUtils.Colors.GROUPIE : isFocused() ? InterfaceUtils.Colors.CLOWNFISH : InterfaceUtils.Colors.SEADRIVE);
+        return (getError() ? Colors.GROUPIE : isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE);
     }
 
     public EditBoxString setError(boolean error) {
@@ -182,9 +183,9 @@ public class EditBoxString extends EditBox implements Description {
         this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick){
-        guiGraphics.drawString(font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? InterfaceUtils.Colors.GROUPIE : -1);
+        guiGraphics.drawString(font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : -1);
         String volume1 = font.plainSubstrByWidth(secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue(), getX() + getWidth() - (getPositionContent(secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue())));
-        guiGraphics.drawString(font, formatter.apply(volume1, displayPos), getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? InterfaceUtils.Colors.GROUPIE : -1);
+        guiGraphics.drawString(font, formatter.apply(volume1, displayPos), getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : -1);
     }
 
     @Override

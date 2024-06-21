@@ -10,8 +10,8 @@ import ru.kelcuprum.alinlib.gui.components.selector.base.SelectorButton;
 
 import java.util.Arrays;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class SelectorStringButton extends SelectorButton implements Resetable {
     public final String defaultVolume;

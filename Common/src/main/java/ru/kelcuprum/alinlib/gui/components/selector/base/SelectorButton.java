@@ -4,11 +4,12 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class SelectorButton extends Button {
     protected String[] list;
@@ -61,7 +62,7 @@ public class SelectorButton extends Button {
     // Рендер
     @Override
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        if(InterfaceUtils.isDoesNotFit(Component.literal(buttonMessage).append(": ").append(getValue()), getWidthComponent(), getHeight())){
+        if(GuiUtils.isDoesNotFit(Component.literal(buttonMessage).append(": ").append(getValue()), getWidthComponent(), getHeight())){
             if(isHoveredOrFocused()){
                 this.setMessage(getValue());
             } else {

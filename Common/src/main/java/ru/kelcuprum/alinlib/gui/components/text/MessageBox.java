@@ -12,8 +12,8 @@ import ru.kelcuprum.alinlib.gui.components.Description;
 
 import java.util.List;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class MessageBox extends AbstractWidget implements Description {
     private final boolean isCentred;

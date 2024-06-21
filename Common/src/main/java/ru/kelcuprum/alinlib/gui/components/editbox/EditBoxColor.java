@@ -5,12 +5,13 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
+import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.editbox.base.EditBoxString;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class EditBoxColor extends EditBoxString implements Resetable {
     public int volume;
@@ -68,7 +69,7 @@ public class EditBoxColor extends EditBoxString implements Resetable {
     }
     @Override
     public int getColor() {
-        return getError() ? InterfaceUtils.Colors.GROUPIE : this.volume;
+        return getError() ? Colors.GROUPIE : this.volume;
     }
 
     @Override

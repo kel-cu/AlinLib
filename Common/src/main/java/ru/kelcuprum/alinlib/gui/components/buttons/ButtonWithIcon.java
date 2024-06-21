@@ -6,11 +6,12 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class ButtonWithIcon extends Button {
     protected ResourceLocation icon;
@@ -47,7 +48,7 @@ public class ButtonWithIcon extends Button {
 
     @Override
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        if(InterfaceUtils.isDoesNotFit(getMessage(), getWidth()-getHeight()-2, getHeight())){
+        if(GuiUtils.isDoesNotFit(getMessage(), getWidth()-getHeight()-2, getHeight())){
             this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, getHeight(), 0xFFFFFF);
         } else {
             if(isCenter) guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, getMessage(), getX() + (getWidth()/2)+(getHeight()/2)+2, getY() + (getHeight() - 8) / 2, 0xffffff);

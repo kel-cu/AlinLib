@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.components.ConfigureScrolWidget;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
@@ -21,7 +21,7 @@ import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import java.util.List;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
+import static ru.kelcuprum.alinlib.gui.Icons.RESET;
 
 public class AbstractConfigScreen extends Screen {
 
@@ -214,7 +214,7 @@ public class AbstractConfigScreen extends Screen {
     public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f){
         assert this.minecraft != null;
         super.renderBackground(guiGraphics, i, j, f);
-        InterfaceUtils.renderLeftPanel(guiGraphics, this.builder.panelSize, this.height);
+        guiGraphics.fill(0, 0, this.builder.panelSize, this.height, Colors.BLACK_ALPHA);
     }
 
     @Override

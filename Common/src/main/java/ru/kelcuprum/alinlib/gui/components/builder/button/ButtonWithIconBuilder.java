@@ -6,7 +6,7 @@ import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 import ru.kelcuprum.alinlib.gui.components.buttons.ButtonWithIcon;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.CLOWNFISH;
+import static ru.kelcuprum.alinlib.gui.Icons.CLOWNFISH;
 
 public class ButtonWithIconBuilder extends AbstractBuilder {
     public boolean isCenter = true;

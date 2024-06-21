@@ -4,11 +4,12 @@ package ru.kelcuprum.alinlib.gui.components.buttons;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class ButtonWithTwoLabels extends Button {
     protected Component rightLabel;
@@ -43,7 +44,7 @@ public class ButtonWithTwoLabels extends Button {
 
     @Override
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        if(InterfaceUtils.isDoesNotFit(Component.empty().append(leftLabel).append(": ").append(rightLabel), getWidth(), getHeight())){
+        if(GuiUtils.isDoesNotFit(Component.empty().append(leftLabel).append(": ").append(rightLabel), getWidth(), getHeight())){
             setMessage(Component.empty().append(leftLabel).append(": ").append(rightLabel));
             this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
         } else {

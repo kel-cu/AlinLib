@@ -7,14 +7,15 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
+import static ru.kelcuprum.alinlib.gui.Icons.RESET;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class Button extends AbstractButton implements Description {
     protected InterfaceUtils.DesignType type;
@@ -86,8 +87,8 @@ public class Button extends AbstractButton implements Description {
         else if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
-        if(InterfaceUtils.isDoesNotFit(getMessage(), getWidthComponent(), getHeight())) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
-        else if(isCentred) InterfaceUtils.drawCenteredString(guiGraphics, AlinLib.MINECRAFT.font, getMessage(), getXComponent() + getWidthComponent() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
+        if(GuiUtils.isDoesNotFit(getMessage(), getWidthComponent(), getHeight())) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+        else if(isCentred) GuiUtils.drawCenteredString(guiGraphics, AlinLib.MINECRAFT.font, getMessage(), getXComponent() + getWidthComponent() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
         else guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
     }
     // Мелочи V2

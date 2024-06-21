@@ -6,13 +6,14 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class CategoryBox extends TextBox {
     public final List<AbstractWidget> values = new ArrayList<>();
@@ -91,7 +92,7 @@ public class CategoryBox extends TextBox {
         if (visible) {
             int y = getY() + (getHeight() - 8) / 2;
             Font font = AlinLib.MINECRAFT.font;
-            if(InterfaceUtils.isDoesNotFit(Component.literal(state ? "▼" : "▶").append("   ").append(getName()), getWidth(), getHeight())){
+            if(GuiUtils.isDoesNotFit(Component.literal(state ? "▼" : "▶").append("   ").append(getName()), getWidth(), getHeight())){
                 this.setMessage(Component.literal(state ? "▼" : "▶").append("   ").append(getName()));
                 this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
                 int textWidth = font.width(getMessage());

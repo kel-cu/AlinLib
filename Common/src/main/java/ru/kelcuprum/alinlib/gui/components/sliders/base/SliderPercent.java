@@ -7,14 +7,15 @@ import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.DEFAULT_WIDTH;
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.RESET;
+import static ru.kelcuprum.alinlib.gui.Icons.RESET;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class SliderPercent extends AbstractSliderButton implements Description {
     public final InterfaceUtils.DesignType type;
@@ -94,11 +95,11 @@ public class SliderPercent extends AbstractSliderButton implements Description {
         if(isResetable()){
             if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY));
             guiGraphics.blit(RESET, getX()+2, getY()+2, 0f, 0f, getHeight()-4, getHeight()-4, getHeight()-4, getHeight()-4);
-            if(type != null) this.type.renderSliderBackground(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY), this.value, this);
-        } else this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value, this);
+            if(type != null) this.type.renderSliderBackground(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY), this.value);
+        } else this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value);
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
-        if(InterfaceUtils.isDoesNotFit(Component.literal(buttonMessage).append(": ").append(getComponentValue()), getWidth(), getHeight())){
+        if(GuiUtils.isDoesNotFit(Component.literal(buttonMessage).append(": ").append(getComponentValue()), getWidth(), getHeight())){
             if(isHoveredOrFocused()){
                 this.setMessage(getComponentValue());
             } else {

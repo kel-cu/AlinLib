@@ -9,7 +9,7 @@ import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 
-import static ru.kelcuprum.alinlib.gui.InterfaceUtils.Icons.*;
+import static ru.kelcuprum.alinlib.gui.Icons.*;
 
 public class LocalizationScreen {
     public static Screen build(Screen parent) {
