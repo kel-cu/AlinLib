@@ -41,7 +41,9 @@ public class StarScript {
         ss.set("time", () -> Value.string(new SimpleDateFormat(AlinLib.localization.getLocalization("date.time")).format(System.currentTimeMillis())));
         // Player
         ss.set("player", new ValueMap()
-                .set("name", () -> Value.string(AlinLib.MINECRAFT.getUser().getName()))
+                .set("name", () -> Value.string(Player.getName()))
+                .set("uuid", () -> Value.string(Player.getUUID()))
+                .set("profile_type", () -> Value.string(Player.getProfileType()))
                 .set("health", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getHealth() : 0))
                 .set("health_max", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getMaxHealth() : 0))
                 .set("health_percent", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getPercentHealth() : 0))

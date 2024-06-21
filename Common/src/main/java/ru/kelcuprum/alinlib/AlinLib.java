@@ -155,6 +155,8 @@ public class AlinLib {
     }
     public static void isHBKel(){
         if(LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 8){
+            if(bariumConfig.getBoolean("KEL_HB_"+LocalDate.now().getYear(), false)) return;
+            bariumConfig.setBoolean("KEL_HB_"+LocalDate.now().getYear(), true);
             new ToastBuilder()
                     .setIcon(Items.CAKE)
                     .setTitle(Component.literal("AlinLib"))

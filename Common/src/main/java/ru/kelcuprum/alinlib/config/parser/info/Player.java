@@ -1,6 +1,5 @@
 package ru.kelcuprum.alinlib.config.parser.info;
 
-import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -9,6 +8,15 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 
 public class Player {
+    public static String getName(){
+        return AlinLib.MINECRAFT.getUser().getName();
+    }
+    public static String getUUID(){
+        return AlinLib.MINECRAFT.getUser().getProfileId().toString();
+    }
+    public static String getProfileType(){
+        return AlinLib.MINECRAFT.getUser().getType().getName();
+    }
 
     public static String getItemName(){
         if(AlinLib.MINECRAFT.player == null) return "";

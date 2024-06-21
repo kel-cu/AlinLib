@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
-
+@Deprecated
 public class InterfaceUtils {
     private static final WidgetSprites SPRITES = new WidgetSprites(getResourceLocation("widget/button"), getResourceLocation("widget/button_disabled"), getResourceLocation("widget/button_highlighted"));
     public static final ResourceLocation BACKGROUND_LOCATION = getResourceLocation("textures/block/dirt.png");
@@ -82,7 +82,6 @@ public class InterfaceUtils {
     }
     public static final int DEFAULT_HEIGHT = 20;
     public enum DesignType {
-//        @Deprecated ALINA(0),
         FLAT(0),
         MODERN(1),
         VANILLA(2);
