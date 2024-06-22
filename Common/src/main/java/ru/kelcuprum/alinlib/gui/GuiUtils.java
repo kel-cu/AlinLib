@@ -48,7 +48,7 @@ public class GuiUtils {
             stylesID.add(style.id);
         }
         styles.put(style.id, style);
-        AlinLib.log(String.format("[Style] Registration of %s by id %s", style.name, style.id));
+        AlinLib.log(String.format("[Style] Registration of %s by id %s", style.name.getString(), style.id));
     }
     
     public static String[] getStylesName(){
@@ -74,7 +74,7 @@ public class GuiUtils {
         AbstractStyle style = safeStyle;
         for(String id : stylesID){
             AbstractStyle styleById = getStyleByID(id);
-            if(Objects.equals(styleById.name, name)){
+            if(Objects.equals(styleById.name.getString(), name)){
                 style=styleById;
             };
         }

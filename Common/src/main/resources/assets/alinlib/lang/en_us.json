@@ -65,5 +65,8 @@
   "alinlib.world.moon": "The Moon",
   "alinlib.unknown": "Unknown",
 
+  "alinlib.style.flat": "Flat",
+  "alinlib.style.modern": "Modern",
+
   "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum"
 }

@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib.gui.config;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonWithIconBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
@@ -20,7 +21,10 @@ public class ConfigScreen {
 
         builder.addWidget(new TextBox(Component.translatable("alinlib.config"), true))
                 .addWidget(new CategoryBox(Component.translatable("alinlib.config.design"))
-                        .addValue(new SelectorBuilder(Component.translatable("alinlib.config.default_design_type")).setValue(0).setList(new String[]{"Flat", "Modern"}).setConfig(AlinLib.bariumConfig, "DEFAULT_DESIGN_TYPE").build())
+                        .addValue(new SelectorBuilder(Component.translatable("alinlib.config.default_design_type"), selectorButton -> AlinLib.bariumConfig.setString("DEFAULT_DESIGN_TYPE", GuiUtils.getStyleByName(selectorButton.getList()[selectorButton.getPosition()]).id))
+                                .setList(GuiUtils.getStylesName())
+                                .setValue(GuiUtils.getPositionOnStylesID(GuiUtils.getSelected().name.getString()))
+                                .build())
                         .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.config_screen.small_panel_size"), false).setConfig(AlinLib.bariumConfig, "CONFIG_SCREEN.SMALL_PANEL_SIZE").build())
                         .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.toast.timeline"), true).setConfig(AlinLib.bariumConfig, "TOAST.TIMELINE").build())
                         .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.button.enable_reset_button"), true).setConfig(AlinLib.bariumConfig, "BUTTON.ENABLE_RESET_BUTTON").build())

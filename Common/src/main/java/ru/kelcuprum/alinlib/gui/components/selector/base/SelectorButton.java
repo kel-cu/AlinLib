@@ -31,6 +31,10 @@ public class SelectorButton extends Button {
     // Получить
     public Component getValue(){
         assert this.list !=null;
+        if(this.position >= this.list.length) {
+            setPosition(-1);
+            onPress();
+        }
         try {
             return Component.literal(this.list[this.position]);
         } catch (Exception ex){

@@ -64,5 +64,8 @@
   "alinlib.world.moon": "Луна",
   "alinlib.unknown": "Неизвестно",
 
+  "alinlib.style.flat": "Плоский",
+  "alinlib.style.modern": "Современный",
+
   "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"
 }
