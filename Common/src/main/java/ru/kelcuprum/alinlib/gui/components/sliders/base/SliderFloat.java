@@ -1,9 +1,9 @@
 package ru.kelcuprum.alinlib.gui.components.sliders.base;
 
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
@@ -15,33 +15,33 @@ public class SliderFloat extends SliderPercent {
     public String typeInteger = "";
     public OnPress onPress;
     public SliderFloat(int x, int y, float position, float min, float max, Component component) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), position, min, max, component);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), position, min, max, component);
     }
-    public SliderFloat(int x, int y, InterfaceUtils.DesignType type, float position, float min, float max, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, min, max, label, null);
+    public SliderFloat(int x, int y, AbstractStyle style, float position, float min, float max, Component label) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, position, min, max, label, null);
 
     }
 
     public SliderFloat(int x, int y, float position, float min, float max, Component component, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), position, min, max, component, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), position, min, max, component, onPress);
     }
-    public SliderFloat(int x, int y, InterfaceUtils.DesignType type, float position, float min, float max, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, min, max, label, onPress);
+    public SliderFloat(int x, int y, AbstractStyle style, float position, float min, float max, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, position, min, max, label, onPress);
     }
     ////
     public SliderFloat(int x, int y, int width, int height, float position, float min, float max, Component component) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), position, min, max, component);
+        this(x, y, width, height, GuiUtils.getSelected(), position, min, max, component);
     }
-    public SliderFloat(int x, int y, int width, int height, InterfaceUtils.DesignType type, float position, float min, float max, Component label) {
-        this(x, y, width, height, type, position, min, max, label, null);
+    public SliderFloat(int x, int y, int width, int height, AbstractStyle style, float position, float min, float max, Component label) {
+        this(x, y, width, height, style, position, min, max, label, null);
 
     }
 
     public SliderFloat(int x, int y, int width, int height, float position, float min, float max, Component component, OnPress onPress) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), position, min, max, component, onPress);
+        this(x, y, width, height, GuiUtils.getSelected(), position, min, max, component, onPress);
     }
-    public SliderFloat(int x, int y, int width, int height, InterfaceUtils.DesignType type, float position, float min, float max, Component label, OnPress onPress) {
-        super(x, y, width, height, type, label);
+    public SliderFloat(int x, int y, int width, int height, AbstractStyle style, float position, float min, float max, Component label, OnPress onPress) {
+        super(x, y, width, height, style, label);
         setValue(((double) (position - min) /(max-min)));
         this.onPress = onPress;
         this.displayValue = position;

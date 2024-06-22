@@ -5,8 +5,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
@@ -23,13 +23,13 @@ public class ButtonWithTwoLabels extends Button {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, leftLabel, rightLabel);
     }
     public ButtonWithTwoLabels(int x, int y, int width, int height, Component leftLabel, Component rightLabel) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), leftLabel, rightLabel);
+        this(x, y, width, height, GuiUtils.getSelected(), leftLabel, rightLabel);
     }
-    public ButtonWithTwoLabels(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component leftLabel, Component rightLabel) {
-        this(x, y, width, height, type, leftLabel, rightLabel, null);
+    public ButtonWithTwoLabels(int x, int y, int width, int height, AbstractStyle style, Component leftLabel, Component rightLabel) {
+        this(x, y, width, height, style, leftLabel, rightLabel, null);
     }
-    public ButtonWithTwoLabels(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component leftLabel, Component rightLabel, OnPress onPress) {
-        super(x, y, width, height, type, false, Component.empty(), null);
+    public ButtonWithTwoLabels(int x, int y, int width, int height, AbstractStyle style, Component leftLabel, Component rightLabel, OnPress onPress) {
+        super(x, y, width, height, style, false, Component.empty(), null);
         this.rightLabel = rightLabel;
         this.leftLabel = leftLabel;
         setMessage(Component.empty().append(leftLabel).append(": ").append(rightLabel));

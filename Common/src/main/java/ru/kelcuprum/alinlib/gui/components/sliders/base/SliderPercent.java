@@ -8,9 +8,9 @@ import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import static ru.kelcuprum.alinlib.gui.Icons.RESET;
@@ -18,49 +18,49 @@ import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class SliderPercent extends AbstractSliderButton implements Description {
-    public final InterfaceUtils.DesignType type;
+    public final AbstractStyle style;
     public final String buttonMessage;
     public OnPress onPress;
 
     public SliderPercent(int x, int y, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), 0, label, null);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), 0, label, null);
     }
-    public SliderPercent(int x, int y, InterfaceUtils.DesignType type, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, 0, label, null);
+    public SliderPercent(int x, int y, AbstractStyle style, Component label) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, 0, label, null);
     }
-    public SliderPercent(int x, int y, InterfaceUtils.DesignType type, double position, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, label, null);
+    public SliderPercent(int x, int y, AbstractStyle style, double position, Component label) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, position, label, null);
     }
     //
     public SliderPercent(int x, int y, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), 0, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), 0, label, onPress);
     }
-    public SliderPercent(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, 0, label, onPress);
+    public SliderPercent(int x, int y, AbstractStyle style, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, 0, label, onPress);
     }
-    public SliderPercent(int x, int y, InterfaceUtils.DesignType type, double position, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, position, label, onPress);
+    public SliderPercent(int x, int y, AbstractStyle style, double position, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, position, label, onPress);
     }
     //
     public SliderPercent(int x, int y, int width, int height, Component label) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), 0, label, null);
+        this(x, y, width, height, GuiUtils.getSelected(), 0, label, null);
     }
-    public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label) {
-        this(x, y, width, height, type, 0, label, null);
+    public SliderPercent(int x, int y, int width, int height, AbstractStyle style, Component label) {
+        this(x, y, width, height, style, 0, label, null);
     }
-    public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, double position, Component label) {
-        this(x, y, width, height, type, position, label, null);
+    public SliderPercent(int x, int y, int width, int height, AbstractStyle style, double position, Component label) {
+        this(x, y, width, height, style, position, label, null);
     }
     //
     public SliderPercent(int x, int y, int width, int height, Component label, OnPress onPress) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), 0, label, onPress);
+        this(x, y, width, height, GuiUtils.getSelected(), 0, label, onPress);
     }
-    public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
-        this(x, y, width, height, type, 0, label, onPress);
+    public SliderPercent(int x, int y, int width, int height, AbstractStyle style, Component label, OnPress onPress) {
+        this(x, y, width, height, style, 0, label, onPress);
     }
-    public SliderPercent(int x, int y, int width, int height, InterfaceUtils.DesignType type, double position, Component label, OnPress onPress) {
+    public SliderPercent(int x, int y, int width, int height, AbstractStyle style, double position, Component label, OnPress onPress) {
         super(x, y, width, height, label, position);
-        this.type = type;
+        this.style = style;
         this.onPress = onPress;
         this.buttonMessage = label.getString();
         this.setMessage(Component.literal(buttonMessage).append(": ").append(getComponentValue()));
@@ -93,10 +93,10 @@ public class SliderPercent extends AbstractSliderButton implements Description {
     }
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
         if(isResetable()){
-            if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY));
+            if(style != null) this.style.renderBackground$widget(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY));
             guiGraphics.blit(RESET, getX()+2, getY()+2, 0f, 0f, getHeight()-4, getHeight()-4, getHeight()-4, getHeight()-4);
-            if(type != null) this.type.renderSliderBackground(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY), this.value);
-        } else this.type.renderSliderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value);
+            if(style != null) this.style.renderBackground$slider(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY), this.value);
+        } else this.style.renderBackground$slider(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value);
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
         if(GuiUtils.isDoesNotFit(Component.literal(buttonMessage).append(": ").append(getComponentValue()), getWidth(), getHeight())){

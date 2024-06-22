@@ -71,9 +71,9 @@ public class EditBoxBuilder extends AbstractBuilder {
 
     public EditBoxString build(){
         if(this.config != null && this.configType != null) {
-            if(this.isColor) return new EditBoxColor(x, y, width, height, designType, config, configType, color, title);
-            else return new EditBoxConfigString(x, y, width, height, secret, designType, config, configType, value, title);
-        } else if(this.localization != null && this.configType != null) return new EditBoxLocalization(x, y, width, height, designType, localization, configType, title);
-        else return new EditBoxString(font, x, y, width, height, secret, value, designType, title, responder);
+            if(this.isColor) return new EditBoxColor(x, y, width, height, style, config, configType, color, title);
+            else return new EditBoxConfigString(x, y, width, height, secret, style, config, configType, value, title);
+        } else if(this.localization != null && this.configType != null) return new EditBoxLocalization(x, y, width, height, style, localization, configType, title);
+        else return new EditBoxString(font, x, y, width, height, secret, value, style, title, responder);
     }
 }

@@ -7,8 +7,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
@@ -25,16 +25,16 @@ public class ButtonWithIcon extends Button {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, leftLabel, icon);
     }
     public ButtonWithIcon(int x, int y, int width, int height, Component leftLabel, ResourceLocation icon) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), leftLabel, icon);
+        this(x, y, width, height, GuiUtils.getSelected(), leftLabel, icon);
     }
-    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component leftLabel,ResourceLocation icon) {
-        this(x, y, width, height, type, leftLabel, icon, true);
+    public ButtonWithIcon(int x, int y, int width, int height, AbstractStyle style, Component leftLabel,ResourceLocation icon) {
+        this(x, y, width, height, style, leftLabel, icon, true);
     }
-    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component leftLabel,ResourceLocation icon, boolean isCenter) {
-        this(x, y, width, height, type, leftLabel, icon, isCenter, null);
+    public ButtonWithIcon(int x, int y, int width, int height, AbstractStyle style, Component leftLabel,ResourceLocation icon, boolean isCenter) {
+        this(x, y, width, height, style, leftLabel, icon, isCenter, null);
     }
-    public ButtonWithIcon(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, ResourceLocation icon, boolean isCenter, OnPress onPress) {
-        super(x, y, width, height, type, false, label, null);
+    public ButtonWithIcon(int x, int y, int width, int height, AbstractStyle style, Component label, ResourceLocation icon, boolean isCenter, OnPress onPress) {
+        super(x, y, width, height, style, false, label, null);
         this.isCenter = isCenter;
         this.onPress = onPress;
         this.icon = icon;

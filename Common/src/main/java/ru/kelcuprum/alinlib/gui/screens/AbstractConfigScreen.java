@@ -69,11 +69,11 @@ public class AbstractConfigScreen extends Screen {
         // -=-=-=-=-=-=-=-
         // Exit Buttons
         // 85 before reset button
-        back = addRenderableWidget(new Button(10, height - 30, this.builder.panelSize-45, 20, builder.type, CommonComponents.GUI_BACK, (OnPress) -> {
+        back = addRenderableWidget(new Button(10, height - 30, this.builder.panelSize-45, 20, builder.style, CommonComponents.GUI_BACK, (OnPress) -> {
             assert this.minecraft != null;
             this.minecraft.setScreen(builder.parent);
         }));
-        reset = addRenderableWidget(new ButtonSprite(this.builder.panelSize-30, height-30, 20, 20, builder.type, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
+        reset = addRenderableWidget(new ButtonSprite(this.builder.panelSize-30, height-30, 20, 20, builder.style, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
             for(AbstractWidget widget : builder.widgets){
                 if(widget instanceof Resetable){
                     ((Resetable) widget).resetValue();

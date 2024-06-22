@@ -18,7 +18,9 @@ import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
 import ru.kelcuprum.alinlib.config.parser.info.Player;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.styles.FlatStyle;
+import ru.kelcuprum.alinlib.gui.styles.ModernStyle;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import java.time.LocalDate;
@@ -45,7 +47,8 @@ public class AlinLib {
     // Init
     public static void onInitializeClient() {
         starScript = new StarScript();
-
+        GuiUtils.registerStyle(new FlatStyle());
+        GuiUtils.registerStyle(new ModernStyle());
         KeyMapping toggleStealth = KeyMappingHelper.register(new KeyMapping(
                 "alinlib.key.stealth",
                 GLFW.GLFW_KEY_UNKNOWN,
@@ -126,15 +129,6 @@ public class AlinLib {
         }
         return coordinate*value;
     }
-
-    // Design
-    public static InterfaceUtils.DesignType getDefaultDesignType(){
-        return switch (bariumConfig.getNumber("DEFAULT_DESIGN_TYPE", 0).intValue()){
-            case 1 -> InterfaceUtils.DesignType.MODERN;
-            default -> InterfaceUtils.DesignType.FLAT;
-        };
-    }
-
     // Funny
     public static void isAprilFool(){
         if(LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 1){

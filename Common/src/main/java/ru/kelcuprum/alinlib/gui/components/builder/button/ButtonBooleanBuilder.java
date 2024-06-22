@@ -39,7 +39,7 @@ public class ButtonBooleanBuilder extends AbstractBuilder {
     }
 
     public Button build(){
-        if(this.config != null && this.configType != null) return new ButtonConfigBoolean(x, y, width, height, designType, config, configType, defaultValue, title);
-        return new ButtonBoolean(x, y, width, height, designType, defaultValue, title, onPress);
+        if(this.config != null && this.configType != null) return new ButtonConfigBoolean(x, y, width, height, style, config, configType, defaultValue, title);
+        return new ButtonBoolean(x, y, width, height, style, defaultValue, title, onPress);
     }
 }

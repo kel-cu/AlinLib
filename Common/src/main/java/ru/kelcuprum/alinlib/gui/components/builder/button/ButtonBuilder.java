@@ -37,6 +37,6 @@ public class ButtonBuilder extends AbstractBuilder {
     }
 
     public Button build(){
-        return new Button(x, y, width, height, designType, title, onPress);
+        return new Button(x, y, width, height, style, title, onPress);
     }
 }

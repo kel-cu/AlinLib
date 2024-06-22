@@ -4,9 +4,10 @@ import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.selector.base.SelectorButton;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import java.util.Arrays;
 
@@ -19,17 +20,17 @@ public class SelectorStringButton extends SelectorButton implements Resetable {
     public String typeConfig;
 
     public SelectorStringButton(int x, int y, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), list, config, typeConfig, defaultVolume, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), list, config, typeConfig, defaultVolume, label);
     }
-    public SelectorStringButton(int x, int y, InterfaceUtils.DesignType type, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, list, config, typeConfig, defaultVolume, label);
+    public SelectorStringButton(int x, int y, AbstractStyle style, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, list, config, typeConfig, defaultVolume, label);
     }
     ///
     public SelectorStringButton(int x, int y, int width, int height, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), list, config, typeConfig, defaultVolume, label);
+        this(x, y, width, height, GuiUtils.getSelected(), list, config, typeConfig, defaultVolume, label);
     }
-    public SelectorStringButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
-        super(x, y, width, height, type, list, 0, label, null);
+    public SelectorStringButton(int x, int y, int width, int height, AbstractStyle style, String[] list, Config config, String typeConfig, String defaultVolume, Component label) {
+        super(x, y, width, height, style, list, 0, label, null);
 
         this.defaultVolume = defaultVolume;
         this.typeConfig = typeConfig;

@@ -54,7 +54,7 @@ public class SliderFloatBuilder extends AbstractBuilder {
     }
 
     public SliderFloat build(){
-        if(this.config != null && this.configType != null) return new SliderConfigFloat(x, y, width, height, designType, config, configType, defaultValue, min, max, title);
-        return new SliderFloat(x, y, width, height, designType, defaultValue, min, max, title, onPress);
+        if(this.config != null && this.configType != null) return new SliderConfigFloat(x, y, width, height, style, config, configType, defaultValue, min, max, title);
+        return new SliderFloat(x, y, width, height, style, defaultValue, min, max, title, onPress);
     }
 }

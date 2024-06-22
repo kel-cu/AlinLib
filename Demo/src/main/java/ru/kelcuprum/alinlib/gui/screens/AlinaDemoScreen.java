@@ -8,7 +8,6 @@ import net.minecraft.world.item.Items;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.AlinLibTest;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.ImageWidget;
 import ru.kelcuprum.alinlib.gui.components.builder.button.*;
 import ru.kelcuprum.alinlib.gui.components.builder.editbox.EditBoxBuilder;

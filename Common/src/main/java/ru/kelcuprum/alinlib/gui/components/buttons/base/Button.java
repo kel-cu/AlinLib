@@ -8,9 +8,9 @@ import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import static ru.kelcuprum.alinlib.gui.Icons.RESET;
@@ -18,7 +18,7 @@ import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class Button extends AbstractButton implements Description {
-    protected InterfaceUtils.DesignType type;
+    protected AbstractStyle style;
     private final boolean isCentred;
     public final String buttonMessage;
     private OnPress onPress;
@@ -28,36 +28,36 @@ public class Button extends AbstractButton implements Description {
         this( x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, null);
     }
     public Button(int x, int y, Component label, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.FLAT, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), label, onPress);
     }
-    public Button(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, true, label, onPress);
+    public Button(int x, int y, AbstractStyle style, Component label, OnPress onPress){
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, true, label, onPress);
     }
-    public Button(int x, int y, InterfaceUtils.DesignType type, boolean isCentred, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, isCentred, label, onPress);
+    public Button(int x, int y, AbstractStyle style, boolean isCentred, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, isCentred, label, onPress);
     }
     //////////
     public Button(int x, int y, int width, int height, Component label){
         this(x, y, width, height, label, null);
     }
     public Button(int x, int y, int width, int height, Component label, OnPress onPress){
-        this(x, y, width, height, InterfaceUtils.DesignType.FLAT, label, onPress);
+        this(x, y, width, height, GuiUtils.getSelected(), label, onPress);
     }
-    public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress){
-        this(x, y, width, height, type, true, label, onPress);
+    public Button(int x, int y, int width, int height, AbstractStyle style, Component label, OnPress onPress){
+        this(x, y, width, height, style, true, label, onPress);
     }
-    public Button(int x, int y, int width, int height, InterfaceUtils.DesignType type, boolean isCentred, Component label, OnPress onPress) {
+    public Button(int x, int y, int width, int height, AbstractStyle style, boolean isCentred, Component label, OnPress onPress) {
         super(x, y, width, height, label);
         this.buttonMessage = label.getString();
-        this.type = type;
+        this.style = style;
         this.onPress = onPress;
         this.isCentred = isCentred;
     }
 
     // Изменение элементов в кнопке
     // С возвращением класса
-    public Button setType(InterfaceUtils.DesignType type) {
-        this.type = type;
+    public Button setStyle(AbstractStyle style) {
+        this.style = style;
         return this;
     }
     public Button setActive(boolean active){
@@ -80,11 +80,11 @@ public class Button extends AbstractButton implements Description {
     }
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         if(isResetable()){
-            if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY));
+            if(style != null) this.style.renderBackground$widget(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, guiGraphics, mouseX, mouseY));
             guiGraphics.blit(RESET, getX()+2, getY()+2, 0f, 0f, getHeight()-4, getHeight()-4, getHeight()-4, getHeight()-4);
-            if(type != null) this.type.renderBackground(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY));
+            if(style != null) this.style.renderBackground$widget(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, guiGraphics, mouseX, mouseY));
         }
-        else if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
+        else if(style != null) this.style.renderBackground$widget(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         if(GuiUtils.isDoesNotFit(getMessage(), getWidthComponent(), getHeight())) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);

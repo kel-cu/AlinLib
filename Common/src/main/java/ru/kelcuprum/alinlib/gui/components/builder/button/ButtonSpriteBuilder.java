@@ -63,6 +63,6 @@ public class ButtonSpriteBuilder extends AbstractBuilder {
     }
 
     public ButtonSprite build(){
-        return new ButtonSprite(x, y, width, height, designType, icon, textureWidth, textureHeight, title, onPress);
+        return new ButtonSprite(x, y, width, height, style, icon, textureWidth, textureHeight, title, onPress);
     }
 }

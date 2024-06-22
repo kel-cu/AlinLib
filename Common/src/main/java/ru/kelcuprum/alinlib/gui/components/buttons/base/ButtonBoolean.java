@@ -5,7 +5,7 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
@@ -17,23 +17,23 @@ public class ButtonBoolean extends Button {
     public final String buttonMessage;
 
     public ButtonBoolean(int x, int y, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, InterfaceUtils.DesignType.FLAT, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), label, onPress);
     }
-    public ButtonBoolean(int x, int y, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, true, label, onPress);
+    public ButtonBoolean(int x, int y, AbstractStyle style, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, true, label, onPress);
     }
-    public ButtonBoolean(int x, int y, InterfaceUtils.DesignType type, Boolean current, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, current, label, onPress);
+    public ButtonBoolean(int x, int y, AbstractStyle style, Boolean current, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, current, label, onPress);
     }
     ////
     public ButtonBoolean(int x, int y, int width, int height, Component label, OnPress onPress) {
-        this(x, y, width, height, InterfaceUtils.DesignType.FLAT, label, onPress);
+        this(x, y, width, height, GuiUtils.getSelected(), label, onPress);
     }
-    public ButtonBoolean(int x, int y, int width, int height, InterfaceUtils.DesignType type, Component label, OnPress onPress) {
-        this(x, y, width, height, type, true, label, onPress);
+    public ButtonBoolean(int x, int y, int width, int height, AbstractStyle style, Component label, OnPress onPress) {
+        this(x, y, width, height, style, true, label, onPress);
     }
-    public ButtonBoolean(int x, int y, int width, int height, InterfaceUtils.DesignType type, Boolean current, Component label, OnPress onPress) {
-        super(x, y, width, height, type, label, null);
+    public ButtonBoolean(int x, int y, int width, int height, AbstractStyle style, Boolean current, Component label, OnPress onPress) {
+        super(x, y, width, height, style, label, null);
         this.buttonMessage = label.getString();
         this.value = current;
         this.onPress = onPress;

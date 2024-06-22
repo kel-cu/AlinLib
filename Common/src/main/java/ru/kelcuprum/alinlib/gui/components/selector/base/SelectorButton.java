@@ -5,8 +5,8 @@ import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
@@ -16,11 +16,11 @@ public class SelectorButton extends Button {
     protected int position;
     protected String buttonMessage;
     protected OnPress onPress;
-    public SelectorButton(int x, int y, InterfaceUtils.DesignType type, String[] list, int position, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, list, position, label, onPress);
+    public SelectorButton(int x, int y, AbstractStyle style, String[] list, int position, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, list, position, label, onPress);
     }
-    public SelectorButton(int x, int y, int width, int height, InterfaceUtils.DesignType type, String[] list, int position, Component label, OnPress onPress) {
-        super(x, y, width, height, type, label, null);
+    public SelectorButton(int x, int y, int width, int height, AbstractStyle style, String[] list, int position, Component label, OnPress onPress) {
+        super(x, y, width, height, style, label, null);
         this.list = list;
         this.onPress = onPress;
         this.position = position;

@@ -41,7 +41,7 @@ public class SliderPercentBuilder extends AbstractBuilder {
     }
 
     public SliderPercent build(){
-        if(this.config != null && this.configType != null) return new SliderConfigPercent(x, y, width, height, designType, config, configType, defaultValue, title);
-        return new SliderPercent(x, y, width, height, designType, defaultValue, title, onPress);
+        if(this.config != null && this.configType != null) return new SliderConfigPercent(x, y, width, height, style, config, configType, defaultValue, title);
+        return new SliderPercent(x, y, width, height, style, defaultValue, title, onPress);
     }
 }

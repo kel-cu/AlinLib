@@ -1,11 +1,11 @@
 package ru.kelcuprum.alinlib.gui.components.sliders;
 
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.sliders.base.SliderFloat;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
@@ -16,17 +16,17 @@ public class SliderConfigFloat extends SliderFloat implements Resetable {
     public final String typeConfig;
 
     public SliderConfigFloat(int x, int y, Config config, String typeConfig, float defaultConfig, float min, float max, Component component) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, min, max, component);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), config, typeConfig, defaultConfig, min, max, component);
     }
-    public SliderConfigFloat(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, float defaultConfig, float min, float max, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, min, max, label);
+    public SliderConfigFloat(int x, int y, AbstractStyle style, Config config, String typeConfig, float defaultConfig, float min, float max, Component label) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, config, typeConfig, defaultConfig, min, max, label);
     }
     ///
     public SliderConfigFloat(int x, int y, int width, int height, Config config, String typeConfig, float defaultConfig, float min, float max, Component component) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, min, max, component);
+        this(x, y, width, height, GuiUtils.getSelected(), config, typeConfig, defaultConfig, min, max, component);
     }
-    public SliderConfigFloat(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, float defaultConfig, float min, float max, Component label) {
-        super(x, y, width, height, type, config.getNumber(typeConfig, defaultConfig).floatValue(), min, max, label);
+    public SliderConfigFloat(int x, int y, int width, int height, AbstractStyle style, Config config, String typeConfig, float defaultConfig, float min, float max, Component label) {
+        super(x, y, width, height, style, config.getNumber(typeConfig, defaultConfig).floatValue(), min, max, label);
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;

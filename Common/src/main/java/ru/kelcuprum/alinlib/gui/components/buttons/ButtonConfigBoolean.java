@@ -1,11 +1,11 @@
 package ru.kelcuprum.alinlib.gui.components.buttons;
 
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Config;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.ButtonBoolean;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
@@ -15,16 +15,16 @@ public class ButtonConfigBoolean extends ButtonBoolean implements Resetable {
     public final Config config;
     public final String typeConfig;
     public ButtonConfigBoolean(int x, int y, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, label);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), config, typeConfig, defaultConfig, label);
     }
-    public ButtonConfigBoolean(int x, int y, InterfaceUtils.DesignType type, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, config, typeConfig, defaultConfig, label);
+    public ButtonConfigBoolean(int x, int y, AbstractStyle style, Config config, String typeConfig, boolean defaultConfig, Component label) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, config, typeConfig, defaultConfig, label);
     }
     public ButtonConfigBoolean(int x, int y, int width, int height, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), config, typeConfig, defaultConfig, label);
+        this(x, y, width, height, GuiUtils.getSelected(), config, typeConfig, defaultConfig, label);
     }
-    public ButtonConfigBoolean(int x, int y, int width, int height, InterfaceUtils.DesignType type, Config config, String typeConfig, boolean defaultConfig, Component label) {
-        super(x, y, width, height, type, label, null);
+    public ButtonConfigBoolean(int x, int y, int width, int height, AbstractStyle style, Config config, String typeConfig, boolean defaultConfig, Component label) {
+        super(x, y, width, height, style, label, null);
         this.config = config;
         this.typeConfig = typeConfig;
         this.defaultConfig = defaultConfig;

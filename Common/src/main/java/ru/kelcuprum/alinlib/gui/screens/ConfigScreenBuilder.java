@@ -4,8 +4,9 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.Objects;
 
 public class ConfigScreenBuilder {
     protected Component title;
-    protected InterfaceUtils.DesignType type;
+    protected AbstractStyle style;
     protected List<AbstractWidget> panelWidgets = new ArrayList<>();
     protected List<AbstractWidget> widgets = new ArrayList<>();
     protected OnTick onTick;
@@ -27,12 +28,12 @@ public class ConfigScreenBuilder {
         this(parent, Component.literal("Change me please"));
     }
     public ConfigScreenBuilder(Screen parent, Component title) {
-        this(parent, title, AlinLib.getDefaultDesignType());
+        this(parent, title, GuiUtils.getSelected());
     }
-    public ConfigScreenBuilder(Screen parent, Component title, InterfaceUtils.DesignType type){
+    public ConfigScreenBuilder(Screen parent, Component title, AbstractStyle style){
         this.parent = parent;
         this.title = title;
-        this.type = type;
+        this.style = style;
     }
     //
     public ConfigScreenBuilder setTitle(String string){
@@ -47,12 +48,12 @@ public class ConfigScreenBuilder {
         return this.title;
     }
     //
-    public ConfigScreenBuilder setType(InterfaceUtils.DesignType type) {
-        this.type = type;
+    public ConfigScreenBuilder setType(AbstractStyle style) {
+        this.style = style;
         return this;
     }
-    public InterfaceUtils.DesignType getType() {
-        return this.type;
+    public AbstractStyle getType() {
+        return this.style;
     }
     //
     public ConfigScreenBuilder setPanelSize(int panelSize) {

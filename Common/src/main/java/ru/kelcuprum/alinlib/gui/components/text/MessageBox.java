@@ -7,8 +7,9 @@ import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import java.util.List;
 
@@ -18,53 +19,53 @@ import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 public class MessageBox extends AbstractWidget implements Description {
     private final boolean isCentred;
     private final MessageBox.OnPress onPress;
-    private final InterfaceUtils.DesignType type;
+    private final AbstractStyle style;
 
     public MessageBox(Component label){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, AlinLib.getDefaultDesignType(), null);
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, GuiUtils.getSelected(), null);
     }
     public MessageBox(Component label, OnPress onPress){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, AlinLib.getDefaultDesignType(), onPress);
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, GuiUtils.getSelected(), onPress);
     }
-    public MessageBox(Component label, InterfaceUtils.DesignType type, OnPress onPress){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, type, onPress);
+    public MessageBox(Component label, AbstractStyle style, OnPress onPress){
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, false, style, onPress);
     }
     ///
     public MessageBox(Component label, boolean isCenter){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, AlinLib.getDefaultDesignType(), null);
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, GuiUtils.getSelected(), null);
     }
     public MessageBox(Component label, boolean isCenter, OnPress onPress){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, AlinLib.getDefaultDesignType(), onPress);
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, GuiUtils.getSelected(), onPress);
     }
-    public MessageBox(Component label, boolean isCenter, InterfaceUtils.DesignType type, OnPress onPress){
-        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, type, onPress);
+    public MessageBox(Component label, boolean isCenter, AbstractStyle style, OnPress onPress){
+        this(0, 0, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, style, onPress);
     }
     ///
     public MessageBox(int x, int y, Component label, boolean isCenter){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, AlinLib.getDefaultDesignType(), null);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, GuiUtils.getSelected(), null);
     }
     public MessageBox(int x, int y, Component label, boolean isCenter, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, AlinLib.getDefaultDesignType(), onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, GuiUtils.getSelected(), onPress);
     }
-    public MessageBox(int x, int y, Component label, boolean isCenter, InterfaceUtils.DesignType type, OnPress onPress){
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, type, onPress);
+    public MessageBox(int x, int y, Component label, boolean isCenter, AbstractStyle style, OnPress onPress){
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, isCenter, style, onPress);
     }
     ///
     public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter){
-        this(x, y, width, height, label, isCenter, AlinLib.getDefaultDesignType(), null);
+        this(x, y, width, height, label, isCenter, GuiUtils.getSelected(), null);
     }
     public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter, OnPress onPress) {
-        this(x, y, width, height, label, isCenter, AlinLib.getDefaultDesignType(), onPress);
+        this(x, y, width, height, label, isCenter, GuiUtils.getSelected(), onPress);
     }
-    public MessageBox(int x, int y, int width, int height, Component label, InterfaceUtils.DesignType type, boolean isCenter){
-        this(x, y, width, height, label, isCenter, type, null);
+    public MessageBox(int x, int y, int width, int height, Component label, AbstractStyle style, boolean isCenter){
+        this(x, y, width, height, label, isCenter, style, null);
     }
 
-    public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter, InterfaceUtils.DesignType type, OnPress onPress){
+    public MessageBox(int x, int y, int width, int height, Component label, boolean isCenter, AbstractStyle style, OnPress onPress){
         super(x, y, width, height, label);
         this.isCentred = isCenter;
         this.onPress = onPress;
-        this.type = type;
+        this.style = style;
         this.setActive(this.onPress != null);
     }
 
@@ -106,7 +107,7 @@ public class MessageBox extends AbstractWidget implements Description {
         }
     }
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
-        if(type != null) this.type.renderBackground(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
+        if(style != null) this.style.renderBackground$widget(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(getMessage(), width-12);

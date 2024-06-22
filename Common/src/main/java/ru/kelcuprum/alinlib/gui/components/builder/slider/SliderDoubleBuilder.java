@@ -52,7 +52,7 @@ public class SliderDoubleBuilder extends AbstractBuilder {
     }
 
     public SliderDouble build(){
-        if(this.config != null && this.configType != null) return new SliderConfigDouble(x, y, width, height, designType, config, configType, defaultValue, min, max, title);
-        return new SliderDouble(x, y, width, height, designType, defaultValue, min, max, title, onPress);
+        if(this.config != null && this.configType != null) return new SliderConfigDouble(x, y, width, height, style, config, configType, defaultValue, min, max, title);
+        return new SliderDouble(x, y, width, height, style, defaultValue, min, max, title, onPress);
     }
 }

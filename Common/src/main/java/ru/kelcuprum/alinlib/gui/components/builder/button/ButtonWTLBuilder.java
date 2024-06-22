@@ -45,6 +45,6 @@ public class ButtonWTLBuilder extends AbstractBuilder {
     }
 
     public Button build(){
-        return new ButtonWithTwoLabels(x, y, width, height, designType, leftLabel, rightLabel, onPress);
+        return new ButtonWithTwoLabels(x, y, width, height, style, leftLabel, rightLabel, onPress);
     }
 }

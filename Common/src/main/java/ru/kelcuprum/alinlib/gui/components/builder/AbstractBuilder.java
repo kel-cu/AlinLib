@@ -2,8 +2,8 @@ package ru.kelcuprum.alinlib.gui.components.builder;
 
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.network.chat.Component;
-import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
@@ -16,7 +16,7 @@ public abstract class AbstractBuilder {
     protected int height = DEFAULT_HEIGHT;
     protected Component title;
     protected Component description;
-    protected InterfaceUtils.DesignType designType = AlinLib.getDefaultDesignType();
+    protected AbstractStyle style = GuiUtils.getSelected();
 
     public AbstractBuilder(){
         this(Component.empty());
@@ -49,12 +49,12 @@ public abstract class AbstractBuilder {
         return this.description;
     }
     //
-    public <T extends AbstractBuilder> T setDesignType(InterfaceUtils.DesignType designType){
-        this.designType = designType;
+    public <T extends AbstractBuilder> T setStyle(AbstractStyle style){
+        this.style = style;
         return (T) this;
     }
-    public InterfaceUtils.DesignType getDesignType(){
-        return this.designType;
+    public AbstractStyle getStyle(){
+        return this.style;
     }
     // Position
     public <T extends AbstractBuilder> T setPosition(int x, int y){

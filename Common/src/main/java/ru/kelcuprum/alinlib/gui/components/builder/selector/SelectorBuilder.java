@@ -55,9 +55,9 @@ public class SelectorBuilder extends AbstractBuilder {
 
     public SelectorButton build(){
         if(this.config != null && this.configType != null){
-            if(this.defaultString != null) return new SelectorStringButton(x, y, width, height, designType, list, config, configType, defaultString, title);
-            else return new SelectorIntegerButton(x, y, width, height, designType, list, config, configType, defaultInt, title);
+            if(this.defaultString != null) return new SelectorStringButton(x, y, width, height, style, list, config, configType, defaultString, title);
+            else return new SelectorIntegerButton(x, y, width, height, style, list, config, configType, defaultInt, title);
         }
-        return new SelectorButton(x, y, width, height, designType, list, defaultInt, title, onPress);
+        return new SelectorButton(x, y, width, height, style, list, defaultInt, title, onPress);
     }
 }

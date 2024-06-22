@@ -4,8 +4,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.gui.InterfaceUtils;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
@@ -17,27 +18,27 @@ public class ButtonSprite extends Button {
     // DEFAULT_WIDTH, DEFAULT_HEIGHT
 
     public ButtonSprite(int x, int y, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, AlinLib.getDefaultDesignType(), icon, label, onPress);
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, GuiUtils.getSelected(), icon, label, onPress);
     }
-    public ButtonSprite(int x, int y, InterfaceUtils.DesignType type, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, icon, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, onPress);
+    public ButtonSprite(int x, int y, AbstractStyle style, ResourceLocation icon, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, icon, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label, onPress);
     }
     //
-    public ButtonSprite(int x, int y, InterfaceUtils.DesignType type, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
-        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, type, icon, iconWidth, iconHeight, label, onPress);
+    public ButtonSprite(int x, int y, AbstractStyle style, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, style, icon, iconWidth, iconHeight, label, onPress);
     }
 
     //////
     public ButtonSprite(int x, int y, int width, int height, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, width, height, AlinLib.getDefaultDesignType(), icon, label, onPress);
+        this(x, y, width, height, GuiUtils.getSelected(), icon, label, onPress);
     }
-    public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, ResourceLocation icon, Component label, OnPress onPress) {
-        this(x, y, width, height, type, icon, width, height, label, onPress);
+    public ButtonSprite(int x, int y, int width, int height, AbstractStyle style, ResourceLocation icon, Component label, OnPress onPress) {
+        this(x, y, width, height, style, icon, width, height, label, onPress);
     }
 
     //
-    public ButtonSprite(int x, int y, int width, int height, InterfaceUtils.DesignType type, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
-        super(x, y, width, height, type, label, null);
+    public ButtonSprite(int x, int y, int width, int height, AbstractStyle style, ResourceLocation icon, int iconWidth, int iconHeight, Component label, OnPress onPress) {
+        super(x, y, width, height, style, label, null);
         this.onPress = onPress;
         this.icon = icon;
         this.iconWidth = iconWidth;

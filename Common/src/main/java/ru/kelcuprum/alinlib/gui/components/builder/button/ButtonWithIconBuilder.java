@@ -38,6 +38,6 @@ public class ButtonWithIconBuilder extends AbstractBuilder {
     }
 
     public Button build(){
-        return new ButtonWithIcon(x, y, width, height, designType, title, icon, isCenter, onPress);
+        return new ButtonWithIcon(x, y, width, height, style, title, icon, isCenter, onPress);
     }
 }
