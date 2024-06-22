@@ -65,5 +65,13 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
+}
 
+publishing {
+    publications {
+        mavenFabric(MavenPublication) {
+            artifactId = rootProject.archives_base_name + "-fabric"
+            from components.java
+        }
+    }
 }
