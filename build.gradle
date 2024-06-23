@@ -17,14 +17,21 @@ preprocess {
     def mc1202_fabric = createNode('1.20.2-fabric', 1_20_02, '')
     def mc121_fabric = createNode('1.21-fabric', 1_21_00, '')
 
+    def mc1201_common = createNode('1.20.1-common', 1_20_01, '')
+    def mc1202_common = createNode('1.20.2-common', 1_20_02, '')
+    def mc121_common = createNode('1.21-common', 1_21_00, '')
+
     def mc1201_forge = createNode('1.20.1-forge', 1_20_01, '')
     def mc1202_forge = createNode('1.20.2-forge', 1_20_02, '')
     def mc1205_neoforge = createNode('1.20.5-neoforge', 1_20_05, '')
     def mc121_neoforge = createNode('1.21-neoforge', 1_21_00, '')
-    // Architectury Loom does not support mc1.20.5+ forge at all
 
-    mc1201_fabric.link(mc1202_fabric, null)
-    mc1202_fabric.link(mc121_fabric, null)
+    mc1201_common.link(mc1202_common, null)
+    mc1202_common.link(mc121_common, null)
+
+    mc1201_common.link(mc1201_fabric, null)
+    mc1202_common.link(mc1202_fabric, null)
+    mc121_common.link(mc121_fabric, null)
 
     mc1201_fabric.link(mc1201_forge, null)
     mc1202_fabric.link(mc1202_forge, null)
@@ -61,7 +68,7 @@ tasks.register('buildAndGather') {
             copy {
                 from(buildLibs(project)) {
                     include '*.jar'
-                    exclude '*-dev.jar', '*-sources.jar'
+                    exclude '*-dev.jar', '*-sources.jar', '*-all.jar'
                 }
                 into buildLibs(rootProject)
                 duplicatesStrategy DuplicatesStrategy.INCLUDE

@@ -3,12 +3,12 @@ apply plugin: 'io.github.goooler.shadow'
 apply plugin: 'dev.architectury.loom'
 apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
-apply plugin: "io.github.p03w.machete"
 
-def mod_brand = (loom.platform.get() as String).toLowerCase()
-assert mod_brand in ['fabric', 'forge', 'neoforge']
-assert project.name.endsWith('-' + mod_brand)  // optional check
+def mod_brand = project.name.endsWith("-common") ? 'common' : (loom.platform.get() as String).toLowerCase()
+assert mod_brand in ['fabric', 'forge', 'neoforge', 'common']
+//assert project.name.endsWith('-' + mod_brand)  // optional check
 archivesBaseName = rootProject.archives_base_name + "-" + mod_brand
+group = rootProject.maven_group
 
 int mcVersion = 1
 preprocess {
@@ -33,19 +33,18 @@ repositories {
 configurations {
     modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
 }
-
 loom {
-    runConfigs.client {
-        // to make sure it generates all "Minecraft Client (:subproject_name)" applications
-        ideConfigGenerated = true
-        runDir '../../run'
-        vmArgs '-Dmixin.debug.export=true'
+    if(mod_brand != 'common') {
+        runConfigs.client {
+            // to make sure it generates all "Minecraft Client (:subproject_name)" applications
+            ideConfigGenerated = true
+            runDir '../../run'
+            vmArgs '-Dmixin.debug.export=true'
+        }
     }
-
     accessWidenerPath = file("../../src/main/resources/alinlib.accesswidener")
     if (mod_brand == 'forge') {
         forge {
-            convertAccessWideners = true
             mixinConfig "alinlib.mixin.json"
         }
     }
@@ -53,10 +52,11 @@ loom {
 
 remapJar {
     remapperIsolation = true
-}
-machete {
-    ignoredTasks.add("shadowJar")
-    ignoredTasks.add("jar")
+    injectAccessWidener = true
+
+    inputFile.set shadowJar.archiveFile
+    dependsOn shadowJar
+    archiveClassifier.set null
 }
 
 configurations {shadow}
@@ -67,6 +67,7 @@ dependencies {
     mappings loom.layered() {
         officialMojangMappings()
     }
+    include implementation("meteordevelopment:starscript:0.2.2")
 
     if (mod_brand == 'fabric') {
         modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
@@ -74,12 +75,13 @@ dependencies {
         modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     } else if (mod_brand == 'neoforge') {
         neoForge "net.neoforged:neoforge:${project.forge_version}"
+    } else if(mod_brand == 'common') {
+        modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
     } else {
         forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
 
         include "io.github.llamalad7:mixinextras-forge:0.3.6"
     }
-    include implementation("meteordevelopment:starscript:0.2.2")
 }
 
 int JAVA_COMPATIBILITY
@@ -94,6 +96,52 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 version = project.mod_version + "+mc" + project.minecraft_version
+
+publishing {
+    repositories {
+        maven {
+            name = "Kel_Cuprum_Repository"
+            url = "https://repo-test.kelcuprum.ru/test"
+            credentials {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
+
+    publications {
+        println(String.format("%s:%s:%s", rootProject.maven_group, project.version, project.archives_base_name))
+        if(mod_brand == "neoforge"){
+            mavenNeoForge(MavenPublication) {
+                groupId rootProject.maven_group
+                version project.version
+                artifactId = rootProject.archives_base_name + "-neoforge"
+                from components.java
+            }
+        } else if(mod_brand == "forge"){
+            mavenForge(MavenPublication) {
+                groupId rootProject.maven_group
+                version project.version
+                artifactId = rootProject.archives_base_name + "-forge"
+                from components.java
+            }
+        } else if(mod_brand == "fabric"){
+            mavenForge(MavenPublication) {
+                groupId rootProject.maven_group
+                version project.version
+                artifactId = rootProject.archives_base_name + "-fabric"
+                from components.java
+            }
+        } else if(mod_brand == "common"){
+            mavenCommon(MavenPublication) {
+                groupId rootProject.maven_group
+                version project.version
+                artifactId = rootProject.archives_base_name + "-common"
+                from components.java
+            }
+        }
+    }
+}
 
 processResources {
     inputs.property "version", version
