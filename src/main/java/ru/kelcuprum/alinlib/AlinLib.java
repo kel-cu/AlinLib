@@ -124,7 +124,6 @@ public class AlinLib
     //$$      GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick());
     //$$  }
     //$$  public void registerKeymappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
-    //$$      AlinLib.log("ХУЙ, а теперь когда вы обратили внимание");
     //$$      for(KeyMapping mapping : EXAMPLE_MAPPING) {
     //$$          event.register(mapping);
     //$$      }
