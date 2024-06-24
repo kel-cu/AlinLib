@@ -32,6 +32,7 @@ import java.util.Random;
 import static ru.kelcuprum.alinlib.gui.Icons.CLOWNFISH;
 //#if FORGE
 //$$ @net.minecraftforge.fml.common.Mod("alinlib")
+//$$ @net.minecraftforge.fml.common.Mod.EventBusSubscriber(bus = net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD, value = net.minecraftforge.api.distmarker.Dist.CLIENT)
 //#elseif NEOFORGE
 //$$ @net.neoforged.fml.common.Mod("alinlib")
 //#endif
@@ -114,16 +115,16 @@ public class AlinLib
     //$$          }
     //$$      }
     //$$      if (net.minecraftforge.fml.loading.FMLLoader.getDist() == net.minecraftforge.api.distmarker.Dist.CLIENT) {
+    //$$          net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerKeymappings);
     //$$          registerScreen();
-    //$$          net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(this::registerBindings);
     //$$          net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(this::onPostRenderGui);
     //$$      }
     //$$  }
     //$$  public void onPostRenderGui(net.minecraftforge.client.event.RenderGuiEvent.Post event) {
     //$$      GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick());
     //$$  }
-    //$$  @net.minecraftforge.eventbus.api.SubscribeEvent
-    //$$  public void registerBindings(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
+    //$$  public void registerKeymappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
+    //$$      AlinLib.log("ХУЙ, а теперь когда вы обратили внимание");
     //$$      for(KeyMapping mapping : EXAMPLE_MAPPING) {
     //$$          event.register(mapping);
     //$$      }

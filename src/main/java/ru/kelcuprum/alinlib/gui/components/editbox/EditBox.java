@@ -44,7 +44,7 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
             setValue(this.builder.config.getString(this.builder.configType, this.builder.value));
             setResponder(string -> this.builder.config.setString(this.builder.configType, string));
         } else if (this.builder.hasLocalization()) {
-            setValue(this.builder.localization.getLocalization(this.builder.configType));
+            setValue(this.builder.localization.getLocalization(this.builder.configType, false, false, false));
             setResponder(string -> this.builder.localization.setLocalization(this.builder.configType, string));
         } else {
             setValue(((EditBoxBuilder) builder).value);
@@ -146,7 +146,7 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
             setValue(builder.value);
         } else if(builder.hasLocalization()){
             builder.localization.resetLocalization(builder.configType);
-            setValue(builder.localization.getLocalization(builder.configType));
+            setValue(builder.localization.getLocalization(builder.configType, false, false, false));
         } else setValue(builder.value);
     }
 
