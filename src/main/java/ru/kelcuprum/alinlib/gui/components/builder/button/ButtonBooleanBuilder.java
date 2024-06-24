@@ -3,9 +3,7 @@ package ru.kelcuprum.alinlib.gui.components.builder.button;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
-import ru.kelcuprum.alinlib.gui.components.buttons.ButtonConfigBoolean;
-import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
-import ru.kelcuprum.alinlib.gui.components.buttons.base.ButtonBoolean;
+import ru.kelcuprum.alinlib.gui.components.buttons.ButtonBoolean;
 
 public class ButtonBooleanBuilder extends AbstractBuilder {
     public ButtonBoolean.OnPress onPress;
@@ -23,6 +21,14 @@ public class ButtonBooleanBuilder extends AbstractBuilder {
         this.defaultValue = defaultValue;
         this.onPress = onPress;
     }
+    // Default value
+    public ButtonBooleanBuilder setDefaultValue(boolean defaultValue){
+        this.defaultValue = defaultValue;
+        return this;
+    }
+    public boolean getDefaultValue(){
+        return this.defaultValue;
+    }
     // OnPress
     public ButtonBooleanBuilder setOnPress(ButtonBoolean.OnPress onPress){
         this.onPress = onPress;
@@ -37,9 +43,11 @@ public class ButtonBooleanBuilder extends AbstractBuilder {
         this.configType = configType;
         return this;
     }
+    public boolean hasConfigurable(){
+        return this.config != null && this.configType != null;
+    }
 
-    public Button build(){
-        if(this.config != null && this.configType != null) return new ButtonConfigBoolean(x, y, width, height, style, config, configType, defaultValue, title);
-        return new ButtonBoolean(x, y, width, height, style, defaultValue, title, onPress);
+    public ButtonBoolean build(){
+        return new ButtonBoolean(this);
     }
 }

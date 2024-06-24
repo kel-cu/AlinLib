@@ -8,13 +8,11 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.components.ConfigureScrolWidget;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
-import ru.kelcuprum.alinlib.gui.components.buttons.base.Button;
-import ru.kelcuprum.alinlib.gui.components.buttons.ButtonSprite;
+import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
@@ -47,7 +45,11 @@ public class AbstractConfigScreen extends Screen {
         }
     }
     protected AbstractWidget getFirstActiveWidget(List<AbstractWidget> widgets){
-        AbstractWidget widget = widgets.get(0);
+        //#if MC > 12005
+        AbstractWidget widget = widgets.getFirst();
+        //#else
+        //$$ AbstractWidget widget = widgets.get(0);
+        //#endif
         for(AbstractWidget abstractWidget : widgets){
             if(abstractWidget.isActive()) {
                 widget = abstractWidget;
@@ -61,19 +63,21 @@ public class AbstractConfigScreen extends Screen {
     AbstractWidget reset;
     protected void initPanelButtons(){
         // -=-=-=-=-=-=-=-
-        titleW = addRenderableWidget(new TextBox(10, 5, this.builder.panelSize-20, 30, this.builder.title, true));
+        titleW = addRenderableWidget(new TextBox(5, 5, this.builder.panelSize-10, 30, this.builder.title, true));
         // -=-=-=-=-=-=-=-
-        this.descriptionBox = new DescriptionBox(10, 40, this.builder.panelSize-20, height - 75, Component.empty());
+        this.descriptionBox = new DescriptionBox(5, 40, this.builder.panelSize-10, height - 70, Component.empty());
         this.descriptionBox.visible = false;
         addRenderableWidget(this.descriptionBox);
         // -=-=-=-=-=-=-=-
         // Exit Buttons
         // 85 before reset button
-        back = addRenderableWidget(new Button(10, height - 30, this.builder.panelSize-45, 20, builder.style, CommonComponents.GUI_BACK, (OnPress) -> {
+
+        back = addRenderableWidget(new ButtonBuilder(CommonComponents.GUI_BACK).setOnPress((OnPress) -> {
             assert this.minecraft != null;
             this.minecraft.setScreen(builder.parent);
-        }));
-        reset = addRenderableWidget(new ButtonSprite(this.builder.panelSize-30, height-30, 20, 20, builder.style, RESET, Localization.getText("alinlib.component.reset"), (OnPress) -> {
+        }).setPosition(5, height - 25).setSize(this.builder.panelSize-35, 20).build());
+
+        reset = addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.component.reset")).setOnPress((OnPress) -> {
             for(AbstractWidget widget : builder.widgets){
                 if(widget instanceof Resetable){
                     ((Resetable) widget).resetValue();
@@ -86,7 +90,7 @@ public class AbstractConfigScreen extends Screen {
                     .setIcon(RESET)
                     .show(this.minecraft.getToasts());
             AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
-        }));
+        }).setSprite(RESET).setSize(20, 20).setPosition(this.builder.panelSize-25, height-25).build());
         this.scroller_panel = addRenderableWidget(new ConfigureScrolWidget(-8, 0, 4, this.height, Component.empty(), scroller -> {
             scroller.innerHeight = 5;
             if(lastCheck){

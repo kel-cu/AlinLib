@@ -65,8 +65,8 @@ public class ConfigScreenBuilder {
     }
     //
     public ConfigScreenBuilder addPanelWidget(AbstractWidget widget){
-        widget.setWidth(this.panelSize-20);
-        widget.setX(10);
+        widget.setWidth(this.panelSize-10);
+        widget.setX(5);
         widget.setY(yL);
         yL+=widget.getHeight()+5;
         this.panelWidgets.add(widget);

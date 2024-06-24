@@ -5,10 +5,7 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
-import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxColor;
-import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxConfigString;
-import ru.kelcuprum.alinlib.gui.components.editbox.EditBoxLocalization;
-import ru.kelcuprum.alinlib.gui.components.editbox.base.EditBoxString;
+import ru.kelcuprum.alinlib.gui.components.editbox.EditBox;
 
 import java.util.function.Consumer;
 
@@ -68,12 +65,23 @@ public class EditBoxBuilder extends AbstractBuilder {
         this.secret = secret;
         return this;
     }
+    public boolean hasConfigurable(){
+        return this.config != null && this.configType != null;
+    }
+    public boolean hasLocalization(){
+        return this.localization != null && this.configType != null;
+    }
+    //
+    public EditBoxBuilder setFont(Font font){
+        this.font = font;
+        return this;
+    }
 
-    public EditBoxString build(){
-        if(this.config != null && this.configType != null) {
-            if(this.isColor) return new EditBoxColor(x, y, width, height, style, config, configType, color, title);
-            else return new EditBoxConfigString(x, y, width, height, secret, style, config, configType, value, title);
-        } else if(this.localization != null && this.configType != null) return new EditBoxLocalization(x, y, width, height, style, localization, configType, title);
-        else return new EditBoxString(font, x, y, width, height, secret, value, style, title, responder);
+    public Font getFont() {
+        return font;
+    }
+
+    public EditBox build(){
+        return new EditBox(this);
     }
 }

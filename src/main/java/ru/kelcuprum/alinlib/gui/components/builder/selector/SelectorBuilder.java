@@ -3,9 +3,7 @@ package ru.kelcuprum.alinlib.gui.components.builder.selector;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
-import ru.kelcuprum.alinlib.gui.components.selector.SelectorIntegerButton;
-import ru.kelcuprum.alinlib.gui.components.selector.SelectorStringButton;
-import ru.kelcuprum.alinlib.gui.components.selector.base.SelectorButton;
+import ru.kelcuprum.alinlib.gui.components.selector.SelectorButton;
 
 public class SelectorBuilder extends AbstractBuilder {
     public String[] list;
@@ -52,12 +50,11 @@ public class SelectorBuilder extends AbstractBuilder {
         this.configType = configType;
         return this;
     }
+    public boolean hasConfigurable(){
+        return this.config != null && this.configType != null;
+    }
 
     public SelectorButton build(){
-        if(this.config != null && this.configType != null){
-            if(this.defaultString != null) return new SelectorStringButton(x, y, width, height, style, list, config, configType, defaultString, title);
-            else return new SelectorIntegerButton(x, y, width, height, style, list, config, configType, defaultInt, title);
-        }
-        return new SelectorButton(x, y, width, height, style, list, defaultInt, title, onPress);
+        return new SelectorButton(this);
     }
 }

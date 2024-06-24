@@ -1,12 +1,10 @@
 apply plugin: 'maven-publish'
-apply plugin: 'io.github.goooler.shadow'
 apply plugin: 'dev.architectury.loom'
 apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
 
 def mod_brand = project.name.endsWith("-common") ? 'common' : (loom.platform.get() as String).toLowerCase()
 assert mod_brand in ['fabric', 'forge', 'neoforge', 'common']
-//assert project.name.endsWith('-' + mod_brand)  // optional check
 archivesBaseName = rootProject.archives_base_name + "-" + mod_brand
 group = rootProject.maven_group
 
@@ -45,21 +43,17 @@ loom {
     accessWidenerPath = file("../../src/main/resources/alinlib.accesswidener")
     if (mod_brand == 'forge') {
         forge {
+            convertAccessWideners = true
             mixinConfig "alinlib.mixin.json"
         }
     }
 }
-
 remapJar {
+    if(mod_brand == 'forge' || mod_brand == 'neoforge') atAccessWideners.add("alinlib.accesswidener")
     remapperIsolation = true
     injectAccessWidener = true
-
-    inputFile.set shadowJar.archiveFile
-    dependsOn shadowJar
-    archiveClassifier.set null
 }
 
-configurations {shadow}
 dependencies {
     // loom
     implementation("com.google.code.gson:gson:2.10.1")
@@ -101,7 +95,7 @@ publishing {
     repositories {
         maven {
             name = "Kel_Cuprum_Repository"
-            url = "https://repo-test.kelcuprum.ru/test"
+            url = "https://repo.kelcuprum.ru/test"
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")
@@ -130,13 +124,6 @@ publishing {
                 groupId rootProject.maven_group
                 version project.version
                 artifactId = rootProject.archives_base_name + "-fabric"
-                from components.java
-            }
-        } else if(mod_brand == "common"){
-            mavenCommon(MavenPublication) {
-                groupId rootProject.maven_group
-                version project.version
-                artifactId = rootProject.archives_base_name + "-common"
                 from components.java
             }
         }
