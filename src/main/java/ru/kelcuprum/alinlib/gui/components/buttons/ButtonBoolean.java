@@ -1,9 +1,11 @@
 package ru.kelcuprum.alinlib.gui.components.buttons;
 
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
@@ -33,12 +35,35 @@ public class ButtonBoolean extends Button implements Resetable {
 
     @Override
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        if(GuiUtils.isDoesNotFit(getMessage(), getWidthComponent(), getHeight())){
-            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+        if(GuiUtils.isDoesNotFit(builder.isCheckBox ? builder.getTitle() : getMessage(), getWidthComponent(), getHeight())){
+            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, builder.isCheckBox ? builder.getTitle() : getMessage(), (getHeight() - 8) / 2, 0xFFFFFF);
         } else {
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, volumeState, getX() + getWidth()-AlinLib.MINECRAFT.font.width(volumeState.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+            guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXTextComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+            if(builder.isCheckBox) {
+                int boxHeight = getHeight() - 10;
+                int boxX = 5;
+                int color = value ? getCheckBoxColor() : 0xFFFFFFFF;
+                guiGraphics.fill(getXComponent()+boxX, getY()+boxX, getXComponent()+boxX + boxHeight, getY()+boxX+1, color);
+                guiGraphics.fill(getXComponent()+boxX, getY()+boxHeight+boxX-1, getXComponent()+boxX + boxHeight, getY()+boxHeight+boxX, color);
+
+                guiGraphics.fill(getXComponent()+boxX, getY()+boxX+1, getXComponent()+boxX+1, getY()+boxX+boxHeight, color);
+                guiGraphics.fill(getXComponent()+boxX+boxHeight-1, getY()+boxX+1, getXComponent()+boxX+boxHeight, getY()+boxX+boxHeight, color);
+                if(value){
+                    guiGraphics.fill(getXComponent()+boxX+2, getY()+boxX+2, getXComponent()+boxX+boxHeight-2, getY()+boxX+boxHeight-2, color);
+                }
+//                guiGraphics.fill(x + width, y, x + 1 + width, y + height, 0xFFFFFFFF);
+            } else guiGraphics.drawString(AlinLib.MINECRAFT.font, volumeState, getX() + getWidth()-AlinLib.MINECRAFT.font.width(volumeState.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
         }
+    }
+    public int getCheckBoxColor(){
+        return switch (AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR", 0).intValue()){
+            case 0 -> Colors.TETRA;
+            case 1 -> Colors.SEADRIVE;
+            case 2 -> Colors.CONVICT;
+            case 3 -> Colors.SEABIRD;
+            case 4 -> Colors.GROUPIE;
+            default -> AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR.CUSTOM", Colors.SPECKLE[0]).intValue();
+        };
     }
     // Получить
     // Заменить
@@ -47,6 +72,17 @@ public class ButtonBoolean extends Button implements Resetable {
         this.volumeState = this.value ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF;
         this.setMessage(Component.literal(builder.getTitle().getString() +": ").append(volumeState));
         return this;
+    }
+
+    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, Component message, int x, int color) {
+        int k = this.getXTextComponent() + x;
+        int l = this.getX() + this.getWidth() - x;
+        if(!builder.isCheckBox) k+=height;
+        renderScrollingString(guiGraphics, font, message, k, getY(), l, getY()+height, color);
+    }
+
+    protected int getXTextComponent() {
+        return builder.isCheckBox ? getXComponent()+height : getXComponent();
     }
 
     @Override

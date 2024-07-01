@@ -69,7 +69,7 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
     }
 
     protected int getColor() {
-        return (getError() ? Colors.GROUPIE : builder.isColor ? Integer.parseInt(getValue()) : isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE);
+        return (getError() ? Colors.GROUPIE : builder.isColor ? volume : isFocused() ? Colors.CLOWNFISH : Colors.SEADRIVE);
     }
 
     public EditBox setError(boolean error) {
