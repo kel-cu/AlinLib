@@ -22,6 +22,13 @@ public class Button extends AbstractButton implements Description {
     public Button(AbstractBuilder builder) {
         super(builder.getX(), builder.getY(), builder.getWidth(), builder.getHeight(), builder.getTitle());
         this.builder =  builder;
+        this.active = builder.getActive();
+        this.visible = builder.getVisible();
+    }
+
+    @Override
+    public boolean isActive() {
+        return builder.getActive();
     }
 
     // Изменение элементов в кнопке

@@ -7,6 +7,7 @@ import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,9 @@ public class CategoryBox extends TextBox {
         this.name = label;
         this.setActive(true);
     }
-
+    public CategoryBox addValue(AbstractBuilder builder){
+        return addValue(builder.build());
+    };
     public CategoryBox addValue(AbstractWidget widget) {
         if (widget == null)
             return this;
@@ -38,7 +41,13 @@ public class CategoryBox extends TextBox {
         values.add(widget);
         return this;
     }
-    public CategoryBox addValues(List<AbstractWidget> widgets) {
+    public CategoryBox addBuilders(List<AbstractBuilder> builders){
+        for(AbstractBuilder builder : builders){
+            addValue(builder);
+        }
+        return this;
+    }
+    public CategoryBox  addValues(List<AbstractWidget> widgets) {
         if (widgets == null)
             return this;
         values.addAll(widgets);

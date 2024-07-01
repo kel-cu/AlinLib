@@ -25,6 +25,8 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
     public EditBox(AbstractBuilder builder) {
         super(((EditBoxBuilder) builder).getFont(), builder.getX(), builder.getY(), builder.getWidth(), builder.getHeight(), builder.getTitle());
         this.builder = (EditBoxBuilder) builder;
+        this.active = builder.getActive();
+        this.visible = builder.getVisible();
         setMaxLength(Integer.MAX_VALUE);
         if (this.builder.isColor) {
             setMaxLength(16);
@@ -50,6 +52,11 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
             setValue(((EditBoxBuilder) builder).value);
             setResponder(((EditBoxBuilder) builder).responder);
         }
+    }
+
+    @Override
+    public boolean isActive() {
+        return builder.getActive();
     }
 
     protected int getPositionContent(String content) {

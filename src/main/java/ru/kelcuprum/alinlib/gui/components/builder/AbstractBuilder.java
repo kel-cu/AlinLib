@@ -14,6 +14,8 @@ public abstract class AbstractBuilder {
 
     protected int width = DEFAULT_WIDTH();
     protected int height = DEFAULT_HEIGHT;
+    protected boolean active = true;
+    protected boolean visible = true;
     protected Component title;
     protected Component description;
     protected AbstractStyle style = GuiUtils.getSelected();
@@ -94,5 +96,22 @@ public abstract class AbstractBuilder {
     public int getHeight(){
         return this.height;
     }
+    //
+    public <T extends AbstractBuilder> T setActive(boolean active){
+        this.active = active;
+        return (T) this;
+    }
+    public boolean getActive(){
+        return this.active;
+    }
+    //
+    public <T extends AbstractBuilder> T setVisible(boolean visible){
+        this.visible = visible;
+        return (T) this;
+    }
+    public boolean getVisible(){
+        return this.visible;
+    }
+
     public abstract AbstractWidget build();
 }

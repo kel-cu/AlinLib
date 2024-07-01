@@ -5,6 +5,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
@@ -64,6 +65,9 @@ public class ConfigScreenBuilder {
         return this.panelSize;
     }
     //
+    public ConfigScreenBuilder addPanelWidget(AbstractBuilder builder){
+        return addPanelWidget(builder.build());
+    }
     public ConfigScreenBuilder addPanelWidget(AbstractWidget widget){
         widget.setWidth(this.panelSize-10);
         widget.setX(5);
@@ -73,6 +77,9 @@ public class ConfigScreenBuilder {
         return this;
     }
 
+    public ConfigScreenBuilder addWidget(AbstractBuilder builder){
+        return addWidget(builder.build());
+    }
     public ConfigScreenBuilder addWidget(AbstractWidget widget){
         if(widget instanceof CategoryBox){
             this.widgets.add(widget);

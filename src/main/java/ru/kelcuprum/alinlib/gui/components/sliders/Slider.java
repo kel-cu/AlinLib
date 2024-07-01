@@ -26,6 +26,8 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
     public Slider(AbstractBuilder builder) {
         super(builder.getX(), builder.getY(), builder.getWidth(), builder.getHeight(), builder.getTitle(), 0);
         this.builder = (SliderBuilder) builder;
+        this.active = builder.getActive();
+        this.visible = builder.getVisible();
         if(this.builder.hasConfigurable()){
             if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTERGER) {
                 this.setValue(((double) (this.builder.config.getNumber(this.builder.configType, this.builder.defaultValue).intValue() - this.builder.min.intValue()) / (this.builder.max.intValue() - this.builder.min.intValue())));
@@ -36,6 +38,11 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
             }
         } else setValue(((this.builder.defaultValue.doubleValue() - this.builder.min.doubleValue()) / (this.builder.max.doubleValue() - this.builder.min.doubleValue())));
         this.setMessage(Component.literal(this.builder.getTitle().getString()).append(": ").append(getComponentValue()));
+    }
+
+    @Override
+    public boolean isActive() {
+        return builder.getActive();
     }
 
     // Получить
