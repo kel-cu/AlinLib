@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "name": "AlinLib",
+  "id": "alinlib",
+  "version": "${version}",
+  "description": "A library to facilitate mod development by Kel Cuprum",
+  "authors": [
+    "Kel Cuprum"
+  ],
+  "contributors": [
+    "Kel Cuprum [Developer, Tester, Translator]",
+    "@dima_dencep [#1, #4, #5]",
+    "ImGRUI [Stealth mode algorithm]"
+  ],
+  "contact": {
+    "sources": "https://github.com/kel-cu/AlinLib",
+    "homepage": "https://modrinth.com/project/AlinLib",
+    "issues": "https://github.com/kel-cu/AlinLib/issues",
+    "email": "me@kelcuprum.ru"
+  },
+  "license": "GPL 3.0",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "ru.kelcuprum.alinlib.AlinLib"
+    ],
+    "modmenu": [
+      "ru.kelcuprum.alinlib.gui.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "alinlib.mixin.json"
+  ],
+  "accessWidener": "alinlib.accesswidener",
+  "icon": "assets/alinlib/icon.png",
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": "${minecraft_dependency}"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/project/AlinLib",
+        "modmenu.donate": "https://kelcu.ru/don",
+        "modmenu.discord": "https://kelcu.ru/ds"
+      },
+      "badges": ["library"]
+    }
+  }
+}
