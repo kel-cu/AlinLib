@@ -13,6 +13,7 @@ import ru.kelcuprum.alinlib.gui.components.ConfigureScrolWidget;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
+import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
@@ -125,12 +126,23 @@ public class AbstractConfigScreen extends Screen {
         this.scroller = addRenderableWidget(new ConfigureScrolWidget(this.width - 8, 0, 4, this.height, Component.empty(), scroller -> {
             scroller.innerHeight = 5;
             boolean descriptionEnable = false;
+            CategoryBox lastCategory = null;
             for(AbstractWidget widget : builder.widgets){
                 if(widget.visible){
                     if(widget instanceof Description){
                         if(widget.isHoveredOrFocused() && ((Description) widget).getDescription() != null && this.descriptionBox != null){
                             descriptionEnable = true;
                             this.descriptionBox.setDescription(((Description) widget).getDescription());
+                        }
+                    }
+                    if(widget instanceof CategoryBox){
+                        if(lastCategory != widget && ((CategoryBox) widget).getState()) lastCategory = (CategoryBox) widget;
+                    }
+                    if(lastCategory != null && !(widget instanceof CategoryBox)){
+                        if(!lastCategory.values.contains(widget)) {
+                            scroller.innerHeight+=6;
+                            lastCategory.setRenderLine(true);
+                            lastCategory = null;
                         }
                     }
                     widget.setY((int) (scroller.innerHeight - scroller.scrollAmount()));

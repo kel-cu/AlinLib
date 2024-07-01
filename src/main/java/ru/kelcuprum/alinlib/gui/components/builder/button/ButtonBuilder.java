@@ -19,8 +19,12 @@ public class ButtonBuilder extends AbstractBuilder {
         this(Component.empty());
     }
     public ButtonBuilder(Component title){
-        this(title, null);
+        this(title, (Button.OnPress) null);
     }
+    public ButtonBuilder(Component title, Component rightTitle){
+        this(title, rightTitle, null);
+    }
+
     public ButtonBuilder(Component title, Button.OnPress onPress){
         this(title, null, onPress);
     }

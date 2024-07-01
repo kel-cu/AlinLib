@@ -80,8 +80,10 @@ public class ConfigScreenBuilder {
     public ConfigScreenBuilder addWidget(AbstractBuilder builder){
         return addWidget(builder.build());
     }
+    CategoryBox lastCategory = null;
     public ConfigScreenBuilder addWidget(AbstractWidget widget){
         if(widget instanceof CategoryBox){
+            if(lastCategory != widget) lastCategory = (CategoryBox) widget;
             this.widgets.add(widget);
             widget.setX(140);
             widget.setY(yC);
@@ -93,6 +95,13 @@ public class ConfigScreenBuilder {
                 yC+=cW.getHeight()+5;
             }
         } else {
+            if(lastCategory != null){
+                if(!lastCategory.values.contains(widget)) {
+                    yC+=6;
+                    lastCategory.setRenderLine(true);
+                    lastCategory = null;
+                }
+            }
             this.widgets.add(widget);
             widget.setY(yC);
             widget.setX(140);

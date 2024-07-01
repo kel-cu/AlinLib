@@ -17,18 +17,29 @@ import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class CategoryBox extends TextBox {
     public final List<AbstractWidget> values = new ArrayList<>();
-    private boolean state = true;
+    private boolean state;
+    private boolean renderLine = false;
     private Component name;
 
     public CategoryBox(Component label) {
-        this(0, 0, label);
+        this(label, true);
+    }
+    public CategoryBox(Component label, boolean state) {
+        this(0, 0, label, state);
     }
     public CategoryBox(int x, int y, Component label) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, label);
     }
+    public CategoryBox(int x, int y, Component label, boolean state) {
+        this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, state, label);
+    }
     public CategoryBox(int x, int y, int width, int height, Component label) {
+        this(x, y ,width, height, true, label);
+    }
+    public CategoryBox(int x, int y, int width, int height, boolean state, Component label) {
         super(x, y, width, height, label, true);
         this.name = label;
+        this.state = state;
         this.setActive(true);
     }
     public CategoryBox addValue(AbstractBuilder builder){
@@ -37,7 +48,7 @@ public class CategoryBox extends TextBox {
     public CategoryBox addValue(AbstractWidget widget) {
         if (widget == null)
             return this;
-
+        widget.visible = state;
         values.add(widget);
         return this;
     }
@@ -63,16 +74,20 @@ public class CategoryBox extends TextBox {
     public List<AbstractWidget> getValues(){
         return values;
     }
-
     public CategoryBox changeState(){
         return changeState(!state);
+    }
+    public boolean getState(){
+        return state;
+    }
+    public CategoryBox setRenderLine(boolean renderLine){
+        this.renderLine = renderLine;
+        return this;
     }
 
     public CategoryBox changeState(boolean state){
         this.state = state;
-        for (AbstractWidget widget : values) {
-            widget.visible = state;
-        }
+        for (AbstractWidget widget : values)  widget.visible = state;
         return this;
     }
     @Override
@@ -112,6 +127,13 @@ public class CategoryBox extends TextBox {
                 int textWidth = font.width(getName());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
                 guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, 0xFFFFFFFF);
+            }
+            if(state && renderLine){
+                int yW = height+5;
+                for(AbstractWidget widget : values) yW+=widget.getHeight()+5;
+                int textWidth = font.width(getName());
+                int x = (getX() + getWidth() / 2) - (textWidth/2);
+                guiGraphics.fill(x, getY()+yW, x+textWidth, getY()+yW+1, 0xFFFFFFFF);
             }
         }
     }
