@@ -30,13 +30,33 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
         this.visible = builder.getVisible();
         if(this.builder.hasConfigurable()){
             if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTERGER) {
-                this.setValue(((double) (this.builder.config.getNumber(this.builder.configType, this.builder.defaultValue).intValue() - this.builder.min.intValue()) / (this.builder.max.intValue() - this.builder.min.intValue())));
+                int selValue = this.builder.config.getNumber(this.builder.configType, this.builder.defaultValue).intValue() - this.builder.min.intValue();
+                this.displayValue = this.builder.min.intValue() + selValue;
+                this.setValue(((double) selValue / (this.builder.max.intValue() - this.builder.min.intValue())));
             } else if (this.builder.type == SliderBuilder.NUMBER_TYPE.FLOAT) {
-                this.setValue(((double) (this.builder.config.getNumber(this.builder.configType, this.builder.defaultValue).floatValue() - this.builder.min.floatValue()) / (this.builder.max.floatValue() - this.builder.min.floatValue())));
+                float selValue = this.builder.config.getNumber(this.builder.configType, this.builder.defaultValue).floatValue() - this.builder.min.floatValue();
+                this.displayValue = this.builder.min.floatValue() + selValue;
+                this.setValue(((double) selValue / (this.builder.max.floatValue() - this.builder.min.floatValue())));
             } else if (this.builder.type == SliderBuilder.NUMBER_TYPE.DOUBLE || this.builder.type == SliderBuilder.NUMBER_TYPE.PERCENT) {
-                this.setValue(((this.builder.config.getNumber(this.builder.configType, this.builder.defaultValue).doubleValue() - this.builder.min.doubleValue()) / (this.builder.max.doubleValue() - this.builder.min.doubleValue())));
+                double selValue = this.builder.config.getNumber(this.builder.configType, this.builder.defaultValue).doubleValue() - this.builder.min.doubleValue();
+                this.displayValue = this.builder.min.doubleValue() + selValue;
+                this.setValue(selValue / (this.builder.max.doubleValue() - this.builder.min.doubleValue()));
             }
-        } else setValue(((this.builder.defaultValue.doubleValue() - this.builder.min.doubleValue()) / (this.builder.max.doubleValue() - this.builder.min.doubleValue())));
+        } else {
+            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTERGER) {
+                int selValue = (this.builder.defaultValue.intValue() - this.builder.min.intValue());
+                this.displayValue = this.builder.min.intValue() + selValue;
+                setValue(((double) selValue / (this.builder.max.intValue() - this.builder.min.intValue())));
+            } else if (this.builder.type == SliderBuilder.NUMBER_TYPE.FLOAT) {
+                float selValue = (this.builder.defaultValue.floatValue() - this.builder.min.floatValue());
+                this.displayValue = this.builder.min.floatValue() + selValue;
+                setValue(selValue / (this.builder.max.floatValue() - this.builder.min.floatValue()));
+            } else if (this.builder.type == SliderBuilder.NUMBER_TYPE.DOUBLE || this.builder.type == SliderBuilder.NUMBER_TYPE.PERCENT) {
+                double selValue = (this.builder.defaultValue.doubleValue() - this.builder.min.doubleValue());
+                this.displayValue = this.builder.min.doubleValue() + selValue;
+                setValue((selValue / (this.builder.max.doubleValue() - this.builder.min.doubleValue())));
+            }
+        }
         this.setMessage(Component.literal(this.builder.getTitle().getString()).append(": ").append(getComponentValue()));
     }
 
