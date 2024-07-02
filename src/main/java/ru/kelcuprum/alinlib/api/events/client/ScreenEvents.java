@@ -21,6 +21,7 @@ public final class ScreenEvents {
             event.onKeyPressed(screen, keyCode, scanCode, modifiers, cir);
         }
     });
+
     @FunctionalInterface
     public interface ScreenRender {
         void onScreenRender(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);

@@ -4,7 +4,8 @@
   "client": [
     "events.client.GuiMixin",
     "events.client.MinecraftMixin",
-    "events.client.ScreenMixin"
+    "events.client.ScreenMixin",
+    "events.client.TextureManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
