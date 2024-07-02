@@ -62,6 +62,9 @@ public class ButtonBoolean extends Button implements Resetable {
             case 2 -> Colors.TETRA;
             case 3 -> Colors.CONVICT;
             case 4 -> Colors.SEABIRD;
+            case 5 -> Colors.SODIUM;
+            case 6 -> Colors.EMBEDDIUM;
+            case 7 -> Colors.WHITE;
             default -> AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR.CUSTOM", Colors.SPECKLE[0]).intValue();
         };
     }

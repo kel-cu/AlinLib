@@ -21,6 +21,23 @@
   "alinlib.config.toast.timeline": "Toast timeline",
   "alinlib.config.button.enable_reset_button": "Reset Button",
 
+  "alinlib.config.checkbox": "Checkbox",
+  "alinlib.config.checkbox.example": "Example Checkbox",
+  "alinlib.config.checkbox.enable": "Checkbox Style",
+  "alinlib.config.checkbox.color": "Color",
+
+  "alinlib.config.checkbox.color.groupie": "Groupie",
+  "alinlib.config.checkbox.color.seadrive": "SeaDrive",
+  "alinlib.config.checkbox.color.tetra": "Tetra",
+  "alinlib.config.checkbox.color.convict": "Convict",
+  "alinlib.config.checkbox.color.seabird": "Seabird",
+  "alinlib.config.checkbox.color.sodium": "Sodium",
+  "alinlib.config.checkbox.color.embeddium": "Embeddium",
+  "alinlib.config.checkbox.color.white": "White",
+  "alinlib.config.checkbox.color.user": "Custom",
+
+  "alinlib.config.checkbox.color.custom": "Custom color",
+
   "alinlib.config.localization": "Localization",
   "alinlib.config.localization.extended_coordinates": "Extended Coordinates",
   "alinlib.config.view.item_off_hand": "Show Item in Offhand",

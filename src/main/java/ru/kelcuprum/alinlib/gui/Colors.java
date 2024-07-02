@@ -14,4 +14,7 @@ public interface Colors {
     int WHITE = 0xFFFFFFFF;
     int BLACK = 0xFF000000;
     int BLACK_ALPHA = 0x37000000;
+
+    int SODIUM = 0xFF92e0d0;
+    int EMBEDDIUM = 0xFFcf7cb6;
 }
