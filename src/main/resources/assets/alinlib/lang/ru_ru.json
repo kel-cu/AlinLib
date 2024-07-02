@@ -17,12 +17,12 @@
   "alinlib.config.design": "Дизайн",
   "alinlib.config.default_design_type": "Стандартный тип дизайна",
   "alinlib.config.config_screen.small_panel_size": "Сокращенная версия панели",
-  "alinlib.config.toast.timeline": "Временная шкала в уведомлений",
+  "alinlib.config.toast.timeline": "Временная шкала в уведомлениях",
   "alinlib.config.button.enable_reset_button": "Кнопка сброса",
 
-  "alinlib.config.checkbox": "Флажок",
-  "alinlib.config.checkbox.example": "Пример флажка",
-  "alinlib.config.checkbox.enable": "Стиль флажка",
+  "alinlib.config.checkbox": "Чекбокс",
+  "alinlib.config.checkbox.example": "Пример чекбокса",
+  "alinlib.config.checkbox.enable": "Стиль чекбокса",
   "alinlib.config.checkbox.color": "Цвет",
 
   "alinlib.config.checkbox.color.groupie": "Groupie",
