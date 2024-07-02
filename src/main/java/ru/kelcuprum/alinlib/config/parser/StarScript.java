@@ -1,15 +1,15 @@
 package ru.kelcuprum.alinlib.config.parser;
 
-import meteordevelopment.starscript.Script;
-import meteordevelopment.starscript.Section;
-import meteordevelopment.starscript.StandardLib;
-import meteordevelopment.starscript.Starscript;
-import meteordevelopment.starscript.compiler.Compiler;
-import meteordevelopment.starscript.compiler.Parser;
-import meteordevelopment.starscript.utils.Error;
-import meteordevelopment.starscript.utils.StarscriptError;
-import meteordevelopment.starscript.value.Value;
-import meteordevelopment.starscript.value.ValueMap;
+import org.meteordev.starscript.Script;
+import org.meteordev.starscript.Section;
+import org.meteordev.starscript.StandardLib;
+import org.meteordev.starscript.Starscript;
+import org.meteordev.starscript.compiler.Compiler;
+import org.meteordev.starscript.compiler.Parser;
+import org.meteordev.starscript.utils.Error;
+import org.meteordev.starscript.utils.StarscriptError;
+import org.meteordev.starscript.value.Value;
+import org.meteordev.starscript.value.ValueMap;
 import net.minecraft.SharedConstants;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;

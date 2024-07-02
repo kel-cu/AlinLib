@@ -25,7 +25,7 @@ repositories {
     maven { url = 'https://jitpack.io' }
     maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
     maven { url = "https://maven.neoforged.net/releases/" } // NEOFORGE
-    maven { url = "https://maven.meteordev.org/releases" } // STARSCRIPT
+    maven { url = "https://repo.kelcuprum.ru/forks" } // STARSCRIPT
     maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
 }
 configurations {
@@ -53,7 +53,7 @@ remapJar {
     remapperIsolation = true
     injectAccessWidener = true
 }
-
+configurations {shade}
 dependencies {
     // loom
     implementation("com.google.code.gson:gson:2.10.1")
@@ -61,7 +61,7 @@ dependencies {
     mappings loom.layered() {
         officialMojangMappings()
     }
-    include implementation("meteordevelopment:starscript:0.2.2")
+    include(implementation("meteordevelopment:starscript:0.3.4"))
 
     if (mod_brand == 'fabric') {
         modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"

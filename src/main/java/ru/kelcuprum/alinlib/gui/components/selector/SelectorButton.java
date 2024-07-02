@@ -13,7 +13,7 @@ import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import java.util.Arrays;
 
 public class SelectorButton extends Button implements Resetable {
-    protected final SelectorBuilder builder;
+    public final SelectorBuilder builder;
     protected int position;
 
     public SelectorButton(AbstractBuilder builder) {

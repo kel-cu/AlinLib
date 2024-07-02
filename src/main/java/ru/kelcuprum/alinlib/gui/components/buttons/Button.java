@@ -18,7 +18,7 @@ import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import static ru.kelcuprum.alinlib.gui.Icons.RESET;
 
 public class Button extends AbstractButton implements Description {
-    protected final AbstractBuilder builder;
+    public final AbstractBuilder builder;
     public Button(AbstractBuilder builder) {
         super(builder.getX(), builder.getY(), builder.getWidth(), builder.getHeight(), builder.getTitle());
         this.builder =  builder;

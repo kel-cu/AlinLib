@@ -12,7 +12,7 @@ import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
 
 public class ButtonBoolean extends Button implements Resetable {
-    protected final ButtonBooleanBuilder builder;
+    public final ButtonBooleanBuilder builder;
     protected Component volumeState;
     public boolean value;
 

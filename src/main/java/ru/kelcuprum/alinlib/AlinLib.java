@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib;
 
-import meteordevelopment.starscript.value.ValueMap;
+import org.meteordev.starscript.value.ValueMap;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
