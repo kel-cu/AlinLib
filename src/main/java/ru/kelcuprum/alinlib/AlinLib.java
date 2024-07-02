@@ -82,8 +82,8 @@ public class AlinLib
             isHBKel();
         });
         ClientLifecycleEvents.CLIENT_STOPPING.register((client) -> {
-            log("This world goes round and round like a carousel in a circus.");
-            log("Maybe the world is a circus?)");
+            log(Component.translatable("alinlib.log.exit.first"));
+            log(Component.translatable("alinlib.log.exit.two"));
         });
         LocalizationEvents.DEFAULT_PARSER_INIT.register(parser -> parser.ss.set("alinlib", new ValueMap()
                 .set("id", MODID)

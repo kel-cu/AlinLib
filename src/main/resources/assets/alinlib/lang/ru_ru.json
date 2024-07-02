@@ -67,5 +67,9 @@
   "alinlib.style.flat": "Плоский",
   "alinlib.style.modern": "Современный",
 
+
+  "alinlib.log.exit.first": "Этот мир крутится и крутится как карусель в цирке.",
+  "alinlib.log.exit.two": "Может этот мир и есть цирк?)",
+
   "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"
 }
