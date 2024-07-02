@@ -119,7 +119,7 @@ public class AlinLib
     //$$      }
     //$$  }
     //$$  public void onPostRenderGui(net.minecraftforge.client.event.RenderGuiEvent.Post event) {
-    //$$      GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick());
+    //$$      ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick());
     //$$  }
     //$$  public void registerKeymappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
     //$$      for(KeyMapping mapping : EXAMPLE_MAPPING) {
@@ -142,7 +142,7 @@ public class AlinLib
     //$$      if (net.neoforged.fml.loading.FMLLoader.getDist() == net.neoforged.api.distmarker.Dist.CLIENT) {
     //$$          net.neoforged.fml.ModLoadingContext.get().registerExtensionPoint(
     //$$                  net.neoforged.neoforge.client.gui.IConfigScreenFactory.class,
-    //$$                  () -> (minecraftClient, screen) -> DesignScreen.build(screen));
+    //$$                  () -> (minecraftClient, screen) -> ru.kelcuprum.alinlib.gui.config.DesignScreen.build(screen));
     //$$          final net.neoforged.bus.api.IEventBus bus = net.neoforged.fml.ModLoadingContext.get().getActiveContainer().getEventBus();
     //$$          bus.addListener(this::registerBindings);
     //$$          net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(this::onPostRenderGui);
@@ -158,11 +158,11 @@ public class AlinLib
 
     //#if NEOFORGE && MC >= 12100
     //$$  public void onPostRenderGui(net.neoforged.neoforge.client.event.RenderGuiEvent.Post event) {
-    //$$      GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick().getGameTimeDeltaTicks());
+    //$$      ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick().getGameTimeDeltaTicks());
     //$$  }
     //#elseif NEOFORGE && MC < 12100
     //$$  public void onPostRenderGui(net.neoforged.neoforge.client.event.RenderGuiEvent.Post event) {
-    //$$      GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick());
+    //$$      ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick());
     //$$  }
     //#endif
 
@@ -170,13 +170,13 @@ public class AlinLib
     //$$ public void registerScreen(){
     //$$          net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(
     //$$                  net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
-    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory((java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>) DesignScreen::build));
+    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory((java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>) ru.kelcuprum.alinlib.gui.config.DesignScreen::build));
     //$$ }
     //#elseif FORGE && MC >= 12002
     //$$ public void registerScreen(){
     //$$          net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(
     //$$                  net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
-    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory(DesignScreen::build));
+    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory(ru.kelcuprum.alinlib.gui.config.DesignScreen::build));
     //$$ }
     //#endif
     // Stealth
