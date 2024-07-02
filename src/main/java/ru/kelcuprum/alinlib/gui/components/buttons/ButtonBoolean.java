@@ -88,7 +88,8 @@ public class ButtonBoolean extends Button implements Resetable {
     public void resetValue() {
         if(this.builder.hasConfigurable()){
             this.builder.config.setBoolean(this.builder.configType, this.builder.defaultValue);
-        } else setValue(this.builder.defaultValue);
+        }
+        setValue(this.builder.defaultValue);
     }
 
     @Override

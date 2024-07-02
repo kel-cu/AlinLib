@@ -213,6 +213,14 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
             } else if (this.builder.type == SliderBuilder.NUMBER_TYPE.DOUBLE || this.builder.type == SliderBuilder.NUMBER_TYPE.PERCENT) {
                 this.setValue(((builder.config.getNumber(builder.configType, builder.defaultValue).doubleValue() - builder.min.doubleValue()) / (builder.max.doubleValue() - builder.min.doubleValue())));
             }
+        } else {
+            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTERGER) {
+                this.setValue(((double) (builder.defaultValue.intValue() - builder.min.intValue()) / (builder.max.intValue() - builder.min.intValue())));
+            } else if (this.builder.type == SliderBuilder.NUMBER_TYPE.FLOAT) {
+                this.setValue(((double) (builder.defaultValue.floatValue() - builder.min.floatValue()) / (builder.max.floatValue() - builder.min.floatValue())));
+            } else if (this.builder.type == SliderBuilder.NUMBER_TYPE.DOUBLE || this.builder.type == SliderBuilder.NUMBER_TYPE.PERCENT) {
+                this.setValue(((builder.defaultValue.doubleValue() - builder.min.doubleValue()) / (builder.max.doubleValue() - builder.min.doubleValue())));
+            }
         }
     }
 

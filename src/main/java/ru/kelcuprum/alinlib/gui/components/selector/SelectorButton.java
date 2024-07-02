@@ -96,6 +96,7 @@ public class SelectorButton extends Button implements Resetable {
             if(builder.defaultString == null) builder.config.setNumber(builder.configType, builder.defaultInt);
             else builder.config.setString(builder.configType, builder.defaultString);
         }
+        setPosition(builder.defaultString == null ? builder.defaultInt : Arrays.stream(getList()).toList().indexOf(builder.defaultString));
     }
 
     @Override

@@ -142,7 +142,7 @@ public class AlinLib
     //$$      if (net.neoforged.fml.loading.FMLLoader.getDist() == net.neoforged.api.distmarker.Dist.CLIENT) {
     //$$          net.neoforged.fml.ModLoadingContext.get().registerExtensionPoint(
     //$$                  net.neoforged.neoforge.client.gui.IConfigScreenFactory.class,
-    //$$                  () -> (minecraftClient, screen) -> ConfigScreen.build(screen));
+    //$$                  () -> (minecraftClient, screen) -> DesignScreen.build(screen));
     //$$          final net.neoforged.bus.api.IEventBus bus = net.neoforged.fml.ModLoadingContext.get().getActiveContainer().getEventBus();
     //$$          bus.addListener(this::registerBindings);
     //$$          net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(this::onPostRenderGui);
@@ -170,13 +170,13 @@ public class AlinLib
     //$$ public void registerScreen(){
     //$$          net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(
     //$$                  net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
-    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory((java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>) ConfigScreen::build));
+    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory((java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>) DesignScreen::build));
     //$$ }
     //#elseif FORGE && MC >= 12002
     //$$ public void registerScreen(){
     //$$          net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(
     //$$                  net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
-    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory(ConfigScreen::build));
+    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory(DesignScreen::build));
     //$$ }
     //#endif
     // Stealth
