@@ -1,6 +1,5 @@
-package ru.kelcuprum.alinlib.config.parser.info;
+package ru.kelcuprum.alinlib.info;
 
-import net.minecraft.util.TimeUtil;
 import ru.kelcuprum.alinlib.AlinLib;
 
 import java.text.DateFormat;
@@ -62,10 +61,12 @@ public class World {
     }
     public static String getName(){
         String world = getCodeName();
-        if(world.equals("minecraft:the_moon")) return AlinLib.localization.getLocalization("world.moon", false, false);
-        if(world.equals("minecraft:the_end")) return AlinLib.localization.getLocalization("world.the_end", false, false);
-        if(world.equals("minecraft:the_nether")) return AlinLib.localization.getLocalization("world.nether", false, false);
-        if(world.equals("minecraft:overworld")) return AlinLib.localization.getLocalization("world.overworld", false, false);
-        return AlinLib.localization.getLocalization("world.unknown", false, false);
+        return switch (world) {
+            case "minecraft:the_moon" -> AlinLib.localization.getLocalization("world.moon", false, false);
+            case "minecraft:the_end" -> AlinLib.localization.getLocalization("world.the_end", false, false);
+            case "minecraft:the_nether" -> AlinLib.localization.getLocalization("world.nether", false, false);
+            case "minecraft:overworld" -> AlinLib.localization.getLocalization("world.overworld", false, false);
+            default -> world;
+        };
     }
 }

@@ -13,8 +13,8 @@ import org.meteordev.starscript.value.ValueMap;
 import net.minecraft.SharedConstants;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.config.parser.info.Player;
-import ru.kelcuprum.alinlib.config.parser.info.World;
+import ru.kelcuprum.alinlib.info.Player;
+import ru.kelcuprum.alinlib.info.World;
 
 import java.text.SimpleDateFormat;
 import java.util.Objects;
@@ -44,6 +44,7 @@ public class StarScript {
                 .set("name", () -> Value.string(Player.getName()))
                 .set("uuid", () -> Value.string(Player.getUUID()))
                 .set("profile_type", () -> Value.string(Player.getProfileType()))
+                .set("license", () -> Value.bool(Player.isLicenseAccount()))
                 .set("health", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getHealth() : 0))
                 .set("health_max", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getMaxHealth() : 0))
                 .set("health_percent", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getPercentHealth() : 0))

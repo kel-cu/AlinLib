@@ -34,7 +34,10 @@
 
   "alinlib.config.stealth": "Stealth",
   "alinlib.config.streamer.stealth": "Stealth mode",
+  "alinlib.config.stealth.coordinates": "Coordinates",
+  "alinlib.config.streamer.stealth.coordinates": "Hide Coordinates",
   "alinlib.config.streamer.stealth.type": "Stealth Algorithm",
+  "alinlib.config.streamer.stealth.name": "Hide name",
 
 
   "alinlib.localization": "Localizations",

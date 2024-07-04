@@ -17,7 +17,7 @@ import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
-import ru.kelcuprum.alinlib.config.parser.info.Player;
+import ru.kelcuprum.alinlib.info.Player;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.styles.FlatStyle;
 import ru.kelcuprum.alinlib.gui.styles.ModernStyle;
@@ -47,11 +47,6 @@ public class AlinLib
     public static Localization localization = new Localization("alinlib","config/AlinLib/lang");
     public static Minecraft MINECRAFT = Minecraft.getInstance();
     public static StarScript starScript;
-    public static HashMap<String, Double> funnyCoordinatesX$alinLib = new HashMap<>();
-    public static HashMap<String, Double> funnyCoordinatesZ$alinLib = new HashMap<>();
-    ///
-    public static HashMap<String, Double> funnyCoordinatesX$imGRUI = new HashMap<>();
-    public static HashMap<String, Double> funnyCoordinatesZ$imGRUI = new HashMap<>();
 
     // Init
     public static void init() {
@@ -179,52 +174,6 @@ public class AlinLib
     //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory(ru.kelcuprum.alinlib.gui.config.DesignScreen::build));
     //$$ }
     //#endif
-    // Stealth
-    public static double getFunnyValueCoordinate(double coordinate, String server, String world, boolean isX){
-        return switch (bariumConfig.getNumber("STREAMER.STEALTH.TYPE", 0).intValue()){
-            case 1 -> getFunnyValueCoordinate$kelVersion(coordinate, server, world, isX);
-            default -> getFunnyValueCoordinate$ImGRUIVersion(coordinate, server, world, isX);
-        };
-    }
-    public static double getFunnyValueCoordinate$kelVersion(double coordinate, String server, String world, boolean isX){
-        String info =  server + "-" + world;
-        double value;
-        if(isX ? funnyCoordinatesX$alinLib.containsKey(info) : funnyCoordinatesZ$alinLib.containsKey(info)) value = isX ? funnyCoordinatesX$alinLib.get(info) : funnyCoordinatesZ$alinLib.get(info);
-        else {
-            while(true){
-                double r = Math.random();
-                int i = Math.random() < 0.5 ? -1 : 1;
-                double m= Math.random() * 10;
-                value = r*i*m;
-                if((value > -1.25 && value < -0.75 ) || (value > 0.75 && value < 1.25)){
-                    if(isX) funnyCoordinatesX$alinLib.put(info, value); else funnyCoordinatesZ$alinLib.put(info, value);
-                    log(info+": "+value+(isX ? " x" : " z"));
-                    break;
-                }
-            }
-        }
-        return coordinate * value;
-    }
-    public static double getFunnyValueCoordinate$ImGRUIVersion(double coordinate, String server, String world, boolean isX){
-        String info =  server + "-" + world;
-        double value;
-        if(isX ? funnyCoordinatesX$imGRUI.containsKey(info) : funnyCoordinatesZ$imGRUI.containsKey(info)) value = isX ? funnyCoordinatesX$imGRUI.get(info) : funnyCoordinatesZ$imGRUI.get(info);
-        else {
-            while(true){
-                int i = Math.random() < 0.5 ? -1 : 1;
-                value = 2*Math.random()*i;
-                if((value > -1.25 && value < -0.75 ) || (value > 0.75 && value < 1.25)){
-                    if(isX) funnyCoordinatesX$imGRUI.put(info, value); else funnyCoordinatesZ$imGRUI.put(info, value);
-                    log(info+": "+value+(isX ? " x" : " z"));
-                    break;
-                }
-            }
-        }
-        if(!isX) {
-            if (Player.getX() > 0 && coordinate > 0 && value > 0) value *= -1;
-        }
-        return coordinate*value;
-    }
     // Funny
     public static void isAprilFool(){
         if(LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 1){

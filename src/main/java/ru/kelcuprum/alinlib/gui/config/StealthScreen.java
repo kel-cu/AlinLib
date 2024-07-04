@@ -6,6 +6,7 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
+import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 
@@ -20,7 +21,11 @@ public class StealthScreen {
 
         builder.addWidget(new TextBox(Component.translatable("alinlib.config.stealth"), true))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.streamer.stealth"), false).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH"))
-                .addWidget(new SelectorBuilder(Component.translatable("alinlib.config.streamer.stealth.type")).setValue(0).setList(new String[]{"ImGRUI Version", "AlinLib"}).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH.TYPE"));
+                .addWidget(new CategoryBox(Component.translatable("alinlib.config.stealth.coordinates"))
+                        .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.streamer.stealth.coordinates"), true).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH.COORDINATES"))
+                        .addValue(new SelectorBuilder(Component.translatable("alinlib.config.streamer.stealth.type")).setValue(0).setList(new String[]{"ImGRUI Version", "AlinLib"}).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH.COORDINATES.TYPE"))
+                )
+                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.streamer.stealth.name"), true).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH.NAME"));
         return builder.build();
     }
 }

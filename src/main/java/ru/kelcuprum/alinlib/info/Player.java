@@ -1,5 +1,6 @@
-package ru.kelcuprum.alinlib.config.parser.info;
+package ru.kelcuprum.alinlib.info;
 
+import net.minecraft.client.User;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -9,13 +10,17 @@ import ru.kelcuprum.alinlib.config.Localization;
 
 public class Player {
     public static String getName(){
-        return AlinLib.MINECRAFT.getUser().getName();
+        return Stealth.getParsedName(AlinLib.MINECRAFT.getUser().getName());
     }
     public static String getUUID(){
         return AlinLib.MINECRAFT.getUser().getProfileId().toString();
     }
     public static String getProfileType(){
         return AlinLib.MINECRAFT.getUser().getType().getName();
+    }
+
+    public static boolean isLicenseAccount(){
+        return AlinLib.MINECRAFT.getUser().getType() == User.Type.MSA || AlinLib.MINECRAFT.getUser().getType() == User.Type.MOJANG;
     }
 
     public static String getItemName(){
@@ -57,10 +62,7 @@ public class Player {
     }
     public static double getX(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return 404;
-        double x = AlinLib.MINECRAFT.getCameraEntity().getX();
-        if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false)){
-            x = AlinLib.getFunnyValueCoordinate(x, (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), true);
-        }
+        double x =  Stealth.getFunnyValueCoordinate(AlinLib.MINECRAFT.getCameraEntity().getX(), (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), false);
         return Localization.getDoubleRounding(x, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
     }
     public static double getY(){
@@ -70,10 +72,7 @@ public class Player {
     }
     public static double getZ(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return 404;
-        double z = AlinLib.MINECRAFT.getCameraEntity().getZ();
-        if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false)){
-            z = AlinLib.getFunnyValueCoordinate(z, (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), false);
-        }
+        double z =  Stealth.getFunnyValueCoordinate(AlinLib.MINECRAFT.getCameraEntity().getZ(), (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), false);
         return Localization.getDoubleRounding(z, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
     }
     public static int getPing(){

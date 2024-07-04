@@ -33,7 +33,10 @@
 
   "alinlib.config.stealth": "Скрытность",
   "alinlib.config.streamer.stealth": "Режим стелса",
+  "alinlib.config.stealth.coordinates": "Координаты",
+  "alinlib.config.streamer.stealth.coordinates": "Скрыть координаты",
   "alinlib.config.streamer.stealth.type": "Алгоритм скрытности",
+  "alinlib.config.streamer.stealth.name": "Скрыть ник",
 
 
   "alinlib.localization": "Локализация",
