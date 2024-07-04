@@ -1,6 +1,9 @@
 package ru.kelcuprum.alinlib.gui;
 
+import ru.kelcuprum.alinlib.AlinLib;
+
 public interface Colors {
+    int ALINA = 0xFF9D1248;
     int[] SPECKLE = {0xFFffdc78, 0xFFcbbaa6};
     int SEADRIVE = 0xFF79c738;
     int CLOWNFISH = 0xFFf1ae31;
@@ -17,4 +20,33 @@ public interface Colors {
 
     int SODIUM = 0xFF92e0d0;
     int EMBEDDIUM = 0xFFcf7cb6;
+
+    static int getCheckBoxColor(){
+        return switch (AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR", 0).intValue()){
+            case 0 -> Colors.GROUPIE;
+            case 1 -> Colors.ALINA;
+            case 2 -> Colors.SEADRIVE;
+            case 3 -> Colors.TETRA;
+            case 4 -> Colors.CONVICT;
+            case 5 -> Colors.SEABIRD;
+            case 6 -> Colors.SODIUM;
+            case 7 -> Colors.EMBEDDIUM;
+            case 8 -> Colors.WHITE;
+            default -> AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR.CUSTOM", Colors.SPECKLE[0]).intValue();
+        };
+    }
+    static int getScrollerColor(){
+        return switch (AlinLib.bariumConfig.getNumber("SCROLLER.COLOR", 0).intValue()){
+            case 0 -> Colors.WHITE;
+            case 1 -> Colors.GROUPIE;
+            case 2 -> Colors.ALINA;
+            case 3 -> Colors.SEADRIVE;
+            case 4 -> Colors.TETRA;
+            case 5 -> Colors.CONVICT;
+            case 6 -> Colors.SEABIRD;
+            case 7 -> Colors.SODIUM;
+            case 8 -> Colors.EMBEDDIUM;
+            default -> AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR.CUSTOM", Colors.SPECKLE[0]).intValue();
+        };
+    }
 }

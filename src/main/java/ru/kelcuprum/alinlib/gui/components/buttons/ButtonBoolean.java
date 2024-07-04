@@ -45,7 +45,7 @@ public class ButtonBoolean extends Button implements Resetable {
             int boxHeight = getHeight() - 10;
             int boxX = getWidthComponent()+5-height;
             int boxY = 5;
-            int color = value ? getCheckBoxColor() : 0xFFFFFFFF;
+            int color = value ? Colors.getCheckBoxColor() : 0xFFFFFFFF;
             guiGraphics.fill(getXComponent()+boxX, getY()+boxY, getXComponent()+boxX + boxHeight, getY()+boxY+1, color);
             guiGraphics.fill(getXComponent()+boxX, getY()+boxHeight+boxY-1, getXComponent()+boxX + boxHeight, getY()+boxHeight+boxY, color);
 
@@ -55,19 +55,6 @@ public class ButtonBoolean extends Button implements Resetable {
                 guiGraphics.fill(getXComponent()+boxX+2, getY()+boxY+2, getXComponent()+boxX+boxHeight-2, getY()+boxY+boxHeight-2, color);
             }
         }
-    }
-    public int getCheckBoxColor(){
-        return switch (AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR", 0).intValue()){
-            case 0 -> Colors.GROUPIE;
-            case 1 -> Colors.SEADRIVE;
-            case 2 -> Colors.TETRA;
-            case 3 -> Colors.CONVICT;
-            case 4 -> Colors.SEABIRD;
-            case 5 -> Colors.SODIUM;
-            case 6 -> Colors.EMBEDDIUM;
-            case 7 -> Colors.WHITE;
-            default -> AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR.CUSTOM", Colors.SPECKLE[0]).intValue();
-        };
     }
     // Получить
     // Заменить

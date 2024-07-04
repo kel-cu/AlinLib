@@ -24,18 +24,8 @@
   "alinlib.config.checkbox.example": "Пример чекбокса",
   "alinlib.config.checkbox.enable": "Стиль чекбокса",
   "alinlib.config.checkbox.color": "Цвет",
-
-  "alinlib.config.checkbox.color.groupie": "Groupie",
-  "alinlib.config.checkbox.color.seadrive": "SeaDrive",
-  "alinlib.config.checkbox.color.tetra": "Tetra",
-  "alinlib.config.checkbox.color.convict": "Convict",
-  "alinlib.config.checkbox.color.seabird": "Seabird",
-  "alinlib.config.checkbox.color.sodium": "Sodium",
-  "alinlib.config.checkbox.color.embeddium": "Embeddium",
-  "alinlib.config.checkbox.color.white": "Белый",
-  "alinlib.config.checkbox.color.user": "Кастомный",
-
   "alinlib.config.checkbox.color.custom": "Кастоный цвет",
+  "alinlib.config.scroller.color": "Цвет скроллера",
 
   "alinlib.config.localization": "Локализация",
   "alinlib.config.localization.extended_coordinates": "Расширенные координаты",
@@ -87,6 +77,17 @@
 
   "alinlib.log.exit.first": "Этот мир крутится и крутится как карусель в цирке.",
   "alinlib.log.exit.two": "Может этот мир и есть цирк?)",
+
+  "alinlib.color.groupie": "Groupie",
+  "alinlib.color.alina": "Алина Котова",
+  "alinlib.color.seadrive": "SeaDrive",
+  "alinlib.color.tetra": "Tetra",
+  "alinlib.color.convict": "Convict",
+  "alinlib.color.seabird": "Seabird",
+  "alinlib.color.sodium": "Sodium",
+  "alinlib.color.embeddium": "Embeddium",
+  "alinlib.color.white": "Белый",
+  "alinlib.color.user": "Кастомный",
 
   "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"
 }

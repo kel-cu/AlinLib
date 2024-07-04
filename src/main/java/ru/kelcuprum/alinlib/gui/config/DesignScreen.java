@@ -33,18 +33,31 @@ public class DesignScreen {
                         .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.checkbox.example"), true, true, null))
                         .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.checkbox.enable"), true).setConfig(AlinLib.bariumConfig, "CHECKBOX.ENABLE"))
                         .addValue(new SelectorBuilder(Component.translatable("alinlib.config.checkbox.color")).setValue(0).setList(new String[]{
-                                Component.translatable("alinlib.config.checkbox.color.groupie").getString(),
-                                Component.translatable("alinlib.config.checkbox.color.seadrive").getString(),
-                                Component.translatable("alinlib.config.checkbox.color.tetra").getString(),
-                                Component.translatable("alinlib.config.checkbox.color.convict").getString(),
-                                Component.translatable("alinlib.config.checkbox.color.seabird").getString(),
-                                Component.translatable("alinlib.config.checkbox.color.sodium").getString(),
-                                Component.translatable("alinlib.config.checkbox.color.embeddium").getString(),
-                                Component.translatable("alinlib.config.checkbox.color.white").getString(),
-                                Component.translatable("alinlib.config.checkbox.color.user").getString()
+                                Component.translatable("alinlib.color.groupie").getString(),
+                                Component.translatable("alinlib.color.alina").getString(),
+                                Component.translatable("alinlib.color.seadrive").getString(),
+                                Component.translatable("alinlib.color.tetra").getString(),
+                                Component.translatable("alinlib.color.convict").getString(),
+                                Component.translatable("alinlib.color.seabird").getString(),
+                                Component.translatable("alinlib.color.sodium").getString(),
+                                Component.translatable("alinlib.color.embeddium").getString(),
+                                Component.translatable("alinlib.color.white").getString(),
+                                Component.translatable("alinlib.color.user").getString()
                         }).setConfig(AlinLib.bariumConfig, "CHECKBOX.COLOR"))
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.checkbox.color.custom")).setColor(Colors.SPECKLE[0]).setConfig(AlinLib.bariumConfig, "CHECKBOX.COLOR.CUSTOM"))
-                );
+                )
+                .addWidget(new SelectorBuilder(Component.translatable("alinlib.config.scroller.color")).setValue(0).setList(new String[]{
+                        Component.translatable("alinlib.color.white").getString(),
+                        Component.translatable("alinlib.color.groupie").getString(),
+                        Component.translatable("alinlib.color.alina").getString(),
+                        Component.translatable("alinlib.color.seadrive").getString(),
+                        Component.translatable("alinlib.color.tetra").getString(),
+                        Component.translatable("alinlib.color.convict").getString(),
+                        Component.translatable("alinlib.color.seabird").getString(),
+                        Component.translatable("alinlib.color.sodium").getString(),
+                        Component.translatable("alinlib.color.embeddium").getString(),
+                        Component.translatable("alinlib.color.user").getString()
+                }).setConfig(AlinLib.bariumConfig, "SCROLLER.COLOR"));
         return builder.build();
     }
     //if FORGE && MC >= 12002

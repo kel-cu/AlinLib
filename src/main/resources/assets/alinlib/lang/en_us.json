@@ -25,18 +25,8 @@
   "alinlib.config.checkbox.example": "Example Checkbox",
   "alinlib.config.checkbox.enable": "Checkbox Style",
   "alinlib.config.checkbox.color": "Color",
-
-  "alinlib.config.checkbox.color.groupie": "Groupie",
-  "alinlib.config.checkbox.color.seadrive": "SeaDrive",
-  "alinlib.config.checkbox.color.tetra": "Tetra",
-  "alinlib.config.checkbox.color.convict": "Convict",
-  "alinlib.config.checkbox.color.seabird": "Seabird",
-  "alinlib.config.checkbox.color.sodium": "Sodium",
-  "alinlib.config.checkbox.color.embeddium": "Embeddium",
-  "alinlib.config.checkbox.color.white": "White",
-  "alinlib.config.checkbox.color.user": "Custom",
-
   "alinlib.config.checkbox.color.custom": "Custom color",
+  "alinlib.config.scroller.color": "Scroller Color",
 
   "alinlib.config.localization": "Localization",
   "alinlib.config.localization.extended_coordinates": "Extended Coordinates",
@@ -88,6 +78,17 @@
 
   "alinlib.log.exit.first": "This world goes round and round like a carousel in a circus.",
   "alinlib.log.exit.two": "Maybe the world is a circus?)",
+
+  "alinlib.color.groupie": "Groupie",
+  "alinlib.color.alina": "Alina Kotova",
+  "alinlib.color.seadrive": "SeaDrive",
+  "alinlib.color.tetra": "Tetra",
+  "alinlib.color.convict": "Convict",
+  "alinlib.color.seabird": "Seabird",
+  "alinlib.color.sodium": "Sodium",
+  "alinlib.color.embeddium": "Embeddium",
+  "alinlib.color.white": "White",
+  "alinlib.color.user": "Custom",
 
   "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum"
 }
