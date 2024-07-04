@@ -130,17 +130,14 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
         }
         return super.isBordered();
     }
-
     //#endif
-    protected Component description;
 
     public EditBox setDescription(Component description) {
-        this.description = description;
+        this.builder.setDescription(description);
         return this;
     }
-
-    public Component getDescription() {
-        return this.description;
+    public Component getDescription(){
+        return this.builder.getDescription();
     }
 
     @Override

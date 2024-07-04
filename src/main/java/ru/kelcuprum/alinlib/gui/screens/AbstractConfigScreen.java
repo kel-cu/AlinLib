@@ -215,7 +215,9 @@ public class AbstractConfigScreen extends Screen {
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
         if(mouseX <= this.builder.panelSize){
-            if (!scr && scroller_panel != null) {
+            if(descriptionBox.visible && (mouseX >= 5 && mouseX <= builder.panelSize-5) && (mouseY >= 40 && mouseY <= height - 30)){
+                scr = descriptionBox.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+            } else if (!scr && scroller_panel != null) {
                 scr = scroller_panel.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
             }
         } else {
@@ -230,7 +232,9 @@ public class AbstractConfigScreen extends Screen {
     //$$   public boolean mouseScrolled(double mouseX, double mouseY, double scrollY) {
     //$$      boolean scr = super.mouseScrolled(mouseX, mouseY, scrollY);
     //$$      if(mouseX <= this.builder.panelSize){
-    //$$          if (!scr && scroller_panel != null) {
+    //$$          if(descriptionBox.visible && (mouseX >= 5 && mouseX <= builder.panelSize-5) && (mouseY >= 40 && mouseY <= height - 30)){
+    //$$                scr = descriptionBox.mouseScrolled(mouseX, mouseY, scrollY);
+    //$$            } else if (!scr && scroller_panel != null) {
     //$$              scr = scroller_panel.mouseScrolled(mouseX, mouseY, scrollY);
     //$$          }
     //$$      } else {

@@ -11,7 +11,7 @@ public class ButtonBooleanBuilder extends AbstractBuilder {
     public Config config;
     public String configType;
     public boolean defaultValue;
-    public boolean isCheckBox = true;
+    public boolean isCheckBox;
     public ButtonBooleanBuilder(boolean defaultValue){
         this(Component.empty(), defaultValue);
     }
@@ -19,7 +19,7 @@ public class ButtonBooleanBuilder extends AbstractBuilder {
         this(title, defaultValue, null);
     }
     public ButtonBooleanBuilder(Component title, boolean defaultValue, ButtonBoolean.OnPress onPress){
-        this(title, defaultValue, AlinLib.bariumConfig.getBoolean("CHECKBOX.ENABLE", false), null);
+        this(title, defaultValue, AlinLib.bariumConfig.getBoolean("CHECKBOX.ENABLE", true), onPress);
     }
     public ButtonBooleanBuilder(Component title, boolean defaultValue, boolean isCheckBox, ButtonBoolean.OnPress onPress){
         super(title);

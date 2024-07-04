@@ -102,13 +102,11 @@ public class ButtonBoolean extends Button implements Resetable {
         void onPress(Boolean volume);
     }
 
-
-    protected Component description;
     public ButtonBoolean setDescription(Component description){
-        this.description = description;
+        this.builder.setDescription(description);
         return this;
     }
     public Component getDescription(){
-        return this.description;
+        return this.builder.getDescription();
     }
 }

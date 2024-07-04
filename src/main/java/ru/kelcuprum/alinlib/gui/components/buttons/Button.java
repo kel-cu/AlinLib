@@ -163,12 +163,11 @@ public class Button extends AbstractButton implements Description {
         void onPress(Button button);
     }
 
-    protected Component description;
     public Button setDescription(Component description){
-        this.description = description;
+        this.builder.setDescription(description);
         return this;
     }
     public Component getDescription(){
-        return this.description;
+        return this.builder.getDescription();
     }
 }

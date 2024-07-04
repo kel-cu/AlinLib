@@ -12,7 +12,7 @@ public class SliderBuilder extends AbstractBuilder {
     public Config config;
     public String configType;
     public Number defaultValue;
-    public NUMBER_TYPE type = NUMBER_TYPE.INTERGER;
+    public NUMBER_TYPE type = NUMBER_TYPE.INTEGER;
     public String valueType = "";
     public SliderBuilder(){
         this(Component.empty());
@@ -35,17 +35,17 @@ public class SliderBuilder extends AbstractBuilder {
     //
     public SliderBuilder setMin(int min){
         this.min = min;
-        this.type = NUMBER_TYPE.INTERGER;
+        this.type = NUMBER_TYPE.INTEGER;
         return this;
     }
     public SliderBuilder setMax(int max){
         this.max = max;
-        this.type = NUMBER_TYPE.INTERGER;
+        this.type = NUMBER_TYPE.INTEGER;
         return this;
     }
     public SliderBuilder setDefaultValue(int defaultValue){
         this.defaultValue = defaultValue;
-        this.type = NUMBER_TYPE.INTERGER;
+        this.type = NUMBER_TYPE.INTEGER;
         return this;
     }
     //
@@ -103,7 +103,7 @@ public class SliderBuilder extends AbstractBuilder {
         return new Slider(this);
     }
     public enum NUMBER_TYPE{
-        INTERGER(),
+        INTEGER(),
         DOUBLE(),
         FLOAT(),
         PERCENT()

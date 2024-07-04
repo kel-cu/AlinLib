@@ -6,6 +6,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
 import ru.kelcuprum.alinlib.AlinLib;
 
 import java.util.List;
@@ -48,49 +49,42 @@ public class DescriptionBox extends AbstractWidget{
     public void setPosition(int x, int y) {
         super.setPosition(x, y);
     }
-    public void onPress() {}
-
-    @Override
-    public void setMessage(Component component) {
-        super.setMessage(component);
-    }
-
+    int textHeight = 0;
+    int lastTextHeight = 0;
+    int textSize = (AlinLib.MINECRAFT.font.lineHeight + 3);
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-        List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(this.description, width-12);
-        guiGraphics.fill(getX(), getY(), getX()+width, getY()+height, 0x75000000);
-        int l = 0;
-        for(FormattedCharSequence text : list){
-            if(getHeight() > ((AlinLib.MINECRAFT.font.lineHeight+3)*(l+2))) {
-                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
-                l++;
-            } else {
-                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, "...", getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
-                break;
-            };
+        List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(description, width - 12);
+        guiGraphics.fill(getX(), getY(), getX() + width, getY() + height, 0x75000000);
+        guiGraphics.enableScissor(getX(), getY(), getX() + width, getY() + height);
+        int y = getY() + 6;
+        textHeight = ((list.size()+1)*textSize)+12;
+        if(lastTextHeight != textHeight){
+            scrollAmount = Mth.clamp(scrollAmount, 0, textHeight-height-textSize);
+            lastTextHeight -= lastTextHeight-textHeight;
+            if(height > textHeight) scrollAmount = 0;
         }
+
+        for (FormattedCharSequence text : list) {
+            guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX() + (getWidth() / 2), (int) (y-scrollAmount), -1);
+            y+=textSize;
+        }
+        guiGraphics.disableScissor();
     }
     @Override
     protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
         this.defaultButtonNarrationText(narrationElementOutput);
     }
+    double scrollRate = 9.0;
+    double scrollAmount = 0;
     @Override
-    public void onClick(double d, double e) {
-        this.onPress();
-    }
-    @Override
-    public boolean keyPressed(int i, int j, int k) {
-        if (this.active && this.visible) {
-            if (CommonInputs.selected(i)) {
-                this.playDownSound(AlinLib.MINECRAFT.getSoundManager());
-                this.onPress();
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+    //#if MC >= 12002
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        //#elseif MC < 12002
+        //$$   public boolean mouseScrolled(double mouseX, double mouseY, double scrollY) {
+        //#endif
+        scrollAmount = Mth.clamp(scrollAmount- scrollY*scrollRate, 0, lastTextHeight-height-textSize);
+        return true;
     }
 
     public interface OnPress {

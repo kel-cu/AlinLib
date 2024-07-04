@@ -12,11 +12,8 @@ import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.slider.SliderBuilder;
-import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
-import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
-import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 import static ru.kelcuprum.alinlib.gui.Icons.RESET;
 
 public class Slider extends AbstractSliderButton implements Description, Resetable {
@@ -29,7 +26,7 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
         this.active = builder.getActive();
         this.visible = builder.getVisible();
         if(this.builder.hasConfigurable()){
-            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTERGER) {
+            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTEGER) {
                 int selValue = this.builder.config.getNumber(this.builder.configType, this.builder.defaultValue).intValue() - this.builder.min.intValue();
                 this.displayValue = this.builder.min.intValue() + selValue;
                 this.setValue(((double) selValue / (this.builder.max.intValue() - this.builder.min.intValue())));
@@ -43,7 +40,7 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
                 this.setValue(selValue / (this.builder.max.doubleValue() - this.builder.min.doubleValue()));
             }
         } else {
-            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTERGER) {
+            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTEGER) {
                 int selValue = (this.builder.defaultValue.intValue() - this.builder.min.intValue());
                 this.displayValue = this.builder.min.intValue() + selValue;
                 setValue(((double) selValue / (this.builder.max.intValue() - this.builder.min.intValue())));
@@ -201,7 +198,7 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
 
     @Override
     protected void applyValue() {
-        if (builder.type == SliderBuilder.NUMBER_TYPE.INTERGER) {
+        if (builder.type == SliderBuilder.NUMBER_TYPE.INTEGER) {
             int selValue = (int) ((this.builder.max.intValue() - this.builder.min.intValue()) * this.value);
             this.displayValue = this.builder.min.intValue() + selValue;
             if (builder.hasConfigurable()) this.builder.config.setNumber(this.builder.configType, this.displayValue.intValue());
@@ -226,7 +223,7 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
     public void resetValue() {
         if (this.builder.hasConfigurable()) {
             this.builder.config.setNumber(this.builder.configType, this.builder.defaultValue);
-            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTERGER) {
+            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTEGER) {
                 this.setValue(((double) (builder.config.getNumber(builder.configType, builder.defaultValue).intValue() - builder.min.intValue()) / (builder.max.intValue() - builder.min.intValue())));
             } else if (this.builder.type == SliderBuilder.NUMBER_TYPE.FLOAT) {
                 this.setValue(((double) (builder.config.getNumber(builder.configType, builder.defaultValue).floatValue() - builder.min.floatValue()) / (builder.max.floatValue() - builder.min.floatValue())));
@@ -234,7 +231,7 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
                 this.setValue(((builder.config.getNumber(builder.configType, builder.defaultValue).doubleValue() - builder.min.doubleValue()) / (builder.max.doubleValue() - builder.min.doubleValue())));
             }
         } else {
-            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTERGER) {
+            if (this.builder.type == SliderBuilder.NUMBER_TYPE.INTEGER) {
                 this.setValue(((double) (builder.defaultValue.intValue() - builder.min.intValue()) / (builder.max.intValue() - builder.min.intValue())));
             } else if (this.builder.type == SliderBuilder.NUMBER_TYPE.FLOAT) {
                 this.setValue(((double) (builder.defaultValue.floatValue() - builder.min.floatValue()) / (builder.max.floatValue() - builder.min.floatValue())));
@@ -254,14 +251,11 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
         void onPress(double value);
     }
 
-    protected Component description;
-
     public Slider setDescription(Component description) {
-        this.description = description;
+        this.builder.setDescription(description);
         return this;
     }
-
-    public Component getDescription() {
-        return this.description;
+    public Component getDescription(){
+        return this.builder.getDescription();
     }
 }

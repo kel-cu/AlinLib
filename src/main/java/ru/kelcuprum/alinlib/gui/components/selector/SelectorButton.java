@@ -108,13 +108,11 @@ public class SelectorButton extends Button implements Resetable {
         void onPress(SelectorButton onPress);
     }
 
-
-    protected Component description;
     public SelectorButton setDescription(Component description){
-        this.description = description;
+        this.builder.setDescription(description);
         return this;
     }
     public Component getDescription(){
-        return this.description;
+        return this.builder.getDescription();
     }
 }
