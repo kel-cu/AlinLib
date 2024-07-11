@@ -17,14 +17,12 @@ import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
-import ru.kelcuprum.alinlib.info.Player;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.styles.FlatStyle;
 import ru.kelcuprum.alinlib.gui.styles.ModernStyle;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Random;
 
 import static ru.kelcuprum.alinlib.gui.Icons.CLOWNFISH;
@@ -91,7 +89,6 @@ public class AlinLib
     public void onInitializeClient() {
         AlinLib.isFabricLoader = true;
         AlinLib.VERSION = net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer(AlinLib.MODID).get().getMetadata().getVersion().getFriendlyString();
-        KeyMappingHelper.onRegister = net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper::registerKeyBinding;
         init();
     }
     //#elseif FORGE

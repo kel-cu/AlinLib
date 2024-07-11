@@ -21,6 +21,9 @@
   "license": "GPL 3.0",
   "environment": "*",
   "entrypoints": {
+    "preLaunch": [
+      "ru.kelcuprum.alinlib.AlinLibPreLaunch"
+    ],
     "client": [
       "ru.kelcuprum.alinlib.AlinLib"
     ],
