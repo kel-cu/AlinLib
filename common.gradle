@@ -3,8 +3,8 @@ apply plugin: 'dev.architectury.loom'
 apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
 
-def mod_brand = project.name.endsWith("-common") ? 'common' : (loom.platform.get() as String).toLowerCase()
-assert mod_brand in ['fabric', 'forge', 'neoforge', 'common']
+def mod_brand = (loom.platform.get() as String).toLowerCase()
+assert mod_brand in ['fabric', 'forge', 'neoforge']
 archivesBaseName = rootProject.archives_base_name + "-" + mod_brand
 group = rootProject.maven_group
 
@@ -32,14 +32,12 @@ configurations {
     modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
 }
 loom {
-    if(mod_brand != 'common') {
         runConfigs.client {
             // to make sure it generates all "Minecraft Client (:subproject_name)" applications
             ideConfigGenerated = true
             runDir '../../run'
             vmArgs '-Dmixin.debug.export=true'
         }
-    }
     accessWidenerPath = file("../../src/main/resources/alinlib.accesswidener")
     if (mod_brand == 'forge') {
         forge {
@@ -50,10 +48,9 @@ loom {
 }
 remapJar {
     if(mod_brand == 'forge' || mod_brand == 'neoforge') atAccessWideners.add("alinlib.accesswidener")
-    remapperIsolation = true
+//    remapperIsolation = true
     injectAccessWidener = true
 }
-configurations {shade}
 dependencies {
     // loom
     implementation("com.google.code.gson:gson:2.10.1")
@@ -69,12 +66,9 @@ dependencies {
         modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     } else if (mod_brand == 'neoforge') {
         neoForge "net.neoforged:neoforge:${project.forge_version}"
-    } else if(mod_brand == 'common') {
-        modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
     } else {
         forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-
-        include "io.github.llamalad7:mixinextras-forge:0.3.6"
+        include "io.github.llamalad7:mixinextras-forge:0.4.0"
     }
 }
 
@@ -104,7 +98,6 @@ publishing {
     }
 
     publications {
-        println(String.format("%s:%s:%s", rootProject.maven_group, project.version, project.archives_base_name))
         if(mod_brand == "neoforge"){
             mavenNeoForge(MavenPublication) {
                 groupId rootProject.maven_group

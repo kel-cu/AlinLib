@@ -92,12 +92,7 @@ public class AlinLib
         init();
     }
     //#elseif FORGE
-    //$$  public static final java.util.List<KeyMapping> EXAMPLE_MAPPING = new java.util.ArrayList<>();
     //$$  public AlinLib(){
-    //$$      KeyMappingHelper.onRegister = (s) -> {
-    //$$          EXAMPLE_MAPPING.add(s);
-    //$$          return s;
-    //$$      };
     //$$      init();
     //$$     for(net.minecraftforge.forgespi.language.IModInfo mod : net.minecraftforge.fml.ModList.get().getMods()){
     //$$          if(mod.getModId().equals(AlinLib.MODID)){
@@ -114,17 +109,12 @@ public class AlinLib
     //$$      ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick());
     //$$  }
     //$$  public void registerKeymappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
-    //$$      for(KeyMapping mapping : EXAMPLE_MAPPING) {
+    //$$      for(KeyMapping mapping : KeyMappingHelper.EXAMPLE_MAPPING) {
     //$$          event.register(mapping);
     //$$      }
     //$$  }
     //#elseif NEOFORGE
-    //$$  public static final java.util.List<KeyMapping> EXAMPLE_MAPPING = new java.util.ArrayList<>();
     //$$  public AlinLib(){
-    //$$      KeyMappingHelper.onRegister = (s) -> {
-    //$$          EXAMPLE_MAPPING.add(s);
-    //$$          return s;
-    //$$      };
     //$$      init();
     //$$      for(net.neoforged.neoforgespi.language.IModInfo mod : net.neoforged.fml.ModList.get().getMods()){
     //$$          if(mod.getModId().equals(AlinLib.MODID)){
@@ -142,7 +132,7 @@ public class AlinLib
     //$$  }
     //$$  @net.neoforged.bus.api.SubscribeEvent
     //$$  public void registerBindings(net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent event) {
-    //$$      for(KeyMapping mapping : EXAMPLE_MAPPING) {
+    //$$      for(KeyMapping mapping : KeyMappingHelper.EXAMPLE_MAPPING) {
     //$$          event.register(mapping);
     //$$      }
     //$$  }
