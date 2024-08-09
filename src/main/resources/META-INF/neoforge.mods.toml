@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "*"
-issueTrackerURL = "https://github.com/simply-kel/alinlib/issues"
+issueTrackerURL = "https://github.com/kel-cu/alinlib/issues"
 license="GPL 3.0"
 
 [[mods]]

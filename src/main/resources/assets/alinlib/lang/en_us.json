@@ -36,7 +36,10 @@
   "alinlib.config.streamer.stealth": "Stealth mode",
   "alinlib.config.stealth.coordinates": "Coordinates",
   "alinlib.config.streamer.stealth.coordinates": "Hide Coordinates",
+  "alinlib.config.streamer.stealth.direction": "Hide Direction",
   "alinlib.config.streamer.stealth.type": "Stealth Algorithm",
+  "alinlib.config.stealth.alinlib": "AlinLib",
+  "alinlib.config.streamer.alinlib.max_radius": "Radius",
   "alinlib.config.streamer.stealth.name": "Hide name",
 
 
@@ -60,7 +63,7 @@
   "alinlib.localization.world.the_end": "The End?",
   "alinlib.localization.world.moon": "The Moon",
 
-  "alinlib.date.time": "hh:mm",
+  "alinlib.date.time": "HH:mm",
   "alinlib.time.morning": "Morning",
   "alinlib.time.day": "Day",
   "alinlib.time.evening": "Evening",

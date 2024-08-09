@@ -83,7 +83,7 @@ public class Player {
     public static String getDirection(boolean oneSymbol){
         if(AlinLib.MINECRAFT.player == null) return "-";
         Direction direction = AlinLib.MINECRAFT.player.getDirection();
-        if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false)){
+        if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false) && AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH.DIRECTION", true)){
             switch (direction) {
                 case NORTH -> direction = Direction.EAST;
                 case SOUTH -> direction = Direction.WEST;

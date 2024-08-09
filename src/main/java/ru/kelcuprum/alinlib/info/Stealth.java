@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class Stealth {
     public static HashMap<String, Double> funnyCoordinatesX$alinLib = new HashMap<>();
     public static HashMap<String, Double> funnyCoordinatesZ$alinLib = new HashMap<>();
+    public static HashMap<String, Double> radius$alinLib = new HashMap<>();
     ///
     public static HashMap<String, Double> funnyCoordinatesX$imGRUI = new HashMap<>();
     public static HashMap<String, Double> funnyCoordinatesZ$imGRUI = new HashMap<>();
@@ -14,15 +15,17 @@ public class Stealth {
     public static double getFunnyValueCoordinate(double coordinate, String server, String world, boolean isX) {
         if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false) && AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH.COORDINATES", true)){
             return switch (AlinLib.bariumConfig.getNumber("STREAMER.STEALTH.COORDINATES.TYPE", 0).intValue()) {
-                case 1 -> getFunnyValueCoordinate$kelVersion(coordinate, server, world, isX);
+                case 1 -> getFunnyValueCoordinate$AlinLib(coordinate, server, world, isX);
                 default -> getFunnyValueCoordinate$ImGRUIVersion(coordinate, server, world, isX);
             };
         } else return coordinate;
     }
 
-    public static double getFunnyValueCoordinate$kelVersion(double coordinate, String server, String world, boolean isX) {
+    public static double getFunnyValueCoordinate$AlinLib(double coordinate, String server, String world, boolean isX) {
         String info = server + "-" + world;
         double value;
+        double radius = radius$alinLib.getOrDefault(info, AlinLib.bariumConfig.getNumber("STREAMER.STEALTH.ALINLIB.MAX_RADIUS", 1000).intValue() * Math.random());
+        radius$alinLib.put(info, radius);
         if (isX ? funnyCoordinatesX$alinLib.containsKey(info) : funnyCoordinatesZ$alinLib.containsKey(info))
             value = isX ? funnyCoordinatesX$alinLib.get(info) : funnyCoordinatesZ$alinLib.get(info);
         else {
@@ -38,8 +41,9 @@ public class Stealth {
                     break;
                 }
             }
+
         }
-        return coordinate * value;
+        return coordinate - (radius*value);
     }
 
     public static double getFunnyValueCoordinate$ImGRUIVersion(double coordinate, String server, String world, boolean isX) {
