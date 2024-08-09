@@ -35,8 +35,8 @@ public class World {
             DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
             Calendar calendar = new GregorianCalendar();
             calendar.set(2000, Calendar.JANUARY, day+1, hours, minutes, 0);
-
             clock = dateFormat.format(calendar.getTimeInMillis());
+            if(strDateFormat.contains("hh")) clock = clock+(hours >= 12 ? "pm" : "am");
         } catch (IllegalArgumentException ex) {
             clock = "[It's not correct format for Java SimpleDateFormat]";
         }

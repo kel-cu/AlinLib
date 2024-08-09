@@ -16,7 +16,11 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.info.Player;
 import ru.kelcuprum.alinlib.info.World;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class StarScript {
@@ -38,7 +42,7 @@ public class StarScript {
                         .set("vsync", () -> Value.bool(AlinLib.MINECRAFT.options.enableVsync().get()))
                 )
         );
-        ss.set("time", () -> Value.string(new SimpleDateFormat(AlinLib.localization.getLocalization("date.time")).format(System.currentTimeMillis())));
+        ss.set("time", () -> Value.string(getTime()));
         // Player
         ss.set("player", new ValueMap()
                 .set("name", () -> Value.string(Player.getName()))
@@ -86,6 +90,20 @@ public class StarScript {
     public long lastExceptionRunSectionCheck = 0;
     public long lastExceptionRunCheck = 0;
     public long lastErrorCheck = 0;
+
+    public String getTime(){
+        String clock;
+        try {
+            String strDateFormat = AlinLib.localization.getLocalization("date.time", false, false);
+            DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+            clock = dateFormat.format(System.currentTimeMillis());
+            if(strDateFormat.contains("hh")) clock = clock+(new Date().getHours() >= 12 ? "pm" : "am");
+        } catch (IllegalArgumentException ex) {
+            clock = "[It's not correct format for Java SimpleDateFormat]";
+        }
+        return clock;
+    }
+
     public Script compile(String source) {
         Parser.Result result = Parser.parse(source);
 
