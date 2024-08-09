@@ -42,6 +42,7 @@ public class DesignScreen {
                                 Component.translatable("alinlib.color.sodium").getString(),
                                 Component.translatable("alinlib.color.embeddium").getString(),
                                 Component.translatable("alinlib.color.white").getString(),
+                                Component.translatable("alinlib.color.waterplayer").getString(),
                                 Component.translatable("alinlib.color.user").getString()
                         }).setConfig(AlinLib.bariumConfig, "CHECKBOX.COLOR"))
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.checkbox.color.custom")).setColor(Colors.SPECKLE[0]).setConfig(AlinLib.bariumConfig, "CHECKBOX.COLOR.CUSTOM"))
@@ -56,6 +57,7 @@ public class DesignScreen {
                         Component.translatable("alinlib.color.seabird").getString(),
                         Component.translatable("alinlib.color.sodium").getString(),
                         Component.translatable("alinlib.color.embeddium").getString(),
+                        Component.translatable("alinlib.color.waterplayer").getString(),
                         Component.translatable("alinlib.color.user").getString()
                 }).setConfig(AlinLib.bariumConfig, "SCROLLER.COLOR"));
         return builder.build();

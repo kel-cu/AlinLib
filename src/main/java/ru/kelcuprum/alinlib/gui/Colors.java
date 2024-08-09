@@ -20,6 +20,7 @@ public interface Colors {
 
     int SODIUM = 0xFF92e0d0;
     int EMBEDDIUM = 0xFFcf7cb6;
+    int WEBSITE_WATERPLAYER = 0XFFd03b18;
 
     static int getCheckBoxColor(){
         return switch (AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR", 0).intValue()){
@@ -32,6 +33,7 @@ public interface Colors {
             case 6 -> Colors.SODIUM;
             case 7 -> Colors.EMBEDDIUM;
             case 8 -> Colors.WHITE;
+            case 9 -> Colors.WEBSITE_WATERPLAYER;
             default -> AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR.CUSTOM", Colors.SPECKLE[0]).intValue();
         };
     }
@@ -46,6 +48,7 @@ public interface Colors {
             case 6 -> Colors.SEABIRD;
             case 7 -> Colors.SODIUM;
             case 8 -> Colors.EMBEDDIUM;
+            case 9 -> Colors.WEBSITE_WATERPLAYER;
             default -> AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR.CUSTOM", Colors.SPECKLE[0]).intValue();
         };
     }
