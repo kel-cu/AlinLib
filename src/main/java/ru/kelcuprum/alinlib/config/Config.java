@@ -153,7 +153,7 @@ public class Config {
      * Преобразование в JSON
      */
     public String toString() {
-        return this._jsonConfiguration.toString();
+        return toJSON().toString();
     }
 
     /**
