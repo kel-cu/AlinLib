@@ -175,7 +175,12 @@ public class AlinLib
                     .setTitle(Component.literal("AlinLib"))
                     .setMessage(Component.translatable("alinlib.april_fools."+type))
                     .setType(ToastBuilder.Type.WARN)
-                    .show(MINECRAFT.getToasts());
+
+                    //#if MC >= 12102
+                    .show(MINECRAFT.getToastManager());
+            //#elseif MC < 12102
+            //$$ .show(MINECRAFT.getToasts());
+            //#endif
         }
     }
     public static void isHBKel(){
@@ -186,7 +191,11 @@ public class AlinLib
                     .setIcon(Items.CAKE)
                     .setTitle(Component.literal("AlinLib"))
                     .setMessage(Component.translatable("alinlib.hb"))
-                    .show(MINECRAFT.getToasts());
+                    //#if MC >= 12102
+                    .show(MINECRAFT.getToastManager());
+            //#elseif MC < 12102
+            //$$ .show(MINECRAFT.getToasts());
+            //#endif
         }
     }
 

@@ -1,7 +1,12 @@
 package ru.kelcuprum.alinlib.gui.toast;
 
 import net.minecraft.client.gui.components.toasts.Toast;
-import net.minecraft.client.gui.components.toasts.ToastComponent;
+
+//#if MC >= 12102
+import net.minecraft.client.gui.components.toasts.ToastManager;
+//#elseif MC < 12102
+//$$ import net.minecraft.client.gui.components.toasts.ToastComponent;
+//#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -82,15 +87,22 @@ public class ToastBuilder {
         return new AlinaToast(this);
     }
 
+    //#if MC >= 12102
     @SuppressWarnings("UnusedReturnValue")
-    public AlinaToast buildAndShow(ToastComponent toasts) {
+    public AlinaToast buildAndShow(ToastManager toasts) {
+        //#elseif MC < 12102
+        //$$ public AlinaToast buildAndShow(ToastComponent toasts) {
+        //#endif
         AlinaToast toast = build();
         toasts.addToast(toast);
 
         return toast;
     }
-
-    public void show(ToastComponent toasts) {
+    //#if MC >= 12102
+    public void show(ToastManager toasts) {
+        //#elseif MC < 12102
+        //$$ public void show(ToastComponent toasts) {
+        //#endif
         buildAndShow(toasts);
     }
 

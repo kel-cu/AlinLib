@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib.gui.components.sliders;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -94,7 +95,11 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
         if (isResetable()) {
             if (builder.getStyle() != null)
                 builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, mouseX, mouseY));
-            guiGraphics.blit(RESET, getX() + 2, getY() + 2, 0f, 0f, getHeight() - 4, getHeight() - 4, getHeight() - 4, getHeight() - 4);
+            guiGraphics.blit(
+                    //#if MC >= 12102
+                    RenderType::guiTextured,
+                    //#endif
+                    RESET, getX() + 2, getY() + 2, 0f, 0f, getHeight() - 4, getHeight() - 4, getHeight() - 4, getHeight() - 4);
             if (builder.getStyle() != null)
                 builder.getStyle().renderBackground$slider(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, mouseX, mouseY), this.value);
         } else
@@ -188,7 +193,11 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
                     .setTitle(builder.getTitle())
                     .setMessage(Component.translatable("alinlib.component.value_reset.toast"))
                     .setIcon(RESET)
-                    .show(AlinLib.MINECRAFT.getToasts());
+                    //#if MC >= 12102
+                    .show(AlinLib.MINECRAFT.getToastManager());
+            //#elseif MC < 12102
+            //$$ .show(AlinLib.MINECRAFT.getToasts());
+            //#endif
             AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
             return true;
         }

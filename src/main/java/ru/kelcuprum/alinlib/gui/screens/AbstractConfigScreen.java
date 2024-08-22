@@ -89,7 +89,11 @@ public class AbstractConfigScreen extends Screen {
                     .setTitle(title)
                     .setMessage(Component.translatable("alinlib.component.reset.toast"))
                     .setIcon(RESET)
-                    .show(this.minecraft.getToasts());
+                    //#if MC >= 12102
+                    .show(AlinLib.MINECRAFT.getToastManager());
+            //#elseif MC < 12102
+            //$$ .show(AlinLib.MINECRAFT.getToasts());
+            //#endif
             AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
         }).setSprite(RESET).setSize(20, 20).setPosition(this.builder.panelSize-25, height-25).build());
         this.scroller_panel = addRenderableWidget(new ConfigureScrolWidget(-8, 0, 4, this.height, Component.empty(), scroller -> {

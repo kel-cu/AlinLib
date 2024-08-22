@@ -1,9 +1,16 @@
 package ru.kelcuprum.alinlib.gui.toast;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
-import net.minecraft.client.gui.components.toasts.ToastComponent;
+//#if MC >= 12102
+import net.minecraft.client.gui.components.toasts.ToastManager;
+//#elseif MC < 12102
+//$$ import net.minecraft.client.gui.components.toasts.ToastComponent;
+//#endif
+import net.minecraft.client.gui.components.toasts.ToastManager;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
 
@@ -35,13 +42,19 @@ public class AlinaToast implements Toast {
         return texts.size() == 2 ? 32 : 12+(11*(texts.size()));
     }
 
+    long l = 0;
     @Override
-    public @NotNull Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long l) {
+    //#if MC >= 12102
+    public void render(GuiGraphics guiGraphics, Font font, long lon) {
+        l = lon;
+        //#elseif MC < 12102
+        //$$ public @NotNull Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long lon) {
+        //#endif
         guiGraphics.fill(0, 0, width(), height() - 1, 0xB3000000);
         if(builder.color != null) guiGraphics.fill(0, height() - 1, width(), height(), builder.color.intValue());
         else if (builder.type != ToastBuilder.Type.FLAT) {
             guiGraphics.fill(0, height() - 1, width(), height(), 0xB3000000);
-            if(AlinLib.bariumConfig.getBoolean("TOAST.TIMELINE")) guiGraphics.fill(0, height() - 1, (int) (width()*(l/(double)builder.displayTime)), height(), builder.type.color);
+            if(AlinLib.bariumConfig.getBoolean("TOAST.TIMELINE")) guiGraphics.fill(0, height() - 1, (int) (width()*(lon/(double)builder.displayTime)), height(), builder.type.color);
             else guiGraphics.fill(0, height() - 1, width(), height(), builder.type.color);
         } else guiGraphics.fill(0, height() - 1, width(), height(), 0xB3000000);
 
@@ -54,13 +67,31 @@ public class AlinaToast implements Toast {
             y+=11;
         }
         if (builder.hasIcon()) {
-            if (builder.icon != null) guiGraphics.blit(builder.icon, 8, 8, 0.0F, 0.0F, 16, 16, 16, 16);
+            if (builder.icon != null) guiGraphics.blit(
+                    //#if MC >= 12102
+                    RenderType::guiTextured,
+                    //#endif
+                    builder.icon, 8, 8, 0.0F, 0.0F, 16, 16, 16, 16);
             else if (builder.itemIcon != null) guiGraphics.renderFakeItem(builder.itemIcon, 8, 8);
         }
-        Visibility visibility = (double) l >= builder.displayTime * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+        //#if MC < 12102
+        //$$ Visibility visibility = (double) l >= builder.displayTime * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+        //$$ if (builder.visibilityVisitor != null) visibility = builder.visibilityVisitor.apply(visibility);
+        //$$ return visibility;
+        //#endif
+    }
 
-        if (builder.visibilityVisitor != null) visibility = builder.visibilityVisitor.apply(visibility);
+    //#if MC >= 12102
+    Visibility visibility = Visibility.SHOW;
+        @Override
+    public void update(ToastManager toastManager, long l) {
+            Visibility visibility = (double) l >= builder.displayTime * toastManager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+            if (builder.visibilityVisitor != null) visibility = builder.visibilityVisitor.apply(visibility);
+    }
 
+    @Override
+    public Visibility getWantedVisibility() {
         return visibility;
     }
+    //#endif
 }
