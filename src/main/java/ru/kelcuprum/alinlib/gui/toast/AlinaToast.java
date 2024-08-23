@@ -9,7 +9,6 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 //#elseif MC < 12102
 //$$ import net.minecraft.client.gui.components.toasts.ToastComponent;
 //#endif
-import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -85,12 +84,12 @@ public class AlinaToast implements Toast {
     Visibility visibility = Visibility.SHOW;
         @Override
     public void update(ToastManager toastManager, long l) {
-            Visibility visibility = (double) l >= builder.displayTime * toastManager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
+            visibility = (double) l >= builder.displayTime * toastManager.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
             if (builder.visibilityVisitor != null) visibility = builder.visibilityVisitor.apply(visibility);
     }
 
     @Override
-    public Visibility getWantedVisibility() {
+    public @NotNull Visibility getWantedVisibility() {
         return visibility;
     }
     //#endif
