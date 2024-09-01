@@ -71,7 +71,7 @@ public class AlinLib
         });
         ClientLifecycleEvents.CLIENT_FULL_STARTED.register((client) -> {
             AlinLib.log(String.format("Client full started. MC Version: %s", client.getLaunchedVersion()));
-            isAprilFool();
+            aprilFool();
             isHBKel();
         });
         ClientLifecycleEvents.CLIENT_STOPPING.register((client) -> {
@@ -162,8 +162,11 @@ public class AlinLib
     //$$ }
     //#endif
     // Funny
-    public static void isAprilFool(){
-        if(LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 1){
+    public static boolean isAprilFool(){
+        return LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 1;
+    }
+    public static void aprilFool(){
+        if(isAprilFool()){
             String[] types = {
                     "white",
                     "welcome",

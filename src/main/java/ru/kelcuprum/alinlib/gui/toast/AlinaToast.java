@@ -41,19 +41,17 @@ public class AlinaToast implements Toast {
         return texts.size() == 2 ? 32 : 12+(11*(texts.size()));
     }
 
-    long l = 0;
     @Override
     //#if MC >= 12102
-    public void render(GuiGraphics guiGraphics, Font font, long lon) {
-        l = lon;
+    public void render(GuiGraphics guiGraphics, Font font, long l) {
         //#elseif MC < 12102
-        //$$ public @NotNull Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long lon) {
+        //$$ public @NotNull Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long l) {
         //#endif
         guiGraphics.fill(0, 0, width(), height() - 1, 0xB3000000);
         if(builder.color != null) guiGraphics.fill(0, height() - 1, width(), height(), builder.color.intValue());
         else if (builder.type != ToastBuilder.Type.FLAT) {
             guiGraphics.fill(0, height() - 1, width(), height(), 0xB3000000);
-            if(AlinLib.bariumConfig.getBoolean("TOAST.TIMELINE")) guiGraphics.fill(0, height() - 1, (int) (width()*(lon/(double)builder.displayTime)), height(), builder.type.color);
+            if(AlinLib.bariumConfig.getBoolean("TOAST.TIMELINE")) guiGraphics.fill(0, height() - 1, (int) (width()*(l/(double)builder.displayTime)), height(), builder.type.color);
             else guiGraphics.fill(0, height() - 1, width(), height(), builder.type.color);
         } else guiGraphics.fill(0, height() - 1, width(), height(), 0xB3000000);
 

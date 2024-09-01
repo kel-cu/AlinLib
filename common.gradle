@@ -89,7 +89,7 @@ publishing {
     repositories {
         maven {
             name = "Kel_Cuprum_Repository"
-            url = "https://repo.kelcuprum.ru/snapshots"
+            url = "https://repo.kelcuprum.ru/test"
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")

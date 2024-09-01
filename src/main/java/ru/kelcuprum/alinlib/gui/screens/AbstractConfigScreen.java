@@ -20,6 +20,7 @@ import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import java.util.List;
 
+import static ru.kelcuprum.alinlib.gui.Icons.EXIT;
 import static ru.kelcuprum.alinlib.gui.Icons.RESET;
 
 public class AbstractConfigScreen extends Screen {
@@ -76,14 +77,10 @@ public class AbstractConfigScreen extends Screen {
         back = addRenderableWidget(new ButtonBuilder(CommonComponents.GUI_BACK).setOnPress((OnPress) -> {
             assert this.minecraft != null;
             this.minecraft.setScreen(builder.parent);
-        }).setPosition(5, height - 25).setSize(this.builder.panelSize-35, 20).build());
+        }).setIcon(AlinLib.isAprilFool() ? EXIT : null).setPosition(5, height - 25).setSize(this.builder.panelSize-35, 20).build());
 
         reset = addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.component.reset")).setOnPress((OnPress) -> {
-            for(AbstractWidget widget : builder.widgets){
-                if(widget instanceof Resetable){
-                    ((Resetable) widget).resetValue();
-                }
-            }
+            for(AbstractWidget widget : builder.widgets) if(widget instanceof Resetable) ((Resetable) widget).resetValue();
             assert this.minecraft != null;
             new ToastBuilder()
                     .setTitle(title)
