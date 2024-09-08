@@ -8,6 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 
+import static net.minecraft.world.item.Items.AIR;
+
 public class Player {
     public static String getName(){
         return Stealth.getParsedName(AlinLib.MINECRAFT.getUser().getName());
@@ -25,19 +27,24 @@ public class Player {
 
     public static String getItemName(){
         if(AlinLib.MINECRAFT.player == null) return "";
-        ItemStack main_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND);
-        ItemStack off_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND);
+        ItemStack main_hand = getItemInHand(false);
+        ItemStack off_hand = getItemInHand(true);
         if(!main_hand.isEmpty()) return main_hand.getHoverName().getString();
         else if(!off_hand.isEmpty() && AlinLib.bariumConfig.getBoolean("VIEW.ITEM_OFF_HAND", false)) return off_hand.getHoverName().getString();
         else return "";
     }
     public static int getItemCount(){
         if(AlinLib.MINECRAFT.player == null) return 0;
-        ItemStack main_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.MAIN_HAND);
-        ItemStack off_hand = AlinLib.MINECRAFT.player.getItemInHand(InteractionHand.OFF_HAND);
+        ItemStack main_hand = getItemInHand(false);
+        ItemStack off_hand = getItemInHand(true);
         if(!main_hand.isEmpty()) return main_hand.getCount();
         else if(!off_hand.isEmpty() && AlinLib.bariumConfig.getBoolean("VIEW.ITEM_OFF_HAND", false)) return off_hand.getCount();
         else return 0;
+    }
+
+    public static ItemStack getItemInHand(boolean isOffhand){
+        if(AlinLib.MINECRAFT.player == null) return AIR.getDefaultInstance();
+        return AlinLib.MINECRAFT.player.getItemInHand(isOffhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
     }
 
     public static double getHealth(){

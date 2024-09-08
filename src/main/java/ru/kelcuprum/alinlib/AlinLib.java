@@ -37,7 +37,6 @@ public class AlinLib
         implements net.fabricmc.api.ClientModInitializer
     //#endif
 {
-    public static boolean isFabricLoader = false;
     public static final String MODID = "alinlib";
     public static String VERSION = "alinlib";
     public static final Logger LOG = LogManager.getLogger("AlinaLib");
@@ -59,10 +58,8 @@ public class AlinLib
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             assert client.player != null;
-            while (toggleStealth.consumeClick()) {
+            while (toggleStealth.consumeClick())
                 bariumConfig.setBoolean("STREAMER.STEALTH", !bariumConfig.getBoolean("STREAMER.STEALTH", false));
-                bariumConfig.save();
-            }
         });
 
         ClientLifecycleEvents.CLIENT_STARTED.register((client) -> {
@@ -87,7 +84,6 @@ public class AlinLib
     //#if FABRIC
     @Override
     public void onInitializeClient() {
-        AlinLib.isFabricLoader = true;
         AlinLib.VERSION = net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer(AlinLib.MODID).get().getMetadata().getVersion().getFriendlyString();
         init();
     }

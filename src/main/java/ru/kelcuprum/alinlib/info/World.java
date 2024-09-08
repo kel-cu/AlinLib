@@ -11,17 +11,11 @@ public class World {
     public static String getTimeType(){
         if(AlinLib.MINECRAFT.level == null) return "";
         long currentTime = getDayTime();
-        if (currentTime < 6000 && currentTime > 0) {
-            return AlinLib.localization.getLocalization("time.morning", false, false);
-        } else if (currentTime < 12000 && currentTime > 6000) {
-            return AlinLib.localization.getLocalization("time.day", false, false);
-        } else if (currentTime < 16500 && currentTime > 12000) {
-            return AlinLib.localization.getLocalization("time.evening", false, false);
-        } else if (currentTime > 16500) {
-            return AlinLib.localization.getLocalization("time.night", false, false);
-        } else {
-            return "";
-        }
+        if (currentTime < 6000 && currentTime > 0) return AlinLib.localization.getLocalization("time.morning", false, false);
+        else if (currentTime < 12000 && currentTime > 6000) return AlinLib.localization.getLocalization("time.day", false, false);
+        else if (currentTime < 16500 && currentTime > 12000) return AlinLib.localization.getLocalization("time.evening", false, false);
+        else if (currentTime > 16500) return AlinLib.localization.getLocalization("time.night", false, false);
+        else return "";
     }
     public static String getFormattedTime(){
         if(AlinLib.MINECRAFT.level == null) return "";
