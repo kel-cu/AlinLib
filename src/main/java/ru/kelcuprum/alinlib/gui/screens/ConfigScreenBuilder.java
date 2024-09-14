@@ -7,6 +7,7 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
+import ru.kelcuprum.alinlib.gui.screens.types.*;
 import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import java.util.ArrayList;
@@ -14,16 +15,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class ConfigScreenBuilder {
-    protected Component title;
-    protected AbstractStyle style;
-    protected List<AbstractWidget> panelWidgets = new ArrayList<>();
-    protected List<AbstractWidget> widgets = new ArrayList<>();
-    protected OnTick onTick;
-    protected OnTickScreen onTickScreen;
-    protected Screen parent;
-    protected int panelSize = AlinLib.bariumConfig.getBoolean("CONFIG_SCREEN.SMALL_PANEL_SIZE", false) ?  130 : 190;
-    protected int yL = 40;
-    protected int yC = 5;
+    public Component title;
+    public AbstractStyle style;
+    public List<AbstractWidget> panelWidgets = new ArrayList<>();
+    public List<AbstractWidget> widgets = new ArrayList<>();
+    public OnTick onTick;
+    public OnTickScreen onTickScreen;
+    public Screen parent;
+    public int panelSize = AlinLib.bariumConfig.getBoolean("CONFIG_SCREEN.SMALL_PANEL_SIZE", false) ?  130 : 190;
+    public int yL = 40;
+    public int yC = 5;
 
     public ConfigScreenBuilder(Screen parent) {
         this(parent, Component.literal("Change me please"));
@@ -129,7 +130,7 @@ public class ConfigScreenBuilder {
 
     public AbstractConfigScreen build() {
         Objects.requireNonNull(this.title, "title == null");
-        return new AbstractConfigScreen(this);
+        return panelWidgets.isEmpty() ? new ConfigScreen$withoutPanel(this) : new ConfigScreen(this);
     }
 
     public interface OnTick {
