@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 
@@ -86,7 +87,15 @@ public class ToastBuilder {
 
         return new AlinaToast(this);
     }
-
+    @SuppressWarnings("UnusedReturnValue")
+    public AlinaToast buildAndShow(){
+        return
+        //#if MC >= 12102
+        buildAndShow(AlinLib.MINECRAFT.getToastManager());
+        //#elseif MC < 12102
+        //$$ buildAndShow(AlinLib.MINECRAFT.getToasts());
+        //#endif
+    }
     //#if MC >= 12102
     @SuppressWarnings("UnusedReturnValue")
     public AlinaToast buildAndShow(ToastManager toasts) {
