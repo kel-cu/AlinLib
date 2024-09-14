@@ -2,6 +2,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'dev.architectury.loom'
 apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
+apply plugin: 'com.modrinth.minotaur'
 
 def mod_brand = (loom.platform.get() as String).toLowerCase()
 assert mod_brand in ['fabric', 'forge', 'neoforge']
@@ -89,7 +90,7 @@ publishing {
     repositories {
         maven {
             name = "Kel_Cuprum_Repository"
-            url = "https://repo.kelcuprum.ru/test"
+            url = "https://repo.kelcuprum.ru/releases"
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")
@@ -119,6 +120,27 @@ publishing {
                 artifactId = rootProject.archives_base_name + "-fabric"
                 from components.java
             }
+        }
+    }
+}
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") // Remember to have the MODRINTH_TOKEN environment variable set or else this will fail - just make sure it stays private!
+    versionName = project.modrinth_title + " " + rootProject.mod_version
+    projectId = "alinlib" // This can be the project ID or the slug. Either will work!
+    setVersion(version)
+    // You don't need to set this manually. Will fail if Modrinth has this version already
+    changelog = new File("../../changelog.md").text;
+    versionType = rootProject.version_type // This is the default -- can also be `beta` or `alpha`
+    uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
+    project.modrinth_versions.split(", ").each {
+        gameVersions.add it
+    }
+    if(mod_brand == "fabric") loaders = ["fabric", "quilt"]
+    else loaders = [mod_brand]
+    dependencies {
+        if(mod_brand == "fabric"){
+            required.project "fabric-api"
+            optional.project "modmenu"
         }
     }
 }
