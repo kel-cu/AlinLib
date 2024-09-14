@@ -35,7 +35,7 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
 
     public void initPanelButtons() {
         // -=-=-=-=-=-=-=-
-        titleW = addRenderableWidget(new TextBox(5, 5, width - 55, 20, this.builder.title, true));
+        titleW = addRenderableWidget(new TextBox(10, 5, width - 70, 20, this.builder.title, true));
         // -=-=-=-=-=-=-=-
         // Exit Buttons
         // 85 before reset button
@@ -43,7 +43,7 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
         back = addRenderableWidget(new ButtonBuilder(AlinLib.isAprilFool() ? CommonComponents.GUI_BACK : Component.literal("x")).setOnPress((OnPress) -> {
             assert this.minecraft != null;
             this.minecraft.setScreen(builder.parent);
-        }).setSprite(AlinLib.isAprilFool() ? EXIT : null).setPosition(width - 25, 5).setSize(20, 20).build());
+        }).setSprite(AlinLib.isAprilFool() ? EXIT : null).setPosition(width - 30, 5).setSize(20, 20).build());
 
         reset = addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.component.reset")).setOnPress((OnPress) -> {
             for (AbstractWidget widget : builder.widgets)
@@ -55,7 +55,7 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
                     .setIcon(RESET)
                     .buildAndShow();
             AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
-        }).setSprite(RESET).setSize(20, 20).setPosition(width - 50, 5).build());
+        }).setSprite(RESET).setSize(20, 20).setPosition(width - 55, 5).build());
         addRenderableWidgets(builder.panelWidgets);
     }
 
@@ -130,7 +130,7 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
     public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
         assert this.minecraft != null;
         super.renderBackground(guiGraphics, i, j, f);
-        guiGraphics.fill(5, 5, width - 55, 25, Colors.BLACK_ALPHA);
+        guiGraphics.fill(10, 5, width - 60, 25, Colors.BLACK_ALPHA);
     }
     //#elseif MC < 12002
     //$$
