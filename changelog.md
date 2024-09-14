@@ -1,10 +1,1 @@
-> This version has been republished due to plugin settings for publishing
-
-- Added buildAndShow() (for multiversion)
-- Optimize code 
-- Added player.debug.direction(_symbol) #10
-- Added Player.getDirection();
-- Added Player.getDebugDirection(boolean);
-- Redesigned configuration interface
-- Added new configuration design, no left panel
-- Cleanup code
+- Small fixes ConfigScreen$withoutPanel

@@ -57,9 +57,12 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
 
     public void initCategory() {
         int width = this.width - 20;
+        int oy = 30;
         for (AbstractWidget widget : builder.widgets) {
             widget.setWidth(width);
+            widget.setY(oy);
             widget.setX(10);
+            oy+= (widget.getHeight()+5);
         }
         this.scroller = addRenderableWidget(new ConfigureScrolWidget(this.width - 8, 30, 4, this.height - 30, Component.empty(), scroller -> {
             scroller.innerHeight = 30;
