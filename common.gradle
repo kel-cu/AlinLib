@@ -129,9 +129,9 @@ modrinth {
     projectId = "alinlib" // This can be the project ID or the slug. Either will work!
     setVersion(version)
     // You don't need to set this manually. Will fail if Modrinth has this version already
-    changelog = new File("../../changelog.md").text;
+    changelog = file("../../changelog.md").text
     versionType = rootProject.version_type // This is the default -- can also be `beta` or `alpha`
-    uploadFile = jar // With Loom, this MUST be set to `remapJar` instead of `jar`!
+    uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
     project.modrinth_versions.split(", ").each {
         gameVersions.add it
     }

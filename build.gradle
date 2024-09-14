@@ -51,7 +51,11 @@ publishing {
         }
     }
 }
-
+tasks.register('modrinthAll') {
+    subprojects {
+        dependsOn project.tasks.named('modrinth').get()
+    }
+}
 tasks.register('buildAndGather') {
     subprojects {
         dependsOn project.tasks.named('build').get()

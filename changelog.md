@@ -1,3 +1,5 @@
+> This version has been republished due to plugin settings for publishing
+
 - Added buildAndShow() (for multiversion)
 - Optimize code 
 - Added player.debug.direction(_symbol) #10
