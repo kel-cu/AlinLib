@@ -25,7 +25,7 @@ public class DesignScreen {
         builder.addWidget(new TextBox(Component.translatable("alinlib.config.design"), true))
                 .addWidget(new SelectorBuilder(Component.translatable("alinlib.config.default_design_type"), selectorButton -> AlinLib.bariumConfig.setString("DEFAULT_DESIGN_TYPE", GuiUtils.getStyleByName(selectorButton.getList()[selectorButton.getPosition()]).id))
                         .setList(GuiUtils.getStylesName())
-                        .setValue(GuiUtils.getPositionOnStylesID(GuiUtils.getSelected().name.getString())).setDescription("test"))
+                        .setValue(GuiUtils.getPositionOnStylesID(GuiUtils.getSelected().name.getString())))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.config_screen.small_panel_size"), false).setConfig(AlinLib.bariumConfig, "CONFIG_SCREEN.SMALL_PANEL_SIZE"))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.toast.timeline"), true).setConfig(AlinLib.bariumConfig, "TOAST.TIMELINE"))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.button.enable_reset_button"), true).setConfig(AlinLib.bariumConfig, "BUTTON.ENABLE_RESET_BUTTON"))
