@@ -2,23 +2,16 @@ package ru.kelcuprum.alinlib.gui.screens.types;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.network.chat.CommonComponents;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.*;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
-import ru.kelcuprum.alinlib.gui.components.ConfigureScrolWidget;
-import ru.kelcuprum.alinlib.gui.components.Description;
-import ru.kelcuprum.alinlib.gui.components.Resetable;
+import ru.kelcuprum.alinlib.gui.components.*;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
-import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
-import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
-import ru.kelcuprum.alinlib.gui.components.text.TextBox;
-import ru.kelcuprum.alinlib.gui.screens.AbstractConfigScreen;
-import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
+import ru.kelcuprum.alinlib.gui.components.text.*;
+import ru.kelcuprum.alinlib.gui.screens.*;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
-import static ru.kelcuprum.alinlib.gui.Icons.EXIT;
-import static ru.kelcuprum.alinlib.gui.Icons.RESET;
+import static ru.kelcuprum.alinlib.gui.Icons.*;
 
 public class ConfigScreen extends AbstractConfigScreen {
     public ConfigScreen(ConfigScreenBuilder builder) {
