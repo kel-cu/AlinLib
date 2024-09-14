@@ -152,11 +152,7 @@ public class Button extends AbstractButton implements Description {
                     .setTitle(builder.getTitle())
                     .setMessage(Component.translatable("alinlib.component.value_reset.toast"))
                     .setIcon(RESET)
-                    //#if MC >= 12102
-                    .show(AlinLib.MINECRAFT.getToastManager());
-            //#elseif MC < 12102
-            //$$ .show(AlinLib.MINECRAFT.getToasts());
-            //#endif
+                    .buildAndShow();
             AlinLib.log(Component.translatable("alinlib.component.reset.toast"));
             return true;
         }
