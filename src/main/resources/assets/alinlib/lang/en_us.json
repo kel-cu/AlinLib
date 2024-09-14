@@ -51,6 +51,12 @@
   "alinlib.localization.south": "South",
   "alinlib.localization.west": "West",
   "alinlib.localization.east": "East",
+
+  "alinlib.localization.north.debug": "North (Debug)",
+  "alinlib.localization.south.debug": "South (Debug)",
+  "alinlib.localization.west.debug": "West (Debug)",
+  "alinlib.localization.east.debug": "East (Debug)",
+
   "alinlib.localization.time": "Time",
   "alinlib.localization.time.morning": "Morning",
   "alinlib.localization.time.day": "Day",
@@ -72,6 +78,10 @@
   "alinlib.south": "South",
   "alinlib.west": "West",
   "alinlib.east": "East",
+  "alinlib.north.debug": "Negative Z",
+  "alinlib.south.debug": "Positive Z",
+  "alinlib.west.debug": "Negative X",
+  "alinlib.east.debug": "Positive X",
   "alinlib.world.overworld": "Overworld",
   "alinlib.world.nether": "Nether",
   "alinlib.world.the_end": "The End?",

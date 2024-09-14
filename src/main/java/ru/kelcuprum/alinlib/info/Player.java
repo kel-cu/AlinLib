@@ -87,9 +87,12 @@ public class Player {
         if(AlinLib.MINECRAFT.getConnection().getPlayerInfo(AlinLib.MINECRAFT.getCameraEntity().getUUID()) != null) return AlinLib.MINECRAFT.getConnection().getPlayerInfo(AlinLib.MINECRAFT.player.getUUID()).getLatency();
         return 0;
     }
+    public static Direction getDirection(){
+        if(AlinLib.MINECRAFT.player == null) return Direction.NORTH;
+        return AlinLib.MINECRAFT.player.getDirection();
+    }
     public static String getDirection(boolean oneSymbol){
-        if(AlinLib.MINECRAFT.player == null) return "-";
-        Direction direction = AlinLib.MINECRAFT.player.getDirection();
+        Direction direction = getDirection();
         if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false) && AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH.DIRECTION", true)){
             switch (direction) {
                 case NORTH -> direction = Direction.EAST;
@@ -105,6 +108,26 @@ public class Player {
 
             case WEST -> oneSymbol ? "W" : AlinLib.localization.getLocalization("west", false, false);
             case EAST -> oneSymbol ? "E" : AlinLib.localization.getLocalization("east", false, false);
+
+            default -> oneSymbol ? "?" : AlinLib.localization.getLocalization("unknown", false, false);
+        };
+    }
+    public static String getDebugDirection(boolean oneSymbol){
+        Direction direction = getDirection();
+        if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false) && AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH.DIRECTION", true)){
+            switch (direction) {
+                case NORTH -> direction = Direction.EAST;
+                case SOUTH -> direction = Direction.WEST;
+
+                case WEST -> direction = Direction.NORTH;
+                case EAST -> direction = Direction.SOUTH;
+            }
+        }
+        return switch (direction) {
+            case NORTH -> oneSymbol ? "-Z" : AlinLib.localization.getLocalization("north.debug", false, false);
+            case SOUTH -> oneSymbol ? "+Z" : AlinLib.localization.getLocalization("south.debug", false, false);
+            case WEST -> oneSymbol ? "-X" : AlinLib.localization.getLocalization("west.debug", false, false);
+            case EAST -> oneSymbol ? "+X" : AlinLib.localization.getLocalization("east.debug", false, false);
 
             default -> oneSymbol ? "?" : AlinLib.localization.getLocalization("unknown", false, false);
         };
