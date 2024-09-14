@@ -127,7 +127,7 @@ modrinth {
     token = System.getenv("MODRINTH_TOKEN") // Remember to have the MODRINTH_TOKEN environment variable set or else this will fail - just make sure it stays private!
     versionName = project.modrinth_title + " " + rootProject.mod_version
     projectId = "alinlib" // This can be the project ID or the slug. Either will work!
-    setVersion(version)
+    setVersion(rootProject.mod_version)
     // You don't need to set this manually. Will fail if Modrinth has this version already
     changelog = file("../../changelog.md").text
     versionType = rootProject.version_type // This is the default -- can also be `beta` or `alpha`
