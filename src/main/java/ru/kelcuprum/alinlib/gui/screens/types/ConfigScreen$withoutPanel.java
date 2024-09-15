@@ -2,6 +2,7 @@ package ru.kelcuprum.alinlib.gui.screens.types;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.network.chat.*;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
@@ -10,7 +11,9 @@ import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.components.text.*;
 import ru.kelcuprum.alinlib.gui.screens.*;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Objects;
 
 import static ru.kelcuprum.alinlib.gui.Icons.*;
@@ -64,8 +67,8 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
             widget.setX(10);
             oy+= (widget.getHeight()+5);
         }
-        this.scroller = addRenderableWidget(new ConfigureScrolWidget(this.width - 8, 30, 4, this.height - 30, Component.empty(), scroller -> {
-            scroller.innerHeight = 30;
+        this.scroller = addRenderableWidget(new ConfigureScrolWidget(this.width - 8, 30, 4, this.height - 35, Component.empty(), scroller -> {
+            scroller.innerHeight = 0;
             CategoryBox lastCategory = null;
             Component lastDescription = null;
             for (AbstractWidget widget : builder.widgets) {
@@ -85,13 +88,50 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
                             lastCategory = null;
                         }
                     }
-                    widget.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
+                    widget.setY(30+((int) (scroller.innerHeight - scroller.scrollAmount())));
                     scroller.innerHeight += (widget.getHeight() + 5);
                 } else widget.setY(-widget.getHeight());
             }
+            scroller.innerHeight-=13;
             description = lastDescription != null ? lastDescription : Component.empty();
         }));
-        addRenderableWidgets(builder.widgets);
+        addRenderableWidgets$scroller(builder.widgets);
+    }
+    protected void addRenderableWidgets$scroller(@NotNull List<AbstractWidget> widgets){
+        this.scroller.addWidgets(widgets);
+        for(AbstractWidget widget : widgets) addWidget(widget);
+    }
+    protected void addRenderableWidgets$scroller(@NotNull AbstractWidget widget){
+        this.scroller.addWidget(widget);
+        addWidget(widget);
+    }
+
+    @Override
+    public boolean mouseClicked(double d, double e, int i) {
+        boolean st = true;
+        GuiEventListener selected = null;
+        for (GuiEventListener guiEventListener : this.children()) {
+            if (scroller != null && scroller.widgets.contains(guiEventListener)) {
+                if ((d >= 10 && d <= width - 10) && (e >= 30 && e <= height)) {
+                    if (guiEventListener.mouseClicked(d, e, i)) {
+                        st = false;
+                        selected = guiEventListener;
+                        break;
+                    }
+                }
+            } else if (guiEventListener.mouseClicked(d, e, i)) {
+                st = false;
+                selected = guiEventListener;
+                break;
+            }
+        }
+
+        this.setFocused(selected);
+        if (i == 0) {
+            this.setDragging(true);
+        }
+
+        return st;
     }
 
     //#if MC >= 12002
@@ -144,6 +184,9 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
         //$$ renderBackground(guiGraphics);
         //#endif
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
+        guiGraphics.enableScissor(0, 30, width, this.height-5);
+        if (scroller != null) for (AbstractWidget widget : scroller.widgets) widget.render(guiGraphics, mouseX, mouseY, partialTicks);
+        guiGraphics.disableScissor();
         if (!Objects.equals(description, Component.empty()))
             guiGraphics.renderTooltip(AlinLib.MINECRAFT.font, description, mouseX, mouseY);
     }

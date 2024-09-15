@@ -3,17 +3,21 @@ package ru.kelcuprum.alinlib.gui.components;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractScrollWidget;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import ru.kelcuprum.alinlib.gui.Colors;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class ConfigureScrolWidget extends AbstractScrollWidget {
     public final Consumer<ConfigureScrolWidget> onScroll;
     public int innerHeight;
+    public List<AbstractWidget> widgets = new ArrayList<>();
 
     public ConfigureScrolWidget(int x, int y, int width, int height, Component message, Consumer<ConfigureScrolWidget> onScroll) {
         super(x, y, width, height, message);
@@ -44,7 +48,7 @@ public class ConfigureScrolWidget extends AbstractScrollWidget {
 
     @Override
     protected void renderBackground(GuiGraphics guiGraphics) {
-        if (this.scrollbarVisible()) guiGraphics.fill(getX()+this.width, getY(), getX()+this.width+4, getHeight(), 0x75000000);
+        if (this.scrollbarVisible()) guiGraphics.fill(getX()+this.width, getY(), getX()+this.width+4, getY()+getHeight(), 0x75000000);
     }
 
     private int getContentHeight() {
@@ -74,6 +78,17 @@ public class ConfigureScrolWidget extends AbstractScrollWidget {
 
     @Override
     protected void renderBorder(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+    }
+
+    public void resetWidgets(){
+        widgets.clear();
+        setScrollAmount(0);
+    }
+    public void addWidget(AbstractWidget widget) {
+        widgets.add(widget);
+    }
+    public void addWidgets(List<AbstractWidget> widgets) {
+        for(AbstractWidget widget : widgets) addWidget(widget);
     }
 
     @Override
