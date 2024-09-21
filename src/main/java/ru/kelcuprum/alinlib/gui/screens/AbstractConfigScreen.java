@@ -4,6 +4,7 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.ConfigureScrolWidget;
 import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
 
@@ -31,10 +32,11 @@ public class AbstractConfigScreen extends Screen {
         }
     }
     public AbstractWidget getFirstActiveWidget(List<AbstractWidget> widgets){
-        //#if MC > 12005
-        AbstractWidget widget = widgets.getFirst();
+        AbstractWidget widget = widgets
+                //#if MC > 12005
+                .getFirst();
         //#else
-        //$$ AbstractWidget widget = widgets.get(0);
+        //$$ .get(0);
         //#endif
         for(AbstractWidget abstractWidget : widgets){
             if(abstractWidget.isActive()) {
@@ -49,15 +51,13 @@ public class AbstractConfigScreen extends Screen {
     public AbstractWidget reset;
 
     public void removeWidgetFromBuilder(){
-        for (AbstractWidget widget : this.builder.widgets) {
+        for (AbstractWidget widget : this.builder.widgets)
             removeWidget(widget);
-        }
         this.builder.widgets.clear();
     }
     public void removePanelWidgetFromBuilder(){
-        for (AbstractWidget widget : this.builder.panelWidgets) {
+        for (AbstractWidget widget : this.builder.panelWidgets)
             removeWidget(widget);
-        }
         this.builder.panelWidgets.clear();
     }
     public void initCategory(){
@@ -90,20 +90,37 @@ public class AbstractConfigScreen extends Screen {
 
     // Добавление виджетов
     protected void addRenderableWidgets(@NotNull List<AbstractWidget> widgets){
-        for(AbstractWidget widget : widgets){
+        for(AbstractWidget widget : widgets)
             addRenderableWidget(widget);
-        }
+    }
+
+    protected void addRenderableWidgets$scroller(ConfigureScrolWidget scroller, @NotNull List<AbstractWidget> widgets){
+        scroller.addWidgets(widgets);
+        for(AbstractWidget widget : widgets) addWidget(widget);
+    }
+    protected void addRenderableWidgets$scroller(@NotNull List<AbstractWidget> widget){
+        addRenderableWidgets$scroller(scroller, widget);
+    }
+
+    protected void addRenderableWidgets$scroller(@NotNull AbstractWidget widget){
+        addRenderableWidgets$scroller(scroller, widget);
+    }
+    protected void addRenderableWidgets$scroller(ConfigureScrolWidget scroller, @NotNull AbstractWidget widget){
+        scroller.addWidget(widget);
+        addWidget(widget);
     }
 
     @Override
-    public boolean keyPressed(int i, int j, int k) {
-        if(i == GLFW.GLFW_KEY_ESCAPE){
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if(keyCode == GLFW.GLFW_KEY_ESCAPE){
             if(getFocused() != null && getFocused().isFocused()) {
                 getFocused().setFocused(false);
                 return true;
             }
         }
-        return super.keyPressed(i, j, k);
+        if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_KEY_RIGHT_CONTROL) != 0)
+            AlinLib.MINECRAFT.setScreen(new ThanksScreen(this));
+        return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     // Рендер, скролл, прослушивание кей-биндов

@@ -23,7 +23,7 @@ public class ConfigScreenBuilder {
     public OnTickScreen onTickScreen;
     public Screen parent;
     public int panelSize = AlinLib.bariumConfig.getBoolean("CONFIG_SCREEN.SMALL_PANEL_SIZE", false) ?  130 : 190;
-    public int yL = 40;
+    public int yL = AlinLib.bariumConfig.getBoolean("MODERN", true) ? 35 : 40;
     public int yC = 5;
 
     public ConfigScreenBuilder(Screen parent) {
@@ -70,8 +70,8 @@ public class ConfigScreenBuilder {
         return addPanelWidget(builder.build());
     }
     public ConfigScreenBuilder addPanelWidget(AbstractWidget widget){
-        widget.setWidth(this.panelSize-10);
-        widget.setX(5);
+        widget.setWidth(this.panelSize-(AlinLib.bariumConfig.getBoolean("MODERN", true) ? 20 : 10));
+        widget.setX(AlinLib.bariumConfig.getBoolean("MODERN", true) ? 10 : 5);
         widget.setY(yL);
         yL+=widget.getHeight()+5;
         this.panelWidgets.add(widget);
@@ -130,7 +130,7 @@ public class ConfigScreenBuilder {
 
     public AbstractConfigScreen build() {
         Objects.requireNonNull(this.title, "title == null");
-        return panelWidgets.isEmpty() ? new ConfigScreen$withoutPanel(this) : new ConfigScreen(this);
+        return panelWidgets.isEmpty() ? new ConfigScreen$withoutPanel(this) : (AlinLib.bariumConfig.getBoolean("MODERN", true) ? new ConfigScreen$modern(this) : new ConfigScreen(this));
     }
 
     public interface OnTick {

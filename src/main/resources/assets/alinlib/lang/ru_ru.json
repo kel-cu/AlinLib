@@ -26,6 +26,7 @@
   "alinlib.config.checkbox.color": "Цвет",
   "alinlib.config.checkbox.color.custom": "Кастоный цвет",
   "alinlib.config.scroller.color": "Цвет скроллера",
+  "alinlib.config.modern": "Современный дизайн",
 
   "alinlib.config.localization": "Локализация",
   "alinlib.config.localization.extended_coordinates": "Расширенные координаты",

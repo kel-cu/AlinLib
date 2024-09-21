@@ -38,16 +38,13 @@ public class World {
 
     }
     public static long getTime(){
-        if(AlinLib.MINECRAFT.level == null) return -1;
-        return AlinLib.MINECRAFT.level.getDayTime();
+        return AlinLib.MINECRAFT.level == null ? -1 :  AlinLib.MINECRAFT.level.getDayTime();
     }
     public static long getDayTime(){
-        if(AlinLib.MINECRAFT.level == null) return -1;
-        return AlinLib.MINECRAFT.level.getDayTime() % 24000;
+        return AlinLib.MINECRAFT.level == null ? -1 :  AlinLib.MINECRAFT.level.getDayTime() % 24000;
     }
     public static int getDays(){
-        if(AlinLib.MINECRAFT.level == null) return -1;
-        return (int) (AlinLib.MINECRAFT.level.getDayTime() / 24000L);
+        return AlinLib.MINECRAFT.level == null ? -1 : (int) (AlinLib.MINECRAFT.level.getDayTime() / 24000L);
     }
 
     public static String getCodeName(){

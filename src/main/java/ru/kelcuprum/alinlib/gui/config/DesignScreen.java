@@ -59,7 +59,8 @@ public class DesignScreen {
                         Component.translatable("alinlib.color.embeddium").getString(),
                         Component.translatable("alinlib.color.waterplayer").getString(),
                         Component.translatable("alinlib.color.user").getString()
-                }).setConfig(AlinLib.bariumConfig, "SCROLLER.COLOR"));
+                }).setConfig(AlinLib.bariumConfig, "SCROLLER.COLOR"))
+                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.modern"), true).setConfig(AlinLib.bariumConfig, "MODERN"));
         return builder.build();
     }
     //if FORGE && MC >= 12002

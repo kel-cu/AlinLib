@@ -27,6 +27,7 @@
   "alinlib.config.checkbox.color": "Color",
   "alinlib.config.checkbox.color.custom": "Custom color",
   "alinlib.config.scroller.color": "Scroller Color",
+  "alinlib.config.modern": "Modern Design",
 
   "alinlib.config.localization": "Localization",
   "alinlib.config.localization.extended_coordinates": "Extended Coordinates",

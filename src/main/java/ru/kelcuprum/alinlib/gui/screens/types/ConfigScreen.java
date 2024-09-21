@@ -107,6 +107,7 @@ public class ConfigScreen extends AbstractConfigScreen {
                     scroller.innerHeight += (widget.getHeight()+5);
                 } else widget.setY(-widget.getHeight());
             }
+            scroller.innerHeight-=8;
             if(this.lastCheck != descriptionEnable){
                 lastCheck = descriptionEnable;
                 for(AbstractWidget widget : builder.panelWidgets){
