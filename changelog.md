@@ -1,1 +1,1 @@
-- Small fixes ConfigScreen$withoutPanel
+- Removed support Forge

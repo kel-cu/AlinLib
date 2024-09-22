@@ -26,10 +26,7 @@ import java.time.LocalDate;
 import java.util.Random;
 
 import static ru.kelcuprum.alinlib.gui.Icons.CLOWNFISH;
-//#if FORGE
-//$$ @net.minecraftforge.fml.common.Mod("alinlib")
-//$$ @net.minecraftforge.fml.common.Mod.EventBusSubscriber(bus = net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD, value = net.minecraftforge.api.distmarker.Dist.CLIENT)
-//#elseif NEOFORGE
+//#if NEOFORGE
 //$$ @net.neoforged.fml.common.Mod("alinlib")
 //#endif
 public class AlinLib
@@ -87,28 +84,6 @@ public class AlinLib
         AlinLib.VERSION = net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer(AlinLib.MODID).get().getMetadata().getVersion().getFriendlyString();
         init();
     }
-    //#elseif FORGE
-    //$$  public AlinLib(){
-    //$$      init();
-    //$$     for(net.minecraftforge.forgespi.language.IModInfo mod : net.minecraftforge.fml.ModList.get().getMods()){
-    //$$          if(mod.getModId().equals(AlinLib.MODID)){
-    //$$              AlinLib.VERSION = mod.getVersion().getQualifier();
-    //$$          }
-    //$$      }
-    //$$      if (net.minecraftforge.fml.loading.FMLLoader.getDist() == net.minecraftforge.api.distmarker.Dist.CLIENT) {
-    //$$          net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerKeymappings);
-    //$$          registerScreen();
-    //$$          net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener(this::onPostRenderGui);
-    //$$      }
-    //$$  }
-    //$$  public void onPostRenderGui(net.minecraftforge.client.event.RenderGuiEvent.Post event) {
-    //$$      ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick());
-    //$$  }
-    //$$  public void registerKeymappings(net.minecraftforge.client.event.RegisterKeyMappingsEvent event) {
-    //$$      for(KeyMapping mapping : KeyMappingHelper.EXAMPLE_MAPPING) {
-    //$$          event.register(mapping);
-    //$$      }
-    //$$  }
     //#elseif NEOFORGE
     //$$  public AlinLib(){
     //$$      init();
@@ -144,19 +119,6 @@ public class AlinLib
     //$$  }
     //#endif
 
-    //#if FORGE && MC < 12002
-    //$$ public void registerScreen(){
-    //$$          net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(
-    //$$                  net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
-    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory((java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen>) ru.kelcuprum.alinlib.gui.config.DesignScreen::build));
-    //$$ }
-    //#elseif FORGE && MC >= 12002
-    //$$ public void registerScreen(){
-    //$$          net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(
-    //$$                  net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory.class,
-    //$$                  () -> new net.minecraftforge.client.ConfigScreenHandler.ConfigScreenFactory(ru.kelcuprum.alinlib.gui.config.DesignScreen::build));
-    //$$ }
-    //#endif
     // Funny
     public static boolean isAprilFool(){
         return LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 1;
