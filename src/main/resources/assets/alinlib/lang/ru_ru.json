@@ -105,5 +105,11 @@
   "alinlib.color.waterplayer": "Сайт WaterPlayer",
   "alinlib.color.user": "Кастомный",
 
+  "alinlib.thanks": "Огромное спасибо!",
+  "alinlib.thanks.offer": "Хотите поддержать разработчика? Не проблема! \nВы можете поддержать меня через DonationAlerts или же через Boosty.to\nНо спешу предупредить, обновление списка происходит не мгновенно, автор вручную вписывает людей, тем самым выделяет больше внимание к поддержке сообщества :)",
+  "alinlib.thanks.boosty": "Boosty",
+  "alinlib.thanks.donationalerts": "DonationAlerts",
+  "alinlib.thanks.exit": "Уйти от поддержки :(",
+
   "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"
 }

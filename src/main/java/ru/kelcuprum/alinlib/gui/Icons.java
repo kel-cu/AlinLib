@@ -23,6 +23,7 @@ public interface Icons {
     ResourceLocation WARNING = GuiUtils.getResourceLocation(AlinLib.MODID, "textures/gui/sprites/warning.png");
     ResourceLocation WHAT = GuiUtils.getResourceLocation(AlinLib.MODID, "textures/gui/sprites/what.png");
     ResourceLocation CLOWNFISH = GuiUtils.getResourceLocation(AlinLib.MODID, "textures/gui/sprites/clownfish.png");
+    ResourceLocation THANKS = GuiUtils.getResourceLocation(AlinLib.MODID, "textures/gui/sprites/thanks.png");
     ResourceLocation WIKI = GuiUtils.getResourceLocation(AlinLib.MODID, "textures/gui/sprites/wiki.png");
     ResourceLocation INVISIBILITY = GuiUtils.getResourceLocation(AlinLib.MODID, "textures/gui/sprites/invisibility.png");
     ResourceLocation EXIT = GuiUtils.getResourceLocation(AlinLib.MODID, "textures/gui/sprites/exit.png");

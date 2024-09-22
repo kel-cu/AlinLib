@@ -1,1 +1,3 @@
 - Removed support Forge
+- Rewritten ThanksScreen
+- Changed keybind for ThanksScreen

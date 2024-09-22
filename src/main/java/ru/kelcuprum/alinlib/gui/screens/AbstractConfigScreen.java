@@ -118,7 +118,7 @@ public class AbstractConfigScreen extends Screen {
                 return true;
             }
         }
-        if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_KEY_RIGHT_CONTROL) != 0)
+        if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0)
             AlinLib.MINECRAFT.setScreen(new ThanksScreen(this));
         return super.keyPressed(keyCode, scanCode, modifiers);
     }

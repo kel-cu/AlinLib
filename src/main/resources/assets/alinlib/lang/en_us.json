@@ -108,5 +108,11 @@
   "alinlib.color.waterplayer": "WaterPlayer Website",
   "alinlib.color.user": "Custom",
 
+  "alinlib.thanks": "Thank you so much!",
+  "alinlib.thanks.offer": "Want to support a developer? No problem! \nYou can support me through DonationAlerts or you can support me through Boosty.to\nBut I hasten to warn you, the update of the list is not instantaneous, the author manually enters people, thus highlighting more attention to support the community :)",
+  "alinlib.thanks.boosty": "Boosty",
+  "alinlib.thanks.donationalerts": "DonationAlerts",
+  "alinlib.thanks.exit": "Walking away from support :(",
+
   "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum"
 }
