@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.WebAPI;
@@ -80,7 +81,7 @@ public class ThanksScreen extends Screen {
     public void tick() {
         super.tick();
         long time = System.currentTimeMillis() - stime;
-        if(time > 5000){
+        if(time > 3000){
             stime = System.currentTimeMillis();
             pos++;
             if(pos >= dobryaki.size()) pos = 0;
@@ -92,7 +93,7 @@ public class ThanksScreen extends Screen {
         if(dobryaki.get(pos).isJsonObject()) {
             MutableComponent coloredDobryak = Component.empty();
             JsonObject jsonDobryaka = dobryaki.get(pos).getAsJsonObject();
-            if(jsonDobryaka.has("color")) coloredDobryak.withColor(Color.decode(jsonDobryaka.get("color").getAsString()).getRGB());
+            if(jsonDobryaka.has("color")) coloredDobryak.setStyle(Style.EMPTY.withColor(Color.decode(jsonDobryaka.get("color").getAsString()).getRGB()));
             coloredDobryak.append(jsonDobryaka.get("name").getAsString());
             dobryak = coloredDobryak;
         } else dobryak = Component.literal(dobryaki.get(pos).getAsString());
