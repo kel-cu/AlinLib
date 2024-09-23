@@ -16,7 +16,6 @@ preprocess {
 
     vars.put("MC", mcVersion)
     vars.put("FABRIC", mod_brand == 'fabric' ? 1 : 0)
-    vars.put("FORGE", mod_brand == 'forge' ? 1 : 0)
     vars.put("NEOFORGE", mod_brand == 'neoforge' ? 1 : 0)
 }
 
@@ -40,15 +39,9 @@ loom {
             vmArgs '-Dmixin.debug.export=true'
         }
     accessWidenerPath = file("../../src/main/resources/alinlib.accesswidener")
-    if (mod_brand == 'forge') {
-        forge {
-            convertAccessWideners = true
-            mixinConfig "alinlib.mixin.json"
-        }
-    }
 }
 remapJar {
-    if(mod_brand == 'forge' || mod_brand == 'neoforge') atAccessWideners.add("alinlib.accesswidener")
+    if(mod_brand == 'neoforge') atAccessWideners.add("alinlib.accesswidener")
 //    remapperIsolation = true
     injectAccessWidener = true
 }
@@ -67,18 +60,15 @@ dependencies {
         modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     } else if (mod_brand == 'neoforge') {
         neoForge "net.neoforged:neoforge:${project.forge_version}"
-    } else {
-        forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
-        include "io.github.llamalad7:mixinextras-forge:0.4.0"
     }
 }
 
 int JAVA_COMPATIBILITY
-if (mcVersion >= 12005) {
+if (mcVersion >= 12005)
     JAVA_COMPATIBILITY = 21
-} else {
+else
     JAVA_COMPATIBILITY = 17
-}
+
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
     it.options.release = JAVA_COMPATIBILITY
@@ -104,13 +94,6 @@ publishing {
                 groupId rootProject.maven_group
                 version project.version
                 artifactId = rootProject.archives_base_name + "-neoforge"
-                from components.java
-            }
-        } else if(mod_brand == "forge"){
-            mavenForge(MavenPublication) {
-                groupId rootProject.maven_group
-                version project.version
-                artifactId = rootProject.archives_base_name + "-forge"
                 from components.java
             }
         } else if(mod_brand == "fabric"){
