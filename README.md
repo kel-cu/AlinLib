@@ -24,7 +24,10 @@ dependencies {
 Для указания в fabric.mod.json указывайте ID: `alinlib`
 ## Скриншоты
 ### Интерфейс
-![interface](https://kelcuprum.ru/ass/alinlib/interface.png?)
+![modern interface](https://cdn.modrinth.com/data/cached_images/15d5a52399c417ea741fb8d98f4e7dbccfb7dd7b_0.webp)
+
+> Старый дизайн
+> 
+![Interface](https://cdn.modrinth.com/data/cached_images/d55993f79ff17145e83022ce8923f66cc492d71a.png)
 ### Уведомления
-![toast](https://kelcuprum.ru/ass/alinlib/toast.png?)
-![custom_toast](https://kelcuprum.ru/ass/alinlib/custom_toast.png?)
+![Toast](https://cdn.modrinth.com/data/cached_images/4587aeeb1742db6e5000b8e4aa9dfb68fd19473f.png)
