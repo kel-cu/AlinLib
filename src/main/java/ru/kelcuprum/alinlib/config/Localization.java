@@ -149,9 +149,8 @@ public class Localization {
     }
 
     public static String fixFormatCodes(String text) {
-        for (String formatCode : formatCodes.keySet()) {
+        for (String formatCode : formatCodes.keySet())
             text = text.replaceAll(formatCode, formatCodes.get(formatCode));
-        }
         return text;
     }
 }

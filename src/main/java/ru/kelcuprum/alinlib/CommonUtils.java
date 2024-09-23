@@ -17,6 +17,11 @@ public class CommonUtils {
         return length;
     }
 
+    public static boolean isValidFileName(String string){
+        String refactor = string.replaceAll("[<>:\"?|\\\\/*]", "");
+        return refactor.length() == string.length();
+    }
+
     static long kilo = 1024;
     static long mega = kilo * kilo;
     static long giga = mega * kilo;
