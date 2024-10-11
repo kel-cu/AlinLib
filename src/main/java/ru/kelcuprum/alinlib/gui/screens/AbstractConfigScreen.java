@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.screens;
 
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
@@ -118,7 +119,7 @@ public class AbstractConfigScreen extends Screen {
                 return true;
             }
         }
-        if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0)
+        if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0 && !(getFocused() instanceof EditBox))
             AlinLib.MINECRAFT.setScreen(new ThanksScreen(this));
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
