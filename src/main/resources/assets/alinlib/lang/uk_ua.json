@@ -1,0 +1,152 @@
+{
+  "alinlib.editbox.secret": "Таємниця:)",
+
+  "alinlib.title.not_release": "Ця версія не є релізом!",
+  "alinlib.title.not_release.description": "Ця версія не є релізом та може містити багато баґів і помилок\nЯкщо ви їх помітили, повідомте про них тут:",
+  "alinlib.title.reset": "Скинути налаштування?",
+  "alinlib.title.reset.description": "Ця дія незворотна!",
+
+  "alinlib.key.stealth": "Режим скритности",
+
+  "alinlib.component.reset": "Скинути",
+  "alinlib.component.reset.toast": "Налаштування категорії скинуто",
+  "alinlib.component.value_reset.toast": "Значення скинуто",
+
+  "alinlib.april_fools.white": "Твоя спина біла!",
+  "alinlib.april_fools.welcome": "Ласкаво просимо до Дивовижного цифрового інтерфейсу™",
+  "alinlib.april_fools.clownfish": "Карусель, що кудихає, крутиться й ніколи не зупиняється",
+  "alinlib.hb": "У Kel день народження! Привітати можна у Discord @Kel_Cu або kelcu.ru/ds",
+
+  "alinlib.search": "Знайти...",
+
+  "alinlib.config": "Налаштування",
+
+  "alinlib.config.design": "Дизайн",
+  "alinlib.config.default_design_type": "Тип дизайну за замовчуванням",
+  "alinlib.config.config_screen.small_panel_size": "Скорочений варіант панелі",
+  "alinlib.config.toast.timeline": "Шкала часу сповіщення",
+  "alinlib.config.button.enable_reset_button": "Кнопка скидання",
+
+  "alinlib.config.checkbox": "Прапорець",
+  "alinlib.config.checkbox.example": "Приклад прапорця",
+  "alinlib.config.checkbox.enable": "Стиль прапорця",
+  "alinlib.config.checkbox.color": "Колір",
+  "alinlib.config.checkbox.color.custom": "Власний колір",
+
+  "alinlib.config.blockquote": "Блок цитати",
+  "alinlib.config.blockquote.color": "Колір лінії",
+  "alinlib.config.blockquote.color.background": "Тло",
+
+  "alinlib.config.scroller": "Повзунки",
+  "alinlib.config.scroller.color": "Колір повзунка",
+  "alinlib.config.scroller.smooth": "Гладке прокручування",
+
+  "alinlib.config.horizontal_rule": "Горизонтальне правило",
+  "alinlib.config.horizontal_rule.color": "Колір",
+
+  "alinlib.config.modern": "Модерністський дизайн",
+
+  "alinlib.config.localization": "Локалізація",
+  "alinlib.config.localization.extended_coordinates": "Розширені координати",
+  "alinlib.config.view.item_off_hand": "Показувати предмети в другорядній руці",
+
+  "alinlib.config.stealth": "Скритність",
+  "alinlib.config.streamer.stealth": "Режим скритністи",
+  "alinlib.config.stealth.coordinates": "Координати",
+  "alinlib.config.streamer.stealth.coordinates": "Приховати координати",
+  "alinlib.config.streamer.stealth.direction": "Приховати напрямок",
+  "alinlib.config.streamer.stealth.type": "Алгоритм скритности",
+  "alinlib.config.stealth.alinlib": "AlinLib",
+  "alinlib.config.streamer.alinlib.max_radius": "Радіус",
+  "alinlib.config.streamer.stealth.name": "Приховати ім'я",
+
+
+  "alinlib.localization": "Локалізація",
+  "alinlib.localization.date.time": "Формат часу",
+  "alinlib.localization.unknown": "Невідомо",
+  "alinlib.localization.sides": "Чотири сторони горизонту",
+  "alinlib.localization.north": "Північ",
+  "alinlib.localization.south": "Південь",
+  "alinlib.localization.west": "Захід",
+  "alinlib.localization.east": "Схід",
+  "alinlib.localization.north.debug": "Північ (налагодження)",
+  "alinlib.localization.south.debug": "Південь (налагодження)",
+  "alinlib.localization.west.debug": "Захід (налагодження)",
+  "alinlib.localization.east.debug": "Схід (налагодження)",
+  "alinlib.localization.time": "Час",
+  "alinlib.localization.time.morning": "Ранок",
+  "alinlib.localization.time.day": "День",
+  "alinlib.localization.time.evening": "Вечір",
+  "alinlib.localization.time.night": "Ніч",
+
+  "alinlib.localization.world": "Світи",
+  "alinlib.localization.world.overworld": "Верхній світ",
+  "alinlib.localization.world.nether": "Незер",
+  "alinlib.localization.world.the_end": "Кінець?",
+  "alinlib.localization.world.moon": "Місяць",
+
+  "alinlib.date.time": "HH:mm",
+  "alinlib.time.morning": "Ранок",
+  "alinlib.time.day": "День",
+  "alinlib.time.evening": "Вечір",
+  "alinlib.time.night": "Ніч",
+  "alinlib.north": "Північ",
+  "alinlib.south": "Південь",
+  "alinlib.west": "Захід",
+  "alinlib.east": "Схід",
+  "alinlib.north.debug": "Негативний Z",
+  "alinlib.south.debug": "Позитивний Z",
+  "alinlib.west.debug": "Негативний X",
+  "alinlib.east.debug": "Позитивний X",
+  "alinlib.world.overworld": "Верхній світ",
+  "alinlib.world.nether": "Незер",
+  "alinlib.world.the_end": "Кінець?",
+  "alinlib.world.moon": "Місяць",
+  "alinlib.unknown": "Невідомо",
+   
+  "alinlib.style.flat": "Плаский",
+  "alinlib.style.modern": "Модерністський",
+
+
+  "alinlib.log.exit.first": "З часом, будь-яка історія змінюється до невпізнанності",
+  "alinlib.log.exit.two": "Не всі воїни народжуються великими",
+
+  "alinlib.color.groupie": "Groupie",
+  "alinlib.color.alina": "Аліна Котова",
+  "alinlib.color.seadrive": "SeaDrive",
+  "alinlib.color.tetra": "Tetra",
+  "alinlib.color.convict": "Convict",
+  "alinlib.color.seabird": "Seabird",
+  "alinlib.color.droplet": "Droplet",
+  "alinlib.color.sodium": "Sodium",
+  "alinlib.color.embeddium": "Embeddium",
+  "alinlib.color.white": "Білий",
+  "alinlib.color.waterplayer": "Сторінка WaterPlayer",
+
+
+
+  "alinlib.color.catppucin.rosewater": "(CPM) Rosewater",
+  "alinlib.color.catppucin.flamingo": "(CPM) Flamingo",
+  "alinlib.color.catppucin.pink": "(CPM) Pink",
+  "alinlib.color.catppucin.mauve": "(CPM) Mauve",
+  "alinlib.color.catppucin.red": "(CPM) Red",
+  "alinlib.color.catppucin.maroon": "(CPM) Maroon",
+  "alinlib.color.catppucin.peach": "(CPM) Peach",
+  "alinlib.color.catppucin.yellow": "(CPM) Yellow",
+  "alinlib.color.catppucin.green": "(CPM) Green",
+  "alinlib.color.catppucin.teal": "(CPM) Teal",
+  "alinlib.color.catppucin.sky": "(CPM) Sky",
+  "alinlib.color.catppucin.sapphire": "(CPM) Sapphire",
+  "alinlib.color.catppucin.blue": "(CPM) Blue",
+  "alinlib.color.catppucin.lavender": "(CPM) Lavender",
+
+  "alinlib.color.user": "Власний",
+
+  "alinlib.thanks": "Дуже дякую!",
+  "alinlib.thanks.offer": "Хочете підтримати розробника? немає проблем!\nВи можете підтримати мене через DonationAlerts або Boosty.to\nАле поспішаю вас попередити, оновлення списку не відбувається миттєво, автор вручну вводить людей, тим самим привертаючи більше уваги до підтримки спільноти :)",
+  "alinlib.thanks.boosty": "Boosty",
+  "alinlib.thanks.donationalerts": "DonationAlerts",
+  "alinlib.thanks.exit": "Вийти від підтримки :(",
+
+  "modmenu.descriptionTranslation.alinlib": "Бібліотека для полегшення розробки модів Kel Cuprum"
+}
