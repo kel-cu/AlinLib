@@ -1,3 +1,6 @@
-- Fixed TextBox
-- Fixed ThanksScreen
-- Added color: Droplet #ab2b4e
+- Added support text in HorizontalRule
+- Added .setColor(int) / .setColor(int, int) in TextBuilder (Blockquote)
+- Updated libs
+- Fixed render sprite in Button
+- protected -> public (AbstractBuilder)
+- Changed default color in Blockquote (Groupie -> Catppuccin Mocha Blue)
