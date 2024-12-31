@@ -4,17 +4,56 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.text.HorizontalRuleBuilder;
 
+import java.util.Objects;
+
+import static ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder.ALIGN.CENTER;
+
 public class HorizontalRule extends AbstractWidget {
+    public final HorizontalRuleBuilder builder;
+    public final boolean hasText;
     public HorizontalRule(HorizontalRuleBuilder builder) {
-        super(builder.getX(), builder.getY(), builder.getWidth(), builder.getHeight(), Component.empty());
+        super(builder.getX(), builder.getY(), builder.getWidth(), builder.getHeight(), builder.title);
+        this.active = false;
+        this.builder = builder;
+        this.hasText = !Objects.equals(builder.getTitle(), Component.empty());
+    }
+
+    @Override
+    public int getHeight() {
+        if(hasText){
+            return 2 + AlinLib.MINECRAFT.font.lineHeight + builder.height;
+        } else return builder.height;
     }
 
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-        guiGraphics.fill(getX(), getY(), getRight(), getBottom(), Colors.getHorizontalRuleColor());
+        if(hasText){
+            int titleWidth = Math.min(AlinLib.MINECRAFT.font.width(builder.title), getWidth()-(getHeight()-8));
+            int width = (getWidth() / 2) - (titleWidth / 2) - 4;
+            int y = getY()+(getHeight()/2);
+
+            if(isDoesNotFit()) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFFFF);
+            else guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffffff);
+
+            guiGraphics.fill(getX(), y-builder.height, getX()+width, y, getColor());
+            guiGraphics.fill(getX()+getWidth()-width, y-builder.height, getRight(), y, getColor());
+        } else guiGraphics.fill(getX(), getY(), getRight(), getBottom(), getColor());
+    }
+
+
+
+    private boolean isDoesNotFit(){
+        int size = AlinLib.MINECRAFT.font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
+        return size > getWidth();
+    }
+
+    public int getColor(){
+        return builder.color != null ? builder.color[0] : Colors.getHorizontalRuleColor();
     }
 
     @Override

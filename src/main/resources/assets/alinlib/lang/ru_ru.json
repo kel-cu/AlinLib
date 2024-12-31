@@ -60,6 +60,47 @@
   "alinlib.config.streamer.alinlib.max_radius": "Радиус",
   "alinlib.config.streamer.stealth.name": "Скрыть ник",
 
+  "alinlib.config.design.demo": "Демо",
+
+  "alinlib.design.demo.buttons": "Кнопки",
+  "alinlib.design.demo.button": "Кнопка",
+  "alinlib.design.demo.button.left": "Текст слева",
+  "alinlib.design.demo.button.right": "Текст справа",
+  "alinlib.design.demo.button.left.with_icon": "Кнопка",
+  "alinlib.design.demo.button.right.with_icon": "с иконкой",
+  "alinlib.design.demo.button.with_icon": "Кнопка с иконкой",
+  "alinlib.design.demo.button.sprite": "Sprite",
+
+  "alinlib.design.demo.edit_box": "Поле ввода",
+  "alinlib.design.demo.edit_box.color": "Цвет",
+  "alinlib.design.demo.edit_box.secret": "Секрет",
+
+  "alinlib.design.demo.selector": "Выбор",
+
+  "alinlib.design.demo.slider": "Ползунок",
+  "alinlib.design.demo.slider.int": "Integer",
+  "alinlib.design.demo.slider.double": "Double",
+  "alinlib.design.demo.slider.percent": "Percent",
+  "alinlib.design.demo.slider.float": "Float",
+
+  "alinlib.design.demo.text": "Текст",
+  "alinlib.design.demo.text.left": "Текст\n слева",
+  "alinlib.design.demo.text.center": "Текст\n по центру",
+  "alinlib.design.demo.text.right": "Текст\n справа",
+  "alinlib.design.demo.text.message": "Сообщение",
+  "alinlib.design.demo.text.blockquote": "Блок цитаты",
+  "alinlib.design.demo.text.blockquote.colors": "Цветной блок цитаты",
+  "alinlib.design.demo.text.blockquote.colors.def": "Стандартный цвет",
+  "alinlib.design.demo.text.blockquote.colors.col1": "Кастомный цвет (в билдере) #1",
+  "alinlib.design.demo.text.blockquote.colors.col2": "Кастомный цвет (в билдере) #2",
+  "alinlib.design.demo.text.hr": "Горизонтальная линейка (этот виджет)",
+
+  "alinlib.design.demo.other": "Другое",
+  "alinlib.design.demo.other.description": "Виджет описании",
+  "alinlib.design.demo.description": "It's a comical yet devastating universe\nBut it's still the kind of universe that I deserve\nThe lipstick on my face has bled into my skin\nIt should show a grin\nUp from the sky, I won't want you to cry\nSo here's an act for everyone to sneer at\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who's waiting at the top\nShould do a circus hop!\nI shall now accept the fact that I'm a failure (You're a failure)\n'Cause I'm still afraid the future might be scarier (It is scarier)\nI'll slip while having fun and cut off my own tongue\nThey'll think I was dumb!\nUp from the sky, I won't want you to cry\nSo here's an act for everyone to sneer at\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who's waiting at the top\nShould do a circus hop!\nI've said goodbye, I don't want you to cry\nSo have a laugh with everyone but me\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who fell off from the top\nThey did a little drop!\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who's waiting at the top\nShould do a circus hop!",
+  "alinlib.design.demo.other.scroller": "Ползунок ->",
+  "alinlib.design.demo.other.image": "Изображение",
+
 
   "alinlib.localization": "Локализация",
   "alinlib.localization.date.time": "Формат времени",

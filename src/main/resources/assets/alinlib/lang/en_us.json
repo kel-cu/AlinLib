@@ -62,6 +62,46 @@
   "alinlib.config.streamer.alinlib.max_radius": "Radius",
   "alinlib.config.streamer.stealth.name": "Hide name",
 
+  "alinlib.config.design.demo": "Demo",
+
+  "alinlib.design.demo.buttons": "Buttons",
+  "alinlib.design.demo.button": "Buttom",
+  "alinlib.design.demo.button.left": "Left text",
+  "alinlib.design.demo.button.right": "Right text",
+  "alinlib.design.demo.button.left.with_icon": "Button",
+  "alinlib.design.demo.button.right.with_icon": "with icon",
+  "alinlib.design.demo.button.with_icon": "Button with icon",
+  "alinlib.design.demo.button.sprite": "Sprite",
+
+  "alinlib.design.demo.edit_box": "Edit Box",
+  "alinlib.design.demo.edit_box.color": "Color",
+  "alinlib.design.demo.edit_box.secret": "Secret",
+
+  "alinlib.design.demo.selector": "Selector",
+
+  "alinlib.design.demo.slider": "Slider",
+  "alinlib.design.demo.slider.int": "Integer",
+  "alinlib.design.demo.slider.double": "Double",
+  "alinlib.design.demo.slider.percent": "Percent",
+  "alinlib.design.demo.slider.float": "Float",
+
+  "alinlib.design.demo.text": "Text Box",
+  "alinlib.design.demo.text.left": "Left\n text",
+  "alinlib.design.demo.text.center": "Center\n text",
+  "alinlib.design.demo.text.right": "Right\n text",
+  "alinlib.design.demo.text.message": "Message Box",
+  "alinlib.design.demo.text.blockquote": "Blockquote",
+  "alinlib.design.demo.text.blockquote.colors": "Colored Blockquote",
+  "alinlib.design.demo.text.blockquote.colors.def": "Default color",
+  "alinlib.design.demo.text.blockquote.colors.col1": "Custom color (in builder) #1",
+  "alinlib.design.demo.text.blockquote.colors.col2": "Custom color (in builder) #2",
+  "alinlib.design.demo.text.hr": "Horizontal Rule (this widget)",
+
+  "alinlib.design.demo.other": "Other",
+  "alinlib.design.demo.other.description": "Description Box",
+  "alinlib.design.demo.description": "It's a comical yet devastating universe\nBut it's still the kind of universe that I deserve\nThe lipstick on my face has bled into my skin\nIt should show a grin\nUp from the sky, I won't want you to cry\nSo here's an act for everyone to sneer at\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who's waiting at the top\nShould do a circus hop!\nI shall now accept the fact that I'm a failure (You're a failure)\n'Cause I'm still afraid the future might be scarier (It is scarier)\nI'll slip while having fun and cut off my own tongue\nThey'll think I was dumb!\nUp from the sky, I won't want you to cry\nSo here's an act for everyone to sneer at\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who's waiting at the top\nShould do a circus hop!\nI've said goodbye, I don't want you to cry\nSo have a laugh with everyone but me\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who fell off from the top\nThey did a little drop!\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who's waiting at the top\nShould do a circus hop!",
+  "alinlib.design.demo.other.scroller": "Scroller ->",
+  "alinlib.design.demo.other.image": "Image",
 
   "alinlib.localization": "Localizations",
   "alinlib.localization.date.time": "Time format",

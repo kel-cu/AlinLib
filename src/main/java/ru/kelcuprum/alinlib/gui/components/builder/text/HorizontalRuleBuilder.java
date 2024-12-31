@@ -6,15 +6,17 @@ import ru.kelcuprum.alinlib.gui.components.text.HorizontalRule;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 public class HorizontalRuleBuilder extends AbstractBuilder {
-    protected int height = 1;
+    public int[] color;
     public HorizontalRuleBuilder(){
         this(Component.empty());
     }
     public HorizontalRuleBuilder(Component title){
-        this(title, null);
-    }
-    public HorizontalRuleBuilder(Component title, TextBox.OnPress onPress){
         super(title);
+        this.height = 1;
+    }
+    public HorizontalRuleBuilder setColor(int color){
+        this.color = new int[]{color};
+        return this;
     }
     public HorizontalRule build(){
         return new HorizontalRule(this);

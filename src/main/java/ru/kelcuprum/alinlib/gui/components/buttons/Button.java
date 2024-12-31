@@ -69,7 +69,7 @@ public class Button extends AbstractButton implements Description {
                 //#if MC >= 12102
                 RenderType::guiTextured,
                 //#endif
-                ((ButtonBuilder) builder).sprite, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), ((ButtonBuilder) builder).textureWidth, ((ButtonBuilder) builder).textureHeight);
+                ((ButtonBuilder) builder).sprite, getX(), getY(), 0F, 0F, ((ButtonBuilder) builder).textureWidth, ((ButtonBuilder) builder).textureHeight, getWidth(), getHeight());
         if(!builder.getTitle().getString().isEmpty() && isHovered()){
             guiGraphics.renderTooltip(AlinLib.MINECRAFT.font, builder.getTitle(), mouseX, mouseY);
         }

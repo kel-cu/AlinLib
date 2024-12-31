@@ -1,9 +1,11 @@
 package ru.kelcuprum.alinlib.gui.components.builder.text;
 
 import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
+import static ru.kelcuprum.alinlib.gui.Colors.GROUPIE;
 import static ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder.ALIGN.CENTER;
 import static ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder.ALIGN.LEFT;
 
@@ -11,6 +13,7 @@ public class TextBuilder extends AbstractBuilder {
     public TextBox.OnPress onPress;
     public TYPE type = TYPE.TEXT;
     public ALIGN align = CENTER;
+    public int[] color;
     public TextBuilder(){
         this(Component.empty());
     }
@@ -45,6 +48,14 @@ public class TextBuilder extends AbstractBuilder {
     }
     public ALIGN getAlign(){
         return this.align;
+    }
+    // Color
+    public TextBuilder setColor(int color){
+        return setColor(color, color-0xE1000000);
+    }
+    public TextBuilder setColor(int line, int background){
+        this.color = new int[]{line, background-0xE1000000};
+        return this;
     }
 
     public TextBox build(){

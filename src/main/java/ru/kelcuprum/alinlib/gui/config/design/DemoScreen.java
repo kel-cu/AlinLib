@@ -1,0 +1,111 @@
+package ru.kelcuprum.alinlib.gui.config.design;
+
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.Colors;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.Icons;
+import ru.kelcuprum.alinlib.gui.components.Description;
+import ru.kelcuprum.alinlib.gui.components.ImageWidget;
+import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
+import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
+import ru.kelcuprum.alinlib.gui.components.builder.editbox.EditBoxBuilder;
+import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
+import ru.kelcuprum.alinlib.gui.components.builder.slider.SliderBuilder;
+import ru.kelcuprum.alinlib.gui.components.builder.text.HorizontalRuleBuilder;
+import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
+import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
+import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
+import ru.kelcuprum.alinlib.gui.config.DesignScreen;
+import ru.kelcuprum.alinlib.gui.config.LocalizationScreen;
+import ru.kelcuprum.alinlib.gui.config.StealthScreen;
+import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
+import ru.kelcuprum.alinlib.gui.screens.ConfirmScreen;
+
+import java.awt.*;
+
+import static ru.kelcuprum.alinlib.gui.Colors.SEADRIVE;
+import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
+import static ru.kelcuprum.alinlib.gui.Icons.*;
+
+public class DemoScreen {
+    public static Screen build(Screen parent) {
+        ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("alinlib"))
+                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreen(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false))
+                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreen(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false))
+                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false));
+        if (AlinLib.isNotReleaseVersion()) {
+            builder.addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.title.not_release"),
+                    (s) -> AlinLib.MINECRAFT.setScreen(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
+                            Component.translatable("alinlib.title.not_release.description"), "https://github.com/kel-cu/alinlib/issues"))
+            ).setIcon(SEARCH).setCentered(false));
+        }
+        builder.addWidget(new TextBuilder(Component.translatable("alinlib.config.design.demo")));
+        builder.addWidget(new CategoryBox(Component.translatable("alinlib.design.demo.buttons"))
+                .addValue(new ButtonBuilder(Component.translatable("alinlib.design.demo.button")))
+                .addValue(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.left"), Component.translatable("alinlib.design.demo.button.right")))
+                .addValue(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.with_icon")).setIcon(CLOWNFISH))
+                .addValue(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.left.with_icon"), Component.translatable("alinlib.design.demo.button.right.with_icon")).setIcon(WIKI))
+                .addValue(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.sprite")).setSprite(CLOWNFISH))
+                .changeState(false)
+        );
+
+        builder.addWidget(new CategoryBox(Component.translatable("alinlib.design.demo.edit_box"))
+                .addValue(new EditBoxBuilder(Component.translatable("alinlib.design.demo.edit_box")))
+                .addValue(new EditBoxBuilder(Component.translatable("alinlib.design.demo.edit_box.color")).setColor(SEADRIVE))
+                .addValue(new EditBoxBuilder(Component.translatable("alinlib.design.demo.edit_box.secret")).setSecret(true))
+                .changeState(false)
+        );
+        builder.addWidget(new CategoryBox(Component.translatable("alinlib.design.demo.selector"))
+                .addValue(new SelectorBuilder(Component.translatable("alinlib.design.demo.selector")).setList(new String[]{
+                        "Hello",
+                        ",",
+                        "world",
+                        "!"
+                }))
+                .changeState(false)
+        );
+        builder.addWidget(new CategoryBox(Component.translatable("alinlib.design.demo.slider"))
+                .addValue(new SliderBuilder(Component.translatable("alinlib.design.demo.slider.int")).setMin(0).setMax(100).setDefaultValue(0))
+                .addValue(new SliderBuilder(Component.translatable("alinlib.design.demo.slider.double")).setMin(0.0).setMax(100.0).setDefaultValue(0.0, false))
+                .addValue(new SliderBuilder(Component.translatable("alinlib.design.demo.slider.percent")).setMin(0.0).setMax(100.0).setDefaultValue(0.0, true))
+                .addValue(new SliderBuilder(Component.translatable("alinlib.design.demo.slider.float")).setMin(0.0f).setMax(100.0f).setDefaultValue(0.0f))
+                .changeState(false)
+        );
+        builder.addWidget(new CategoryBox(Component.translatable("alinlib.design.demo.text"))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.left")).setAlign(TextBuilder.ALIGN.LEFT))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.center")))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.right")).setAlign(TextBuilder.ALIGN.RIGHT))
+                .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.design.demo.text.message")))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.left")).setType(TextBuilder.TYPE.MESSAGE))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.center")).setType(TextBuilder.TYPE.MESSAGE).setAlign(TextBuilder.ALIGN.CENTER))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.right")).setType(TextBuilder.TYPE.MESSAGE).setAlign(TextBuilder.ALIGN.RIGHT))
+                .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.design.demo.text.blockquote")))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.left")).setType(TextBuilder.TYPE.BLOCKQUOTE))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.center")).setType(TextBuilder.TYPE.BLOCKQUOTE).setAlign(TextBuilder.ALIGN.CENTER))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.right")).setType(TextBuilder.TYPE.BLOCKQUOTE).setAlign(TextBuilder.ALIGN.RIGHT))
+                .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors")))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors.def")).setType(TextBuilder.TYPE.BLOCKQUOTE))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors.col1")).setType(TextBuilder.TYPE.BLOCKQUOTE).setColor(Colors.CLOWNFISH))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors.col2")).setType(TextBuilder.TYPE.BLOCKQUOTE).setColor(Colors.SPECKLE[0], Colors.TETRA))
+                .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.design.demo.text.hr")))
+                .addValue(new HorizontalRuleBuilder())
+                .changeState(false)
+        );
+        DescriptionBox dbox = new DescriptionBox(0, 0, DEFAULT_WIDTH(), 80, Component.translatable("alinlib.design.demo.description"));
+        dbox.setDescription(Component.translatable("alinlib.design.demo.description"));
+        builder.addWidget(new CategoryBox(Component.translatable("alinlib.design.demo.other"))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.other.scroller")).setAlign(TextBuilder.ALIGN.RIGHT))
+                .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.design.demo.other.description")))
+                .addValue(dbox)
+                .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.design.demo.other.image")))
+                .addValue(new ImageWidget(0,0,512,512, CLOWNFISH, 512, 512, true, Component.empty()))
+                .addValue(new ImageWidget(0,0,32,32, CLOWNFISH, 32, 32, false, Component.empty()))
+                .changeState(false)
+        );
+
+
+        return builder.build();
+    }
+}

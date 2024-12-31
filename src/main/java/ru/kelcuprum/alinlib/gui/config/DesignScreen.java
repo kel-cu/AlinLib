@@ -10,7 +10,9 @@ import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.editbox.EditBoxBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
+import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
+import ru.kelcuprum.alinlib.gui.config.design.DemoScreen;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 import ru.kelcuprum.alinlib.gui.screens.ConfirmScreen;
 
@@ -135,7 +137,8 @@ public class DesignScreen {
                         }).setConfig(AlinLib.bariumConfig, "HORIZONTAL_RULE.COLOR"))
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.checkbox.color.custom")).setColor(Colors.CPM_LAVENDER).setConfig(AlinLib.bariumConfig, "HORIZONTAL_RULE.COLOR.CUSTOM")))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.scroller.smooth"), false).setConfig(AlinLib.bariumConfig, "SCROLLER.SMOOTH"))
-                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.modern"), true).setConfig(AlinLib.bariumConfig, "MODERN"));
+                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.modern"), true).setConfig(AlinLib.bariumConfig, "MODERN"))
+                .addWidget(new ButtonBuilder(Component.translatable("alinlib.config.design.demo"), (s) -> AlinLib.MINECRAFT.setScreen(DemoScreen.build(parent))).setIcon(WIKI));
         return builder.build();
     }
 }

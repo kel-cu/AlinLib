@@ -82,9 +82,12 @@ public class TextBox extends AbstractWidget implements Description {
     public void renderBackground(GuiGraphics guiGraphics){
        if(builder.type != BLOCKQUOTE && builder.onPress != null) builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getWidth(), getHeight(), true, isHoveredOrFocused());
        else if(builder.type == BLOCKQUOTE){
-           guiGraphics.fill(this.getX()+1, this.getY(), this.getX()+this.getWidth(), this.getY()+this.getHeight(), AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR.BACKGROUND", GROUPIE-0xE1000000).intValue());
-           guiGraphics.fill(this.getX(), this.getY(), this.getX()+1, this.getY()+this.getHeight(), AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR", GROUPIE).intValue());
+           guiGraphics.fill(this.getX(), this.getY(), this.getX()+1, this.getY()+this.getHeight(), getBlockquoteColor()[0]);
+           guiGraphics.fill(this.getX()+1, this.getY(), this.getX()+this.getWidth(), this.getY()+this.getHeight(), getBlockquoteColor()[1]);
        }
+    }
+    public int[] getBlockquoteColor(){
+        return builder.color == null ? new int[]{AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR", GROUPIE).intValue(), AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR.BACKGROUND", GROUPIE-0xE1000000).intValue()} : builder.color;
     }
     public void renderMessageText(GuiGraphics guiGraphics){
         List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(getMessage(), width-(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12));

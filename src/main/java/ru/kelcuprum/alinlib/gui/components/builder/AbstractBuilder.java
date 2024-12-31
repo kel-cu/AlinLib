@@ -9,16 +9,16 @@ import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public abstract class AbstractBuilder {
-    protected int x = 0;
-    protected int y = 0;
+    public int x = 0;
+    public int y = 0;
 
-    protected int width = DEFAULT_WIDTH();
-    protected int height = DEFAULT_HEIGHT;
-    protected boolean active = true;
-    protected boolean visible = true;
-    protected Component title;
-    protected Component description;
-    protected AbstractStyle style = GuiUtils.getSelected();
+    public int width = DEFAULT_WIDTH();
+    public int height = DEFAULT_HEIGHT;
+    public boolean active = true;
+    public boolean visible = true;
+    public Component title;
+    public Component description;
+    public AbstractStyle style = GuiUtils.getSelected();
 
     public AbstractBuilder(){
         this(Component.empty());
