@@ -12,6 +12,7 @@ import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
 
 import java.util.List;
 
+import static ru.kelcuprum.alinlib.gui.Colors.CPM_BLUE;
 import static ru.kelcuprum.alinlib.gui.Colors.GROUPIE;
 import static ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder.ALIGN.CENTER;
 import static ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder.ALIGN.LEFT;
@@ -87,7 +88,7 @@ public class TextBox extends AbstractWidget implements Description {
        }
     }
     public int[] getBlockquoteColor(){
-        return builder.color == null ? new int[]{AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR", GROUPIE).intValue(), AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR.BACKGROUND", GROUPIE-0xE1000000).intValue()} : builder.color;
+        return builder.color == null ? new int[]{AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR", CPM_BLUE).intValue(), AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR.BACKGROUND", CPM_BLUE-0xE1000000).intValue()} : builder.color;
     }
     public void renderMessageText(GuiGraphics guiGraphics){
         List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(getMessage(), width-(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12));

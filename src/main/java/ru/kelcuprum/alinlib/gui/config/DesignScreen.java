@@ -16,6 +16,7 @@ import ru.kelcuprum.alinlib.gui.config.design.DemoScreen;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 import ru.kelcuprum.alinlib.gui.screens.ConfirmScreen;
 
+import static ru.kelcuprum.alinlib.gui.Colors.CPM_BLUE;
 import static ru.kelcuprum.alinlib.gui.Colors.GROUPIE;
 import static ru.kelcuprum.alinlib.gui.Icons.*;
 
@@ -73,8 +74,8 @@ public class DesignScreen {
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.checkbox.color.custom")).setColor(Colors.CPM_LAVENDER).setConfig(AlinLib.bariumConfig, "CHECKBOX.COLOR.CUSTOM"))
                 )
                 .addWidget(new CategoryBox(Component.translatable("alinlib.config.blockquote"))
-                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.blockquote.color")).setColor(GROUPIE).setConfig(AlinLib.bariumConfig, "BLOCKQUOTE.COLOR"))
-                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.blockquote.color.background")).setColor(GROUPIE - 0xE1000000).setConfig(AlinLib.bariumConfig, "BLOCKQUOTE.COLOR.BACKGROUND"))
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.blockquote.color")).setColor(CPM_BLUE).setConfig(AlinLib.bariumConfig, "BLOCKQUOTE.COLOR"))
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.blockquote.color.background")).setColor(CPM_BLUE - 0xE1000000).setConfig(AlinLib.bariumConfig, "BLOCKQUOTE.COLOR.BACKGROUND"))
                 )
                 .addWidget(new CategoryBox(Component.translatable("alinlib.config.scroller"))
                         .addValue(new SelectorBuilder(Component.translatable("alinlib.config.scroller.color")).setValue(0).setList(new String[]{
