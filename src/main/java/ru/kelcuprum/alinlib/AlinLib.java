@@ -17,6 +17,8 @@ import ru.kelcuprum.alinlib.config.parser.StarScript;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.styles.FlatStyle;
 import ru.kelcuprum.alinlib.gui.styles.ModernStyle;
+import ru.kelcuprum.alinlib.gui.styles.WMStyle;
+import ru.kelcuprum.alinlib.gui.styles.WinStyle;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import java.time.LocalDate;
@@ -48,6 +50,8 @@ public class AlinLib
         starScript = new StarScript();
         GuiUtils.registerStyle(new FlatStyle());
         GuiUtils.registerStyle(new ModernStyle());
+        GuiUtils.registerStyle(new WinStyle());
+        GuiUtils.registerStyle(new WMStyle());
         KeyMapping toggleStealth = KeyMappingHelper.register(new KeyMapping(
                 "alinlib.key.stealth",
                 GLFW.GLFW_KEY_UNKNOWN,

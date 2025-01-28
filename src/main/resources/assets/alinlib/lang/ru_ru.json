@@ -23,6 +23,13 @@
 
   "alinlib.config.design": "Дизайн",
   "alinlib.config.default_design_type": "Стандартный тип дизайна",
+  "alinlib.config.themes": "Темы",
+  "alinlib.config.themes.windows": "Windows 9x",
+  "alinlib.config.button.win.color": "Цвет",
+  "alinlib.config.button.win.color.custom": "Кастоный цвет",
+  "alinlib.config.themes.twm": "Мировая машина",
+  "alinlib.config.button.twm.color": "Цвет",
+  "alinlib.config.button.twm.color.custom": "Кастоный цвет",
   "alinlib.config.config_screen.small_panel_size": "Сокращенная версия панели",
   "alinlib.config.toast.timeline": "Временная шкала в уведомлениях",
   "alinlib.config.button.enable_reset_button": "Кнопка сброса",
@@ -147,6 +154,8 @@
 
   "alinlib.style.flat": "Плоский",
   "alinlib.style.modern": "Современный",
+  "alinlib.style.windows": "Windows 9x",
+  "alinlib.style.twm": "Мировая машина",
 
 
   "alinlib.log.exit.first": "Истинное счастие невозможно без одиночества",

@@ -25,6 +25,13 @@
 
   "alinlib.config.design": "Design",
   "alinlib.config.default_design_type": "Default Design Type",
+  "alinlib.config.themes": "Themes",
+  "alinlib.config.themes.windows": "Windows 9x",
+  "alinlib.config.button.win.color": "Color",
+  "alinlib.config.button.win.color.custom": "Custom color",
+  "alinlib.config.themes.twm": "The World Machine",
+  "alinlib.config.button.twm.color": "Color",
+  "alinlib.config.button.twm.color.custom": "Custom color",
   "alinlib.config.config_screen.small_panel_size": "Shortened version of the panel",
   "alinlib.config.toast.timeline": "Toast timeline",
   "alinlib.config.button.enable_reset_button": "Reset Button",
@@ -150,6 +157,8 @@
 
   "alinlib.style.flat": "Flat",
   "alinlib.style.modern": "Modern",
+  "alinlib.style.windows": "Windows 9x",
+  "alinlib.style.twm": "The World Machine",
 
 
   "alinlib.log.exit.first": "This world goes round and round like a carousel in a circus.",

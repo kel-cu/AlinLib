@@ -64,6 +64,7 @@ public class Stealth {
             }
         }
         if (!isX) {
+            assert AlinLib.MINECRAFT.cameraEntity != null;
             if (AlinLib.MINECRAFT.cameraEntity.getX() > 0 && coordinate > 0 && value > 0) value *= -1;
         }
         return coordinate * value;

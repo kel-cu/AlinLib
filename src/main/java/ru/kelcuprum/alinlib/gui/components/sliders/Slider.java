@@ -113,14 +113,14 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
             } else {
                 this.setMessage(Component.literal(builder.getTitle().getString()).append(": ").append(getComponentValue()));
             }
-            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active));
         } else {
             if (isHovered()) {
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getXComponent() + (getWidthComponent() / 2) - (AlinLib.MINECRAFT.font.width(getComponentValue().getString()) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getXComponent() + (getWidthComponent() / 2) - (AlinLib.MINECRAFT.font.width(getComponentValue().getString()) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active));
             } else {
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active));
                 // VOLUME
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getComponentValue().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getComponentValue().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active));
             }
         }
     }

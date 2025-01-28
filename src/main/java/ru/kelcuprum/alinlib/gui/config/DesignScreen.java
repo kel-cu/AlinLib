@@ -5,27 +5,34 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.editbox.EditBoxBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
+import ru.kelcuprum.alinlib.gui.components.builder.text.HorizontalRuleBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
-import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.config.design.DemoScreen;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 import ru.kelcuprum.alinlib.gui.screens.ConfirmScreen;
 
+
 import static ru.kelcuprum.alinlib.gui.Colors.CPM_BLUE;
-import static ru.kelcuprum.alinlib.gui.Colors.GROUPIE;
 import static ru.kelcuprum.alinlib.gui.Icons.*;
 
 public class DesignScreen {
+    public static AbstractBuilder[] getPanelWidgets(Screen parent){
+        AbstractBuilder[] list = {
+                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreen(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreen(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false)
+        };
+        return list;
+    }
     public static Screen build(Screen parent) {
-        ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("alinlib"))
-                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreen(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false))
-                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreen(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false))
-                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false));
+        ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("alinlib"));
+        builder.addPanelWidgets(getPanelWidgets(parent));
         if (AlinLib.isNotReleaseVersion()) {
             builder.addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.title.not_release"),
                     (s) -> AlinLib.MINECRAFT.setScreen(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
@@ -36,6 +43,66 @@ public class DesignScreen {
                 .addWidget(new SelectorBuilder(Component.translatable("alinlib.config.default_design_type"), selectorButton -> AlinLib.bariumConfig.setString("DEFAULT_DESIGN_TYPE", GuiUtils.getStyleByName(selectorButton.getList()[selectorButton.getPosition()]).id))
                         .setList(GuiUtils.getStylesName())
                         .setValue(GuiUtils.getPositionOnStylesID(GuiUtils.getSelected().name.getString())))
+                .addWidget(new CategoryBox(Component.translatable("alinlib.config.themes"))
+                        .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.config.themes.windows")).build())
+                        .addValue(new SelectorBuilder(Component.translatable("alinlib.config.button.win.color")).setValue(21).setList(new String[]{
+                                Component.translatable("alinlib.color.white").getString(),
+                                Component.translatable("alinlib.color.groupie").getString(),
+                                Component.translatable("alinlib.color.alina").getString(),
+                                Component.translatable("alinlib.color.seadrive").getString(),
+                                Component.translatable("alinlib.color.tetra").getString(),
+                                Component.translatable("alinlib.color.convict").getString(),
+                                Component.translatable("alinlib.color.seabird").getString(),
+                                Component.translatable("alinlib.color.sodium").getString(),
+                                Component.translatable("alinlib.color.embeddium").getString(),
+                                Component.translatable("alinlib.color.waterplayer").getString(),
+                                // CPM - Catppuccin Mocha
+                                Component.translatable("alinlib.color.catppucin.pink").getString(),
+                                Component.translatable("alinlib.color.catppucin.mauve").getString(),
+                                Component.translatable("alinlib.color.catppucin.red").getString(),
+                                Component.translatable("alinlib.color.catppucin.maroon").getString(),
+                                Component.translatable("alinlib.color.catppucin.peach").getString(),
+                                Component.translatable("alinlib.color.catppucin.yellow").getString(),
+                                Component.translatable("alinlib.color.catppucin.green").getString(),
+                                Component.translatable("alinlib.color.catppucin.teal").getString(),
+                                Component.translatable("alinlib.color.catppucin.sky").getString(),
+                                Component.translatable("alinlib.color.catppucin.sapphire").getString(),
+                                Component.translatable("alinlib.color.catppucin.blue").getString(),
+
+                                Component.translatable("alinlib.color.user").getString()
+                        }).setConfig(AlinLib.bariumConfig, "BUTTON.WIN.COLOR"))
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.button.win.color.custom")).setColor(Colors.ALINA).setConfig(AlinLib.bariumConfig, "BUTTON.WIN.COLOR.CUSTOM"))
+                        .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.config.themes.twm")).build())
+                        .addValue(new SelectorBuilder(Component.translatable("alinlib.config.button.twm.color")).setValue(23).setList(new String[]{
+                                Component.translatable("alinlib.color.groupie").getString(),
+                                Component.translatable("alinlib.color.alina").getString(),
+                                Component.translatable("alinlib.color.seadrive").getString(),
+                                Component.translatable("alinlib.color.tetra").getString(),
+                                Component.translatable("alinlib.color.convict").getString(),
+                                Component.translatable("alinlib.color.seabird").getString(),
+                                Component.translatable("alinlib.color.sodium").getString(),
+                                Component.translatable("alinlib.color.embeddium").getString(),
+                                Component.translatable("alinlib.color.waterplayer").getString(),
+                                // CPM - Catppuccin Mocha
+                                Component.translatable("alinlib.color.catppucin.rosewater").getString(),
+                                Component.translatable("alinlib.color.catppucin.flamingo").getString(),
+                                Component.translatable("alinlib.color.catppucin.pink").getString(),
+                                Component.translatable("alinlib.color.catppucin.mauve").getString(),
+                                Component.translatable("alinlib.color.catppucin.red").getString(),
+                                Component.translatable("alinlib.color.catppucin.maroon").getString(),
+                                Component.translatable("alinlib.color.catppucin.peach").getString(),
+                                Component.translatable("alinlib.color.catppucin.yellow").getString(),
+                                Component.translatable("alinlib.color.catppucin.green").getString(),
+                                Component.translatable("alinlib.color.catppucin.teal").getString(),
+                                Component.translatable("alinlib.color.catppucin.sky").getString(),
+                                Component.translatable("alinlib.color.catppucin.sapphire").getString(),
+                                Component.translatable("alinlib.color.catppucin.blue").getString(),
+                                Component.translatable("alinlib.color.catppucin.lavender").getString(),
+
+                                Component.translatable("alinlib.color.user").getString()
+                        }).setConfig(AlinLib.bariumConfig, "BUTTON.WM.COLOR"))
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.button.twm.color.custom")).setColor(0xff8261d3).setConfig(AlinLib.bariumConfig, "BUTTON.WM.COLOR.CUSTOM"))
+                        .changeState(false))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.config_screen.small_panel_size"), false).setConfig(AlinLib.bariumConfig, "CONFIG_SCREEN.SMALL_PANEL_SIZE"))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.toast.timeline"), true).setConfig(AlinLib.bariumConfig, "TOAST.TIMELINE"))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.button.enable_reset_button"), true).setConfig(AlinLib.bariumConfig, "BUTTON.ENABLE_RESET_BUTTON"))

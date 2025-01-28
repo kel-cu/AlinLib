@@ -79,18 +79,18 @@ public class Button extends AbstractButton implements Description {
         if(((ButtonBuilder) builder).sprite == null) {
             if (((ButtonBuilder) builder).rightTitle == null) {
                 if (GuiUtils.isDoesNotFit(getMessage(), getWidthComponent(), getHeight()))
-                    this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+                    this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active));
                 else if (((ButtonBuilder) builder).getCentered())
-                    GuiUtils.drawCenteredString(guiGraphics, AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + getWidthComponent() / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
+                    GuiUtils.drawCenteredString(guiGraphics, AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + getWidthComponent() / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), true);
                 else
-                    guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff, true);
+                    guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), true);
             } else {
                 if (GuiUtils.isDoesNotFit(Component.empty().append(builder.getTitle()).append(" ").append(((ButtonBuilder) builder).getRightTitle()), getWidthComponent(), getHeight())) {
                     this.setMessage(Component.empty().append(builder.getTitle()).append(" ").append(((ButtonBuilder) builder).rightTitle));
-                    this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+                    this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active));
                 } else {
-                    guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
-                    guiGraphics.drawString(AlinLib.MINECRAFT.font, ((ButtonBuilder) builder).getRightTitle(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(((ButtonBuilder) builder).getRightTitle().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, 0xffffff);
+                    guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+                    guiGraphics.drawString(AlinLib.MINECRAFT.font, ((ButtonBuilder) builder).getRightTitle(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(((ButtonBuilder) builder).getRightTitle().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
                 }
             }
             if (((ButtonBuilder) builder).icon != null)

@@ -131,4 +131,62 @@ public interface Colors {
             default -> AlinLib.bariumConfig.getNumber("HORIZONTAL_RULE.COLOR.CUSTOM", Colors.CPM_LAVENDER).intValue();
         };
     }
+
+    static int getWMButton(){
+        return switch (AlinLib.bariumConfig.getNumber("BUTTON.WM.COLOR", 23).intValue()){
+            case 0 -> Colors.GROUPIE;
+            case 1 -> Colors.ALINA;
+            case 2 -> Colors.SEADRIVE;
+            case 3 -> Colors.TETRA;
+            case 4 -> Colors.CONVICT;
+            case 5 -> Colors.SEABIRD;
+            case 6 -> Colors.SODIUM;
+            case 7 -> Colors.EMBEDDIUM;
+            case 8 -> Colors.WEBSITE_WATERPLAYER;
+
+            case 9 -> Colors.CPM_ROSEWATER;
+            case 10 -> Colors.CPM_FLAMINGO;
+            case 11 -> Colors.CPM_PINK;
+            case 12 -> Colors.CPM_MAUVE;
+            case 13 -> Colors.CPM_RED;
+            case 14 -> Colors.CPM_MAROON;
+            case 15 -> Colors.CPM_PEACH;
+            case 16 -> Colors.CPM_YELLOW;
+            case 17 -> Colors.CPM_GREEN;
+            case 18 -> Colors.CPM_TEAL;
+            case 19 -> Colors.CPM_SKY;
+            case 20 -> Colors.CPM_SAPPHIRE;
+            case 21 -> Colors.CPM_BLUE;
+            case 22 -> Colors.CPM_LAVENDER;
+            default -> AlinLib.bariumConfig.getNumber("BUTTON.WM.COLOR.CUSTOM", 0xff8261d3).intValue();
+        };
+    }
+
+    static int getWinColor(){
+        return switch (AlinLib.bariumConfig.getNumber("BUTTON.WIN.COLOR", 21).intValue()){
+            case 0 -> 0xff989898;
+            case 1 -> Colors.GROUPIE;
+            case 2 -> Colors.ALINA;
+            case 3 -> Colors.SEADRIVE;
+            case 4 -> Colors.TETRA;
+            case 5 -> Colors.CONVICT;
+            case 6 -> Colors.SEABIRD;
+            case 7 -> Colors.SODIUM;
+            case 8 -> Colors.EMBEDDIUM;
+            case 9 -> Colors.WEBSITE_WATERPLAYER;
+
+            case 10 -> Colors.CPM_PINK;
+            case 11 -> Colors.CPM_MAUVE;
+            case 12 -> Colors.CPM_RED;
+            case 13 -> Colors.CPM_MAROON;
+            case 14 -> Colors.CPM_PEACH;
+            case 15 -> Colors.CPM_YELLOW;
+            case 16 -> Colors.CPM_GREEN;
+            case 17 -> Colors.CPM_TEAL;
+            case 18 -> Colors.CPM_SKY;
+            case 19 -> Colors.CPM_SAPPHIRE;
+            case 20 -> Colors.CPM_BLUE;
+            default -> AlinLib.bariumConfig.getNumber("BUTTON.WIN.COLOR.CUSTOM", ALINA).intValue();
+        };
+    }
 }

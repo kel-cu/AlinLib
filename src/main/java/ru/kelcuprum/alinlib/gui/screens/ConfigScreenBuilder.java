@@ -3,6 +3,8 @@ package ru.kelcuprum.alinlib.gui.screens;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
@@ -17,12 +19,15 @@ import java.util.Objects;
 
 public class ConfigScreenBuilder {
     public Component title;
+    public ResourceLocation textureIcon;
+    public Item itemIcon;
     public AbstractStyle style;
     public List<AbstractWidget> panelWidgets = new ArrayList<>();
     public List<AbstractWidget> widgets = new ArrayList<>();
     public OnTick onTick;
     public OnTickScreen onTickScreen;
     public Screen parent;
+    public CustomConfigScreen customConfigScreen;
     public boolean isResetable = false;
     public int panelSize = AlinLib.bariumConfig.getBoolean("CONFIG_SCREEN.SMALL_PANEL_SIZE", false) ?  130 : 190;
     public int yL = AlinLib.bariumConfig.getBoolean("MODERN", true) ? 35 : 40;
@@ -52,6 +57,21 @@ public class ConfigScreenBuilder {
         return this.title;
     }
     //
+    public ConfigScreenBuilder setIcon(Item item){
+        this.itemIcon = item;
+        return this;
+    }
+    public ConfigScreenBuilder setIcon(ResourceLocation texture){
+        this.textureIcon = texture;
+        return this;
+    }
+    public Item getItemIcon(){
+        return itemIcon;
+    }
+    public ResourceLocation getTextureIcon(){
+        return textureIcon;
+    }
+    //
     public ConfigScreenBuilder setType(AbstractStyle style) {
         this.style = style;
         return this;
@@ -77,6 +97,14 @@ public class ConfigScreenBuilder {
         widget.setY(yL);
         yL+=widget.getHeight()+5;
         this.panelWidgets.add(widget);
+        return this;
+    }
+    public ConfigScreenBuilder addPanelWidgets(AbstractBuilder... widgets){
+        for(AbstractBuilder widget : widgets) addPanelWidget(widget);
+        return this;
+    }
+    public ConfigScreenBuilder addPanelWidgets(AbstractWidget... widgets){
+        for(AbstractWidget widget : widgets) addPanelWidget(widget);
         return this;
     }
 
@@ -114,6 +142,14 @@ public class ConfigScreenBuilder {
         if(!isResetable && (widget instanceof Resetable)) isResetable = true;
         return this;
     }
+    public ConfigScreenBuilder addWidgets(AbstractBuilder... widgets){
+        for(AbstractBuilder widget : widgets) addWidget(widget);
+        return this;
+    }
+    public ConfigScreenBuilder addWidgets(AbstractWidget... widgets){
+        for(AbstractWidget widget : widgets) addWidget(widget);
+        return this;
+    }
     //
     public ConfigScreenBuilder setResetable(boolean isResetable){
         this.isResetable = isResetable;
@@ -139,10 +175,15 @@ public class ConfigScreenBuilder {
         this.parent = parent;
         return this;
     }
-
     public AbstractConfigScreen build() {
         Objects.requireNonNull(this.title, "title == null");
+        if(customConfigScreen != null) return customConfigScreen.onCreate(this);
         return panelWidgets.isEmpty() ? new ConfigScreen$withoutPanel(this) : (AlinLib.bariumConfig.getBoolean("MODERN", true) ? new ConfigScreen$modern(this) : new ConfigScreen(this));
+    }
+    //
+    public ConfigScreenBuilder setCustomConfigScreen(CustomConfigScreen onCreate){
+        this.customConfigScreen = onCreate;
+        return this;
     }
 
     public interface OnTick {
@@ -150,5 +191,8 @@ public class ConfigScreenBuilder {
     }
     public interface OnTickScreen {
         void onTick(ConfigScreenBuilder builder, AbstractConfigScreen screen);
+    }
+    public interface CustomConfigScreen {
+        AbstractConfigScreen onCreate(ConfigScreenBuilder builder);
     }
 }

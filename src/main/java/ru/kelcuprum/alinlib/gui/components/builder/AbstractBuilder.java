@@ -18,7 +18,7 @@ public abstract class AbstractBuilder {
     public boolean visible = true;
     public Component title;
     public Component description;
-    public AbstractStyle style = GuiUtils.getSelected();
+    public AbstractStyle style;
 
     public AbstractBuilder(){
         this(Component.empty());
@@ -56,7 +56,7 @@ public abstract class AbstractBuilder {
         return (T) this;
     }
     public AbstractStyle getStyle(){
-        return this.style;
+        return this.style == null ? GuiUtils.getSelected() : this.style;
     }
     // Position
     public <T extends AbstractBuilder> T setPosition(int x, int y){
