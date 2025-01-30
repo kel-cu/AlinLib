@@ -1,0 +1,207 @@
+{
+  "alinlib": "AlinLib",
+  "alinlib.editbox.secret": "秘密 :)",
+
+  "alinlib.title.not_release": "此版本不是正式发布版本！",
+  "alinlib.title.not_release.description": "此版本为测试版本，可能存在大量错误和漏洞。\\n若发现问题，请通过 Issues 反馈！",
+  "alinlib.title.reset": "确定重置参数？",
+  "alinlib.title.reset.description": "此操作不可逆！",
+
+  "alinlib.key.stealth": "潜行模式",
+
+  "alinlib.component.reset": "重置",
+  "alinlib.component.reset.toast": "分类配置已重置",
+  "alinlib.component.value_reset.toast": "数值已重置",
+
+  "alinlib.april_fools.white": "你的背是白色的！",
+  "alinlib.april_fools.welcome": "欢迎来到神奇数字界面™",
+  "alinlib.april_fools.clownfish": "咯咯笑旋转木马，它旋转永不停歇",
+  "alinlib.hb": "今天是 Kel 的生日！去 Discord 祝贺他吧 @Kel_Cu / kelcu.ru/ds",
+
+  "alinlib.search": "搜索...",
+
+  "alinlib.config": "配置",
+
+  "alinlib.config.design": "设计",
+  "alinlib.config.default_design_type": "默认设计类型",
+  "alinlib.config.themes": "主题",
+  "alinlib.config.themes.windows": "Windows 9x",
+  "alinlib.config.button.win.color": "颜色",
+  "alinlib.config.button.win.color.custom": "自定义颜色",
+  "alinlib.config.themes.twm": "世界机器",
+  "alinlib.config.button.twm.color": "颜色",
+  "alinlib.config.button.twm.color.custom": "自定义颜色",
+  "alinlib.config.config_screen.small_panel_size": "面板精简模式",
+  "alinlib.config.toast.timeline": "提示时间轴",
+  "alinlib.config.button.enable_reset_button": "重置按钮",
+
+  "alinlib.config.checkbox": "复选框",
+  "alinlib.config.checkbox.example": "示例复选框",
+  "alinlib.config.checkbox.enable": "复选框样式",
+  "alinlib.config.checkbox.color": "颜色",
+  "alinlib.config.checkbox.color.custom": "自定义颜色",
+
+  "alinlib.config.blockquote": "引用框",
+  "alinlib.config.blockquote.color": "边框颜色",
+  "alinlib.config.blockquote.color.background": "背景色",
+
+  "alinlib.config.scroller": "滚动条",
+  "alinlib.config.scroller.color": "滚动条颜色",
+  "alinlib.config.scroller.smooth": "平滑滚动",
+
+  "alinlib.config.horizontal_rule": "水平分割线",
+  "alinlib.config.horizontal_rule.color": "分割线颜色",
+
+  "alinlib.config.modern": "现代设计",
+
+  "alinlib.config.localization": "本地化",
+  "alinlib.config.localization.extended_coordinates": "扩展坐标显示",
+  "alinlib.config.view.item_off_hand": "显示副手物品",
+
+  "alinlib.config.stealth": "隐身",
+  "alinlib.config.streamer.stealth": "直播隐身模式",
+  "alinlib.config.stealth.coordinates": "坐标",
+  "alinlib.config.streamer.stealth.coordinates": "隐藏坐标",
+  "alinlib.config.streamer.stealth.direction": "隐藏朝向",
+  "alinlib.config.streamer.stealth.type": "隐身算法",
+  "alinlib.config.stealth.alinlib": "艾琳库算法",
+  "alinlib.config.streamer.alinlib.max_radius": "作用半径",
+  "alinlib.config.streamer.stealth.name": "隐藏名称",
+
+  "alinlib.config.design.demo": "演示",
+
+  "alinlib.design.demo.buttons": "按钮",
+  "alinlib.design.demo.button": "按钮",
+  "alinlib.design.demo.button.left": "左对齐文字",
+  "alinlib.design.demo.button.right": "右对齐文字",
+  "alinlib.design.demo.button.left.with_icon": "左侧图标按钮",
+  "alinlib.design.demo.button.right.with_icon": "右侧图标按钮",
+  "alinlib.design.demo.button.with_icon": "带图标按钮",
+  "alinlib.design.demo.button.sprite": "精灵按钮",
+
+  "alinlib.design.demo.edit_box": "输入框",
+  "alinlib.design.demo.edit_box.color": "颜色",
+  "alinlib.design.demo.edit_box.secret": "秘密输入",
+
+  "alinlib.design.demo.selector": "选择器",
+
+  "alinlib.design.demo.slider": "滑块",
+  "alinlib.design.demo.slider.int": "整数",
+  "alinlib.design.demo.slider.double": "双精度",
+  "alinlib.design.demo.slider.percent": "百分比",
+  "alinlib.design.demo.slider.float": "浮点数",
+
+  "alinlib.design.demo.text": "文本框",
+  "alinlib.design.demo.text.left": "左对齐\n文字",
+  "alinlib.design.demo.text.center": "居中\n文字",
+  "alinlib.design.demo.text.right": "右对齐\n文字",
+  "alinlib.design.demo.text.message": "消息框",
+  "alinlib.design.demo.text.blockquote": "引用框",
+  "alinlib.design.demo.text.blockquote.colors": "彩色引用框",
+  "alinlib.design.demo.text.blockquote.colors.def": "默认颜色",
+  "alinlib.design.demo.text.blockquote.colors.col1": "自定义颜色（构建器内）#1",
+  "alinlib.design.demo.text.blockquote.colors.col2": "自定义颜色（构建器内）#2",
+  "alinlib.design.demo.text.hr": "水平分割线（本组件）",
+
+  "alinlib.design.demo.other": "其他",
+  "alinlib.design.demo.other.description": "描述框",
+  "alinlib.design.demo.description": "这是个滑稽却残酷的宇宙\n却仍是我应得的归宿\n面颊上的口红已渗入肌肤\n本应勾勒笑弧\n仰望天际不愿见你泪目\n且看这出闹剧任人揶揄\n齐声唱和这首荒唐曲\n咯咯笑旋转木马永不停驻\n顶端等候的杂技演员\n该来场马戏团跳跃舞步！\n如今我坦然接受失败命数（你失败了）\n只因仍畏惧未来更可怖（确实可怖）\n欢愉中失足咬断自己舌根\n众人皆笑我愚钝！\n仰望天际不愿见你泪目\n且看这出闹剧任人揶揄\n齐声唱和这首荒唐曲\n咯咯笑旋转木马永不停驻\n顶端等候的杂技演员\n该来场马戏团跳跃舞步！\n我已道别离不愿见你哭泣\n就与众人欢笑独我沉寂\n齐声唱和这首荒唐曲\n咯咯笑旋转木马永不停驻\n从顶端跌落的杂技演员\n完成了小小的坠落表演！\n齐声唱和这首荒唐曲\n咯咯笑旋转木马永不停驻\n顶端等候的杂技演员\n该来场马戏团跳跃舞步！",
+  "alinlib.design.demo.other.scroller": "滚动条 ->",
+  "alinlib.design.demo.other.image": "图片",
+
+  "alinlib.localization": "本地化",
+  "alinlib.localization.date.time": "时间格式",
+  "alinlib.localization.unknown": "未知",
+  "alinlib.localization.sides": "方位",
+  "alinlib.localization.north": "北",
+  "alinlib.localization.south": "南",
+  "alinlib.localization.west": "西",
+  "alinlib.localization.east": "东",
+
+  "alinlib.localization.north.debug": "北（调试）",
+  "alinlib.localization.south.debug": "南（调试）",
+  "alinlib.localization.west.debug": "西（调试）",
+  "alinlib.localization.east.debug": "东（调试）",
+
+  "alinlib.localization.time": "时段",
+  "alinlib.localization.time.morning": "清晨",
+  "alinlib.localization.time.day": "白昼",
+  "alinlib.localization.time.evening": "黄昏",
+  "alinlib.localization.time.night": "夜晚",
+
+  "alinlib.localization.world": "维度",
+  "alinlib.localization.world.overworld": "主世界",
+  "alinlib.localization.world.nether": "下界",
+  "alinlib.localization.world.the_end": "末地？",
+  "alinlib.localization.world.moon": "月球",
+
+  "alinlib.date.time": "HH:mm",
+  "alinlib.time.morning": "清晨",
+  "alinlib.time.day": "白昼",
+  "alinlib.time.evening": "黄昏",
+  "alinlib.time.night": "夜晚",
+  "alinlib.north": "北",
+  "alinlib.south": "南",
+  "alinlib.west": "西",
+  "alinlib.east": "东",
+  "alinlib.north.debug": "负 Z 轴",
+  "alinlib.south.debug": "正 Z 轴",
+  "alinlib.west.debug": "负 X 轴",
+  "alinlib.east.debug": "正 X 轴",
+  "alinlib.world.overworld": "主世界",
+  "alinlib.world.nether": "下界",
+  "alinlib.world.the_end": "末地？",
+  "alinlib.world.moon": "月球",
+  "alinlib.unknown": "未知",
+
+  "alinlib.style.flat": "扁平化",
+  "alinlib.style.modern": "现代",
+  "alinlib.style.windows": "Windows 9x",
+  "alinlib.style.twm": "世界机器",
+
+  "alinlib.log.exit.first": "这个世界如同马戏团的旋转木马般永不停转。",
+  "alinlib.log.exit.two": "或许世界本就是座马戏团？)",
+
+  "alinlib.color.groupie": "Groupie",
+  "alinlib.color.alina": "Alina Kotova",
+  "alinlib.color.seadrive": "SeaDrive",
+  "alinlib.color.tetra": "Tetra",
+  "alinlib.color.convict": "Convict",
+  "alinlib.color.seabird": "Seabird",
+  "alinlib.color.droplet": "Droplet",
+  "alinlib.color.sodium": "Sodium",
+  "alinlib.color.embeddium": "Embeddium",
+  "alinlib.color.white": "White",
+  "alinlib.color.waterplayer": "WaterPlayer Website",
+
+  "alinlib.color.catppucin.rosewater": "(CPM) Rosewater",
+  "alinlib.color.catppucin.flamingo": "(CPM) Flamingo",
+  "alinlib.color.catppucin.pink": "(CPM) Pink",
+  "alinlib.color.catppucin.mauve": "(CPM) Mauve",
+  "alinlib.color.catppucin.red": "(CPM) Red",
+  "alinlib.color.catppucin.maroon": "(CPM) Maroon",
+  "alinlib.color.catppucin.peach": "(CPM) Peach",
+  "alinlib.color.catppucin.yellow": "(CPM) Yellow",
+  "alinlib.color.catppucin.green": "(CPM) Green",
+  "alinlib.color.catppucin.teal": "(CPM) Teal",
+  "alinlib.color.catppucin.sky": "(CPM) Sky",
+  "alinlib.color.catppucin.sapphire": "(CPM) Sapphire",
+  "alinlib.color.catppucin.blue": "(CPM) Blue",
+  "alinlib.color.catppucin.lavender": "(CPM) Lavender",
+
+  "alinlib.color.user": "自定义",
+
+  "alinlib.thanks": "衷心感谢！",
+  "alinlib.thanks.offer": "想支持开发者？没问题！\n可通过 DonationAlerts 或 Boosty.to 支持\n但请注意：支持者名单更新非即时，作者会手动录入以突显社区贡献者 :)",
+  "alinlib.thanks.boosty": "Boosty",
+  "alinlib.thanks.donationalerts": "DonationAlerts",
+  "alinlib.thanks.exit": "暂时不需要支持 :(",
+
+  "modmenu.descriptionTranslation.alinlib": "Kel Cuprum 开发的模组开发辅助库",
+
+
+
+
+
+  "alinlib.going_to_the_river": "Блять, да мне похуй на тебя, блять, слушай, какая у тебя там тачка, блять, квартиры, срачки там блять, яхты, всё, мне похуй, хоть там \"Бэнтли\", хоть блять нахуй \"Майбах\", хоть \"Роллс-Ройс\", хоть \"Бугатти\" блять, хоть стометровая яхта, мне на это насрать, понимаешь? Сколько ты там, кого ебешь, каких баб, каких значит вот этих самок шикарных или атласных, блять в космос ты летишь, мне на это насрать, понимаешь?\n\nЯ, блять, в своем познании настолько преисполнился, что я как будто бы уже сто триллионов миллиардов лет, блять, проживаю на триллионах и триллионах таких же планет, понимаешь, как эта Земля, мне уже этот мир абсолютно понятен, и я здесь ищу только одного, блять, - покоя, умиротворения и вот этой гармонии, от слияния с бесконечно вечным, от созерцания этого великого фрактального подобия и от вот этого замечательного всеединства существа, бесконечно вечного, куда ни посмотри, хоть вглубь - в бесконечно малое, хоть ввысь - бесконечно большое, понимаешь? А ты мне опять со своим вот этим блять, иди суетись дальше, это твоё распределение, это твой путь и твой горизонт познания и ощущения твоей природы, он несоизмеримо мелок по сравнению с моим, понимаешь? Я как будто бы уже давно глубокий старец, бессмертный, ну или там уже почти бессмертный, который на этой планете от её самого зарождения, ещё когда только Солнце только-только сформировалось как звезда, и вот это газопылевое облако, вот, после взрыва, Солнца, когда оно вспыхнуло, как звезда, начало формировать вот эти коацерваты, планеты, понимаешь, я на этой Земле уже как будто почти пять миллиардов лет блять живу и знаю её вдоль и поперёк этот весь мир, а ты мне какие-то...\n\nМне похуй на твои тачки, на твои блять нахуй яхты, на твои квартиры, там, на твоё благо. Я был на этой планете бесконечным множеством, и круче Цезаря, и круче Гитлера, и круче всех великих, понимаешь, был, а где-то был конченым говном, ещё хуже, чем здесь. Я множество этих состояний чувствую. Где-то я был больше подобен растению, где-то я больше был подобен птице, там, червю, где-то был просто сгусток камня, это всё есть душа, понимаешь? Она имеет грани подобия совершенно многообразные, бесконечное множество. Но тебе этого не понять, поэтому ты езжай себе блять.\n\nМы в этом мире как бы живем разными ощущениями и разными стремлениями, соответственно, разное наше и место, разное и наше распределение. Тебе я желаю все самые крутые тачки чтоб были у тебя, и все самые лучше самки чтобы раздвигали ноги перед тобой, чтобы раздвигали перед тобой щели, на шиворот-навыворот, блять, перед тобой, как ковёр, это самое, раскрывали, растлевали, растлали, и ты их чтобы ебал до посинения, докрасна, вон, как Солнце закатное, и чтоб на лучших яхтах, и на самолётах летал, и кончал прямо с иллюминатора, и делал всё, что только в голову могло прийти и не прийти, если мало идей, обращайся ко мне, я тебе на каждую твою идею предложу сотню триллионов, как всё делать.\n\nНу а я всё, я иду как глубокий старец, узревший вечное, прикоснувшийся к Божественному, сам стал богоподобен и устремлен в это бесконечное, и который в умиротворении, покое, гармонии, благодати, в этом сокровенном блаженстве пребывает, вовлеченный во всё и во вся, понимаешь, вот и всё, в этом наша разница. Так что я иду любоваться мирозданием, а ты идёшь преисполняться в гранях каких-то, вот и вся разница, понимаешь, ты не зришь это вечное бесконечное, оно тебе не нужно. Ну зато ты, так сказать, более активен, как вот этот дятел долбящий, или муравей, который очень активен в своей стезе, поэтому давай, наши пути здесь, конечно, имеют грани подобия, потому что всё едино, но я-то тебя прекрасно понимаю, а вот ты меня - вряд ли, потому что я как бы тебя в себе содержу, всю твою природу, она составляет одну маленькую там песчиночку, от того что есть во мне, вот и всё, поэтому давай, ступай, езжай, а я пошел наслаждаться нахуй блять прекрасным осенним закатом на берегу теплой южной реки. Всё, пиздуй-бороздуй, и я попиздил, нахуй."
+}
