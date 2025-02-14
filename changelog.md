@@ -1,17 +1,2 @@
-- Changes builder
-- Added new functions in AbstractStyle
-    - int getTextColor(boolean active)
-    - boolean textShadow()
-- Added new styles: Windows 9X (classic), The World Machine
-- Downscaled: clownfish.png; Changed: thanks.png
-- Added new functions in Colors for new themes
-- Fixes rendering for Slider
-- Added new functions in ConfigScreenBuilder
-    - setCustomConfigScreen(CustomConfigScreen)
-    - addWidgets()
-    - addPanelWidgets()
-    - setIcon() / getIcon() // not currently implemented in the interface
-    - setItemIcon() / getItemIcon() ^
-- Added GsonHelper
-- Cleanup code
-- And more
+- Support for ClickEvents has been added
+- NeoForge is no longer supported

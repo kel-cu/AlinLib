@@ -1,19 +1,29 @@
 package ru.kelcuprum.alinlib.gui.components.text;
 
+import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.navigation.CommonInputs;
+import net.minecraft.client.gui.screens.ConfirmLinkScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
+import net.minecraft.util.StringUtil;
+import org.jetbrains.annotations.Nullable;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import static ru.kelcuprum.alinlib.gui.Colors.CPM_BLUE;
-import static ru.kelcuprum.alinlib.gui.Colors.GROUPIE;
 import static ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder.ALIGN.CENTER;
 import static ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder.ALIGN.LEFT;
 import static ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder.TYPE.*;
@@ -71,6 +81,10 @@ public class TextBox extends AbstractWidget implements Description {
         super.setHeight(i);
     }
 
+    public List<FormattedCharSequence> getArrayTexts(int border){
+        return AlinLib.MINECRAFT.font.split(getMessage(), width-border);
+    }
+
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
         renderBackground(guiGraphics);
@@ -91,7 +105,7 @@ public class TextBox extends AbstractWidget implements Description {
         return builder.color == null ? new int[]{AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR", CPM_BLUE).intValue(), AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR.BACKGROUND", CPM_BLUE-0xE1000000).intValue()} : builder.color;
     }
     public void renderMessageText(GuiGraphics guiGraphics){
-        List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(getMessage(), width-(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12));
+        List<FormattedCharSequence> list = getArrayTexts(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12);
         int l = 0;
         for(FormattedCharSequence text : list){
             if(builder.align == CENTER) guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
@@ -111,6 +125,84 @@ public class TextBox extends AbstractWidget implements Description {
     @Override
     public void onClick(double d, double e) {
         this.onPress();
+    }
+    @Override
+    public boolean mouseClicked(double d, double e, int i){
+        if(this.builder.type == BLOCKQUOTE || this.builder.type == MESSAGE){
+            List<FormattedCharSequence> list = getArrayTexts(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12);
+            int l = 0;
+            int x = getX()+(this.builder.type == BLOCKQUOTE ? 7 : 6);
+            for(FormattedCharSequence chars : list){
+                int y = getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l);
+                if(x<=d && d<=x+AlinLib.MINECRAFT.font.width(chars)){
+                    if(y<=e && e<=y+AlinLib.MINECRAFT.font.lineHeight){
+                        Style style = AlinLib.MINECRAFT.font.getSplitter().componentStyleAtWidth(chars, Mth.floor(screenToChatX(x, d)));
+                        if(style != null && this.handleComponentClicked(style)){
+                            return true;
+                        }
+                    }
+                }
+                l++;
+            }
+            return super.mouseClicked(d, e, i);
+        } else return super.mouseClicked(d, e, i);
+    }
+
+    public boolean handleComponentClicked(@Nullable Style style) {
+        if (style == null) {
+            return false;
+        } else {
+            ClickEvent clickEvent = style.getClickEvent();
+            if (clickEvent != null) {
+                if (clickEvent.getAction() == ClickEvent.Action.OPEN_URL) {
+                    if (!(Boolean)AlinLib.MINECRAFT.options.chatLinks().get()) {
+                        return false;
+                    }
+
+                    try {
+                        URI uRI = Util.parseAndValidateUntrustedUri(clickEvent.getValue());
+                        if (AlinLib.MINECRAFT.options.chatLinksPrompt().get()) {
+                            Screen current = AlinLib.MINECRAFT.screen;
+                            AlinLib.MINECRAFT.setScreen(new ConfirmLinkScreen((bl) -> {
+                                if (bl) {
+                                    Util.getPlatform().openUri(uRI);
+                                }
+
+                                AlinLib.MINECRAFT.setScreen(current);
+                            }, clickEvent.getValue(), false));
+                        } else {
+                            Util.getPlatform().openUri(uRI);
+                        }
+                    } catch (URISyntaxException uRISyntaxException) {
+                        AlinLib.LOG.error("Can't open url for {}", clickEvent, uRISyntaxException);
+                    }
+                } else if (clickEvent.getAction() == ClickEvent.Action.OPEN_FILE) {
+                    Util.getPlatform().openFile(new File(clickEvent.getValue()));
+                } else if (clickEvent.getAction() == ClickEvent.Action.RUN_COMMAND) {
+                    String string = StringUtil.filterText(clickEvent.getValue());
+                    if (string.startsWith("/")) {
+                        assert AlinLib.MINECRAFT.player != null;
+                        if (!AlinLib.MINECRAFT.player.connection.sendUnsignedCommand(string.substring(1))) {
+                            AlinLib.LOG.error("Not allowed to run command with signed argument from click event: '{}'", string);
+                        }
+                    } else {
+                        AlinLib.LOG.error("Failed to run command without '/' prefix from click event: '{}'", string);
+                    }
+                } else if (clickEvent.getAction() == ClickEvent.Action.COPY_TO_CLIPBOARD) {
+                    AlinLib.MINECRAFT.keyboardHandler.setClipboard(clickEvent.getValue());
+                } else {
+                    AlinLib.LOG.error("Don't know how to handle {}", clickEvent);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    private double screenToChatX(int x, double d) {
+        return d - (double) x;
     }
     @Override
     public boolean keyPressed(int i, int j, int k) {

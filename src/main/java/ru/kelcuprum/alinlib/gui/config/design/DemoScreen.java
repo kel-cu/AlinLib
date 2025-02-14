@@ -1,7 +1,9 @@
 package ru.kelcuprum.alinlib.gui.config.design;
 
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.components.ImageWidget;
@@ -79,6 +81,9 @@ public class DemoScreen {
                 .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors.def")).setType(TextBuilder.TYPE.BLOCKQUOTE))
                 .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors.col1")).setType(TextBuilder.TYPE.BLOCKQUOTE).setColor(Colors.CLOWNFISH))
                 .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors.col2")).setType(TextBuilder.TYPE.BLOCKQUOTE).setColor(Colors.SPECKLE[0], Colors.TETRA))
+                .addValue(new TextBuilder(Component.empty().withStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wfu.kelcu.ru/jSgLdwH"))).append("hehehehe")).setType(TextBuilder.TYPE.MESSAGE))
+
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.url", Component.empty().withStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wfu.kelcu.ru/jSgLdwH")).withColor(SEADRIVE)).append("click please\nhehehehe"))).setType(TextBuilder.TYPE.MESSAGE))
                 .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.design.demo.text.hr")))
                 .addValue(new HorizontalRuleBuilder())
                 .changeState(false)

@@ -102,6 +102,7 @@
   "alinlib.design.demo.text.blockquote.colors.def": "Default color",
   "alinlib.design.demo.text.blockquote.colors.col1": "Custom color (in builder) #1",
   "alinlib.design.demo.text.blockquote.colors.col2": "Custom color (in builder) #2",
+  "alinlib.design.demo.text.url": "click on this -> %s",
   "alinlib.design.demo.text.hr": "Horizontal Rule (this widget)",
 
   "alinlib.design.demo.other": "Other",
