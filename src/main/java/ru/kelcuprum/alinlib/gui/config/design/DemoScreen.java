@@ -18,6 +18,8 @@ import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 import ru.kelcuprum.alinlib.gui.screens.ConfirmScreen;
 
+import java.net.URI;
+
 import static ru.kelcuprum.alinlib.gui.Colors.SEADRIVE;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 import static ru.kelcuprum.alinlib.gui.Icons.*;
@@ -81,9 +83,14 @@ public class DemoScreen {
                 .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors.def")).setType(TextBuilder.TYPE.BLOCKQUOTE))
                 .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors.col1")).setType(TextBuilder.TYPE.BLOCKQUOTE).setColor(Colors.CLOWNFISH))
                 .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.blockquote.colors.col2")).setType(TextBuilder.TYPE.BLOCKQUOTE).setColor(Colors.SPECKLE[0], Colors.TETRA))
-                .addValue(new TextBuilder(Component.empty().withStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wfu.kelcu.ru/jSgLdwH"))).append("hehehehe")).setType(TextBuilder.TYPE.MESSAGE))
+                //#if MC >= 12105
+                .addValue(new TextBuilder(Component.empty().withStyle(Style.EMPTY.withClickEvent(new ClickEvent.OpenUrl(URI.create("https://wfu.kelcu.ru/jSgLdwH")))).append("hehehehe")).setType(TextBuilder.TYPE.MESSAGE))
 
-                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.url", Component.empty().withStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wfu.kelcu.ru/jSgLdwH")).withColor(SEADRIVE)).append("click please\nhehehehe"))).setType(TextBuilder.TYPE.MESSAGE))
+                .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.url", Component.empty().withStyle(Style.EMPTY.withClickEvent(new ClickEvent.OpenUrl(URI.create("https://wfu.kelcu.ru/jSgLdwH"))).withColor(SEADRIVE)).append("click please\nhehehehe"))).setType(TextBuilder.TYPE.MESSAGE))
+                //#else
+                //$$ .addValue(new TextBuilder(Component.empty().withStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wfu.kelcu.ru/jSgLdwH"))).append("hehehehe")).setType(TextBuilder.TYPE.MESSAGE))
+                //$$ .addValue(new TextBuilder(Component.translatable("alinlib.design.demo.text.url", Component.empty().withStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wfu.kelcu.ru/jSgLdwH")).withColor(SEADRIVE)).append("click please\nhehehehe"))).setType(TextBuilder.TYPE.MESSAGE))
+                //#endif
                 .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.design.demo.text.hr")))
                 .addValue(new HorizontalRuleBuilder())
                 .changeState(false)

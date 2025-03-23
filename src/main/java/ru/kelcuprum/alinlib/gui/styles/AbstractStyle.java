@@ -14,6 +14,9 @@ public abstract class AbstractStyle {
 
     public abstract void renderBackground$widget(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused);
     public abstract void renderBackground$slider(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position);
+    public void renderBackground$editbox(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused){
+        renderBackground$widget(guiGraphics, x, y, width, height, active, isHoveredOrFocused);
+    };
     public int getTextColor(boolean active){
         return active ? 16777215 : 10526880;
     }

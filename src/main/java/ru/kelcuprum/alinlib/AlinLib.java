@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib;
 
+import net.fabricmc.loader.api.FabricLoader;
 import org.meteordev.starscript.value.ValueMap;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -11,15 +12,20 @@ import ru.kelcuprum.alinlib.api.events.alinlib.AlinLibEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
 import ru.kelcuprum.alinlib.api.events.alinlib.LocalizationEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
+import ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents;
 import ru.kelcuprum.alinlib.config.Config;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.config.DesignScreen;
+import ru.kelcuprum.alinlib.gui.screens.types.ConfigScreen;
 import ru.kelcuprum.alinlib.gui.styles.FlatStyle;
 import ru.kelcuprum.alinlib.gui.styles.ModernStyle;
 import ru.kelcuprum.alinlib.gui.styles.WMStyle;
 import ru.kelcuprum.alinlib.gui.styles.WinStyle;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
+import ru.kelcuprum.alinlib.test.GUIRender;
+import ru.kelcuprum.alinlib.utils.StealthManager;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -52,6 +58,7 @@ public class AlinLib
         GuiUtils.registerStyle(new ModernStyle());
         GuiUtils.registerStyle(new WinStyle());
         GuiUtils.registerStyle(new WMStyle());
+        StealthManager.registerDefault();
         KeyMapping toggleStealth = KeyMappingHelper.register(new KeyMapping(
                 "alinlib.key.stealth",
                 GLFW.GLFW_KEY_UNKNOWN,
@@ -63,6 +70,18 @@ public class AlinLib
             while (toggleStealth.consumeClick())
                 bariumConfig.setBoolean("STREAMER.STEALTH", !bariumConfig.getBoolean("STREAMER.STEALTH", false));
         });
+        if(FabricLoader.getInstance().isDevelopmentEnvironment()){
+            KeyMapping openConfig = KeyMappingHelper.register(new KeyMapping(
+                    "alinlib.key.config",
+                    GLFW.GLFW_KEY_L,
+                    "alinlib"
+            ));
+            GuiRenderEvents.RENDER.register(new GUIRender());
+            ClientTickEvents.END_CLIENT_TICK.register(client -> {
+                assert client.player != null;
+                while (openConfig.consumeClick()) MINECRAFT.setScreen(DesignScreen.build(MINECRAFT.screen));
+            });
+        }
 
         ClientLifecycleEvents.CLIENT_STARTED.register((client) -> {
             LocalizationEvents.DEFAULT_PARSER_INIT.invoker().onParserInit(starScript);

@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.config;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -27,6 +28,12 @@ public class DesignScreen {
                 new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreen(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
                 new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreen(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
                 new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false)
+        };
+        if(FabricLoader.getInstance().isDevelopmentEnvironment()) list = new AbstractBuilder[]{
+                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreen(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreen(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.config.design.demo"), (s) -> AlinLib.MINECRAFT.setScreen(DemoScreen.build(parent))).setIcon(WIKI).setCentered(false)
         };
         return list;
     }
@@ -205,8 +212,7 @@ public class DesignScreen {
                         }).setConfig(AlinLib.bariumConfig, "HORIZONTAL_RULE.COLOR"))
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.checkbox.color.custom")).setColor(Colors.CPM_LAVENDER).setConfig(AlinLib.bariumConfig, "HORIZONTAL_RULE.COLOR.CUSTOM")))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.scroller.smooth"), false).setConfig(AlinLib.bariumConfig, "SCROLLER.SMOOTH"))
-                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.modern"), true).setConfig(AlinLib.bariumConfig, "MODERN"))
-                .addWidget(new ButtonBuilder(Component.translatable("alinlib.config.design.demo"), (s) -> AlinLib.MINECRAFT.setScreen(DemoScreen.build(parent))).setIcon(WIKI));
+                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.modern"), true).setConfig(AlinLib.bariumConfig, "MODERN"));
         return builder.build();
     }
 }

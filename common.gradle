@@ -1,11 +1,12 @@
 apply plugin: 'maven-publish'
-apply plugin: 'dev.architectury.loom'
+apply plugin: 'fabric-loom'
 apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
 apply plugin: 'com.modrinth.minotaur'
 
-def mod_brand = (loom.platform.get() as String).toLowerCase()
-assert mod_brand in ['fabric', 'forge', 'neoforge']
+//def mod_brand = (loom.platform.get() as String).toLowerCase()
+//assert mod_brand in ['fabric', 'forge', 'neoforge']
+def mod_brand = 'fabric'
 archivesBaseName = rootProject.archives_base_name + "-" + mod_brand
 group = rootProject.maven_group
 
@@ -44,7 +45,7 @@ loom {
 remapJar {
     if(mod_brand == 'neoforge') atAccessWideners.add("alinlib.accesswidener")
 //    remapperIsolation = true
-    injectAccessWidener = true
+//    injectAccessWidener = true
 }
 dependencies {
     // loom

@@ -7,12 +7,14 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
+import ru.kelcuprum.alinlib.utils.StealthManager;
 
 import static net.minecraft.world.item.Items.AIR;
 
 public class Player {
     public static String getName(){
-        return Stealth.getParsedName(AlinLib.MINECRAFT.getUser().getName());
+        String name = AlinLib.MINECRAFT.getUser().getName();
+        return StealthManager.isStealthActive() && StealthManager.isStealthName() ? StealthManager.getStealthManager().getName(name) : name;
     }
     public static String getUUID(){
         return AlinLib.MINECRAFT.getUser().getProfileId().toString();
@@ -69,17 +71,17 @@ public class Player {
     }
     public static double getX(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return 404;
-        double x =  Stealth.getFunnyValueCoordinate(AlinLib.MINECRAFT.getCameraEntity().getX(), (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), false);
+        double x = StealthManager.isStealthActive() && StealthManager.isStealthCoordinates() ? StealthManager.getStealthManager().getX(AlinLib.MINECRAFT.getCameraEntity()) : AlinLib.MINECRAFT.getCameraEntity().getX();
         return Localization.getDoubleRounding(x, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
     }
     public static double getY(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return 404;
-        double y = AlinLib.MINECRAFT.getCameraEntity().getY();
+        double y = StealthManager.isStealthActive() && StealthManager.isStealthCoordinates() ? StealthManager.getStealthManager().getY(AlinLib.MINECRAFT.getCameraEntity()) : AlinLib.MINECRAFT.getCameraEntity().getY();
         return Localization.getDoubleRounding(y, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
     }
     public static double getZ(){
         if(AlinLib.MINECRAFT.getCameraEntity() == null) return 404;
-        double z =  Stealth.getFunnyValueCoordinate(AlinLib.MINECRAFT.getCameraEntity().getZ(), (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), false);
+        double z = StealthManager.isStealthActive() && StealthManager.isStealthCoordinates() ? StealthManager.getStealthManager().getZ(AlinLib.MINECRAFT.getCameraEntity()) : AlinLib.MINECRAFT.getCameraEntity().getZ();
         return Localization.getDoubleRounding(z, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
     }
     public static int getPing(){
@@ -89,26 +91,16 @@ public class Player {
     }
     public static Direction getDirection(){
         if(AlinLib.MINECRAFT.player == null) return Direction.NORTH;
+        if(StealthManager.isStealthActive() && StealthManager.isStealthDirection()) return StealthManager.getStealthManager().getDirection(AlinLib.MINECRAFT.player.getDirection());
         return AlinLib.MINECRAFT.player.getDirection();
     }
     public static String getDirection(boolean oneSymbol){
         Direction direction = getDirection();
-        if(AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH", false) && AlinLib.bariumConfig.getBoolean("STREAMER.STEALTH.DIRECTION", true)){
-            switch (direction) {
-                case NORTH -> direction = Direction.EAST;
-                case SOUTH -> direction = Direction.WEST;
-
-                case WEST -> direction = Direction.NORTH;
-                case EAST -> direction = Direction.SOUTH;
-            }
-        }
         return  switch (direction) {
             case NORTH -> oneSymbol ? "N" : AlinLib.localization.getLocalization("north", false, false);
             case SOUTH -> oneSymbol ? "S" : AlinLib.localization.getLocalization("south", false, false);
-
             case WEST -> oneSymbol ? "W" : AlinLib.localization.getLocalization("west", false, false);
             case EAST -> oneSymbol ? "E" : AlinLib.localization.getLocalization("east", false, false);
-
             default -> oneSymbol ? "?" : AlinLib.localization.getLocalization("unknown", false, false);
         };
     }

@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components;
-
-import com.mojang.blaze3d.systems.RenderSystem;
+//#if MC < 12105
+//$$ import com.mojang.blaze3d.systems.RenderSystem;
+//#endif
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
@@ -58,9 +59,13 @@ public class ConfigureScrolWidget extends AbstractWidget {
         if (this.scrollbarVisible()) {
             int i = this.getScrollBarHeight();
             int k = Math.max(this.getY(), (int)this.scrollAmount() * (this.height - i) / this.getMaxScrollAmount()+ this.getY());
-            RenderSystem.enableBlend();
+            //#if MC < 12105
+            //$$ RenderSystem.enableBlend();
+            //#endif
             guiGraphics.fill(getX(), k, getX()+getWidth(), k+i, Colors.getScrollerColor());
-            RenderSystem.disableBlend();
+            //#if MC < 12105
+            //$$ RenderSystem.disableBlend();
+            //#endif
         }
     }
 

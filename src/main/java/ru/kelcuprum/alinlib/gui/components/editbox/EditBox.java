@@ -112,7 +112,7 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
     }
 
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
+        this.builder.getStyle().renderBackground$editbox(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
 
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {

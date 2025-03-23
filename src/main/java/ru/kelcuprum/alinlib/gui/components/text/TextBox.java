@@ -154,32 +154,58 @@ public class TextBox extends AbstractWidget implements Description {
         } else {
             ClickEvent clickEvent = style.getClickEvent();
             if (clickEvent != null) {
-                if (clickEvent.getAction() == ClickEvent.Action.OPEN_URL) {
+                //#if MC >= 12105
+                if (clickEvent.action() == ClickEvent.Action.OPEN_URL) {
+                    //#else
+                    //$$ if (clickEvent.getAction() == ClickEvent.Action.OPEN_URL) {
+                    //#endif
                     if (!(Boolean)AlinLib.MINECRAFT.options.chatLinks().get()) {
                         return false;
                     }
 
-                    try {
-                        URI uRI = Util.parseAndValidateUntrustedUri(clickEvent.getValue());
-                        if (AlinLib.MINECRAFT.options.chatLinksPrompt().get()) {
-                            Screen current = AlinLib.MINECRAFT.screen;
-                            AlinLib.MINECRAFT.setScreen(new ConfirmLinkScreen((bl) -> {
-                                if (bl) {
-                                    Util.getPlatform().openUri(uRI);
-                                }
+                    //#if MC >= 12105
+                    URI uRI = ((ClickEvent.OpenUrl) clickEvent).uri();
+                    if (AlinLib.MINECRAFT.options.chatLinksPrompt().get()) {
+                        Screen current = AlinLib.MINECRAFT.screen;
+                        AlinLib.MINECRAFT.setScreen(new ConfirmLinkScreen((bl) -> {
+                            if (bl) {
+                                Util.getPlatform().openUri(uRI);
+                            }
 
-                                AlinLib.MINECRAFT.setScreen(current);
-                            }, clickEvent.getValue(), false));
-                        } else {
-                            Util.getPlatform().openUri(uRI);
-                        }
-                    } catch (URISyntaxException uRISyntaxException) {
-                        AlinLib.LOG.error("Can't open url for {}", clickEvent, uRISyntaxException);
+                            AlinLib.MINECRAFT.setScreen(current);
+                        }, uRI.toString(), false));
+                    } else {
+                        Util.getPlatform().openUri(uRI);
                     }
-                } else if (clickEvent.getAction() == ClickEvent.Action.OPEN_FILE) {
-                    Util.getPlatform().openFile(new File(clickEvent.getValue()));
-                } else if (clickEvent.getAction() == ClickEvent.Action.RUN_COMMAND) {
-                    String string = StringUtil.filterText(clickEvent.getValue());
+                    //#else
+                    //$$ try {
+                    //$$       URI uRI = Util.parseAndValidateUntrustedUri(clickEvent.getValue());
+                    //$$       if (AlinLib.MINECRAFT.options.chatLinksPrompt().get()) {
+                    //$$                        Screen current = AlinLib.MINECRAFT.screen;
+                    //$$                        AlinLib.MINECRAFT.setScreen(new ConfirmLinkScreen((bl) -> {
+                    //$$                            if (bl) {
+                    //$$                                Util.getPlatform().openUri(uRI);
+                    //$$                            }
+                    //$$
+                    //$$                            AlinLib.MINECRAFT.setScreen(current);
+                    //$$                        }, uRI.toString(), false));
+                    //$$                    } else {
+                    //$$                        Util.getPlatform().openUri(uRI);
+                    //$$                    }
+                    //$$ } catch(Exception ex) {}
+                    //#endif
+
+                    //#if MC >= 12105
+                } else if (clickEvent.action() == ClickEvent.Action.OPEN_FILE) {
+                    Util.getPlatform().openFile(((ClickEvent.OpenFile) clickEvent).file());
+                } else if (clickEvent.action() == ClickEvent.Action.RUN_COMMAND) {
+                    String string = StringUtil.filterText(((ClickEvent.RunCommand) clickEvent).command());
+                    //#else
+                    //$$ } else if (clickEvent.getAction() == ClickEvent.Action.OPEN_FILE) {
+                    //$$                    Util.getPlatform().openFile(new File(clickEvent.getValue()));
+                    //$$                } else if (clickEvent.getAction() == ClickEvent.Action.RUN_COMMAND) {
+                    //$$                    String string = StringUtil.filterText(clickEvent.getValue());
+                    //#endif
                     if (string.startsWith("/")) {
                         assert AlinLib.MINECRAFT.player != null;
                         if (!AlinLib.MINECRAFT.player.connection.sendUnsignedCommand(string.substring(1))) {
@@ -188,8 +214,13 @@ public class TextBox extends AbstractWidget implements Description {
                     } else {
                         AlinLib.LOG.error("Failed to run command without '/' prefix from click event: '{}'", string);
                     }
-                } else if (clickEvent.getAction() == ClickEvent.Action.COPY_TO_CLIPBOARD) {
-                    AlinLib.MINECRAFT.keyboardHandler.setClipboard(clickEvent.getValue());
+                    //#if MC >= 12105
+                } else if (clickEvent.action() == ClickEvent.Action.COPY_TO_CLIPBOARD) {
+                    AlinLib.MINECRAFT.keyboardHandler.setClipboard(((ClickEvent.CopyToClipboard) clickEvent).value());
+                    //#else
+                    //$$ } else if (clickEvent.getAction() == ClickEvent.Action.COPY_TO_CLIPBOARD) {
+                    //$$    AlinLib.MINECRAFT.keyboardHandler.setClipboard(clickEvent.getValue());
+                    //#endif
                 } else {
                     AlinLib.LOG.error("Don't know how to handle {}", clickEvent);
                 }
