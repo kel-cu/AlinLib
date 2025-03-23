@@ -90,7 +90,7 @@ public class AlinLib
         ClientLifecycleEvents.CLIENT_FULL_STARTED.register((client) -> {
             LOG.log(String.format("Client full started. MC Version: %s", client.getLaunchedVersion()));
             aprilFool();
-            isHBKel();
+            hbKel();
         });
         ClientLifecycleEvents.CLIENT_STOPPING.register((client) -> {
             LOG.log(Component.translatable("alinlib.log.exit.first"));
@@ -159,8 +159,8 @@ public class AlinLib
                     .buildAndShow();
         }
     }
-    public static void isHBKel(){
-        if(LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 8){
+    public static void hbKel(){
+        if(isHBKel()){
             if(bariumConfig.getBoolean("KEL_HB_"+LocalDate.now().getYear(), false)) return;
             bariumConfig.setBoolean("KEL_HB_"+LocalDate.now().getYear(), true);
             new ToastBuilder()
@@ -169,5 +169,8 @@ public class AlinLib
                     .setMessage(Component.translatable("alinlib.hb"))
                     .buildAndShow();
         }
+    }
+    public static boolean isHBKel(){
+        return LocalDate.now().getMonthValue() == 4 && LocalDate.now().getDayOfMonth() == 8;
     }
 }

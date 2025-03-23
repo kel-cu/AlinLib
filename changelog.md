@@ -1,2 +1,4 @@
-- Support for ClickEvents has been added
-- NeoForge is no longer supported
+- Port to 1.21.5
+- Added .renderBackground$editbox in styles
+- Rewritten Stealth (for adding mod integrations)
+- And another fixes
