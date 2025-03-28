@@ -1,4 +1,1 @@
-- Port to 1.21.5
-- Added .renderBackground$editbox in styles
-- Rewritten Stealth (for adding mod integrations)
-- And another fixes
+- Added support for custom worlds (with mod integration)

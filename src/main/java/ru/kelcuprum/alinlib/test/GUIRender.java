@@ -9,7 +9,7 @@ public class GUIRender implements GuiRenderEvents {
     @Override
     public void onRender(GuiGraphics guiGraphics, float partialTick) {
         guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font,
-                Localization.fixFormatCodes(AlinLib.localization.getParsedText("&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.time_formatted}&r")),
+                Localization.fixFormatCodes(AlinLib.localization.getParsedText("&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction_symbol} {world.name} {world.time_formatted}&r")),
                 guiGraphics.guiWidth()/2, 5, -1);
     }
 }

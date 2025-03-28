@@ -6,6 +6,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.function.Supplier;
 
 public class World {
     public static String getTimeType(){
@@ -46,18 +48,28 @@ public class World {
     public static int getDays(){
         return AlinLib.MINECRAFT.level == null ? -1 : (int) (AlinLib.MINECRAFT.level.getDayTime() / 24000L);
     }
-
     public static String getCodeName(){
         return AlinLib.MINECRAFT.level == null ? "unknown" : AlinLib.MINECRAFT.level.dimension().location().toString();
     }
+
+    // Worlds
+
+    public static HashMap<String, Supplier<String>> worldsName = new HashMap<>();
+    public static void register(String id, String name){
+        register(id, () -> name);
+    }
+    public static void register(String id, Supplier<String> name){
+        worldsName.put(id, name);
+    }
+    public static void registerDefaultWorlds(){
+        register("minecraft:the_moon", () -> AlinLib.localization.getLocalization("world.moon", false, false));
+        register("minecraft:the_end", () -> AlinLib.localization.getLocalization("world.the_end", false, false));
+        register("minecraft:the_nether", () -> AlinLib.localization.getLocalization("world.nether", false, false));
+        register("minecraft:overworld", () -> AlinLib.localization.getLocalization("world.overworld", false, false));
+    }
+
     public static String getName(){
         String world = getCodeName();
-        return switch (world) {
-            case "minecraft:the_moon" -> AlinLib.localization.getLocalization("world.moon", false, false);
-            case "minecraft:the_end" -> AlinLib.localization.getLocalization("world.the_end", false, false);
-            case "minecraft:the_nether" -> AlinLib.localization.getLocalization("world.nether", false, false);
-            case "minecraft:overworld" -> AlinLib.localization.getLocalization("world.overworld", false, false);
-            default -> world;
-        };
+        return worldsName.getOrDefault(world, () -> world).get();
     }
 }

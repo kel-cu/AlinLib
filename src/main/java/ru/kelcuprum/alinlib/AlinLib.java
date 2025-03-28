@@ -24,6 +24,7 @@ import ru.kelcuprum.alinlib.gui.styles.ModernStyle;
 import ru.kelcuprum.alinlib.gui.styles.WMStyle;
 import ru.kelcuprum.alinlib.gui.styles.WinStyle;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
+import ru.kelcuprum.alinlib.info.World;
 import ru.kelcuprum.alinlib.test.GUIRender;
 import ru.kelcuprum.alinlib.utils.StealthManager;
 
@@ -58,6 +59,7 @@ public class AlinLib
         GuiUtils.registerStyle(new ModernStyle());
         GuiUtils.registerStyle(new WinStyle());
         GuiUtils.registerStyle(new WMStyle());
+        World.registerDefaultWorlds();
         StealthManager.registerDefault();
         KeyMapping toggleStealth = KeyMappingHelper.register(new KeyMapping(
                 "alinlib.key.stealth",
