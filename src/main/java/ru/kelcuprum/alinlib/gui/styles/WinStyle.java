@@ -39,6 +39,36 @@ public class WinStyle extends AbstractStyle{
     }
 
     @Override
+    public void renderBackground$editbox(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused){
+        if(!isHoveredOrFocused) renderBackground$widget(guiGraphics, x, y, width, height, active, isHoveredOrFocused);
+        else {
+            int color = 0xff717171;
+
+            int color1 = 0x20000000;
+            int color2 = 0x3F000000;
+            int color3 = 0x7F000000;
+            int color4 = 0xF5000000;
+
+            // light
+            // dark light
+            // dark
+            // very dark
+            guiGraphics.fill(x, y, x+width, y+height, color);
+            //
+            guiGraphics.fill(x+1, y+1, x+width-2, y+2, color1);
+            guiGraphics.fill(x+1, y+2, x+2, y+height-1, color1);
+            //
+            guiGraphics.fill(x+2, y+2, x+width-2, y+height-2, color2);
+            //
+            guiGraphics.fill(x+width-2, y+1, x+width-1, y+height-2, color3);
+            guiGraphics.fill(x+1, y+height-2, x+width-1, y+height-1, color3);
+            //
+            guiGraphics.fill(x+width-1, y, x+width, y+height-1, color4);
+            guiGraphics.fill(x, y+height-1, x+width, y+height, color4);
+        }
+    }
+
+    @Override
     public void renderBackground$slider(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position) {
         int color = 0xff717171;
         int colorb = isHoveredOrFocused ? Colors.getWinColor() : 0xFFC0C0C0;
