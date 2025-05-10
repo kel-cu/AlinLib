@@ -26,7 +26,8 @@ public class StealthScreen {
                             Component.translatable("alinlib.title.not_release.description"), "https://github.com/kel-cu/alinlib/issues"))
             ).setIcon(SEARCH).setCentered(false));
         }
-        builder.addWidget(new TextBuilder(Component.translatable("alinlib.config.stealth")))
+        builder.setIcon(WIKI);
+        builder.setCategoryTitle(Component.translatable("alinlib.config.stealth"))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.streamer.stealth"), false).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH"))
                 .addWidget(new CategoryBox(Component.translatable("alinlib.config.stealth.coordinates"))
                         .addValue(new ButtonBooleanBuilder(Component.translatable("alinlib.config.streamer.stealth.coordinates"), true).setConfig(AlinLib.bariumConfig, "STREAMER.STEALTH.COORDINATES"))

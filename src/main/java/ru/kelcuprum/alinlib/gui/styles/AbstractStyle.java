@@ -3,6 +3,8 @@ package ru.kelcuprum.alinlib.gui.styles;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 
+import static ru.kelcuprum.alinlib.gui.Colors.BLACK_ALPHA;
+
 public abstract class AbstractStyle {
     public String id;
     public Component name;
@@ -16,7 +18,13 @@ public abstract class AbstractStyle {
     public abstract void renderBackground$slider(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position);
     public void renderBackground$editbox(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused){
         renderBackground$widget(guiGraphics, x, y, width, height, active, isHoveredOrFocused);
-    };
+    }
+    public void renderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height){
+        guiGraphics.fill(x, y, width, height, BLACK_ALPHA);
+    }
+    public void renderTitleBackground(GuiGraphics guiGraphics, int x, int y, int width, int height){
+        guiGraphics.fill(x, y, width, height, BLACK_ALPHA);
+    }
     public int getTextColor(boolean active){
         return active ? 16777215 : 10526880;
     }

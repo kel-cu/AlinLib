@@ -17,6 +17,7 @@ import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 import ru.kelcuprum.alinlib.gui.screens.ConfirmScreen;
+import ru.kelcuprum.alinlib.gui.screens.DialogScreen;
 
 import java.net.URI;
 
@@ -35,7 +36,8 @@ public class DemoScreen {
                             Component.translatable("alinlib.title.not_release.description"), "https://github.com/kel-cu/alinlib/issues"))
             ).setIcon(SEARCH).setCentered(false));
         }
-        builder.addWidget(new TextBuilder(Component.translatable("alinlib.config.design.demo")));
+        builder.setIcon(WIKI);
+        builder.setCategoryTitle(Component.translatable("alinlib.config.design.demo"));
         builder.addWidget(new CategoryBox(Component.translatable("alinlib.design.demo.buttons"))
                 .addValue(new ButtonBuilder(Component.translatable("alinlib.design.demo.button")))
                 .addValue(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.left"), Component.translatable("alinlib.design.demo.button.right")))
@@ -105,7 +107,9 @@ public class DemoScreen {
                 .addValue(new ImageWidget(0,0,512,512, CLOWNFISH, 512, 512, true, Component.empty()))
                 .addValue(new ImageWidget(0,0,32,32, CLOWNFISH, 32, 32, false, Component.empty()))
                 .changeState(false)
-        );
+        )
+                .addWidget(new ButtonBuilder(Component.translatable("..."),
+                        (s) -> AlinLib.MINECRAFT.setScreen(new DialogScreen(AlinLib.MINECRAFT.screen, new String[]{}, null))));
 
 
         return builder.build();

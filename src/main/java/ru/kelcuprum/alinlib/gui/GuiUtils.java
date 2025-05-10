@@ -88,4 +88,31 @@ public class GuiUtils {
         String id = AlinLib.bariumConfig.getString("DEFAULT_DESIGN_TYPE", stylesID.isEmpty() ? safeStyle.id : stylesID.get(0));
         return getStyleByID(id);
     }
+    //
+    public static int interpolate(int color1, int color2, float progress) {
+        //Разделяем оба цвета на составляющие
+        int a1 = (color1 & 0xff000000) >>> 24;
+        int r1 = (color1 & 0x00ff0000) >>> 16;
+        int g1 = (color1 & 0x0000ff00) >>> 8;
+        int b1 = color1 & 0x000000ff;
+
+        int a2 = (color2 & 0xff000000) >>> 24;
+        int r2 = (color2 & 0x00ff0000) >>> 16;
+        int g2 = (color2 & 0x0000ff00) >>> 8;
+        int b2 = color2 & 0x000000ff;
+
+        //И рассчитываем новые
+        float progress2 = (1 - progress);
+        int newA = clip((int) (a1 * progress2 + a2 * progress));
+        int newR = clip((int) (r1 * progress2 + r2 * progress));
+        int newG = clip((int) (g1 * progress2 + g2 * progress));
+        int newB = clip((int) (b1 * progress2 + b2 * progress));
+
+        //Собираем и возвращаем полученный цвет
+        return (newA << 24) + (newR << 16) + (newG << 8) + newB;
+    }
+
+    public static int clip(int num) {
+        return num <= 0 ? 0 : Math.min(num, 255);
+    }
 }

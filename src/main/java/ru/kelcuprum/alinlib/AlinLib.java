@@ -18,7 +18,6 @@ import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.config.DesignScreen;
-import ru.kelcuprum.alinlib.gui.screens.types.ConfigScreen;
 import ru.kelcuprum.alinlib.gui.styles.FlatStyle;
 import ru.kelcuprum.alinlib.gui.styles.ModernStyle;
 import ru.kelcuprum.alinlib.gui.styles.WMStyle;
@@ -32,14 +31,7 @@ import java.time.LocalDate;
 import java.util.Random;
 
 import static ru.kelcuprum.alinlib.gui.Icons.CLOWNFISH;
-//#if NEOFORGE
-//$$ @net.neoforged.fml.common.Mod("alinlib")
-//#endif
-public class AlinLib
-    //#if FABRIC
-        implements net.fabricmc.api.ClientModInitializer
-    //#endif
-{
+public class AlinLib implements net.fabricmc.api.ClientModInitializer {
     public static final String MODID = "alinlib";
     public static String VERSION = "alinlib";
     public static final AlinLogger LOG = new AlinLogger("AlinaLib");
@@ -104,42 +96,12 @@ public class AlinLib
         );
         AlinLibEvents.INIT.invoker().onInit();
     }
-    //#if FABRIC
+
     @Override
     public void onInitializeClient() {
         AlinLib.VERSION = net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer(AlinLib.MODID).get().getMetadata().getVersion().getFriendlyString();
         init();
     }
-    //#elseif NEOFORGE
-    //$$  public AlinLib(){
-    //$$      init();
-    //$$      for(net.neoforged.neoforgespi.language.IModInfo mod : net.neoforged.fml.ModList.get().getMods()){
-    //$$          if(mod.getModId().equals(AlinLib.MODID)){
-    //$$              AlinLib.VERSION = mod.getVersion().getQualifier();
-    //$$          }
-    //$$      }
-    //$$      if (net.neoforged.fml.loading.FMLLoader.getDist() == net.neoforged.api.distmarker.Dist.CLIENT) {
-    //$$          net.neoforged.fml.ModLoadingContext.get().registerExtensionPoint(
-    //$$                  net.neoforged.neoforge.client.gui.IConfigScreenFactory.class,
-    //$$                  () -> (minecraftClient, screen) -> ru.kelcuprum.alinlib.gui.config.DesignScreen.build(screen));
-    //$$          final net.neoforged.bus.api.IEventBus bus = net.neoforged.fml.ModLoadingContext.get().getActiveContainer().getEventBus();
-    //$$          bus.addListener(this::registerBindings);
-    //$$          net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(this::onPostRenderGui);
-    //$$      }
-    //$$  }
-    //$$  @net.neoforged.bus.api.SubscribeEvent
-    //$$  public void registerBindings(net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent event) {
-    //$$      for(KeyMapping mapping : KeyMappingHelper.EXAMPLE_MAPPING) {
-    //$$          event.register(mapping);
-    //$$      }
-    //$$  }
-    //#endif
-
-    //#if NEOFORGE && MC >= 12100
-    //$$  public void onPostRenderGui(net.neoforged.neoforge.client.event.RenderGuiEvent.Post event) {
-    //$$      ru.kelcuprum.alinlib.api.events.client.GuiRenderEvents.RENDER.invoker().onRender(event.getGuiGraphics(), event.getPartialTick().getGameTimeDeltaTicks());
-    //$$  }
-    //#endif
 
     // Funny
     public static boolean isAprilFool(){

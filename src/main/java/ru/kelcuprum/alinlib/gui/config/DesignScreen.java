@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.Icons;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBooleanBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
@@ -19,7 +20,7 @@ import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
 import ru.kelcuprum.alinlib.gui.screens.ConfirmScreen;
 
 
-import static ru.kelcuprum.alinlib.gui.Colors.CPM_BLUE;
+import static ru.kelcuprum.alinlib.gui.Colors.*;
 import static ru.kelcuprum.alinlib.gui.Icons.*;
 
 public class DesignScreen {
@@ -46,7 +47,8 @@ public class DesignScreen {
                             Component.translatable("alinlib.title.not_release.description"), "https://github.com/kel-cu/alinlib/issues"))
             ).setIcon(SEARCH).setCentered(false));
         }
-        builder.addWidget(new TextBuilder(Component.translatable("alinlib.config.design")))
+        builder.setIcon(WIKI);
+        builder.setCategoryTitle(Component.translatable("alinlib.config.design"))
                 .addWidget(new SelectorBuilder(Component.translatable("alinlib.config.default_design_type"), selectorButton -> AlinLib.bariumConfig.setString("DEFAULT_DESIGN_TYPE", GuiUtils.getStyleByName(selectorButton.getList()[selectorButton.getPosition()]).id))
                         .setList(GuiUtils.getStylesName())
                         .setValue(GuiUtils.getPositionOnStylesID(GuiUtils.getSelected().name.getString())))
@@ -79,6 +81,10 @@ public class DesignScreen {
                                 Component.translatable("alinlib.color.user").getString()
                         }).setConfig(AlinLib.bariumConfig, "BUTTON.WIN.COLOR"))
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.button.win.color.custom")).setColor(Colors.ALINA).setConfig(AlinLib.bariumConfig, "BUTTON.WIN.COLOR.CUSTOM"))
+                        .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.config.button.win.gradient")).build())
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.button.win.gradient.start")).setColor(WIN98_BLUE).setConfig(AlinLib.bariumConfig, "BUTTON.WIN.GRADIENT.START"))
+                        .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.button.win.gradient.end")).setColor(WIN98_LIGHT_BLUE).setConfig(AlinLib.bariumConfig, "BUTTON.WIN.GRADIENT.END"))
+
                         .addValue(new HorizontalRuleBuilder(Component.translatable("alinlib.config.themes.twm")).build())
                         .addValue(new SelectorBuilder(Component.translatable("alinlib.config.button.twm.color")).setValue(23).setList(new String[]{
                                 Component.translatable("alinlib.color.groupie").getString(),
@@ -211,8 +217,7 @@ public class DesignScreen {
                                 Component.translatable("alinlib.color.user").getString()
                         }).setConfig(AlinLib.bariumConfig, "HORIZONTAL_RULE.COLOR"))
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.checkbox.color.custom")).setColor(Colors.CPM_LAVENDER).setConfig(AlinLib.bariumConfig, "HORIZONTAL_RULE.COLOR.CUSTOM")))
-                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.scroller.smooth"), false).setConfig(AlinLib.bariumConfig, "SCROLLER.SMOOTH"))
-                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.modern"), true).setConfig(AlinLib.bariumConfig, "MODERN"));
+                .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.scroller.smooth"), false).setConfig(AlinLib.bariumConfig, "SCROLLER.SMOOTH"));
         return builder.build();
     }
 }

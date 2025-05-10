@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib.config;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.util.GsonHelper;
 import org.apache.logging.log4j.Level;
@@ -40,6 +41,7 @@ public class Config {
     private Number defaultNumberValue = 0;
     private JsonObject defaultJsonObjectValue = new JsonObject();
     private JsonArray defaultJsonArrayValue = new JsonArray();
+    private JsonElement defaultJsonElementValue = new JsonObject();
     //
     public Config setDefaultValue(Boolean value){
         this.defaultBooleanValue = value;
@@ -59,6 +61,10 @@ public class Config {
     }
     public Config setDefaultValue(JsonArray value){
         this.defaultJsonArrayValue = value;
+        return this;
+    }
+    public Config setDefaultValue(JsonElement value){
+        this.defaultJsonElementValue = value;
         return this;
     }
     //
@@ -101,6 +107,10 @@ public class Config {
     public JsonArray getJsonArray(String key){
         if(jsonArrayDefaults.get(key) == null) return getJsonArray(key, defaultJsonArrayValue);
         else return getJsonArray(key, jsonArrayDefaults.get(key));
+    }
+    public JsonElement getJsonElement(String key){
+        if(jsonArrayDefaults.get(key) == null) return getJsonElement(key, defaultJsonArrayValue);
+        else return getJsonElement(key, jsonArrayDefaults.get(key));
     }
     // -=-=-=-=-=-=-=-=-=-=-=-
 
@@ -233,13 +243,33 @@ public class Config {
 
     public JsonObject getJsonObject(String type, JsonObject defaultValue) {
         if (this._jsonConfiguration == null) this._jsonConfiguration = new JsonObject();
-        if (!isJsonNull(type) && !(this._jsonConfiguration.get(type).getAsJsonPrimitive().isJsonObject()))
+        if (!isJsonNull(type) && !(this._jsonConfiguration.get(type).isJsonObject()))
             setJsonObject(type, defaultValue);
         return isJsonNull(type) ? defaultValue : this._jsonConfiguration.get(type).getAsJsonObject();
     }
 
     /**
      * Задать значения JsonObject
+     */
+    public Config setJsonElement(String type, JsonElement newValue) {
+        this._jsonConfiguration.add(type, newValue);
+        save();
+        return this;
+    }
+
+    /**
+     * Получение JsonElement значения
+     */
+
+    public JsonElement getJsonElement(String type, JsonElement defaultValue) {
+        if (this._jsonConfiguration == null) this._jsonConfiguration = new JsonObject();
+        if (!isJsonNull(type) && !(this._jsonConfiguration.get(type).isJsonPrimitive()))
+            setJsonElement(type, defaultValue);
+        return isJsonNull(type) ? defaultValue : this._jsonConfiguration.get(type).getAsJsonObject();
+    }
+
+    /**
+     * Задать значения JsonElement
      */
     public Config setJsonObject(String type, JsonObject newValue) {
         this._jsonConfiguration.add(type, newValue);
@@ -253,7 +283,7 @@ public class Config {
 
     public JsonArray getJsonArray(String type, JsonArray defaultValue) {
         if (this._jsonConfiguration == null) this._jsonConfiguration = new JsonObject();
-        if (!isJsonNull(type) && !(this._jsonConfiguration.get(type).getAsJsonPrimitive().isJsonObject()))
+        if (!isJsonNull(type) && !(this._jsonConfiguration.get(type).isJsonArray()))
             setJsonArray(type, defaultValue);
         return isJsonNull(type) ? defaultValue : this._jsonConfiguration.get(type).getAsJsonArray();
     }

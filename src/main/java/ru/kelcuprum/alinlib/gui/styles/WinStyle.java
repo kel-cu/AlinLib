@@ -4,6 +4,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.Colors;
 
+import static ru.kelcuprum.alinlib.gui.GuiUtils.interpolate;
+
 public class WinStyle extends AbstractStyle{
     public WinStyle() {
         super("windows", Component.translatable("alinlib.style.windows"));
@@ -63,20 +65,69 @@ public class WinStyle extends AbstractStyle{
         guiGraphics.fill(x-1, y, x, y+height, color4);
         guiGraphics.fill(x, y+1, x+width, y, color4);
 //        if(isHoveredOrFocused){
-            int widthS = 6;
-            int xS = x + (int)(position * (double)(width - widthS));
-            guiGraphics.fill(xS, y, xS+widthS, y+height, colorb);
-            //
-            guiGraphics.fill(xS+1, y+1, xS+widthS-2, y+2, color1);
-            guiGraphics.fill(xS+1, y+2, xS+2, y+height-1, color1);
-            //
-            guiGraphics.fill(xS+2, y+2, xS+widthS-2, y+height-2, color2);
-            //
-            guiGraphics.fill(xS+widthS-2, y+1, xS+widthS-1, y+height-2, color3);
-            guiGraphics.fill(xS+1, y+height-2, xS+widthS-1, y+height-1, color3);
-            //
-            guiGraphics.fill(xS+widthS-1, y, xS+widthS, y+height-1, color4);
-            guiGraphics.fill(xS, y+height-1, xS+widthS, y+height, color4);
+        int widthS = 6;
+        int xS = x + (int)(position * (double)(width - widthS));
+        guiGraphics.fill(xS, y, xS+widthS, y+height, colorb);
+        //
+        guiGraphics.fill(xS+1, y+1, xS+widthS-2, y+2, color1);
+        guiGraphics.fill(xS+1, y+2, xS+2, y+height-1, color1);
+        //
+        guiGraphics.fill(xS+2, y+2, xS+widthS-2, y+height-2, color2);
+        //
+        guiGraphics.fill(xS+widthS-2, y+1, xS+widthS-1, y+height-2, color3);
+        guiGraphics.fill(xS+1, y+height-2, xS+widthS-1, y+height-1, color3);
+        //
+        guiGraphics.fill(xS+widthS-1, y, xS+widthS, y+height-1, color4);
+        guiGraphics.fill(xS, y+height-1, xS+widthS, y+height, color4);
 //        }
+    }
+
+    @Override
+    public void renderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        int color = 0xffd0d0d0;
+
+        int color1 = 0x20000000;
+        int color2 = 0x3F000000;
+        int color3 = 0x7F000000;
+        int color4 = 0xF5000000;
+
+        // light
+        // dark light
+        // dark
+        // very dark
+        guiGraphics.fill(x, y, width, height, color);
+        //
+        guiGraphics.fill(x+1, y+1, width-2, y+2, color1);
+        guiGraphics.fill(x+1, y+2, x+2, height-1, color1);
+        //
+        guiGraphics.fill(x+2, y+2, width-2, height-2, color2);
+        //
+        guiGraphics.fill(width-2, y+1, width-1, height-2, color3);
+        guiGraphics.fill(x+1, height-2, width-1, height-1, color3);
+        //
+        guiGraphics.fill(width-1, y, width, height-1, color4);
+        guiGraphics.fill(x, height-1, width, height, color4);
+    }
+    @Override
+    public void renderTitleBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        int factWidth = width-x;
+        int[] colors = Colors.getWinTitleGradientColor();
+        for(int i = 0; i<factWidth; i++){
+            guiGraphics.fill(x+i, y, x+1+i, height, interpolate(colors[0], colors[1], (float) i /factWidth));
+        }
+        int color1 = 0x20000000;
+        int color2 = 0x3F000000;
+        int color3 = 0x7F000000;
+        int color4 = 0xF5000000;
+        guiGraphics.fill(x+1, y+1, width-2, y+2, color1);
+        guiGraphics.fill(x+1, y+2, x+2, height-1, color1);
+        //
+        guiGraphics.fill(x+2, y+2, width-2, height-2, color2);
+        //
+        guiGraphics.fill(width-2, y+1, width-1, height-2, color3);
+        guiGraphics.fill(x+1, height-2, width-1, height-1, color3);
+        //
+        guiGraphics.fill(width-1, y, width, height-1, color4);
+        guiGraphics.fill(x, height-1, width, height, color4);
     }
 }

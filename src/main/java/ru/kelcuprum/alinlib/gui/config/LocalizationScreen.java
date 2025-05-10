@@ -24,7 +24,8 @@ public class LocalizationScreen {
                             Component.translatable("alinlib.title.not_release.description"), "https://github.com/kel-cu/alinlib/issues"))
             ).setIcon(SEARCH).setCentered(false));
         }
-        builder.addWidget(new TextBuilder(Component.translatable("alinlib.localization")))
+        builder.setIcon(WIKI);
+        builder.setCategoryTitle(Component.translatable("alinlib.localization"))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.localization.extended_coordinates"), false).setConfig(AlinLib.bariumConfig, "LOCALIZATION.EXTENDED_COORDINATES"))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.view.item_off_hand"), false).setConfig(AlinLib.bariumConfig, "VIEW.ITEM_OFF_HAND"))
                 .addWidget(new CategoryBox(Component.translatable("alinlib.localization.sides"))

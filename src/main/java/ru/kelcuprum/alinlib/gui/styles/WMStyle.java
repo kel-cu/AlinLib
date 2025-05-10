@@ -43,4 +43,26 @@ public class WMStyle extends AbstractStyle{
             guiGraphics.fill(xS+widthS, y +1, xS+widthS-1, y + height -1, color);
         }
     }
+
+    @Override
+    public void renderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        guiGraphics.fill(x, y, width, height, 0xFF000000);
+//        //
+        guiGraphics.fill(x, y, width, y + 1, Colors.getWMButton());
+        guiGraphics.fill(x, y + 1, x + 1, height - 1, Colors.getWMButton());
+
+        guiGraphics.fill(x, height, width, height - 1, Colors.getWMButton());
+        guiGraphics.fill(width, y + 1, width - 1, height - 1, Colors.getWMButton());
+    }
+
+    @Override
+    public void renderTitleBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+        guiGraphics.fill(x, y, width, height, 0xFF000000);
+//        //
+        guiGraphics.fill(x, y, width, y + 1, Colors.getWMButton());
+        guiGraphics.fill(x, y + 1, x + 1, height - 1, Colors.getWMButton());
+
+        guiGraphics.fill(x, height, width, height - 1, Colors.getWMButton());
+        guiGraphics.fill(width, y + 1, width - 1, height - 1, Colors.getWMButton());
+    }
 }

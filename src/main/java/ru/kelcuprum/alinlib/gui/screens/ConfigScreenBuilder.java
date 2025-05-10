@@ -19,6 +19,7 @@ import java.util.Objects;
 
 public class ConfigScreenBuilder {
     public Component title;
+    public Component categoryTitle;
     public ResourceLocation textureIcon;
     public Item itemIcon;
     public AbstractStyle style;
@@ -37,7 +38,7 @@ public class ConfigScreenBuilder {
         this(parent, Component.literal("Change me please"));
     }
     public ConfigScreenBuilder(Screen parent, Component title) {
-        this(parent, title, GuiUtils.getSelected());
+        this(parent, title, null);
     }
     public ConfigScreenBuilder(Screen parent, Component title, AbstractStyle style){
         this.parent = parent;
@@ -55,6 +56,22 @@ public class ConfigScreenBuilder {
     }
     public Component getTitle(){
         return this.title;
+    }
+    //
+    public AbstractStyle getStyle(){
+        return style == null ? GuiUtils.getSelected() : style;
+    }
+    //
+    public ConfigScreenBuilder setCategoryTitle(String string){
+        setCategoryTitle(Component.literal(string));
+        return this;
+    }
+    public ConfigScreenBuilder setCategoryTitle(Component component) {
+        this.categoryTitle = component;
+        return this;
+    }
+    public Component getCategoryTitle(){
+        return this.categoryTitle;
     }
     //
     public ConfigScreenBuilder setIcon(Item item){
@@ -178,7 +195,7 @@ public class ConfigScreenBuilder {
     public AbstractConfigScreen build() {
         Objects.requireNonNull(this.title, "title == null");
         if(customConfigScreen != null) return customConfigScreen.onCreate(this);
-        return panelWidgets.isEmpty() ? new ConfigScreen$withoutPanel(this) : (AlinLib.bariumConfig.getBoolean("MODERN", true) ? new ConfigScreen$modern(this) : new ConfigScreen(this));
+        return panelWidgets.isEmpty() ? new ConfigScreen$withoutPanel(this) : new ConfigScreen(this);
     }
     //
     public ConfigScreenBuilder setCustomConfigScreen(CustomConfigScreen onCreate){

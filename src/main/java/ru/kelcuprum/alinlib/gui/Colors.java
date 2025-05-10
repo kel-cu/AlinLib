@@ -39,6 +39,9 @@ public interface Colors {
     int CPM_SAPPHIRE = 0xff74c7ec;
     int CPM_BLUE = 0xff89b4fa;
     int CPM_LAVENDER = 0xffb4befe;
+    // Windows 98 Title
+    int WIN98_BLUE = 0xFF000080;
+    int WIN98_LIGHT_BLUE = 0xFF2089ce;
 
     static int getCheckBoxColor(){
         return switch (AlinLib.bariumConfig.getNumber("CHECKBOX.COLOR", 0).intValue()){
@@ -188,5 +191,9 @@ public interface Colors {
             case 20 -> Colors.CPM_BLUE;
             default -> AlinLib.bariumConfig.getNumber("BUTTON.WIN.COLOR.CUSTOM", ALINA).intValue();
         };
+    }
+
+    static int[] getWinTitleGradientColor(){
+        return new int[]{AlinLib.bariumConfig.getNumber("BUTTON.WIN.GRADIENT.START", WIN98_BLUE).intValue(), AlinLib.bariumConfig.getNumber("BUTTON.WIN.GRADIENT.END", WIN98_LIGHT_BLUE).intValue()};
     }
 }

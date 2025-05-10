@@ -2,17 +2,26 @@ package ru.kelcuprum.alinlib.gui.screens.types;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.network.chat.*;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
-import ru.kelcuprum.alinlib.gui.components.*;
+import ru.kelcuprum.alinlib.gui.components.ConfigureScrolWidget;
+import ru.kelcuprum.alinlib.gui.components.Description;
+import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
-import ru.kelcuprum.alinlib.gui.components.text.*;
-import ru.kelcuprum.alinlib.gui.screens.*;
+import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
+import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
+import ru.kelcuprum.alinlib.gui.screens.AbstractConfigScreen;
+import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
+import ru.kelcuprum.alinlib.gui.screens.ConfirmScreen;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
-import static ru.kelcuprum.alinlib.gui.Icons.*;
+import static ru.kelcuprum.alinlib.gui.Icons.EXIT;
+import static ru.kelcuprum.alinlib.gui.Icons.RESET;
 
 public class ConfigScreen extends AbstractConfigScreen {
     public ConfigScreen(ConfigScreenBuilder builder) {
@@ -25,107 +34,161 @@ public class ConfigScreen extends AbstractConfigScreen {
         initCategory();
         super.init();
     }
-    public void initPanelButtons(){
+    int yo = 35;
+    public void initPanelButtons() {
         // -=-=-=-=-=-=-=-
-        titleW = addRenderableWidget(new TextBuilder(this.builder.title).setPosition(5, 5).setSize(this.builder.panelSize-10, 30).build());
+        titleW = addRenderableWidget(new TextBuilder(this.builder.title).setPosition(5 + (builder.itemIcon == null && builder.textureIcon == null ? 0 : 25), 5).setSize(this.builder.panelSize - 10 - (builder.itemIcon == null && builder.textureIcon == null ? 0 : 25), 20).build());
         // -=-=-=-=-=-=-=-
-        this.descriptionBox = new DescriptionBox(5, 40, this.builder.panelSize-10, height - 70, Component.empty());
+        this.descriptionBox = new DescriptionBox(10, 35, this.builder.panelSize - 20, height - 70, Component.empty());
         this.descriptionBox.visible = false;
         addRenderableWidget(this.descriptionBox);
         // -=-=-=-=-=-=-=-
         // Exit Buttons
         // 85 before reset button
-
+        int heigthScroller = 35;
+        for (AbstractWidget widget : builder.panelWidgets) heigthScroller+=(widget.getHeight()+5);
+        this.scroller_panel = addRenderableWidget(new ConfigureScrolWidget(builder.panelSize, 30, 4, this.height - 60, Component.empty(), scroller -> {
+            scroller.innerHeight = 5;
+            for (AbstractWidget widget : builder.panelWidgets) {
+                if (widget.visible) {
+                    widget.setY(30+(int) (scroller.innerHeight - scroller.scrollAmount()));
+                    scroller.innerHeight += (widget.getHeight() + 5);
+                } else widget.setY(-widget.getHeight());
+            }
+            scroller.innerHeight-=8;
+        }));
+        yo = Math.min(heigthScroller, height-30);
         back = addRenderableWidget(new ButtonBuilder(CommonComponents.GUI_BACK).setOnPress((OnPress) -> {
             assert this.minecraft != null;
             this.minecraft.setScreen(builder.parent);
-        }).setIcon(AlinLib.isAprilFool() ? EXIT : null).setPosition(5, height - 25).setSize(this.builder.panelSize-(builder.isResetable ? 35 : 10), 20).build());
+        }).setIcon(AlinLib.isAprilFool() ? EXIT : null).setPosition(5, yo+5).setSize(this.builder.panelSize - (builder.isResetable ? 35 : 10), 20).build());
 
         if(builder.isResetable) reset = addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.component.reset")).setOnPress((OnPress) -> {
-            for(AbstractWidget widget : builder.widgets) if(widget instanceof Resetable) ((Resetable) widget).resetValue();
-            assert this.minecraft != null;
-            new ToastBuilder()
-                    .setTitle(title)
-                    .setMessage(Component.translatable("alinlib.component.reset.toast"))
-                    .setIcon(RESET)
-                    .buildAndShow();
-            AlinLib.LOG.log(Component.translatable("alinlib.component.reset.toast"));
-        }).setSprite(RESET).setSize(20, 20).setPosition(this.builder.panelSize-25, height-25).build());
-        this.scroller_panel = addRenderableWidget(new ConfigureScrolWidget(-8, 0, 4, this.height, Component.empty(), scroller -> {
-            scroller.innerHeight = 5;
-            if(lastCheck){
-                titleW.setY(5);
-                back.setY(height-25);
-                reset.setY(height-25);
-            } else {
-                titleW.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
-                scroller.innerHeight+=titleW.getHeight()+5;
+            this.minecraft.setScreen(new ConfirmScreen(this, RESET, Component.translatable("alinlib.title.reset"), Component.translatable("alinlib.title.reset.description"), (bl) -> {
+                if(bl){
+                    for (AbstractWidget widget : builder.widgets)
+                        if (widget instanceof Resetable) ((Resetable) widget).resetValue();
+                    assert this.minecraft != null;
+                    new ToastBuilder()
+                            .setTitle(title)
+                            .setMessage(Component.translatable("alinlib.component.reset.toast"))
+                            .setIcon(RESET)
+                            .buildAndShow();
+                    AlinLib.LOG.log(Component.translatable("alinlib.component.reset.toast"));
+                }
+            }));
+        }).setSprite(RESET).setSize(20, 20).setPosition(this.builder.panelSize - 25, yo+5).build());
 
-                for(AbstractWidget widget : builder.panelWidgets){
-                    if(widget.visible){
-                        widget.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
-                        scroller.innerHeight += (widget.getHeight()+5);
-                    } else widget.setY(-widget.getHeight());
-                }
-                if(scroller.innerHeight >= height-25){
-                    back.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
-                    reset.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
-                    scroller.innerHeight += (20);
-                }
-            }
-        }));
-        addRenderableWidgets(builder.panelWidgets);
+        addRenderableWidgets$scroller(scroller_panel, builder.panelWidgets);
     }
-    public void initCategory(){
-        int width = this.width - this.builder.panelSize - 20;
-        for(AbstractWidget widget : builder.widgets){
+
+    public int yc = 0;
+    public void initCategory() {
+        if(builder.categoryTitle != null && !builder.categoryTitle.getString().isBlank()) addRenderableWidget(new TextBuilder(builder.categoryTitle).setPosition(getX(), 10).setWidth(getContentWidth()).build());
+        int y = builder.categoryTitle == null || builder.categoryTitle.getString().isBlank() ? 10 : 35;
+        yc = y;
+        int width = getContentWidth();
+        for (AbstractWidget widget : builder.widgets) {
             widget.setWidth(width);
-            widget.setX(this.builder.panelSize+10);
+            widget.setX(getX());
         }
-        this.scroller = addRenderableWidget(new ConfigureScrolWidget(this.width - 4, 0, 4, this.height, Component.empty(), scroller -> {
-            scroller.innerHeight = 5;
+        int heigthScroller = y;
+        for (AbstractWidget widget : builder.widgets) {
+            widget.setY(heigthScroller);
+            if(widget.visible) heigthScroller+=(widget.getHeight()+5);
+        }
+        this.scroller = addRenderableWidget(new ConfigureScrolWidget(getX()+getContentWidth()+1, y, 3, this.height-10-y, Component.empty(), scroller -> {
+            scroller.innerHeight = 0;
+            int heigthScroller1 = yc;
             boolean descriptionEnable = false;
             CategoryBox lastCategory = null;
-            for(AbstractWidget widget : builder.widgets){
-                if(widget.visible){
-                    if(widget instanceof Description){
-                        if(widget.isHoveredOrFocused() && ((Description) widget).getDescription() != null && this.descriptionBox != null){
+            for (AbstractWidget widget : builder.widgets) {
+                if (widget.visible) {
+                    if (widget instanceof Description) {
+                        if (widget.isHoveredOrFocused() && ((Description) widget).getDescription() != null && this.descriptionBox != null) {
                             descriptionEnable = true;
                             this.descriptionBox.setDescription(((Description) widget).getDescription());
                         }
                     }
-                    if(widget instanceof CategoryBox){
-                        if(lastCategory != widget && ((CategoryBox) widget).getState()) lastCategory = (CategoryBox) widget;
+                    if (widget instanceof CategoryBox) {
+                        if (lastCategory != widget && ((CategoryBox) widget).getState())
+                            lastCategory = (CategoryBox) widget;
                     }
-                    if(lastCategory != null && !(widget instanceof CategoryBox)){
-                        if(!lastCategory.values.contains(widget)) {
-                            scroller.innerHeight+=6;
+                    if (lastCategory != null && !(widget instanceof CategoryBox)) {
+                        if (!lastCategory.values.contains(widget)) {
+                            scroller.innerHeight += 6;
                             lastCategory.setRenderLine(true);
                             lastCategory = null;
                         }
                     }
-                    widget.setY((int) (scroller.innerHeight - scroller.scrollAmount()));
-                    scroller.innerHeight += (widget.getHeight()+5);
+                    widget.setPosition(getX(), y + (int) (scroller.innerHeight - scroller.scrollAmount()));
+                    heigthScroller1+=(widget.getHeight()+5);
+                    scroller.innerHeight += (widget.getHeight() + 5);
                 } else widget.setY(-widget.getHeight());
             }
-            scroller.innerHeight-=8;
-            if(this.lastCheck != descriptionEnable){
+            scroller.innerHeight -= 8;
+            yc = Math.min(height-5, heigthScroller1);
+            if (this.lastCheck != descriptionEnable) {
                 lastCheck = descriptionEnable;
-                for(AbstractWidget widget : builder.panelWidgets){
+                for (AbstractWidget widget : builder.panelWidgets) {
                     widget.visible = !lastCheck;
                 }
                 this.descriptionBox.visible = lastCheck;
             }
         }));
-        addRenderableWidgets(builder.widgets);
+        yc = Math.min(height-5, heigthScroller);
+        addRenderableWidgets$scroller(scroller, builder.widgets);
+    }
+
+    public int getContentWidth(){
+        return Math.min(Math.max(550, (int) (width*0.5)), width-15-this.builder.panelSize);
+    }
+    public int getX(){
+        return Math.max(this.builder.panelSize+5, this.builder.panelSize + ((width-this.builder.panelSize) / 2) - (getContentWidth() / 2));
+    }
+
+    @Override
+    public boolean mouseClicked(double d, double e, int i) {
+        boolean st = true;
+        GuiEventListener selected = null;
+        for (GuiEventListener guiEventListener : this.children()) {
+            if (scroller_panel != null && scroller_panel.widgets.contains(guiEventListener)) {
+                if ((d >= 10 && d <= builder.panelSize-10) && (e >= 35 && e <= height-35)) {
+                    if (guiEventListener.mouseClicked(d, e, i)) {
+                        st = false;
+                        selected = guiEventListener;
+                        break;
+                    }
+                }
+            } else if (scroller != null && scroller.widgets.contains(guiEventListener)) {
+                if ((d >= builder.panelSize) && (e >= 35 && e <= height-10)) {
+                    if (guiEventListener.mouseClicked(d, e, i)) {
+                        st = false;
+                        selected = guiEventListener;
+                        break;
+                    }
+                }
+            } else if (guiEventListener.mouseClicked(d, e, i)) {
+                st = false;
+                selected = guiEventListener;
+                break;
+            }
+        }
+
+        this.setFocused(selected);
+        if (i == 0) {
+            this.setDragging(true);
+        }
+
+        return st;
     }
 
     //#if MC >= 12002
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         boolean scr = super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
-        if(mouseX <= this.builder.panelSize){
-            if(descriptionBox.visible && (mouseX >= 5 && mouseX <= builder.panelSize-5) && (mouseY >= 40 && mouseY <= height - 30)){
+        if (mouseX <= this.builder.panelSize) {
+            if (descriptionBox.visible && (mouseX >= 5 && mouseX <= builder.panelSize - 5) && (mouseY >= 40 && mouseY <= height - 30)) {
                 scr = descriptionBox.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
             } else if (!scr && scroller_panel != null) {
                 scr = scroller_panel.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
@@ -158,25 +221,43 @@ public class ConfigScreen extends AbstractConfigScreen {
 
     //#if MC >= 12002
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f){
+    public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
         assert this.minecraft != null;
         super.renderBackground(guiGraphics, i, j, f);
-        guiGraphics.fill(0, 0, this.builder.panelSize, this.height, Colors.BLACK_ALPHA);
+        //#elseif MC < 12002
+        //$$  @Override
+        //$$  public void renderBackground(GuiGraphics guiGraphics){
+        //$$      assert this.minecraft != null;
+        //$$      super.renderBackground(guiGraphics);
+        //#endif
+        builder.getStyle().renderTitleBackground(guiGraphics, 5, 5, this.builder.panelSize-5, 25);
+
+        if(builder.itemIcon != null) guiGraphics.renderFakeItem(builder.itemIcon.getDefaultInstance(), 5, 5, 20);
+        else if(builder.textureIcon != null) guiGraphics.blit(
+                //#if MC >= 12102
+                RenderType::guiTextured,
+                //#endif
+                builder.textureIcon, 5, 5, 0f, 0f, 20, 20, 20, 20);
+        builder.getStyle().renderBackground(guiGraphics, 5, 30, this.builder.panelSize-5, yo);
+
+        int y = builder.categoryTitle != null && !builder.categoryTitle.getString().isBlank() ? 40 : 10;
+        for (AbstractWidget widget : builder.widgets) if(widget.visible) y=(widget.getBottom()+6);
+        builder.getStyle().renderBackground(guiGraphics, getX()-5, 5, getX()+getContentWidth()+5, Math.min(height-5, y));
+        // - Title
+        if(builder.categoryTitle != null && !builder.categoryTitle.getString().isBlank()) builder.getStyle().renderTitleBackground(guiGraphics, getX(), 10, getX()+getContentWidth(), 30);
     }
-    //#elseif MC < 12002
-    //$$
-    //$$  @Override
-    //$$  public void renderBackground(GuiGraphics guiGraphics){
-    //$$      assert this.minecraft != null;
-    //$$      super.renderBackground(guiGraphics);
-    //$$      guiGraphics.fill(0, 0, this.builder.panelSize, this.height, Colors.BLACK_ALPHA);
-    //$$  }
-    //#endif
 
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         //#if MC < 12002
         //$$ renderBackground(guiGraphics);
         //#endif
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
+        guiGraphics.enableScissor(10, 35, builder.panelSize-10, yo-5);
+        if (scroller_panel != null) for (AbstractWidget widget : scroller_panel.widgets) widget.render(guiGraphics, mouseX, mouseY, partialTicks);
+        guiGraphics.disableScissor();
+
+        guiGraphics.enableScissor(0, builder.categoryTitle == null || builder.categoryTitle.getString().isBlank() ? 10 : 35, width, yc-5);
+        if (scroller != null) for (AbstractWidget widget : scroller.widgets) widget.render(guiGraphics, mouseX, mouseY, partialTicks);
+        guiGraphics.disableScissor();
     }
 }
