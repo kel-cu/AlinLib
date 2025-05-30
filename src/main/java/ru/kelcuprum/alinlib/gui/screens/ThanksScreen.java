@@ -5,7 +5,9 @@ import com.google.gson.JsonObject;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+//#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
+//#endif
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

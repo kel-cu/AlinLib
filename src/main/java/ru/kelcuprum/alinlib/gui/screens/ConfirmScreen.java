@@ -5,14 +5,16 @@ import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
+//#if MC >= 12106
+import org.joml.Matrix3x2f;
 import net.minecraft.client.renderer.RenderPipelines;
+//#endif
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import org.joml.Matrix3x2f;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 
 import java.util.List;

@@ -1,10 +1,11 @@
 package ru.kelcuprum.alinlib.gui.components;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
+//#endif
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

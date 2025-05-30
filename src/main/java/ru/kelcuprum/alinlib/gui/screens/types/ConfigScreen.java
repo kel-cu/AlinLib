@@ -3,7 +3,9 @@ package ru.kelcuprum.alinlib.gui.screens.types;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+//#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
+//#endif
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;

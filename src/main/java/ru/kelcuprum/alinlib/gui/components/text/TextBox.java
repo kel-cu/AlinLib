@@ -18,6 +18,7 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
 
+import java.io.File;
 import java.net.URI;
 import java.util.List;
 
