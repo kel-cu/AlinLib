@@ -1,1 +1,2 @@
-- Added support for custom worlds (with mod integration)
+- Fixed EditBox with color, but without configs
+- Ported to 1.21.6

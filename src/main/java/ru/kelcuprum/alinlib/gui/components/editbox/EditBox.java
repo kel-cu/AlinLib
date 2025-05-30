@@ -36,7 +36,7 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
             setResponder(string -> {
                 try {
                     this.volume = (int) Long.parseLong(string.toUpperCase(), 16);
-                    this.builder.config.setNumber(this.builder.configType, volume);
+                    if(this.builder.config != null) this.builder.config.setNumber(this.builder.configType, volume);
                     setError(false);
                 } catch (Exception ex) {
                     setError(true);

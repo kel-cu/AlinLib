@@ -3,7 +3,8 @@
     "1.21-fabric",
     "1.21.2-fabric",
     "1.21.4-fabric",
-    "1.21.5-fabric"
+    "1.21.5-fabric",
+    "1.21.6-fabric"
   ],
   "archive": [
     "1.21-neoforge",

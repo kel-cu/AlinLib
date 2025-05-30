@@ -5,12 +5,14 @@ import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+import org.joml.Matrix3x2f;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 
 import java.util.List;
@@ -105,26 +107,42 @@ public class ConfirmScreen extends Screen {
         int y = 60;
         if(this.icon != null){
             guiGraphics.blit(
-                    //#if MC >= 12102
-                    RenderType::guiTextured,
+                    //#if MC >= 12106
+                    RenderPipelines.GUI_TEXTURED,
+                    //#elseif MC >= 12102
+                    //$$ RenderType::guiTextured,
                     //#endif
                     icon, (width/2)-25, y, 0,0, 50,50, 50, 50);
             y+=55;
         }
         if(!getTitle().getString().isBlank()) {
-            guiGraphics.pose().pushPose();
-            guiGraphics.pose().scale(2.0F, 2.0F, 2.0F);
-            guiGraphics.drawCenteredString(this.font, this.title, this.width / 2 / 2, y / 2, 16777215);
-            guiGraphics.pose().popPose();
+            //#if MC <= 12105
+            //$$ guiGraphics.pose().pushPose();
+            //#else
+            Matrix3x2f matrix3x2f = guiGraphics.pose().pushMatrix();
+            //#endif
+            guiGraphics.pose().scale(2.0F, 2.0F,
+                    //#if MC <= 12105
+                    //$$ 2.0F
+                    //#else
+                    matrix3x2f
+                    //#endif
+            );
+            guiGraphics.drawCenteredString(this.font, this.title, this.width / 2 / 2, y / 2, -1);
+            //#if MC <= 12105
+            //$$ guiGraphics.pose().popPose();
+            //#else
+            guiGraphics.pose().popMatrix();
+            //#endif
             y += 25;
         }
         for(FormattedCharSequence arg : getSplitText()){
-            guiGraphics.drawCenteredString(this.font, arg, this.width / 2, y, 16777215);
+            guiGraphics.drawCenteredString(this.font, arg, this.width / 2, y, -1);
             y+=(this.font.lineHeight+3);
         }
         if(url != null){
             y+=3;
-            guiGraphics.drawCenteredString(this.font, Component.empty().setStyle(Style.EMPTY.withColor(0xFFbac2de)).append(url), this.width / 2, y, 16777215);
+            guiGraphics.drawCenteredString(this.font, Component.empty().setStyle(Style.EMPTY.withColor(0xFFbac2de)).append(url), this.width / 2, y, -1);
             y+=(this.font.lineHeight);
         }
     }

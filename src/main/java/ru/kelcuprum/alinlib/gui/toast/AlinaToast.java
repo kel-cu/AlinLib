@@ -9,6 +9,9 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 //#elseif MC < 12102
 //$$ import net.minecraft.client.gui.components.toasts.ToastComponent;
 //#endif
+//#if MC >= 12106
+import net.minecraft.client.renderer.RenderPipelines;
+//#endif
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -65,8 +68,10 @@ public class AlinaToast implements Toast {
         }
         if (builder.hasIcon()) {
             if (builder.icon != null) guiGraphics.blit(
-                    //#if MC >= 12102
-                    RenderType::guiTextured,
+                    //#if MC >= 12106
+                    RenderPipelines.GUI_TEXTURED,
+                    //#elseif MC >= 12102
+                    //$$ RenderType::guiTextured,
                     //#endif
                     builder.icon, 8, 8, 0.0F, 0.0F, 16, 16, 16, 16);
             else if (builder.itemIcon != null) guiGraphics.renderFakeItem(builder.itemIcon, 8, 8);

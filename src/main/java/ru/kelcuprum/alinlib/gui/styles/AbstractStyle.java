@@ -26,7 +26,7 @@ public abstract class AbstractStyle {
         guiGraphics.fill(x, y, width, height, BLACK_ALPHA);
     }
     public int getTextColor(boolean active){
-        return active ? 16777215 : 10526880;
+        return active ? -1 : 0xFF5F5F5F;
     }
     public boolean textShadow(){
         return true;

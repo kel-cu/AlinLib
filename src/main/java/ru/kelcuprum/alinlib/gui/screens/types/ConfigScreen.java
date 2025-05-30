@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib.gui.screens.types;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -234,8 +235,10 @@ public class ConfigScreen extends AbstractConfigScreen {
 
         if(builder.itemIcon != null) guiGraphics.renderFakeItem(builder.itemIcon.getDefaultInstance(), 5, 5, 20);
         else if(builder.textureIcon != null) guiGraphics.blit(
-                //#if MC >= 12102
-                RenderType::guiTextured,
+                //#if MC >= 12106
+                RenderPipelines.GUI_TEXTURED,
+                //#elseif MC >= 12102
+                //$$ RenderType::guiTextured,
                 //#endif
                 builder.textureIcon, 5, 5, 0f, 0f, 20, 20, 20, 20);
         builder.getStyle().renderBackground(guiGraphics, 5, 30, this.builder.panelSize-5, yo);

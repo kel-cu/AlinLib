@@ -3,6 +3,9 @@ package ru.kelcuprum.alinlib.gui.components.sliders;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
+//#if MC >= 12106
+import net.minecraft.client.renderer.RenderPipelines;
+//#endif
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
@@ -96,8 +99,10 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
             if (builder.getStyle() != null)
                 builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, mouseX, mouseY));
             guiGraphics.blit(
-                    //#if MC >= 12102
-                    RenderType::guiTextured,
+                    //#if MC >= 12106
+                    RenderPipelines.GUI_TEXTURED,
+                    //#elseif MC >= 12102
+                    //$$ RenderType::guiTextured,
                     //#endif
                     RESET, getX() + 2, getY() + 2, 0f, 0f, getHeight() - 4, getHeight() - 4, getHeight() - 4, getHeight() - 4);
             if (builder.getStyle() != null)

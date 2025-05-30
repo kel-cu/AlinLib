@@ -4,8 +4,16 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#if MC >= 12106
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.renderer.RenderPipelines;
+//#endif
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.phys.Vec2;
+import org.joml.Vector2ic;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
@@ -15,6 +23,8 @@ import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
+
+import java.util.List;
 
 import static ru.kelcuprum.alinlib.gui.Icons.RESET;
 
@@ -56,8 +66,10 @@ public class Button extends AbstractButton implements Description {
         if(isResetable()){
             if(builder.getStyle() != null) this.builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, mouseX, mouseY));
             guiGraphics.blit(
-                    //#if MC >= 12102
-                    RenderType::guiTextured,
+                    //#if MC >= 12106
+                    RenderPipelines.GUI_TEXTURED,
+                    //#elseif MC >= 12102
+                    //$$ RenderType::guiTextured,
                     //#endif
                     RESET, getX()+2, getY()+2, 0f, 0f, getHeight()-4, getHeight()-4, getHeight()-4, getHeight()-4);
             if(builder.getStyle() != null) this.builder.getStyle().renderBackground$widget(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, mouseX, mouseY));
@@ -66,12 +78,18 @@ public class Button extends AbstractButton implements Description {
     }
     public void renderSprite(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         guiGraphics.blit(
-                //#if MC >= 12102
-                RenderType::guiTextured,
+                //#if MC >= 12106
+                RenderPipelines.GUI_TEXTURED,
+                //#elseif MC >= 12102
+                //$$ RenderType::guiTextured,
                 //#endif
                 ((ButtonBuilder) builder).sprite, getX(), getY(), 0F, 0F, ((ButtonBuilder) builder).textureWidth, ((ButtonBuilder) builder).textureHeight, getWidth(), getHeight());
         if(!builder.getTitle().getString().isEmpty() && isHovered()){
-            guiGraphics.renderTooltip(AlinLib.MINECRAFT.font, builder.getTitle(), mouseX, mouseY);
+            //#if MC <= 12105
+            //$$ guiGraphics.renderTooltip(AlinLib.MINECRAFT.font, builder.getTitle(), mouseX, mouseY);
+            //#else
+            guiGraphics.setTooltipForNextFrame(AlinLib.MINECRAFT.font, builder.getTitle(), mouseX, mouseY);
+            //#endif
         }
     }
 
@@ -95,8 +113,10 @@ public class Button extends AbstractButton implements Description {
             }
             if (((ButtonBuilder) builder).icon != null)
                 guiGraphics.blit(
-                        //#if MC >= 12102
-                        RenderType::guiTextured,
+                        //#if MC >= 12106
+                        RenderPipelines.GUI_TEXTURED,
+                        //#elseif MC >= 12102
+                        //$$ RenderType::guiTextured,
                         //#endif
                         ((ButtonBuilder) builder).icon, getX(), getY(), 0.0f, 0.0f, getHeight(), getHeight(), getHeight(), getHeight());
         } else renderSprite(guiGraphics, mouseX, mouseY, partialTicks);

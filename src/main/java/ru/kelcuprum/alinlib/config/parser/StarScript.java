@@ -28,7 +28,11 @@ public class StarScript {
         StandardLib.init(ss);
         // General
         ss.set("minecraft", new ValueMap()
-                .set("version", SharedConstants.getCurrentVersion().getName())
+                //#if MC <= 12105
+                //$$ .set("version", SharedConstants.getCurrentVersion().getName())
+                //#else
+                .set("version", SharedConstants.getCurrentVersion().name())
+                //#endif
                 .set("loader", AlinLib.MINECRAFT.getVersionType())
                 .set("fps", () -> Value.number(AlinLib.MINECRAFT.getFps()))
                 .set("window", new ValueMap()

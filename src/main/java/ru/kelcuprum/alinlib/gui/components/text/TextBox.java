@@ -18,9 +18,7 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
 
-import java.io.File;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 import static ru.kelcuprum.alinlib.gui.Colors.CPM_BLUE;
@@ -30,13 +28,14 @@ import static ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder.TYPE.
 
 public class TextBox extends AbstractWidget implements Description {
     public final TextBuilder builder;
-    public TextBox(TextBuilder builder){
+
+    public TextBox(TextBuilder builder) {
         super(builder.getX(), builder.getY(), builder.getWidth(), builder.getHeight(), builder.getTitle());
         this.builder = builder;
         this.setActive(builder.onPress != null);
     }
 
-    public void setActive(boolean active){
+    public void setActive(boolean active) {
         this.active = active;
     }
 
@@ -45,16 +44,19 @@ public class TextBox extends AbstractWidget implements Description {
     public void setX(int x) {
         super.setX(x);
     }
+
     @Override
     public void setY(int y) {
         super.setY(y);
     }
+
     @Override
     public void setPosition(int x, int y) {
         super.setPosition(x, y);
     }
+
     public void onPress() {
-        if(builder.getOnPress() != null) builder.getOnPress().onPress(this);
+        if (builder.getOnPress() != null) builder.getOnPress().onPress(this);
     }
 
     @Override
@@ -64,13 +66,12 @@ public class TextBox extends AbstractWidget implements Description {
     }
 
     @Override
-    public int getHeight(){
-        if(builder.type == TEXT) {
+    public int getHeight() {
+        if (builder.type == TEXT) {
             this.height = builder.getHeight();
             return super.getHeight();
-        }
-        else {
-            this.height = 8+(AlinLib.MINECRAFT.font.lineHeight+3)*(AlinLib.MINECRAFT.font.split(getMessage(), width-12).size());
+        } else {
+            this.height = 8 + (AlinLib.MINECRAFT.font.lineHeight + 3) * (AlinLib.MINECRAFT.font.split(getMessage(), width - 12).size());
             return this.height;
         }
     }
@@ -81,40 +82,49 @@ public class TextBox extends AbstractWidget implements Description {
         super.setHeight(i);
     }
 
-    public List<FormattedCharSequence> getArrayTexts(int border){
-        return AlinLib.MINECRAFT.font.split(getMessage(), width-border);
+    public List<FormattedCharSequence> getArrayTexts(int border) {
+        return AlinLib.MINECRAFT.font.split(getMessage(), width - border);
     }
 
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
         renderBackground(guiGraphics);
-        if(builder.type == TEXT){
-            if(isDoesNotFit()) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
-            else if(builder.align == CENTER) guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, 0xffffff);
-            else guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), (builder.align == LEFT ? (getX() + (getHeight() - 8) / 2) : (getX() + getWidth() - (getHeight() - 8) / 2) - AlinLib.MINECRAFT.font.width(getMessage())), getY() + (getHeight() - 8) / 2, 0xffffff);
+        if (builder.type == TEXT) {
+            if (isDoesNotFit()) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+            else if (builder.align == CENTER)
+                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2, getY() + (getHeight() - 8) / 2, -1);
+            else
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), (builder.align == LEFT ? (getX() + (getHeight() - 8) / 2) : (getX() + getWidth() - (getHeight() - 8) / 2) - AlinLib.MINECRAFT.font.width(getMessage())), getY() + (getHeight() - 8) / 2, -1);
         } else renderMessageText(guiGraphics);
     }
-    public void renderBackground(GuiGraphics guiGraphics){
-       if(builder.type != BLOCKQUOTE && builder.onPress != null) builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getWidth(), getHeight(), true, isHoveredOrFocused());
-       else if(builder.type == BLOCKQUOTE){
-           guiGraphics.fill(this.getX(), this.getY(), this.getX()+1, this.getY()+this.getHeight(), getBlockquoteColor()[0]);
-           guiGraphics.fill(this.getX()+1, this.getY(), this.getX()+this.getWidth(), this.getY()+this.getHeight(), getBlockquoteColor()[1]);
-       }
+
+    public void renderBackground(GuiGraphics guiGraphics) {
+        if (builder.type != BLOCKQUOTE && builder.onPress != null)
+            builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getWidth(), getHeight(), true, isHoveredOrFocused());
+        else if (builder.type == BLOCKQUOTE) {
+            guiGraphics.fill(this.getX(), this.getY(), this.getX() + 1, this.getY() + this.getHeight(), getBlockquoteColor()[0]);
+            guiGraphics.fill(this.getX() + 1, this.getY(), this.getX() + this.getWidth(), this.getY() + this.getHeight(), getBlockquoteColor()[1]);
+        }
     }
-    public int[] getBlockquoteColor(){
-        return builder.color == null ? new int[]{AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR", CPM_BLUE).intValue(), AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR.BACKGROUND", CPM_BLUE-0xE1000000).intValue()} : builder.color;
+
+    public int[] getBlockquoteColor() {
+        return builder.color == null ? new int[]{AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR", CPM_BLUE).intValue(), AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR.BACKGROUND", CPM_BLUE - 0xE1000000).intValue()} : builder.color;
     }
-    public void renderMessageText(GuiGraphics guiGraphics){
+
+    public void renderMessageText(GuiGraphics guiGraphics) {
         List<FormattedCharSequence> list = getArrayTexts(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12);
         int l = 0;
-        for(FormattedCharSequence text : list){
-            if(builder.align == CENTER) guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX()+(getWidth()/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
-            else guiGraphics.drawString(AlinLib.MINECRAFT.font, text, (builder.align == LEFT ? getX()+(this.builder.type == BLOCKQUOTE ? 7 : 6) : getX()+getWidth()-6-AlinLib.MINECRAFT.font.width(text)), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l), -1);
+        for (FormattedCharSequence text : list) {
+            if (builder.align == CENTER)
+                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX() + (getWidth() / 2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), -1);
+            else
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, (builder.align == LEFT ? getX() + (this.builder.type == BLOCKQUOTE ? 7 : 6) : getX() + getWidth() - 6 - AlinLib.MINECRAFT.font.width(text)), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), -1);
             l++;
         }
     }
-    private boolean isDoesNotFit(){
-        int size = AlinLib.MINECRAFT.font.width(this.getMessage()) + ((getHeight() - 8) / 2)*2;
+
+    private boolean isDoesNotFit() {
+        int size = AlinLib.MINECRAFT.font.width(this.getMessage()) + ((getHeight() - 8) / 2) * 2;
         return size > getWidth();
     }
 
@@ -122,22 +132,24 @@ public class TextBox extends AbstractWidget implements Description {
     protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
         this.defaultButtonNarrationText(narrationElementOutput);
     }
+
     @Override
     public void onClick(double d, double e) {
         this.onPress();
     }
+
     @Override
-    public boolean mouseClicked(double d, double e, int i){
-        if(this.builder.type == BLOCKQUOTE || this.builder.type == MESSAGE){
+    public boolean mouseClicked(double d, double e, int i) {
+        if (this.builder.type == BLOCKQUOTE || this.builder.type == MESSAGE) {
             List<FormattedCharSequence> list = getArrayTexts(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12);
             int l = 0;
-            int x = getX()+(this.builder.type == BLOCKQUOTE ? 7 : 6);
-            for(FormattedCharSequence chars : list){
-                int y = getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight+3) * l);
-                if(x<=d && d<=x+AlinLib.MINECRAFT.font.width(chars)){
-                    if(y<=e && e<=y+AlinLib.MINECRAFT.font.lineHeight){
+            int x = getX() + (this.builder.type == BLOCKQUOTE ? 7 : 6);
+            for (FormattedCharSequence chars : list) {
+                int y = getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l);
+                if (x <= d && d <= x + AlinLib.MINECRAFT.font.width(chars)) {
+                    if (y <= e && e <= y + AlinLib.MINECRAFT.font.lineHeight) {
                         Style style = AlinLib.MINECRAFT.font.getSplitter().componentStyleAtWidth(chars, Mth.floor(screenToChatX(x, d)));
-                        if(style != null && this.handleComponentClicked(style)){
+                        if (style != null && this.handleComponentClicked(style)) {
                             return true;
                         }
                     }
@@ -159,7 +171,7 @@ public class TextBox extends AbstractWidget implements Description {
                     //#else
                     //$$ if (clickEvent.getAction() == ClickEvent.Action.OPEN_URL) {
                     //#endif
-                    if (!(Boolean)AlinLib.MINECRAFT.options.chatLinks().get()) {
+                    if (!(Boolean) AlinLib.MINECRAFT.options.chatLinks().get()) {
                         return false;
                     }
 
@@ -208,7 +220,9 @@ public class TextBox extends AbstractWidget implements Description {
                     //#endif
                     if (string.startsWith("/")) {
                         assert AlinLib.MINECRAFT.player != null;
-                        if (!AlinLib.MINECRAFT.player.connection.sendUnsignedCommand(string.substring(1))) {
+                        try {
+                            AlinLib.MINECRAFT.player.connection.sendCommand(string.substring(1));
+                        } catch (Exception ignored) {
                             AlinLib.LOG.error("Not allowed to run command with signed argument from click event: '{}'", string);
                         }
                     } else {
@@ -235,6 +249,7 @@ public class TextBox extends AbstractWidget implements Description {
     private double screenToChatX(int x, double d) {
         return d - (double) x;
     }
+
     @Override
     public boolean keyPressed(int i, int j, int k) {
         if (this.active && this.visible) {
@@ -255,11 +270,13 @@ public class TextBox extends AbstractWidget implements Description {
     }
 
     protected Component description;
-    public TextBox setDescription(Component description){
+
+    public TextBox setDescription(Component description) {
         this.description = description;
         return this;
     }
-    public Component getDescription(){
+
+    public Component getDescription() {
         return this.description;
     }
 }
