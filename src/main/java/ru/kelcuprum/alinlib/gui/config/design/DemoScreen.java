@@ -30,6 +30,12 @@ public class DemoScreen {
     public static Screen build(Screen parent) {
         ConfigScreenBuilder builder = new ConfigScreenBuilder(parent, Component.translatable("alinlib"));
         builder.addPanelWidgets(getPanelWidgets(parent));
+        builder
+                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.design.demo.button")))
+                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.left"), Component.translatable("alinlib.design.demo.button.right")))
+                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.with_icon")).setIcon(CLOWNFISH))
+                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.left.with_icon"), Component.translatable("alinlib.design.demo.button.right.with_icon")).setIcon(WIKI))
+                .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.sprite")).setSprite(CLOWNFISH));
         if (AlinLib.isNotReleaseVersion()) {
             builder.addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.title.not_release"),
                     (s) -> AlinLib.MINECRAFT.setScreen(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),

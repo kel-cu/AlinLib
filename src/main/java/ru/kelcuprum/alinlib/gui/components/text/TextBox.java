@@ -135,12 +135,20 @@ public class TextBox extends AbstractWidget implements Description {
     }
 
     @Override
-    public void onClick(double d, double e) {
+    public void onClick(double d, double e
+                        //#if MC >= 12109
+            , boolean b
+                        //#endif
+    ) {
         this.onPress();
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i) {
+    public boolean mouseClicked(double d, double e, int i
+                                //#if MC >= 12109
+            , boolean b
+                                //#endif
+    ) {
         if (this.builder.type == BLOCKQUOTE || this.builder.type == MESSAGE) {
             List<FormattedCharSequence> list = getArrayTexts(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12);
             int l = 0;
@@ -157,8 +165,16 @@ public class TextBox extends AbstractWidget implements Description {
                 }
                 l++;
             }
-            return super.mouseClicked(d, e, i);
-        } else return super.mouseClicked(d, e, i);
+            return super.mouseClicked(d, e, i
+                    //#if MC >= 12109
+                    , b
+                    //#endif
+            );
+        } else return super.mouseClicked(d, e, i
+                //#if MC >= 12109
+                , b
+                //#endif
+        );
     }
 
     public boolean handleComponentClicked(@Nullable Style style) {

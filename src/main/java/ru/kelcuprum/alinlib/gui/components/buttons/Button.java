@@ -147,9 +147,17 @@ public class Button extends AbstractButton implements Description {
     }
 
     @Override
-    public void onClick(double d, double e) {
+    public void onClick(double d, double e
+    //#if MC >= 12109
+    , boolean b
+    //#endif
+    ) {
         if(isResetable() && (getX() < d && d < getX()+getHeight())) ((Resetable) this).resetValue();
-        else super.onClick(d, e);
+        else super.onClick(d, e
+                //#if MC >= 12109
+                , b
+                //#endif
+        );
     }
 
     public boolean isHoveredOrFocused(boolean isReset, int mouseX, int mouseY) {

@@ -1,6 +1,9 @@
 package ru.kelcuprum.alinlib.info;
 
+import com.mojang.authlib.minecraft.UserApiService;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.User;
+import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -19,12 +22,17 @@ public class Player {
     public static String getUUID(){
         return AlinLib.MINECRAFT.getUser().getProfileId().toString();
     }
-    public static String getProfileType(){
-        return AlinLib.MINECRAFT.getUser().getType().getName();
-    }
 
     public static boolean isLicenseAccount(){
-        return AlinLib.MINECRAFT.getUser().getType() == User.Type.MSA || AlinLib.MINECRAFT.getUser().getType() == User.Type.MOJANG;
+        //#if MC >= 12109
+        try {
+            return AlinLib.MINECRAFT.userPropertiesFuture.get() != UserApiService.OFFLINE_PROPERTIES;
+        } catch (Exception ignored){
+            return false;
+        }
+        //#else
+        //$$ return AlinLib.MINECRAFT.getUser().getType() == User.Type.MSA || AlinLib.MINECRAFT.getUser().getType() == User.Type.MOJANG;
+        //#endif
     }
 
     public static String getItemName(){

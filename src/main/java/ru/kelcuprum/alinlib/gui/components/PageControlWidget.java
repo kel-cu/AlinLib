@@ -35,7 +35,11 @@ public class PageControlWidget extends AbstractWidget {
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i) {
+    public boolean mouseClicked(double d, double e, int i
+                                //#if MC >= 12109
+            , boolean b
+                                //#endif
+    ) {
         //#if MC < 12104
         //$$ if (clicked(d, e)) {
         //#else

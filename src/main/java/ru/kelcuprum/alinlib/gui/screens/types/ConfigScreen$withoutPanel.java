@@ -112,7 +112,11 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i) {
+    public boolean mouseClicked(double d, double e, int i
+                                //#if MC >= 12109
+            , boolean b
+                                //#endif
+    ) {
         int size = Math.min(maxSize, width - 10);
         int x = (width - size) / 2;
         boolean st = true;
@@ -120,13 +124,21 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
         for (GuiEventListener guiEventListener : this.children()) {
             if (scroller != null && scroller.widgets.contains(guiEventListener)) {
                 if ((d >= x && d <= x + size) && e >= 30) {
-                    if (guiEventListener.mouseClicked(d, e, i)) {
+                    if (guiEventListener.mouseClicked(d, e, i
+                            //#if MC >= 12109
+                            , b
+                            //#endif
+                    )) {
                         st = false;
                         selected = guiEventListener;
                         break;
                     }
                 }
-            } else if (guiEventListener.mouseClicked(d, e, i)) {
+            } else if (guiEventListener.mouseClicked(d, e, i
+                    //#if MC >= 12109
+                    , b
+                    //#endif
+            )) {
                 st = false;
                 selected = guiEventListener;
                 break;
@@ -205,7 +217,7 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
             List<FormattedCharSequence> listed = AlinLib.MINECRAFT.font.split(description, width - 20);
             //#if MC <= 12105
             //$$ guiGraphics.renderTooltip(AlinLib.MINECRAFT.font, listed, mouseX, mouseY);
-            //#elseif
+            //#else
             guiGraphics.setTooltipForNextFrame(AlinLib.MINECRAFT.font, listed, mouseX, mouseY);
             //#endif
         }

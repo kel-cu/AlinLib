@@ -1,2 +1,2 @@
-- Fixed EditBox with color, but without configs
-- Ported to 1.21.6
+- Fixed scroll bar for left panel in configs
+- Ported to 25w32a

@@ -92,9 +92,17 @@ public class CategoryBox extends AbstractWidget {
         return this;
     }
     @Override
-    public void onClick(double d, double e) {
+    public void onClick(double d, double e
+                        //#if MC >= 12109
+            , boolean b
+                        //#endif
+    ) {
         changeState();
-        super.onClick(d, e);
+        super.onClick(d, e
+                //#if MC >= 12109
+                , b
+                //#endif
+        );
     }
 
     @Override

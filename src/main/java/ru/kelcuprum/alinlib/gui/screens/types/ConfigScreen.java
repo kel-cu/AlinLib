@@ -50,7 +50,7 @@ public class ConfigScreen extends AbstractConfigScreen {
         // 85 before reset button
         int heigthScroller = 35;
         for (AbstractWidget widget : builder.panelWidgets) heigthScroller+=(widget.getHeight()+5);
-        this.scroller_panel = addRenderableWidget(new ConfigureScrolWidget(builder.panelSize, 30, 4, this.height - 60, Component.empty(), scroller -> {
+        this.scroller_panel = addRenderableWidget(new ConfigureScrolWidget(builder.panelSize-9, 31, 3, this.height - 62, Component.empty(), scroller -> {
             scroller.innerHeight = 5;
             for (AbstractWidget widget : builder.panelWidgets) {
                 if (widget.visible) {
@@ -151,13 +151,21 @@ public class ConfigScreen extends AbstractConfigScreen {
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i) {
+    public boolean mouseClicked(double d, double e, int i
+                                //#if MC >= 12109
+            , boolean b
+                                //#endif
+    ) {
         boolean st = true;
         GuiEventListener selected = null;
         for (GuiEventListener guiEventListener : this.children()) {
             if (scroller_panel != null && scroller_panel.widgets.contains(guiEventListener)) {
                 if ((d >= 10 && d <= builder.panelSize-10) && (e >= 35 && e <= height-35)) {
-                    if (guiEventListener.mouseClicked(d, e, i)) {
+                    if (guiEventListener.mouseClicked(d, e, i
+                            //#if MC >= 12109
+                            , b
+                            //#endif
+                    )) {
                         st = false;
                         selected = guiEventListener;
                         break;
@@ -165,13 +173,21 @@ public class ConfigScreen extends AbstractConfigScreen {
                 }
             } else if (scroller != null && scroller.widgets.contains(guiEventListener)) {
                 if ((d >= builder.panelSize) && (e >= 35 && e <= height-10)) {
-                    if (guiEventListener.mouseClicked(d, e, i)) {
+                    if (guiEventListener.mouseClicked(d, e, i
+                            //#if MC >= 12109
+                            , b
+                            //#endif
+                    )) {
                         st = false;
                         selected = guiEventListener;
                         break;
                     }
                 }
-            } else if (guiEventListener.mouseClicked(d, e, i)) {
+            } else if (guiEventListener.mouseClicked(d, e, i
+                    //#if MC >= 12109
+                    , b
+                    //#endif
+            )) {
                 st = false;
                 selected = guiEventListener;
                 break;

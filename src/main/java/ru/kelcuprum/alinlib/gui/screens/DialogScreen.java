@@ -90,7 +90,11 @@ public class DialogScreen extends Screen {
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i) {
+    public boolean mouseClicked(double d, double e, int i
+                                //#if MC >= 12109
+            , boolean b
+                                //#endif
+    ) {
         changePosition();
         return false;
     }
