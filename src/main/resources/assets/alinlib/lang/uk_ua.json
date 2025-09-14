@@ -30,9 +30,9 @@
   "alinlib.config.button.win.gradient": "Заголовок",
   "alinlib.config.button.win.gradient.start": "Початок градієнту",
   "alinlib.config.button.win.gradient.end": "Конец градиента",
-  "alinlib.config.themes.twm": "Мировая машина",
+  "alinlib.config.themes.twm": "Світова машина",
   "alinlib.config.button.twm.color": "Колір",
-  "alinlib.config.button.twm.color.custom": "Власний цвет",
+  "alinlib.config.button.twm.color.custom": "Користувацький цвет",
   "alinlib.config.config_screen.small_panel_size": "Скорочений варіант панелі",
   "alinlib.config.toast.timeline": "Шкала часу сповіщення",
   "alinlib.config.button.enable_reset_button": "Кнопка скидання",
@@ -41,7 +41,7 @@
   "alinlib.config.checkbox.example": "Приклад прапорця",
   "alinlib.config.checkbox.enable": "Стиль прапорця",
   "alinlib.config.checkbox.color": "Колір",
-  "alinlib.config.checkbox.color.custom": "Власний колір",
+  "alinlib.config.checkbox.color.custom": "Користувацький колір",
 
   "alinlib.config.blockquote": "Блок цитати",
   "alinlib.config.blockquote.color": "Колір лінії",
@@ -58,7 +58,7 @@
 
   "alinlib.config.localization": "Локалізація",
   "alinlib.config.localization.extended_coordinates": "Розширені координати",
-  "alinlib.config.view.item_off_hand": "Показувати предмети в другорядній руці",
+  "alinlib.config.view.item_off_hand": "Показувати предмети в іншій руці",
 
   "alinlib.config.stealth": "Скритність",
   "alinlib.config.streamer.stealth": "Режим скритности",
@@ -79,7 +79,7 @@
   "alinlib.design.demo.button.left.with_icon": "Кнопка",
   "alinlib.design.demo.button.right.with_icon": "зі значком",
   "alinlib.design.demo.button.with_icon": "Кнопка зі значком",
-  "alinlib.design.demo.button.sprite": "Sprite",
+  "alinlib.design.demo.button.sprite": "Спрайт",
 
   "alinlib.design.demo.edit_box": "Поле вводу",
   "alinlib.design.demo.edit_box.color": "Колір",
@@ -88,10 +88,10 @@
   "alinlib.design.demo.selector": "Вибір",
 
   "alinlib.design.demo.slider": "Повзунок",
-  "alinlib.design.demo.slider.int": "Integer",
-  "alinlib.design.demo.slider.double": "Double",
-  "alinlib.design.demo.slider.percent": "Percent",
-  "alinlib.design.demo.slider.float": "Float",
+  "alinlib.design.demo.slider.int": "Цілий",
+  "alinlib.design.demo.slider.double": "Подвійний",
+  "alinlib.design.demo.slider.percent": "Відсотковий",
+  "alinlib.design.demo.slider.float": "Рухомий",
 
   "alinlib.design.demo.text": "Текст",
   "alinlib.design.demo.text.left": "Текст\n зліва",
@@ -101,9 +101,9 @@
   "alinlib.design.demo.text.blockquote": "Блок цитати",
   "alinlib.design.demo.text.blockquote.colors": "Кольоровий блок цитати",
   "alinlib.design.demo.text.blockquote.colors.def": "Усталений колір",
-  "alinlib.design.demo.text.blockquote.colors.col1": "Власний колір (у будівнику) #1",
-  "alinlib.design.demo.text.blockquote.colors.col2": "Власний колір (у будівнику) #2",
-  "alinlib.design.demo.text.url": "натисни на це -> %s",
+  "alinlib.design.demo.text.blockquote.colors.col1": "Користувацький колір (у будівнику) #1",
+  "alinlib.design.demo.text.blockquote.colors.col2": "Користувацький колір (у будівнику) #2",
+  "alinlib.design.demo.text.url": "натисни на це —> %s",
   "alinlib.design.demo.text.hr": "Горизонтальная лінійка (цей віджет)",
 
   "alinlib.design.demo.other": "Інше",
