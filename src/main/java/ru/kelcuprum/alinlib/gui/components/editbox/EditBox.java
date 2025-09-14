@@ -1,6 +1,9 @@
 package ru.kelcuprum.alinlib.gui.components.editbox;
 
 import net.minecraft.client.gui.GuiGraphics;
+//#if MC >= 12109
+import net.minecraft.client.input.KeyEvent;
+//#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
@@ -30,7 +33,11 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
         setMaxLength(Integer.MAX_VALUE);
         if (this.builder.isColor) {
             setMaxLength(16);
-            setFormatter((string, integer) -> FormattedCharSequence.forward(string.toUpperCase(), Style.EMPTY.withColor(getColor())));
+            //#if MC < 12109
+            //$$ setFormatter((string, integer) -> FormattedCharSequence.forward(string.toUpperCase(), Style.EMPTY.withColor(getColor())));
+            //#else
+            addFormatter(((string, i) -> FormattedCharSequence.forward(string.toUpperCase(), Style.EMPTY.withColor(getColor()))));
+            //#endif
             this.volume = this.builder.hasConfigurable() ? this.builder.config.getNumber(this.builder.configType, this.builder.color).intValue() : this.builder.color;
             setValue(Integer.toHexString(volume));
             setResponder(string -> {
@@ -96,7 +103,16 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
     }
 
     @Override
-    public boolean keyPressed(int i, int j, int k) {
+    public boolean keyPressed(
+            //#if MC < 12109
+            //$$ int i, int j, int k
+            //#else
+            KeyEvent keyEvent
+            //#endif
+    ) {
+        //#if MC >= 12109
+        int i = keyEvent.key();
+        //#endif
         if (i == GLFW.GLFW_KEY_DELETE && this.resettable()) {
             ((Resetable) this).resetValue();
             assert AlinLib.MINECRAFT != null;
@@ -104,11 +120,18 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
                     .setTitle(builder.getTitle())
                     .setMessage(Component.translatable("alinlib.component.value_reset.toast"))
                     .setIcon(RESET)
+                    .setIsWhiteIcon(true)
                     .buildAndShow();
             AlinLib.LOG.log(Component.translatable("alinlib.component.reset.toast"));
             return true;
         }
-        return super.keyPressed(i, j, k);
+        return super.keyPressed(
+                //#if MC < 12109
+                //$$ i, j, k
+                //#else
+                keyEvent
+                //#endif
+        );
     }
 
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -118,7 +141,13 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         guiGraphics.drawString(font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : builder.getStyle().getTextColor(active));
         String volume1 = font.plainSubstrByWidth(this.builder.secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue(), getX() + getWidth() - (getPositionContent(this.builder.secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue())));
-        guiGraphics.drawString(font, formatter.apply(volume1, displayPos), getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : builder.getStyle().getTextColor(active));
+        guiGraphics.drawString(font,
+                //#if MC < 12109
+                //$$ formatter.apply(volume1, displayPos)
+                //#else
+                applyFormat(volume1, displayPos)
+                //#endif
+                , getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : builder.getStyle().getTextColor(active));
     }
 
 

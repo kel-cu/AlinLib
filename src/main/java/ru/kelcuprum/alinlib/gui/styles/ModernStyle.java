@@ -4,6 +4,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
+import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 public class ModernStyle extends AbstractStyle {
     public ModernStyle() {
@@ -42,5 +44,21 @@ public class ModernStyle extends AbstractStyle {
             guiGraphics.fill(x, y, x+1, y + height, 0xFFFFFFFF);
             guiGraphics.fill(x + width, y, x - 1 + width, y + height, 0xFFFFFFFF);
         }
+    }
+
+    @Override
+    public void renderToastBackground(ToastBuilder builder, GuiGraphics guiGraphics, int x, int y, int width, int height, double timeline) {
+        guiGraphics.fill(0, 0, width, height - 1, 0xB3000000);
+        if(builder.color != null) guiGraphics.fill(0, height - 1, width, height, builder.color.intValue());
+        else if (builder.type != ToastBuilder.Type.FLAT) {
+            guiGraphics.fill(x, y+height - 1, width, height, 0xB3000000);
+            if(AlinLib.bariumConfig.getBoolean("TOAST.TIMELINE")) guiGraphics.fill(0, height - 1, (int) (width*timeline), height, builder.type.color);
+            else guiGraphics.fill(0, height - 1, width, height, builder.type.color);
+        } else guiGraphics.fill(0, height - 1, width, height, 0xB3000000);
+    }
+
+    public static void renderDefaultBlockquoteBackground(TextBuilder builder, GuiGraphics guiGraphics, int x, int y, int width, int height, int[] colors){
+        guiGraphics.fill(x, y, x + 1, y + height, colors[0]);
+        guiGraphics.fill(x + 1, y, x + width, y + height, colors[1]);
     }
 }

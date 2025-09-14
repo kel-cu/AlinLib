@@ -4,6 +4,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
+//#if MC >= 12109
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+//#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.util.FormattedCharSequence;
@@ -82,18 +86,37 @@ public class DialogScreen extends Screen {
 
 
     @Override
-    public boolean keyPressed(int i, int j, int k) {
+    public boolean keyPressed(
+            //#if MC >= 12109
+            KeyEvent keyEvent
+            //#else
+            //$$ int i, int j, int k
+            //#endif
+    ) {
+
+        //#if MC >= 12109
+        int i = keyEvent.key();
+        //#endif
+
         if(i == GLFW.GLFW_KEY_SPACE || i == GLFW.GLFW_KEY_Z){
             changePosition();
             return false;
-        } else return super.keyPressed(i, j, k);
+        } else return super.keyPressed(
+                //#if MC >= 12109
+                keyEvent
+                //#else
+                //$$ i, j, k
+                //#endif
+                );
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i
-                                //#if MC >= 12109
-            , boolean b
-                                //#endif
+    public boolean mouseClicked(
+    //#if MC >= 12109
+    MouseButtonEvent mouseButtonEvent, boolean bl
+    //#else
+    //$$ double d, double e, int i
+    //#endif
     ) {
         changePosition();
         return false;

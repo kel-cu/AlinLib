@@ -6,10 +6,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#if MC >= 12109
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+//#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import ru.kelcuprum.alinlib.AlinLib;
-import ru.kelcuprum.alinlib.gui.Colors;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +66,7 @@ public class ConfigureScrolWidget extends AbstractWidget {
             //#if MC < 12105
             //$$ RenderSystem.enableBlend();
             //#endif
-            guiGraphics.fill(getX(), k, getX()+getWidth(), k+i, Colors.getScrollerColor());
+            guiGraphics.fill(getX(), k, getX()+getWidth(), k+i, GuiUtils.getSelected().getScrollerColor());
             //#if MC < 12105
             //$$ RenderSystem.disableBlend();
             //#endif
@@ -113,7 +117,18 @@ public class ConfigureScrolWidget extends AbstractWidget {
         }
     }
 
-    public boolean mouseClicked(double d, double e, int i) {
+    public boolean mouseClicked(
+            //#if MC >= 12109
+            MouseButtonEvent mouseButtonEvent, boolean bl1
+            //#else
+            //$$ double d, double e, int i
+            //#endif
+    ) {
+        //#if MC >= 12109
+        double d = mouseButtonEvent.x();
+        double e = mouseButtonEvent.y();
+        int i = mouseButtonEvent.button();
+        //#endif
         if (!this.visible) {
             return false;
         } else {
@@ -128,15 +143,39 @@ public class ConfigureScrolWidget extends AbstractWidget {
         }
     }
 
-    public boolean mouseReleased(double d, double e, int i) {
+    public boolean mouseReleased(
+            //#if MC >= 12109
+            MouseButtonEvent mouseButtonEvent
+            //#else
+            //$$ double d, double e, int i
+            //#endif
+    ) {
+        //#if MC >= 12109
+        int i = mouseButtonEvent.button();
+        //#endif
         if (i == 0) {
             this.scrolling = false;
         }
 
-        return super.mouseReleased(d, e, i);
+        return super.mouseReleased(
+                //#if MC >= 12109
+        mouseButtonEvent
+        //#else
+        //$$ d, e, i
+        //#endif
+        );
     }
 
-    public boolean mouseDragged(double d, double e, int i, double f, double g) {
+    public boolean mouseDragged(
+            //#if MC >= 12109
+            MouseButtonEvent mouseButtonEvent, double f, double g
+            //#else
+            //$$ double d, double e, int i, double f, double g
+            //#endif
+    ) {
+        //#if MC >= 12109
+        double e = mouseButtonEvent.y();
+        //#endif
         if (this.visible && this.isFocused() && this.scrolling) {
             if (e < (double)this.getY()) {
                 this.setScrollAmount(0.0);
@@ -158,7 +197,16 @@ public class ConfigureScrolWidget extends AbstractWidget {
         return d >= (double)this.getX() && d < (double)(this.getX() + this.width) && e >= (double)this.getY() && e < (double)(this.getY() + this.height);
     }
 
-    public boolean keyPressed(int i, int j, int k) {
+    public boolean keyPressed(
+            //#if MC < 12109
+            //$$ int i, int j, int k
+            //#else
+            KeyEvent keyEvent
+            //#endif
+    ) {
+        //#if MC >= 12109
+        int i = keyEvent.key();
+        //#endif
         boolean bl = i == 265;
         boolean bl2 = i == 264;
         if (bl || bl2) {
@@ -169,7 +217,13 @@ public class ConfigureScrolWidget extends AbstractWidget {
             }
         }
 
-        return super.keyPressed(i, j, k);
+        return super.keyPressed(
+                //#if MC < 12109
+                //$$ i, j, k
+                //#else
+                keyEvent
+                //#endif
+        );
     }
     // ---
 

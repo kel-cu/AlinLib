@@ -3,6 +3,9 @@ package ru.kelcuprum.alinlib.gui.screens.types;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+//#if MC >= 12109
+import net.minecraft.client.input.MouseButtonEvent;
+//#endif
 import net.minecraft.network.chat.*;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -56,6 +59,7 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
                                     .setTitle(title)
                                     .setMessage(Component.translatable("alinlib.component.reset.toast"))
                                     .setIcon(RESET)
+                                    .setIsWhiteIcon(true)
                                     .buildAndShow();
                             AlinLib.LOG.log(Component.translatable("alinlib.component.reset.toast"));
                         }
@@ -112,11 +116,18 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i
-                                //#if MC >= 12109
-            , boolean b
-                                //#endif
+    public boolean mouseClicked(
+            //#if MC >= 12109
+            MouseButtonEvent mouseButtonEvent, boolean bl
+            //#else
+            //$$ double d, double e, int i
+            //#endif
     ) {
+        //#if MC >= 12109
+        double d = mouseButtonEvent.x();
+        double e = mouseButtonEvent.y();
+        int i = mouseButtonEvent.button();
+        //#endif
         int size = Math.min(maxSize, width - 10);
         int x = (width - size) / 2;
         boolean st = true;
@@ -124,9 +135,11 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
         for (GuiEventListener guiEventListener : this.children()) {
             if (scroller != null && scroller.widgets.contains(guiEventListener)) {
                 if ((d >= x && d <= x + size) && e >= 30) {
-                    if (guiEventListener.mouseClicked(d, e, i
-                            //#if MC >= 12109
-                            , b
+                    if (guiEventListener.mouseClicked(
+                            //#if MC < 12109
+                            //$$ d, e, i
+                            //#else
+                            mouseButtonEvent, bl
                             //#endif
                     )) {
                         st = false;
@@ -134,9 +147,11 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
                         break;
                     }
                 }
-            } else if (guiEventListener.mouseClicked(d, e, i
-                    //#if MC >= 12109
-                    , b
+            } else if (guiEventListener.mouseClicked(
+                    //#if MC < 12109
+                    //$$ d, e, i
+                    //#else
+                    mouseButtonEvent, bl
                     //#endif
             )) {
                 st = false;

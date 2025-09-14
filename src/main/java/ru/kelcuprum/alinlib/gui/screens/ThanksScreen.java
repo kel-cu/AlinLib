@@ -5,6 +5,9 @@ import com.google.gson.JsonObject;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+//#if MC >= 12109
+import net.minecraft.client.input.KeyEvent;
+//#endif
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
 //#endif
@@ -129,10 +132,27 @@ public class ThanksScreen extends Screen {
 
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+    public boolean keyPressed(
+            //#if MC >= 12109
+            KeyEvent keyEvent
+            //#else
+            //$$ int keyCode, int scanCode, int modifiers
+            //#endif
+    ) {
+
+        //#if MC >= 12109
+        int keyCode = keyEvent.key();
+        int modifiers = keyEvent.modifiers();
+        //#endif
         if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0)
             AlinLib.MINECRAFT.setScreen(parent);
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(
+                //#if MC >= 12109
+                keyEvent
+                //#else
+                //$$ keyCode, scanCode, modifiers
+                //#endif
+        );
     }
 
     public void onClose() {

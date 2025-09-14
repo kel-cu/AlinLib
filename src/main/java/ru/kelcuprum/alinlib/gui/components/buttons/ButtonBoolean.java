@@ -2,6 +2,9 @@ package ru.kelcuprum.alinlib.gui.components.buttons;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+//#if MC >= 12109
+import net.minecraft.client.input.InputWithModifiers;
+//#endif
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -26,7 +29,11 @@ public class ButtonBoolean extends Button implements Resetable {
         this.setMessage(Component.literal(builder.getTitle().getString() +": ").append(volumeState));
     }
     @Override
-    public void onPress() {
+    public void onPress(
+            //#if MC >= 12109
+            InputWithModifiers inputWithModifiers
+            //#endif
+    ) {
         if(!active) return;
         this.setValue(!this.value);
         if(builder.hasConfigurable()) this.builder.config.setBoolean(this.builder.configType, value);
@@ -45,7 +52,7 @@ public class ButtonBoolean extends Button implements Resetable {
             int boxHeight = getHeight() - 10;
             int boxX = getWidthComponent()+5-height;
             int boxY = 5;
-            int color = value ? Colors.getCheckBoxColor() : 0xFFFFFFFF;
+            int color = GuiUtils.getSelected().getCheckBoxColor(value);
             guiGraphics.fill(getXComponent()+boxX, getY()+boxY, getXComponent()+boxX + boxHeight, getY()+boxY+1, color);
             guiGraphics.fill(getXComponent()+boxX, getY()+boxHeight+boxY-1, getXComponent()+boxX + boxHeight, getY()+boxHeight+boxY, color);
 

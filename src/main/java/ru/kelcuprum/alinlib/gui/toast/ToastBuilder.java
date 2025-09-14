@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -23,8 +24,10 @@ public class ToastBuilder {
     protected Component message = Component.empty();
     protected ItemStack itemIcon;
     protected ResourceLocation icon;
-    protected Type type = Type.INFO;
-    protected Number color;
+    public Type type = Type.INFO;
+    protected AbstractStyle style = null;
+    protected boolean isWhiteIcon = false;
+    public Number color;
     protected int displayTime = 5000;
     protected Function<Toast.Visibility, Toast.Visibility> visibilityVisitor;
 
@@ -57,6 +60,7 @@ public class ToastBuilder {
     }
 
     public boolean hasIcon() {
+        if(isWhiteIcon && !getStyle().supportWhiteIcons()) return false;
         return this.itemIcon != null || this.icon != null;
     }
 
@@ -82,11 +86,28 @@ public class ToastBuilder {
         return this;
     }
 
+    public ToastBuilder setIsWhiteIcon(boolean isWhiteIcon){
+        this.isWhiteIcon = isWhiteIcon;
+        return this;
+    }
+    public boolean isWhiteIcon() {
+        return isWhiteIcon;
+    }
+
+    public ToastBuilder setStyle(AbstractStyle style){
+        this.style = style;
+        return this;
+    }
+    public AbstractStyle getStyle() {
+        return style == null ? GuiUtils.getSelected() : style;
+    }
+
     public AlinaToast build() {
         Objects.requireNonNull(this.title, "title == null");
 
         return new AlinaToast(this);
     }
+
     @SuppressWarnings("UnusedReturnValue")
     public AlinaToast buildAndShow(){
         return

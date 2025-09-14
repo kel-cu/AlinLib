@@ -1,6 +1,9 @@
 package ru.kelcuprum.alinlib.gui.components.selector;
 
 import net.minecraft.client.gui.GuiGraphics;
+//#if MC >= 12109
+import net.minecraft.client.input.InputWithModifiers;
+//#endif
 import net.minecraft.network.chat.Component;
 import org.apache.logging.log4j.Level;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -31,7 +34,11 @@ public class SelectorButton extends Button implements Resetable {
         assert this.builder.list !=null;
         if(this.position >= this.builder.list.length) {
             setPosition(-1);
-            onPress();
+            onPress(
+                    //#if MC >= 12109
+                    null
+                    //#endif
+            );
         }
         try {
             return Component.literal(this.builder.list[this.position]);
@@ -80,7 +87,11 @@ public class SelectorButton extends Button implements Resetable {
 
     // Мелочь
     @Override
-    public void onPress() {
+    public void onPress(
+            //#if MC >= 12109
+            InputWithModifiers inputWithModifiers
+            //#endif
+    ) {
         this.position++;
         if(this.builder.list.length == this.position) this.position = 0;
         if(builder.hasConfigurable()){

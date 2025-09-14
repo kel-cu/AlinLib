@@ -3,6 +3,9 @@ package ru.kelcuprum.alinlib.gui.screens;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
+//#if MC >= 12109
+import net.minecraft.client.input.KeyEvent;
+//#endif
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -112,7 +115,18 @@ public class AbstractConfigScreen extends Screen {
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+    public boolean keyPressed(
+            //#if MC >= 12109
+            KeyEvent keyEvent
+            //#else
+            //$$ int keyCode, int scanCode, int modifiers
+            //#endif
+    ) {
+
+        //#if MC >= 12109
+        int keyCode = keyEvent.key();
+        int modifiers = keyEvent.modifiers();
+        //#endif
         if(keyCode == GLFW.GLFW_KEY_ESCAPE){
             if(getFocused() != null && getFocused().isFocused()) {
                 getFocused().setFocused(false);
@@ -121,7 +135,13 @@ public class AbstractConfigScreen extends Screen {
         }
         if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0 && !(getFocused() instanceof EditBox))
             AlinLib.MINECRAFT.setScreen(new ThanksScreen(this));
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(
+                //#if MC >= 12109
+                keyEvent
+                //#else
+                //$$ keyCode, scanCode, modifiers
+                //#endif
+        );
     }
 
     // Рендер, скролл, прослушивание кей-биндов

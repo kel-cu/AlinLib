@@ -53,10 +53,17 @@ public class AlinLib implements net.fabricmc.api.ClientModInitializer {
         GuiUtils.registerStyle(new WMStyle());
         World.registerDefaultWorlds();
         StealthManager.registerDefault();
+        //#if MC >= 12109
+        KeyMapping.Category category = KeyMapping.Category.register("alinlib");
+        //#endif
         KeyMapping toggleStealth = KeyMappingHelper.register(new KeyMapping(
                 "alinlib.key.stealth",
                 GLFW.GLFW_KEY_UNKNOWN,
-                "alinlib"
+                //#if MC >= 12109
+                category
+                //#else
+                //$$ "alinlib"
+                //#endif
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -68,7 +75,11 @@ public class AlinLib implements net.fabricmc.api.ClientModInitializer {
             KeyMapping openConfig = KeyMappingHelper.register(new KeyMapping(
                     "alinlib.key.config",
                     GLFW.GLFW_KEY_L,
-                    "alinlib"
+                    //#if MC >= 12109
+                    category
+                    //#else
+                    //$$ "alinlib"
+                    //#endif
             ));
             GuiRenderEvents.RENDER.register(new GUIRender());
             ClientTickEvents.END_CLIENT_TICK.register(client -> {

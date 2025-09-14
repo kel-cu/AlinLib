@@ -30,4 +30,6 @@ public class FlatStyle extends AbstractStyle{
             guiGraphics.fill(xS, yS, xS+4, yS+ AlinLib.MINECRAFT.font.lineHeight, Colors.CLOWNFISH);
         }
     }
+
+
 }

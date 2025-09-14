@@ -6,6 +6,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.text.HorizontalRuleBuilder;
 
@@ -53,7 +54,7 @@ public class HorizontalRule extends AbstractWidget {
     }
 
     public int getColor(){
-        return builder.color != null ? builder.color[0] : Colors.getHorizontalRuleColor();
+        return builder.color != null ? builder.color[0] : GuiUtils.getSelected().getHorizontalRuleColor();
     }
 
     @Override

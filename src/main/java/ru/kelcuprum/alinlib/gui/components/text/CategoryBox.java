@@ -4,7 +4,10 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.gui.navigation.CommonInputs;
+//#if MC >= 12109
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+//#endif
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
@@ -92,15 +95,19 @@ public class CategoryBox extends AbstractWidget {
         return this;
     }
     @Override
-    public void onClick(double d, double e
-                        //#if MC >= 12109
-            , boolean b
-                        //#endif
-    ) {
+    public void onClick(
+            //#if MC < 12109
+            //$$ double d, double e
+            //#else
+            MouseButtonEvent mouseButtonEvent, boolean bl
+            //#endif
+        ) {
         changeState();
-        super.onClick(d, e
-                //#if MC >= 12109
-                , b
+        super.onClick(
+                //#if MC < 12109
+                //$$ d, e
+                //#else
+                mouseButtonEvent, bl
                 //#endif
         );
     }
@@ -111,9 +118,18 @@ public class CategoryBox extends AbstractWidget {
     }
 
     @Override
-    public boolean keyPressed(int i, int j, int k) {
+    public boolean keyPressed(
+            //#if MC < 12109
+            //$$ int i, int j, int k
+            //#else
+            KeyEvent keyEvent
+            //#endif
+    ) {
+        //#if MC >= 12109
+        int i = keyEvent.key();
+        //#endif
         if (this.active && this.visible) {
-            if (CommonInputs.selected(i)) {
+            if (i == 257 || i == 32 || i == 335) {
                 this.playDownSound(AlinLib.MINECRAFT.getSoundManager());
                 changeState();
                 return true;
@@ -135,20 +151,20 @@ public class CategoryBox extends AbstractWidget {
                 this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
                 int textWidth = font.width(getMessage());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
-                guiGraphics.fill(Math.max(x, getX()), y+font.lineHeight+1, Math.max(x, getX())+Math.min(textWidth, getWidth()), y+font.lineHeight+2, Colors.getHorizontalRuleColor());
+                guiGraphics.fill(Math.max(x, getX()), y+font.lineHeight+1, Math.max(x, getX())+Math.min(textWidth, getWidth()), y+font.lineHeight+2, GuiUtils.getSelected().getHorizontalRuleColor());
             } else {
                 guiGraphics.drawString(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, -1);
                 guiGraphics.drawCenteredString(font, getName(), getX() + getWidth() / 2, y, -1);
                 int textWidth = font.width(getName());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
-                guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, Colors.getHorizontalRuleColor());
+                guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, GuiUtils.getSelected().getHorizontalRuleColor());
             }
             if(state && renderLine){
                 int yW = height+5;
                 for(AbstractWidget widget : values) yW+=widget.getHeight()+5;
                 int textWidth = font.width(getName());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
-                guiGraphics.fill(x, getY()+yW, x+textWidth, getY()+yW+1, Colors.getHorizontalRuleColor());
+                guiGraphics.fill(x, getY()+yW, x+textWidth, getY()+yW+1, GuiUtils.getSelected().getHorizontalRuleColor());
             }
         }
     }

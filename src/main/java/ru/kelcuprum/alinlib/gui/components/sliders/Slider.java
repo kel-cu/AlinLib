@@ -3,6 +3,10 @@ package ru.kelcuprum.alinlib.gui.components.sliders;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
+//#if MC >= 12109
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+//#endif
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
 //#endif
@@ -159,20 +163,27 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
     }
 
     @Override
-    public void onClick(double d, double e
+    public void onClick(
                         //#if MC >= 12109
-            , boolean b
+                        MouseButtonEvent event, boolean bl
+                        //#else
+                        //$$ double d, double e
                         //#endif
     ) {
+        //#if MC >= 12109
+        double d = event.x();
+        //#endif
         if (isResetable()) {
             if (getX() < d && d < getX() + getHeight()) {
                 ((Resetable) this).resetValue();
             } else {
                 this.setValueFromMouse(d);
             }
-        } else super.onClick(d, e
+        } else super.onClick(
                 //#if MC >= 12109
-                , b
+                event, bl
+                //#else
+                //$$ d, e
                 //#endif
         );
     }
@@ -191,14 +202,39 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
 
 
     @Override
-    protected void onDrag(double d, double e, double f, double g) {
+    protected void onDrag(
+            //#if MC < 12109
+            //$$ double d, double e
+            //#else
+            MouseButtonEvent mouseButtonEvent
+            //#endif
+            , double f, double g) {
+
+        //#if MC >= 12109
+        double d = mouseButtonEvent.x();
+        //#endif
         if (isResetable()) {
             if (d > getXComponent()) this.setValueFromMouse(d);
-        } else super.onDrag(d, e, f, g);
+        } else super.onDrag(
+                //#if MC < 12109
+                //$$ d, e
+                //#else
+                mouseButtonEvent
+                //#endif
+                , f, g);
     }
 
     @Override
-    public boolean keyPressed(int i, int j, int k) {
+    public boolean keyPressed(
+            //#if MC < 12109
+            //$$ int i, int j, int k
+            //#else
+            KeyEvent keyEvent
+            //#endif
+            ) {
+        //#if MC >= 12109
+        int i = keyEvent.key();
+        //#endif
         if (i == GLFW.GLFW_KEY_DELETE && this.resettable()) {
             ((Resetable) this).resetValue();
             assert AlinLib.MINECRAFT != null;
@@ -206,11 +242,18 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
                     .setTitle(builder.getTitle())
                     .setMessage(Component.translatable("alinlib.component.value_reset.toast"))
                     .setIcon(RESET)
+                    .setIsWhiteIcon(true)
                     .buildAndShow();
             AlinLib.LOG.log(Component.translatable("alinlib.component.reset.toast"));
             return true;
         }
-        return super.keyPressed(i, j, k);
+        return super.keyPressed(
+                //#if MC < 12109
+                //$$ i, j, k
+                //#else
+                keyEvent
+                //#endif
+        );
     }
     //
 

@@ -46,8 +46,8 @@ public class GRUIStealth extends AbstractStealthManager {
             }
         }
         if (!isX) {
-            assert AlinLib.MINECRAFT.cameraEntity != null;
-            if (AlinLib.MINECRAFT.cameraEntity.getX() > 0 && coordinate > 0 && value > 0) value *= -1;
+            assert AlinLib.MINECRAFT.player != null;
+            if (AlinLib.MINECRAFT.player.getX() > 0 && coordinate > 0 && value > 0) value *= -1;
         }
         return coordinate * value;
     }

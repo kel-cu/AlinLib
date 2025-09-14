@@ -1,2 +1,4 @@
-- Fixed scroll bar for left panel in configs
-- Ported to 25w32a
+- Rewritten renders for widgets
+- Added new functions for themes
+- Кастоный стал кастомным
+- Ported to 25w37a

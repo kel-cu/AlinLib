@@ -218,6 +218,10 @@ public class DesignScreen {
                         }).setConfig(AlinLib.bariumConfig, "HORIZONTAL_RULE.COLOR"))
                         .addValue(new EditBoxBuilder(Component.translatable("alinlib.config.checkbox.color.custom")).setColor(Colors.CPM_LAVENDER).setConfig(AlinLib.bariumConfig, "HORIZONTAL_RULE.COLOR.CUSTOM")))
                 .addWidget(new ButtonBooleanBuilder(Component.translatable("alinlib.config.scroller.smooth"), false).setConfig(AlinLib.bariumConfig, "SCROLLER.SMOOTH"));
+        if(FabricLoader.getInstance().isDevelopmentEnvironment()){
+            builder.addWidget(new HorizontalRuleBuilder());
+            builder.addWidget(new ButtonBooleanBuilder(Component.literal("Выйди нахуй из комнаты"), true).setConfig(AlinLib.bariumConfig, "DISABLE_TEST_TEXT_RENDER"));
+        }
         return builder.build();
     }
 }

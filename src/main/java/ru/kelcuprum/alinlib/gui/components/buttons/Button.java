@@ -4,6 +4,11 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#if MC >= 12109
+import net.minecraft.client.input.InputWithModifiers;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+//#endif
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
 //#endif
@@ -47,7 +52,6 @@ public class Button extends AbstractButton implements Description {
         this.active = active;
         return this;
     }
-
 
     // Рендер
     @Override
@@ -147,15 +151,23 @@ public class Button extends AbstractButton implements Description {
     }
 
     @Override
-    public void onClick(double d, double e
-    //#if MC >= 12109
-    , boolean b
+    public void onClick(
+    //#if MC < 12109
+    //$$ double d, double e
+    //#else
+    MouseButtonEvent mouseButtonEvent, boolean bl
     //#endif
     ) {
+
+        //#if MC >= 12109
+        double d = mouseButtonEvent.x();
+        //#endif
         if(isResetable() && (getX() < d && d < getX()+getHeight())) ((Resetable) this).resetValue();
-        else super.onClick(d, e
-                //#if MC >= 12109
-                , b
+        else super.onClick(
+                //#if MC < 12109
+                //$$ d, e
+                //#else
+                mouseButtonEvent, bl
                 //#endif
         );
     }
@@ -167,7 +179,16 @@ public class Button extends AbstractButton implements Description {
         return isHovered || (!isReset && isFocused());
     }
     @Override
-    public boolean keyPressed(int i, int j, int k) {
+    public boolean keyPressed(
+            //#if MC < 12109
+            //$$ int i, int j, int k
+            //#else
+            KeyEvent keyEvent
+            //#endif
+    ) {
+        //#if MC >= 12109
+        int i = keyEvent.key();
+        //#endif
         if(i == GLFW.GLFW_KEY_DELETE && (this instanceof Resetable)) {
             ((Resetable) this).resetValue();
             assert AlinLib.MINECRAFT != null;
@@ -175,16 +196,27 @@ public class Button extends AbstractButton implements Description {
                     .setTitle(builder.getTitle())
                     .setMessage(Component.translatable("alinlib.component.value_reset.toast"))
                     .setIcon(RESET)
+                    .setIsWhiteIcon(true)
                     .buildAndShow();
             AlinLib.LOG.log(Component.translatable("alinlib.component.reset.toast"));
             return true;
         }
-        return super.keyPressed(i, j, k);
+        return super.keyPressed(
+                //#if MC < 12109
+                //$$ i, j, k
+                //#else
+                keyEvent
+                //#endif
+                );
     }
 
     // Мелочи
     @Override
-    public void onPress() {
+    public void onPress(
+            //#if MC >= 12109
+            InputWithModifiers inputWithModifiers
+            //#endif
+            ) {
         if(((ButtonBuilder) builder).getOnPress() != null) {
             ((ButtonBuilder) builder).getOnPress().onPress(this);
             setFocused(false);

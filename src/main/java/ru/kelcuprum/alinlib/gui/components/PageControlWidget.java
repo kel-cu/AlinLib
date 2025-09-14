@@ -4,6 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#if MC >= 12109
+import net.minecraft.client.input.MouseButtonEvent;
+//#endif
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -35,11 +38,18 @@ public class PageControlWidget extends AbstractWidget {
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i
-                                //#if MC >= 12109
-            , boolean b
-                                //#endif
+    public boolean mouseClicked(
+            //#if MC >= 12109
+            MouseButtonEvent mouseButtonEvent, boolean bl1
+            //#else
+            //$$ double d, double e, int i
+            //#endif
     ) {
+        //#if MC >= 12109
+        double d = mouseButtonEvent.x();
+        double e = mouseButtonEvent.y();
+        int i = mouseButtonEvent.button();
+        //#endif
         //#if MC < 12104
         //$$ if (clicked(d, e)) {
         //#else

@@ -3,6 +3,8 @@ package ru.kelcuprum.alinlib.gui.styles;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.Colors;
+import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
+import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.interpolate;
 
@@ -159,5 +161,63 @@ public class WinStyle extends AbstractStyle{
         //
         guiGraphics.fill(width-1, y, width, height-1, color4);
         guiGraphics.fill(x, height-1, width, height, color4);
+    }
+
+    @Override
+    public void renderToastBackground(ToastBuilder toastBuilder, GuiGraphics guiGraphics, int x, int y, int width, int height, double timeline) {
+        y+=1; height-=1; width-=2;
+        guiGraphics.fill(x+1, y+1, x-1+width, y-1+height, 0xFFffffe1);
+        guiGraphics.fill(x+1, y+1, x+width+1, y+3, 0xFFffffe1);
+        //tochki
+        guiGraphics.fill(x+1, y+1, x+2, y+2, 0xFF000000);
+        guiGraphics.fill(x+1+width, y+1, x+2+width, y+2, 0xFF000000);
+        guiGraphics.fill(x+width, y+2, x+1+width, y+3, 0xFF000000);
+
+        guiGraphics.fill(x+1, y-1+height, x+2, y-2+height, 0xFF000000);
+        guiGraphics.fill(x-1+width, y-1+height, x-2+width, y-2+height, 0xFF000000);
+        // poloski
+        guiGraphics.fill(x+2, y, x+2+width, y+1, 0xFF000000);
+        guiGraphics.fill(x+2, y+height, x-2+width, y-1+height, 0xFF000000);
+        guiGraphics.fill(x, y+2, x+1, y-2+height, 0xFF000000);
+        guiGraphics.fill(x+width, y+3, x-1+width, y-2+height, 0xFF000000);
+    }
+
+    @Override
+    public void renderBlockquoteBackground(TextBuilder builder, GuiGraphics guiGraphics, int x, int y, int width, int height, int[] colors) {
+        width-=2;
+        guiGraphics.fill(x+1, y+1, x-1+width, y-1+height, 0xFFffffe1);
+        guiGraphics.fill(x+1, y+1, x+width+1, y+3, 0xFFffffe1);
+        //tochki
+        guiGraphics.fill(x+1, y+1, x+2, y+2, 0xFF000000);
+        guiGraphics.fill(x+1+width, y+1, x+2+width, y+2, 0xFF000000);
+        guiGraphics.fill(x+width, y+2, x+1+width, y+3, 0xFF000000);
+
+        guiGraphics.fill(x+1, y-1+height, x+2, y-2+height, 0xFF000000);
+        guiGraphics.fill(x-1+width, y-1+height, x-2+width, y-2+height, 0xFF000000);
+        // poloski
+        guiGraphics.fill(x+2, y, x+2+width, y+1, 0xFF000000);
+        guiGraphics.fill(x+2, y+height, x-2+width, y-1+height, 0xFF000000);
+        guiGraphics.fill(x, y+2, x+1, y-2+height, 0xFF000000);
+        guiGraphics.fill(x+width, y+3, x-1+width, y-2+height, 0xFF000000);
+    }
+
+    @Override
+    public int getToastTextColor() {
+        return 0xFF000000;
+    }
+
+    @Override
+    public int getTextColor(TextBuilder.TYPE type) {
+        return type == TextBuilder.TYPE.BLOCKQUOTE ? 0xFF000000 : super.getTextColor(type);
+    }
+
+    @Override
+    public boolean textShadow(TextBuilder.TYPE type) {
+        return type != TextBuilder.TYPE.BLOCKQUOTE && super.textShadow(type);
+    }
+
+    @Override
+    public boolean supportWhiteIcons() {
+        return false;
     }
 }

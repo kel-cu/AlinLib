@@ -50,20 +50,14 @@ public class AlinaToast implements Toast {
         //#elseif MC < 12102
         //$$ public @NotNull Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long l) {
         //#endif
-        guiGraphics.fill(0, 0, width(), height() - 1, 0xB3000000);
-        if(builder.color != null) guiGraphics.fill(0, height() - 1, width(), height(), builder.color.intValue());
-        else if (builder.type != ToastBuilder.Type.FLAT) {
-            guiGraphics.fill(0, height() - 1, width(), height(), 0xB3000000);
-            if(AlinLib.bariumConfig.getBoolean("TOAST.TIMELINE")) guiGraphics.fill(0, height() - 1, (int) (width()*(l/(double)builder.displayTime)), height(), builder.type.color);
-            else guiGraphics.fill(0, height() - 1, width(), height(), builder.type.color);
-        } else guiGraphics.fill(0, height() - 1, width(), height(), 0xB3000000);
+        builder.getStyle().renderToastBackground(builder, guiGraphics, 0,0, width(), height(), Math.min(1.0, l/(double)builder.displayTime));
 
         List<FormattedCharSequence> texts = new ObjectArrayList<>();
         texts.addAll(AlinLib.MINECRAFT.font.split(builder.title, textWidth()));
         texts.addAll(AlinLib.MINECRAFT.font.split(builder.message, textWidth()));
         int y = builder.hasIcon() ? 7 : 8;
         for(FormattedCharSequence text : texts){
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, text, builder.hasIcon() ? 30 : 8, y, -1, false);
+            guiGraphics.drawString(AlinLib.MINECRAFT.font, text, builder.hasIcon() ? 30 : 8, y, builder.getStyle().getToastTextColor(), false);
             y+=11;
         }
         if (builder.hasIcon()) {

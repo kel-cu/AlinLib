@@ -4,9 +4,12 @@ import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.gui.navigation.CommonInputs;
 import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.client.gui.screens.Screen;
+//#if MC >= 12109
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
+//#endif
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -15,6 +18,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.StringUtil;
 import org.jetbrains.annotations.Nullable;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
 
@@ -103,13 +107,12 @@ public class TextBox extends AbstractWidget implements Description {
         if (builder.type != BLOCKQUOTE && builder.onPress != null)
             builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getWidth(), getHeight(), true, isHoveredOrFocused());
         else if (builder.type == BLOCKQUOTE) {
-            guiGraphics.fill(this.getX(), this.getY(), this.getX() + 1, this.getY() + this.getHeight(), getBlockquoteColor()[0]);
-            guiGraphics.fill(this.getX() + 1, this.getY(), this.getX() + this.getWidth(), this.getY() + this.getHeight(), getBlockquoteColor()[1]);
+            builder.getStyle().renderBlockquoteBackground(builder, guiGraphics, this.getX(), this.getY(), this.getWidth(), this.getHeight(), getBlockquoteColor());
         }
     }
 
     public int[] getBlockquoteColor() {
-        return builder.color == null ? new int[]{AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR", CPM_BLUE).intValue(), AlinLib.bariumConfig.getNumber("BLOCKQUOTE.COLOR.BACKGROUND", CPM_BLUE - 0xE1000000).intValue()} : builder.color;
+        return builder.color == null ? builder.getStyle().getBlockquoteColors() : builder.color;
     }
 
     public void renderMessageText(GuiGraphics guiGraphics) {
@@ -117,9 +120,9 @@ public class TextBox extends AbstractWidget implements Description {
         int l = 0;
         for (FormattedCharSequence text : list) {
             if (builder.align == CENTER)
-                guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX() + (getWidth() / 2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), -1);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, getX() + (getWidth() / 2) - (AlinLib.MINECRAFT.font.width(text)/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
             else
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, (builder.align == LEFT ? getX() + (this.builder.type == BLOCKQUOTE ? 7 : 6) : getX() + getWidth() - 6 - AlinLib.MINECRAFT.font.width(text)), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), -1);
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, (builder.align == LEFT ? getX() + (this.builder.type == BLOCKQUOTE ? 7 : 6) : getX() + getWidth() - 6 - AlinLib.MINECRAFT.font.width(text)), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
             l++;
         }
     }
@@ -135,20 +138,28 @@ public class TextBox extends AbstractWidget implements Description {
     }
 
     @Override
-    public void onClick(double d, double e
+    public void onClick(
                         //#if MC >= 12109
-            , boolean b
+                        MouseButtonEvent mouseButtonEvent, boolean bl
+                        //#else
+                        //$$ double d, double e
                         //#endif
     ) {
         this.onPress();
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i
+    public boolean mouseClicked(
                                 //#if MC >= 12109
-            , boolean b
+                                MouseButtonEvent mouseButtonEvent, boolean bl
+                                //#else
+                                //$$ double d, double e, int i
                                 //#endif
     ) {
+        //#if MC >= 12109
+        double d = mouseButtonEvent.x();
+        double e = mouseButtonEvent.y();
+        //#endif
         if (this.builder.type == BLOCKQUOTE || this.builder.type == MESSAGE) {
             List<FormattedCharSequence> list = getArrayTexts(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12);
             int l = 0;
@@ -165,17 +176,22 @@ public class TextBox extends AbstractWidget implements Description {
                 }
                 l++;
             }
-            return super.mouseClicked(d, e, i
+            return super.mouseClicked(
                     //#if MC >= 12109
-                    , b
+                    mouseButtonEvent, bl
+                    //#else
+                    //$$ d, e, i
                     //#endif
             );
-        } else return super.mouseClicked(d, e, i
+        } else return super.mouseClicked(
                 //#if MC >= 12109
-                , b
+                mouseButtonEvent, bl
+                //#else
+                //$$ d, e, i
                 //#endif
         );
     }
+
 
     public boolean handleComponentClicked(@Nullable Style style) {
         if (style == null) {
@@ -268,9 +284,18 @@ public class TextBox extends AbstractWidget implements Description {
     }
 
     @Override
-    public boolean keyPressed(int i, int j, int k) {
+    public boolean keyPressed(
+            //#if MC < 12109
+            //$$ int i, int j, int k
+            //#else
+            KeyEvent keyEvent
+            //#endif
+    ) {
+        //#if MC >= 12109
+        int i = keyEvent.key();
+        //#endif
         if (this.active && this.visible) {
-            if (CommonInputs.selected(i)) {
+            if (i == 257 || i == 32 || i == 335) {
                 this.playDownSound(AlinLib.MINECRAFT.getSoundManager());
                 this.onPress();
                 return true;

@@ -3,6 +3,9 @@ package ru.kelcuprum.alinlib.gui.screens.types;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+//#if MC >= 12109
+import net.minecraft.client.input.MouseButtonEvent;
+//#endif
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
 //#endif
@@ -76,6 +79,7 @@ public class ConfigScreen extends AbstractConfigScreen {
                             .setTitle(title)
                             .setMessage(Component.translatable("alinlib.component.reset.toast"))
                             .setIcon(RESET)
+                            .setIsWhiteIcon(true)
                             .buildAndShow();
                     AlinLib.LOG.log(Component.translatable("alinlib.component.reset.toast"));
                 }
@@ -151,19 +155,28 @@ public class ConfigScreen extends AbstractConfigScreen {
     }
 
     @Override
-    public boolean mouseClicked(double d, double e, int i
-                                //#if MC >= 12109
-            , boolean b
-                                //#endif
+    public boolean mouseClicked(
+            //#if MC >= 12109
+            MouseButtonEvent mouseButtonEvent, boolean bl
+            //#else
+            //$$ double d, double e, int i
+            //#endif
     ) {
+        //#if MC >= 12109
+        double d = mouseButtonEvent.x();
+        double e = mouseButtonEvent.y();
+        int i = mouseButtonEvent.button();
+        //#endif
         boolean st = true;
         GuiEventListener selected = null;
         for (GuiEventListener guiEventListener : this.children()) {
             if (scroller_panel != null && scroller_panel.widgets.contains(guiEventListener)) {
                 if ((d >= 10 && d <= builder.panelSize-10) && (e >= 35 && e <= height-35)) {
-                    if (guiEventListener.mouseClicked(d, e, i
-                            //#if MC >= 12109
-                            , b
+                    if (guiEventListener.mouseClicked(
+                            //#if MC < 12109
+                            //$$ d, e, i
+                            //#else
+                            mouseButtonEvent, bl
                             //#endif
                     )) {
                         st = false;
@@ -173,9 +186,11 @@ public class ConfigScreen extends AbstractConfigScreen {
                 }
             } else if (scroller != null && scroller.widgets.contains(guiEventListener)) {
                 if ((d >= builder.panelSize) && (e >= 35 && e <= height-10)) {
-                    if (guiEventListener.mouseClicked(d, e, i
-                            //#if MC >= 12109
-                            , b
+                    if (guiEventListener.mouseClicked(
+                            //#if MC < 12109
+                            //$$ d, e, i
+                            //#else
+                            mouseButtonEvent, bl
                             //#endif
                     )) {
                         st = false;
@@ -183,9 +198,11 @@ public class ConfigScreen extends AbstractConfigScreen {
                         break;
                     }
                 }
-            } else if (guiEventListener.mouseClicked(d, e, i
-                    //#if MC >= 12109
-                    , b
+            } else if (guiEventListener.mouseClicked(
+                    //#if MC < 12109
+                    //$$ d, e, i
+                    //#else
+                    mouseButtonEvent, bl
                     //#endif
             )) {
                 st = false;
