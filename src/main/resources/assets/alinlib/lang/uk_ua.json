@@ -1,8 +1,8 @@
 {
   "alinlib.editbox.secret": "Таємниця:)",
 
-  "alinlib.title.not_release": "Ця версія не є релізом!",
-  "alinlib.title.not_release.description": "Ця версія не є релізом та може містити багато баґів і помилок\nЯкщо ви їх помітили, повідомте про них тут:",
+  "alinlib.title.not_release": "Ця версія не є випуском!",
+  "alinlib.title.not_release.description": "Ця версія не є випуском та може містити багато баґів і помилок.\nЯкщо ви їх помітили, повідомте про них тут:",
   "alinlib.title.reset": "Скинути налаштування?",
   "alinlib.title.reset.description": "Ця дія незворотна!",
 
@@ -17,12 +17,22 @@
   "alinlib.april_fools.clownfish": "Карусель, що кудихає, крутиться й ніколи не зупиняється",
   "alinlib.hb": "У Kel день народження! Привітати можна у Discord @Kel_Cu або kelcu.ru/ds",
 
-  "alinlib.search": "Знайти...",
+  "alinlib.search": "Пошук…",
 
   "alinlib.config": "Налаштування",
 
   "alinlib.config.design": "Дизайн",
-  "alinlib.config.default_design_type": "Тип дизайну за замовчуванням",
+  "alinlib.config.default_design_type": "Устелений тип дизайну",
+  "alinlib.config.themes": "Теми",
+  "alinlib.config.themes.windows": "Windows 9x",
+  "alinlib.config.button.win.color": "Колір",
+  "alinlib.config.button.win.color.custom": "Користувацький колір",
+  "alinlib.config.button.win.gradient": "Заголовок",
+  "alinlib.config.button.win.gradient.start": "Початок градієнта",
+  "alinlib.config.button.win.gradient.end": "Кінець градієнта",
+  "alinlib.config.themes.twm": "Світова машина",
+  "alinlib.config.button.twm.color": "Колір",
+  "alinlib.config.button.twm.color.custom": "Користувацький колір",
   "alinlib.config.config_screen.small_panel_size": "Скорочений варіант панелі",
   "alinlib.config.toast.timeline": "Шкала часу сповіщення",
   "alinlib.config.button.enable_reset_button": "Кнопка скидання",
@@ -31,7 +41,7 @@
   "alinlib.config.checkbox.example": "Приклад прапорця",
   "alinlib.config.checkbox.enable": "Стиль прапорця",
   "alinlib.config.checkbox.color": "Колір",
-  "alinlib.config.checkbox.color.custom": "Власний колір",
+  "alinlib.config.checkbox.color.custom": "Користувацький колір",
 
   "alinlib.config.blockquote": "Блок цитати",
   "alinlib.config.blockquote.color": "Колір лінії",
@@ -44,14 +54,14 @@
   "alinlib.config.horizontal_rule": "Горизонтальне правило",
   "alinlib.config.horizontal_rule.color": "Колір",
 
-  "alinlib.config.modern": "Модерністський дизайн",
+  "alinlib.config.modern": "Сучасний дизайн",
 
   "alinlib.config.localization": "Локалізація",
   "alinlib.config.localization.extended_coordinates": "Розширені координати",
-  "alinlib.config.view.item_off_hand": "Показувати предмети в другорядній руці",
+  "alinlib.config.view.item_off_hand": "Показувати предмети в іншій руці",
 
   "alinlib.config.stealth": "Скритність",
-  "alinlib.config.streamer.stealth": "Режим скритністи",
+  "alinlib.config.streamer.stealth": "Режим скритности",
   "alinlib.config.stealth.coordinates": "Координати",
   "alinlib.config.streamer.stealth.coordinates": "Приховати координати",
   "alinlib.config.streamer.stealth.direction": "Приховати напрямок",
@@ -59,6 +69,48 @@
   "alinlib.config.stealth.alinlib": "AlinLib",
   "alinlib.config.streamer.alinlib.max_radius": "Радіус",
   "alinlib.config.streamer.stealth.name": "Приховати ім'я",
+
+  "alinlib.config.design.demo": "Демо",
+
+  "alinlib.design.demo.buttons": "Кнопки",
+  "alinlib.design.demo.button": "Кнопка",
+  "alinlib.design.demo.button.left": "Текст зліва",
+  "alinlib.design.demo.button.right": "Текст справа",
+  "alinlib.design.demo.button.left.with_icon": "Кнопка",
+  "alinlib.design.demo.button.right.with_icon": "зі значком",
+  "alinlib.design.demo.button.with_icon": "Кнопка зі значком",
+  "alinlib.design.demo.button.sprite": "Спрайт",
+
+  "alinlib.design.demo.edit_box": "Поле вводу",
+  "alinlib.design.demo.edit_box.color": "Колір",
+  "alinlib.design.demo.edit_box.secret": "Таємниця",
+
+  "alinlib.design.demo.selector": "Вибір",
+
+  "alinlib.design.demo.slider": "Повзунок",
+  "alinlib.design.demo.slider.int": "Цілий",
+  "alinlib.design.demo.slider.double": "Подвійний",
+  "alinlib.design.demo.slider.percent": "Відсотковий",
+  "alinlib.design.demo.slider.float": "Рухомий",
+
+  "alinlib.design.demo.text": "Текст",
+  "alinlib.design.demo.text.left": "Текст\n зліва",
+  "alinlib.design.demo.text.center": "Текст\n по центру",
+  "alinlib.design.demo.text.right": "Текст\n справа",
+  "alinlib.design.demo.text.message": "Сповіщення",
+  "alinlib.design.demo.text.blockquote": "Блок цитати",
+  "alinlib.design.demo.text.blockquote.colors": "Кольоровий блок цитати",
+  "alinlib.design.demo.text.blockquote.colors.def": "Усталений колір",
+  "alinlib.design.demo.text.blockquote.colors.col1": "Користувацький колір (у будівнику) #1",
+  "alinlib.design.demo.text.blockquote.colors.col2": "Користувацький колір (у будівнику) #2",
+  "alinlib.design.demo.text.url": "натисни на це —> %s",
+  "alinlib.design.demo.text.hr": "Горизонтальная лінійка (цей віджет)",
+
+  "alinlib.design.demo.other": "Інше",
+  "alinlib.design.demo.other.description": "Віджет опису",
+  "alinlib.design.demo.description": "It's a comical yet devastating universe\nBut it's still the kind of universe that I deserve\nThe lipstick on my face has bled into my skin\nIt should show a grin\nUp from the sky, I won't want you to cry\nSo here's an act for everyone to sneer at\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who's waiting at the top\nShould do a circus hop!\nI shall now accept the fact that I'm a failure (You're a failure)\n'Cause I'm still afraid the future might be scarier (It is scarier)\nI'll slip while having fun and cut off my own tongue\nThey'll think I was dumb!\nUp from the sky, I won't want you to cry\nSo here's an act for everyone to sneer at\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who's waiting at the top\nShould do a circus hop!\nI've said goodbye, I don't want you to cry\nSo have a laugh with everyone but me\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who fell off from the top\nThey did a little drop!\nSo sing along, it's such a silly song\nThe cackling carousel, it spins and never stops\nThe acrobat who's waiting at the top\nShould do a circus hop!",
+  "alinlib.design.demo.other.scroller": "Повзунок ->",
+  "alinlib.design.demo.other.image": "Зображення",
 
 
   "alinlib.localization": "Локалізація",
@@ -105,10 +157,12 @@
   "alinlib.unknown": "Невідомо",
 
   "alinlib.style.flat": "Плаский",
-  "alinlib.style.modern": "Модерністський",
+  "alinlib.style.modern": "Сучасний",
+  "alinlib.style.windows": "Windows 9x",
+  "alinlib.style.twm": "Світова машина",
 
 
-  "alinlib.log.exit.first": "З часом, будь-яка історія змінюється до невпізнанності",
+  "alinlib.log.exit.first": "З часом, будь-яка історія змінюється до невпізнанности",
   "alinlib.log.exit.two": "Не всі воїни народжуються великими",
 
   "alinlib.color.groupie": "Groupie",
