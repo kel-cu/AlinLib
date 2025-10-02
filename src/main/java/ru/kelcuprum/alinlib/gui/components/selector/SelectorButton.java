@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.components.selector;
 
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 //#if MC >= 12109
 import net.minecraft.client.input.InputWithModifiers;
@@ -12,6 +13,7 @@ import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
+import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 import java.util.Arrays;
 
@@ -77,12 +79,19 @@ public class SelectorButton extends Button implements Resetable {
             } else {
                 this.setMessage(Component.empty().append(builder.getTitle()).append(": ").append(getValue()));
             }
-            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active));
+            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active),builder.getStyle().textShadow());
         } else {
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active));
+            guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active),builder.getStyle().textShadow());
             // VOLUME
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, getValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getValue()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active));
+            guiGraphics.drawString(AlinLib.MINECRAFT.font, getValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getValue()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active),builder.getStyle().textShadow());
         }
+    }
+
+
+    public void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j, boolean shadow) {
+        int k = this.getX() + i;
+        int l = this.getX() + this.getWidth() - i;
+        TextBox.renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
     }
 
     // Мелочь

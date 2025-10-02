@@ -12,6 +12,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#if MC >= 12109
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 //#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -248,6 +249,11 @@ public class VerticalConfigureScrolWidget extends AbstractWidget {
 
         this.renderBackground(guiGraphics);
         this.renderDecorations(guiGraphics);
+        //#if MC >= 12109
+        if (this.isHovered()) {
+            guiGraphics.requestCursor(this.isActive() ? isFocused() ? CursorTypes.RESIZE_EW : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+        }
+        //#endif
     }
 
     private void applyMotion(float delta) {

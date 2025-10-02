@@ -6,11 +6,13 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#if MC >= 12109
 import net.minecraft.client.input.MouseButtonEvent;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 //#endif
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import ru.kelcuprum.alinlib.AlinLib;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
 
 public class PageControlWidget extends AbstractWidget {
     public int position;
@@ -27,9 +29,20 @@ public class PageControlWidget extends AbstractWidget {
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
         int p = (this.getHeight() - 8) / 2;
-        guiGraphics.drawString(AlinLib.MINECRAFT.font, "◀", getX() + p, getY() + p, availableLeftScroll() ? -1 : 0xFFadb5bd);
-        guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, String.format("%s / %s", position + 1, size), getX() + (getWidth() / 2), getY() + p, -1);
-        guiGraphics.drawString(AlinLib.MINECRAFT.font, "▶", getRight() - p - AlinLib.MINECRAFT.font.width("▶"), getY() + p, availableRightScroll() ? -1 : 0xFFadb5bd);
+        guiGraphics.drawString(AlinLib.MINECRAFT.font, "◀", getX() + p, getY() + p, GuiUtils.getSelected().getTextColor(availableLeftScroll()), GuiUtils.getSelected().textShadow());
+        guiGraphics.drawString(AlinLib.MINECRAFT.font, String.format("%s / %s", position + 1, size),
+                getX() + (getWidth() / 2) - (AlinLib.MINECRAFT.font.width(String.format("%s / %s", position + 1, size))/2), getY() + p, GuiUtils.getSelected().getTextColor(availableLeftScroll()), GuiUtils.getSelected().textShadow());
+        guiGraphics.drawString(AlinLib.MINECRAFT.font, "▶", getRight() - p - AlinLib.MINECRAFT.font.width("▶"), getY() + p, GuiUtils.getSelected().getTextColor(availableLeftScroll()), GuiUtils.getSelected().textShadow());
+
+        //#if MC >= 12109
+        if (i < getX() + getHeight() || i > getRight() - getHeight()) {
+            boolean enable;
+            if(i < getX() + getHeight()){
+                enable = availableLeftScroll();
+            } else enable = availableRightScroll();
+            guiGraphics.requestCursor(this.isActive() && enable ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+        }
+        //#endif
     }
 
     @Override

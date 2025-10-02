@@ -61,8 +61,20 @@ public abstract class AbstractStyle {
         return -1;
     }
     public int getToastTextColor(){ return -1; }
+    public int getTextSliderColor(boolean active){
+        return getTextColor(active);
+    }
+    public int getEditBoxColor(boolean active){
+        return getTextColor(active);
+    }
     public boolean supportWhiteIcons(){ return true; }
     public boolean textShadow(){
+        return true;
+    }
+    public boolean sliderShadow(){
+        return true;
+    }
+    public boolean editBoxShadow(){
         return true;
     }
     public boolean textShadow(TextBuilder.TYPE type){

@@ -1,4 +1,2 @@
-- Rewritten renders for widgets
-- Added new functions for themes
-- Кастоный стал кастомным
-- Ported to 25w37a
+- Updated themes
+- Remove Support 1.21 - 1.21.5

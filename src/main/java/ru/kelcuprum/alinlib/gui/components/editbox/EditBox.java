@@ -3,6 +3,7 @@ package ru.kelcuprum.alinlib.gui.components.editbox;
 import net.minecraft.client.gui.GuiGraphics;
 //#if MC >= 12109
 import net.minecraft.client.input.KeyEvent;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 //#endif
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -30,6 +31,8 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
         this.builder = (EditBoxBuilder) builder;
         this.active = builder.getActive();
         this.visible = builder.getVisible();
+        setTextColor(builder.getStyle().getEditBoxColor(isActive()));
+        setTextShadow(builder.getStyle().editBoxShadow());
         setMaxLength(Integer.MAX_VALUE);
         if (this.builder.isColor) {
             setMaxLength(16);
@@ -99,6 +102,12 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
             } else {
                 renderText(guiGraphics, mouseX, mouseY, partialTick);
             }
+
+            //#if MC >= 12109
+            if (this.isHovered()) {
+                guiGraphics.requestCursor(this.isActive() ? isFocused() ? CursorTypes.IBEAM : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+            }
+            //#endif
         }
     }
 
@@ -139,7 +148,7 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
     }
 
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.drawString(font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : builder.getStyle().getTextColor(active));
+        guiGraphics.drawString(font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : builder.getStyle().getEditBoxColor(active), builder.getStyle().editBoxShadow());
         String volume1 = font.plainSubstrByWidth(this.builder.secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue(), getX() + getWidth() - (getPositionContent(this.builder.secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue())));
         guiGraphics.drawString(font,
                 //#if MC < 12109
@@ -147,7 +156,7 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
                 //#else
                 applyFormat(volume1, displayPos)
                 //#endif
-                , getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : builder.getStyle().getTextColor(active));
+                , getPositionContent(volume1), getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : builder.getStyle().getEditBoxColor(active), builder.getStyle().editBoxShadow());
     }
 
 

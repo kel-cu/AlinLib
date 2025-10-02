@@ -1,6 +1,11 @@
 package ru.kelcuprum.alinlib;
 
+import net.minecraft.client.KeyMapping;
+import org.lwjgl.glfw.GLFW;
+import ru.kelcuprum.alinlib.gui.GuiUtils;
+
 import java.io.File;
+import java.util.HashMap;
 
 public class CommonUtils {
     public static long parseSeconds(long mills){
@@ -43,5 +48,28 @@ public class CommonUtils {
         else if(size < tera) s = String.format("%.2f", gb) + " GB";
         else s = String.format("%.2f", tb) + " TB";
         return s;
+    }
+    //#if MC >= 12109
+    public static HashMap<String, KeyMapping.Category> categories = new HashMap<>();
+    //#endif
+    public static KeyMapping getKeyMapping(String path, int bind, String category){
+        //#if MC >= 12109
+        String[] args = category.split(":");
+        KeyMapping.Category category1;
+        if(categories.containsKey(category)) category1 = categories.get(category);
+        else{
+            category1 = args.length == 1 ? KeyMapping.Category.register(category) : KeyMapping.Category.register(GuiUtils.getResourceLocation(args[0], args[1]));
+            categories.put(category, category1);
+        }
+        //#endif
+        return new KeyMapping(
+                path,
+                bind,
+                //#if MC >= 12109
+                category1
+                //#else
+                //$$ category
+                //#endif
+        );
     }
 }

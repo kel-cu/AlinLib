@@ -6,6 +6,7 @@ import net.minecraft.client.gui.components.AbstractSliderButton;
 //#if MC >= 12109
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 //#endif
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
@@ -20,6 +21,7 @@ import ru.kelcuprum.alinlib.gui.components.Description;
 import ru.kelcuprum.alinlib.gui.components.Resetable;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.slider.SliderBuilder;
+import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 
 import static ru.kelcuprum.alinlib.gui.Icons.RESET;
@@ -95,6 +97,11 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
         if (this.visible) {
             renderBackground(guiGraphics, mouseX, mouseY, tick);
             renderText(guiGraphics, mouseX, mouseY, tick);
+            //#if MC >= 12109
+            if (this.isHovered()) {
+                guiGraphics.requestCursor(this.isActive() ? isFocused() ? CursorTypes.RESIZE_EW : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+            }
+            //#endif
         }
     }
 
@@ -122,16 +129,23 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
             } else {
                 this.setMessage(Component.literal(builder.getTitle().getString()).append(": ").append(getComponentValue()));
             }
-            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active));
+            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
         } else {
             if (isHovered()) {
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getXComponent() + (getWidthComponent() / 2) - (AlinLib.MINECRAFT.font.width(getComponentValue().getString()) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active));
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getXComponent() + (getWidthComponent() / 2) - (AlinLib.MINECRAFT.font.width(getComponentValue().getString()) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
             } else {
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active));
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
                 // VOLUME
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getComponentValue().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active));
+                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getComponentValue().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
             }
         }
+    }
+
+
+    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j, boolean shadow) {
+        int k = this.getX() + i;
+        int l = this.getX() + this.getWidth() - i;
+        TextBox.renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
     }
 
 

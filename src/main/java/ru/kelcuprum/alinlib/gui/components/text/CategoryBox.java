@@ -7,6 +7,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#if MC >= 12109
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 //#endif
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -148,13 +149,13 @@ public class CategoryBox extends AbstractWidget {
             Font font = AlinLib.MINECRAFT.font;
             if(GuiUtils.isDoesNotFit(Component.literal(state ? "▼" : "▶").append("   ").append(getName()), getWidth(), getHeight())){
                 this.setMessage(Component.literal(state ? "▼" : "▶").append("   ").append(getName()));
-                this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, 0xFFFFFF);
+                this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, GuiUtils.getSelected().getTextColor(isActive()), GuiUtils.getSelected().textShadow());
                 int textWidth = font.width(getMessage());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
                 guiGraphics.fill(Math.max(x, getX()), y+font.lineHeight+1, Math.max(x, getX())+Math.min(textWidth, getWidth()), y+font.lineHeight+2, GuiUtils.getSelected().getHorizontalRuleColor());
             } else {
-                guiGraphics.drawString(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, -1);
-                guiGraphics.drawCenteredString(font, getName(), getX() + getWidth() / 2, y, -1);
+                guiGraphics.drawString(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, GuiUtils.getSelected().getTextColor(isActive()), GuiUtils.getSelected().textShadow());
+                guiGraphics.drawString(font, getName(), getX() + getWidth() / 2 - (font.width(getName())/2), y, GuiUtils.getSelected().getTextColor(isActive()), GuiUtils.getSelected().textShadow());
                 int textWidth = font.width(getName());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
                 guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, GuiUtils.getSelected().getHorizontalRuleColor());
@@ -166,7 +167,19 @@ public class CategoryBox extends AbstractWidget {
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
                 guiGraphics.fill(x, getY()+yW, x+textWidth, getY()+yW+1, GuiUtils.getSelected().getHorizontalRuleColor());
             }
+            //#if MC >= 12109
+            if (this.isHovered()) {
+                guiGraphics.requestCursor(this.isActive() ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+            }
+            //#endif
         }
+    }
+
+
+    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j, boolean shadow) {
+        int k = this.getX() + i;
+        int l = this.getX() + this.getWidth() - i;
+        TextBox.renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
     }
 
     protected Component description;
