@@ -1,6 +1,7 @@
 apply plugin: 'maven-publish'
 apply plugin: 'fabric-loom'
 apply plugin: 'com.replaymod.preprocess'
+apply plugin: 'io.github.goooler.shadow'
 apply plugin: 'me.fallenbreath.yamlang'
 apply plugin: 'com.modrinth.minotaur'
 
@@ -40,12 +41,19 @@ loom {
             vmArgs '-Dmixin.debug.export=true'
         }
 
-    accessWidenerPath = file("./src/main/resources/alinlib.accesswidener").exists() ? file("./src/main/resources/alinlib.accesswidener") :  file("../../src/main/resources/alinlib.accesswidener")
+    accessWidenerPath = file("./src/main/resources/alinlib.accesswidener")
 }
 remapJar {
     if(mod_brand == 'neoforge') atAccessWideners.add("alinlib.accesswidener")
 //    remapperIsolation = true
 //    injectAccessWidener = true
+}
+configurations {
+    shade
+    implementation.extendsFrom shade
+    // Include dep in fat jar with relocation and minimization
+    shadow
+    implementation.extendsFrom shadow
 }
 dependencies {
     // loom
@@ -62,6 +70,12 @@ dependencies {
         modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
     } else if (mod_brand == 'neoforge') {
         neoForge "net.neoforged:neoforge:${project.forge_version}"
+    }
+
+    subprojects.each {
+        implementation project(path: ":${it.name}", configuration: 'namedElements')
+        implementation project(path: ":${it.name}", configuration: 'shade')
+        include project("${it.name}:")
     }
 }
 
@@ -83,6 +97,7 @@ publishing {
         maven {
             name = "Kel_Cuprum_Repository"
             url = "https://repo.kelcuprum.ru/snapshots"
+//            url = "https://repo.kelcuprum.ru/test"
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")

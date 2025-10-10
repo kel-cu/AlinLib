@@ -57,8 +57,11 @@ public abstract class AbstractStyle {
     public int getTextColor(boolean active){
         return active ? -1 : 0xFF5F5F5F;
     }
+    public int getTextTitleColor(){
+        return getTextColor(true);
+    }
     public int getTextColor(TextBuilder.TYPE type){
-        return -1;
+        return type == TextBuilder.TYPE.TITLE ? getTextTitleColor() : getTextColor(true);
     }
     public int getToastTextColor(){ return -1; }
     public int getTextSliderColor(boolean active){
@@ -72,10 +75,13 @@ public abstract class AbstractStyle {
         return true;
     }
     public boolean sliderShadow(){
-        return true;
+        return textShadow();
     }
     public boolean editBoxShadow(){
-        return true;
+        return textShadow();
+    }
+    public boolean titleShadow(){
+        return textShadow();
     }
     public boolean textShadow(TextBuilder.TYPE type){
         return true;

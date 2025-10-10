@@ -53,7 +53,7 @@ public class ButtonBoolean extends Button implements Resetable {
             int boxHeight = getHeight() - 10;
             int boxX = getWidthComponent()+5-height;
             int boxY = 5;
-            int color = GuiUtils.getSelected().getCheckBoxColor(value);
+            int color = builder.getStyle().getCheckBoxColor(value);
             guiGraphics.fill(getXComponent()+boxX, getY()+boxY, getXComponent()+boxX + boxHeight, getY()+boxY+1, color);
             guiGraphics.fill(getXComponent()+boxX, getY()+boxHeight+boxY-1, getXComponent()+boxX + boxHeight, getY()+boxHeight+boxY, color);
 

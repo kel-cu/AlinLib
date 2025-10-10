@@ -43,7 +43,7 @@ public class ConfigScreen extends AbstractConfigScreen {
     int yo = 35;
     public void initPanelButtons() {
         // -=-=-=-=-=-=-=-
-        titleW = addRenderableWidget(new TextBuilder(this.builder.title).setPosition(5 + (builder.itemIcon == null && builder.textureIcon == null ? 0 : 25), 5).setSize(this.builder.panelSize - 10 - (builder.itemIcon == null && builder.textureIcon == null ? 0 : 25), 20).build());
+        titleW = addRenderableWidget(new TextBuilder(this.builder.title).setType(TextBuilder.TYPE.TITLE).setPosition(5 + (builder.itemIcon == null && builder.textureIcon == null ? 0 : 25), 5).setSize(this.builder.panelSize - 10 - (builder.itemIcon == null && builder.textureIcon == null ? 0 : 25), 20).build());
         // -=-=-=-=-=-=-=-
         this.descriptionBox = new DescriptionBox(10, 35, this.builder.panelSize - 20, height - 70, Component.empty());
         this.descriptionBox.visible = false;
@@ -91,7 +91,7 @@ public class ConfigScreen extends AbstractConfigScreen {
 
     public int yc = 0;
     public void initCategory() {
-        if(builder.categoryTitle != null && !builder.categoryTitle.getString().isBlank()) addRenderableWidget(new TextBuilder(builder.categoryTitle).setPosition(getX(), 10).setWidth(getContentWidth()).build());
+        if(builder.categoryTitle != null && !builder.categoryTitle.getString().isBlank()) addRenderableWidget(new TextBuilder(builder.categoryTitle).setType(TextBuilder.TYPE.TITLE).setPosition(getX(), 10).setWidth(getContentWidth()).build());
         int y = builder.categoryTitle == null || builder.categoryTitle.getString().isBlank() ? 10 : 35;
         yc = y;
         int width = getContentWidth();

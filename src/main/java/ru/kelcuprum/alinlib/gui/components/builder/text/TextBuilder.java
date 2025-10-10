@@ -35,7 +35,7 @@ public class TextBuilder extends AbstractBuilder {
     // TYPE
     public TextBuilder setType(TYPE type){
         this.type = type;
-        if(type != TYPE.TEXT && align == CENTER) this.align = LEFT;
+        if(type != TYPE.TEXT && type != TYPE.TITLE && align == CENTER) this.align = LEFT;
         return this;
     }
     public TYPE getType(){
@@ -64,6 +64,7 @@ public class TextBuilder extends AbstractBuilder {
 
     public enum TYPE{
         TEXT(),
+        TITLE(),
         MESSAGE(),
         BLOCKQUOTE()
     }

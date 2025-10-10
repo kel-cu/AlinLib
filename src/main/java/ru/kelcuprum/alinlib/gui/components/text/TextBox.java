@@ -95,7 +95,7 @@ public class TextBox extends AbstractWidget implements Description {
     @Override
     public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
         renderBackground(guiGraphics);
-        if (builder.type == TEXT) {
+        if (builder.type == TEXT || builder.type == TITLE) {
             if (isDoesNotFit()) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2,  builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
             else if (builder.align == CENTER)
                 guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2 - (AlinLib.MINECRAFT.font.width(getMessage())/2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));

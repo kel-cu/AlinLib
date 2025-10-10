@@ -1,2 +1,1 @@
-- Updated themes
-- Remove Support 1.21 - 1.21.5
+Мне впадлу писать change-log на маленький апдейт

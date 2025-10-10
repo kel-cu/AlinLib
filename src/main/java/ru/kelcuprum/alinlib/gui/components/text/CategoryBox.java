@@ -14,6 +14,7 @@ import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
+import ru.kelcuprum.alinlib.gui.styles.AbstractStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,10 @@ public class CategoryBox extends AbstractWidget {
         super(x, y, width, height, label);
         this.name = label;
         this.state = state;
+    }
+    public AbstractStyle style;
+    public AbstractStyle getStyle(){
+        return style == null ? GuiUtils.getSelected() : style;
     }
     public CategoryBox addValue(AbstractBuilder builder){
         return addValue(builder.build());
@@ -149,23 +154,23 @@ public class CategoryBox extends AbstractWidget {
             Font font = AlinLib.MINECRAFT.font;
             if(GuiUtils.isDoesNotFit(Component.literal(state ? "▼" : "▶").append("   ").append(getName()), getWidth(), getHeight())){
                 this.setMessage(Component.literal(state ? "▼" : "▶").append("   ").append(getName()));
-                this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, GuiUtils.getSelected().getTextColor(isActive()), GuiUtils.getSelected().textShadow());
+                this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, getStyle().getTextColor(isActive()), getStyle().textShadow());
                 int textWidth = font.width(getMessage());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
-                guiGraphics.fill(Math.max(x, getX()), y+font.lineHeight+1, Math.max(x, getX())+Math.min(textWidth, getWidth()), y+font.lineHeight+2, GuiUtils.getSelected().getHorizontalRuleColor());
+                guiGraphics.fill(Math.max(x, getX()), y+font.lineHeight+1, Math.max(x, getX())+Math.min(textWidth, getWidth()), y+font.lineHeight+2, getStyle().getHorizontalRuleColor());
             } else {
-                guiGraphics.drawString(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, GuiUtils.getSelected().getTextColor(isActive()), GuiUtils.getSelected().textShadow());
-                guiGraphics.drawString(font, getName(), getX() + getWidth() / 2 - (font.width(getName())/2), y, GuiUtils.getSelected().getTextColor(isActive()), GuiUtils.getSelected().textShadow());
+                guiGraphics.drawString(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, getStyle().getTextColor(isActive()), getStyle().textShadow());
+                guiGraphics.drawString(font, getName(), getX() + getWidth() / 2 - (font.width(getName())/2), y, getStyle().getTextColor(isActive()), getStyle().textShadow());
                 int textWidth = font.width(getName());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
-                guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, GuiUtils.getSelected().getHorizontalRuleColor());
+                guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, getStyle().getHorizontalRuleColor());
             }
             if(state && renderLine){
                 int yW = height+5;
                 for(AbstractWidget widget : values) yW+=widget.getHeight()+5;
                 int textWidth = font.width(getName());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
-                guiGraphics.fill(x, getY()+yW, x+textWidth, getY()+yW+1, GuiUtils.getSelected().getHorizontalRuleColor());
+                guiGraphics.fill(x, getY()+yW, x+textWidth, getY()+yW+1, getStyle().getHorizontalRuleColor());
             }
             //#if MC >= 12109
             if (this.isHovered()) {

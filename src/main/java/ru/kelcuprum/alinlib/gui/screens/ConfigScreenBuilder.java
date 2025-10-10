@@ -20,6 +20,7 @@ import java.util.Objects;
 public class ConfigScreenBuilder {
     public Component title;
     public Component categoryTitle;
+    public Component description;
     public ResourceLocation textureIcon;
     public Item itemIcon;
     public AbstractStyle style;
@@ -56,6 +57,18 @@ public class ConfigScreenBuilder {
     }
     public Component getTitle(){
         return this.title;
+    }
+    //
+    public ConfigScreenBuilder setDescription(String string){
+        setDescription(Component.literal(string));
+        return this;
+    }
+    public ConfigScreenBuilder setDescription(Component component) {
+        this.description = component;
+        return this;
+    }
+    public Component getDescription(){
+        return this.description;
     }
     //
     public AbstractStyle getStyle(){

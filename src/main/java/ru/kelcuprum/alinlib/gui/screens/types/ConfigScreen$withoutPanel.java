@@ -38,7 +38,7 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
         int size = Math.min(maxSize, this.width - 10);
         int x = (width - size) / 2;
         // -=-=-=-=-=-=-=-
-        titleW = addRenderableWidget(new TextBuilder(this.builder.title).setPosition(x + 25, 5).setSize(size - 50, 20).build());
+        titleW = addRenderableWidget(new TextBuilder(this.builder.title).setType(TextBuilder.TYPE.TITLE).setPosition(x + 25, 5).setSize(size - 50, 20).build());
         // -=-=-=-=-=-=-=-
         // Exit Buttons
         // 85 before reset button
