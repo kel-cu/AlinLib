@@ -90,6 +90,11 @@ public class WMStyle extends AbstractStyle{
     }
 
     @Override
+    public int getCursorColor() {
+        return Colors.getWMButton();
+    }
+
+    @Override
     public int getHorizontalRuleColor() {
         return Colors.getWMButton()-0x7F000000;
     }

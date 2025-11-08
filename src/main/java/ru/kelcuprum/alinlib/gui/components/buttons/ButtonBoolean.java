@@ -43,27 +43,20 @@ public class ButtonBoolean extends Button implements Resetable {
 
     @Override
     public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        if(GuiUtils.isDoesNotFit(builder.isCheckBox ? builder.getTitle() : getMessage(), getWidthComponent(), getHeight())){
+        if(GuiUtils.isDoesNotFit(builder.isCheckBox ? builder.getTitle() : getMessage(), getWidthComponent() - (builder.isCheckBox ? (10+builder.getStyle().getCheckBoxSizes(getWidth(), getHeight())[0]) : 0), getHeight())){
             this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, builder.isCheckBox ? builder.getTitle() : getMessage(), (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
         } else {
             guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
             if(!builder.isCheckBox) guiGraphics.drawString(AlinLib.MINECRAFT.font, volumeState, getX() + getWidth()-AlinLib.MINECRAFT.font.width(volumeState.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
         }
         if(builder.isCheckBox) {
-            int boxHeight = getHeight() - 10;
-            int boxX = getWidthComponent()+5-height;
-            int boxY = 5;
-            int color = builder.getStyle().getCheckBoxColor(value);
-            guiGraphics.fill(getXComponent()+boxX, getY()+boxY, getXComponent()+boxX + boxHeight, getY()+boxY+1, color);
-            guiGraphics.fill(getXComponent()+boxX, getY()+boxHeight+boxY-1, getXComponent()+boxX + boxHeight, getY()+boxHeight+boxY, color);
-
-            guiGraphics.fill(getXComponent()+boxX, getY()+boxY+1, getXComponent()+boxX+1, getY()+boxY+boxHeight, color);
-            guiGraphics.fill(getXComponent()+boxX+boxHeight-1, getY()+boxY+1, getXComponent()+boxX+boxHeight, getY()+boxY+boxHeight, color);
-            if(value){
-                guiGraphics.fill(getXComponent()+boxX+2, getY()+boxY+2, getXComponent()+boxX+boxHeight-2, getY()+boxY+boxHeight-2, color);
-            }
+            int boxX = getXComponent() + getWidthComponent()-5-builder.getStyle().getCheckBoxSizes(getWidth(), getHeight())[0];
+            int boxY = getY() + (height-builder.getStyle().getCheckBoxSizes(getWidth(), getHeight())[1]) / 2;
+            builder.getStyle().renderCheckBox(guiGraphics, boxX, boxY, getWidth(), getHeight(), value);
         }
     }
+
+
     // Получить
     // Заменить
     public ButtonBoolean setValue(boolean value){
@@ -76,7 +69,7 @@ public class ButtonBoolean extends Button implements Resetable {
     protected void renderScrollingString(GuiGraphics guiGraphics, Font font, Component message, int x, int color, boolean shadow) {
         int k = this.getXComponent() + x;
         int l = this.getX() + this.getWidth() - x;
-        if(builder.isCheckBox) l-=height;
+        if(builder.isCheckBox) l-=(10+builder.getStyle().getCheckBoxSizes(getWidth(), getHeight())[0]);
         TextBox.renderScrollingString(guiGraphics, font, message, k, getY(), l, getY()+height, color, shadow);
     }
 

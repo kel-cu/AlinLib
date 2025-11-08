@@ -130,6 +130,7 @@ public class Button extends AbstractButton implements Description {
 
     public void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j, boolean shadow) {
         int k = this.getX() + i;
+        if (((ButtonBuilder) builder).icon != null) k+=getHeight();
         int l = this.getX() + this.getWidth() - i;
         TextBox.renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
     }

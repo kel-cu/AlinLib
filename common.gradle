@@ -1,7 +1,6 @@
 apply plugin: 'maven-publish'
 apply plugin: 'fabric-loom'
 apply plugin: 'com.replaymod.preprocess'
-apply plugin: 'io.github.goooler.shadow'
 apply plugin: 'me.fallenbreath.yamlang'
 apply plugin: 'com.modrinth.minotaur'
 
@@ -10,6 +9,7 @@ apply plugin: 'com.modrinth.minotaur'
 def mod_brand = 'fabric'
 archivesBaseName = rootProject.archives_base_name + "-" + mod_brand
 group = rootProject.maven_group
+
 
 int mcVersion = 1
 preprocess {
@@ -29,6 +29,7 @@ repositories {
     maven { url = "https://maven.neoforged.net/releases/" } // NEOFORGE
     maven { url = "https://repo.kelcuprum.ru/forks" } // STARSCRIPT
     maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
+    maven { url = 'https://api.modrinth.com/maven'} // MODRINTH
 }
 configurations {
     modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
@@ -48,13 +49,6 @@ remapJar {
 //    remapperIsolation = true
 //    injectAccessWidener = true
 }
-configurations {
-    shade
-    implementation.extendsFrom shade
-    // Include dep in fat jar with relocation and minimization
-    shadow
-    implementation.extendsFrom shadow
-}
 dependencies {
     // loom
     implementation("com.google.code.gson:gson:2.10.1")
@@ -67,15 +61,10 @@ dependencies {
     if (mod_brand == 'fabric') {
         modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
         modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+        modCompileOnly "maven.modrinth:reglass:${project.reglass_version}"
         modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
     } else if (mod_brand == 'neoforge') {
         neoForge "net.neoforged:neoforge:${project.forge_version}"
-    }
-
-    subprojects.each {
-        implementation project(path: ":${it.name}", configuration: 'namedElements')
-        implementation project(path: ":${it.name}", configuration: 'shade')
-        include project("${it.name}:")
     }
 }
 
@@ -90,6 +79,7 @@ tasks.withType(JavaCompile).configureEach {
     it.options.release = JAVA_COMPATIBILITY
 }
 
+
 version = project.mod_version + "+mc" + project.minecraft_version
 
 publishing {
@@ -97,7 +87,7 @@ publishing {
         maven {
             name = "Kel_Cuprum_Repository"
             url = "https://repo.kelcuprum.ru/snapshots"
-//            url = "https://repo.kelcuprum.ru/test"
+            if(project.version.toString().contains("dt")) url = "https://repo.kelcuprum.ru/test"
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")

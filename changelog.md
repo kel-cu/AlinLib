@@ -1,1 +1,3 @@
-Мне впадлу писать change-log на маленький апдейт
+- Added Cursor color in Styles
+- Added MultilineEditBox and builder
+- Fixed rendering Buttons with icon

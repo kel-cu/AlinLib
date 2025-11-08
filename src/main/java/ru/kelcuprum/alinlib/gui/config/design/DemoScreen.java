@@ -9,10 +9,12 @@ import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.components.ImageWidget;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.editbox.EditBoxBuilder;
+import ru.kelcuprum.alinlib.gui.components.builder.editbox.MultilineEditBoxBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.selector.SelectorBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.slider.SliderBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.text.HorizontalRuleBuilder;
 import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
+import ru.kelcuprum.alinlib.gui.components.editbox.MultilineEditBox;
 import ru.kelcuprum.alinlib.gui.components.text.CategoryBox;
 import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
 import ru.kelcuprum.alinlib.gui.screens.ConfigScreenBuilder;
@@ -57,6 +59,7 @@ public class DemoScreen {
                 .addValue(new EditBoxBuilder(Component.translatable("alinlib.design.demo.edit_box")))
                 .addValue(new EditBoxBuilder(Component.translatable("alinlib.design.demo.edit_box.color")).setColor(SEADRIVE))
                 .addValue(new EditBoxBuilder(Component.translatable("alinlib.design.demo.edit_box.secret")).setSecret(true))
+                .addValue(new MultilineEditBoxBuilder(Component.literal("TEST SUBJECT")).setValue("hell, yeah!\nThis multiline EditBox, but WritableTextBox").setHeight(100))
                 .changeState(false)
         );
         builder.addWidget(new CategoryBox(Component.translatable("alinlib.design.demo.selector"))

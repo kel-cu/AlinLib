@@ -18,10 +18,7 @@ import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.config.DesignScreen;
-import ru.kelcuprum.alinlib.gui.styles.FlatStyle;
-import ru.kelcuprum.alinlib.gui.styles.ModernStyle;
-import ru.kelcuprum.alinlib.gui.styles.WMStyle;
-import ru.kelcuprum.alinlib.gui.styles.WinStyle;
+import ru.kelcuprum.alinlib.gui.styles.*;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import ru.kelcuprum.alinlib.info.World;
 import ru.kelcuprum.alinlib.test.GUIRender;
@@ -51,6 +48,8 @@ public class AlinLib implements net.fabricmc.api.ClientModInitializer {
         GuiUtils.registerStyle(new ModernStyle());
         GuiUtils.registerStyle(new WinStyle());
         GuiUtils.registerStyle(new WMStyle());
+//        if(FabricLoader.getInstance().isModLoaded("reglass"))
+//            GuiUtils.registerStyle(new ReGlassStyle());
         World.registerDefaultWorlds();
         StealthManager.registerDefault();
         KeyMapping toggleStealth = KeyMappingHelper.register(CommonUtils.getKeyMapping(
