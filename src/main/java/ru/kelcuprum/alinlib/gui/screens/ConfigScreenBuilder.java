@@ -3,7 +3,13 @@ package ru.kelcuprum.alinlib.gui.screens;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+        ;
 import net.minecraft.world.item.Item;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
@@ -21,7 +27,13 @@ public class ConfigScreenBuilder {
     public Component title;
     public Component categoryTitle;
     public Component description;
-    public ResourceLocation textureIcon;
+    public
+    //#if MC < 12111
+    //$$ResourceLocation
+    //#else
+    Identifier
+            //#endif
+            textureIcon;
     public Item itemIcon;
     public AbstractStyle style;
     public List<AbstractWidget> panelWidgets = new ArrayList<>();
@@ -91,14 +103,26 @@ public class ConfigScreenBuilder {
         this.itemIcon = item;
         return this;
     }
-    public ConfigScreenBuilder setIcon(ResourceLocation texture){
+    public ConfigScreenBuilder setIcon(
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    texture){
         this.textureIcon = texture;
         return this;
     }
     public Item getItemIcon(){
         return itemIcon;
     }
-    public ResourceLocation getTextureIcon(){
+    public
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+    Identifier
+    //#endif
+    getTextureIcon(){
         return textureIcon;
     }
     //

@@ -3,7 +3,13 @@ package ru.kelcuprum.alinlib.api.events;
 
 import java.util.function.Function;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+        ;
 
 /**
  * Helper for creating {@link Event} classes.
@@ -79,7 +85,13 @@ public final class EventFactory {
      * @param <T>            The listener type.
      * @return The Event instance.
      */
-    public static <T> Event<T> createWithPhases(Class<? super T> type, Function<T[], T> invokerFactory, ResourceLocation... defaultPhases) {
+    public static <T> Event<T> createWithPhases(Class<? super T> type, Function<T[], T> invokerFactory,
+                                                //#if MC < 12111
+                                                //$$ResourceLocation
+                                                //#else
+                                                Identifier
+                                                        //#endif
+                                                        ... defaultPhases) {
         EventFactoryImpl.ensureContainsDefault(defaultPhases);
         EventFactoryImpl.ensureNoDuplicates(defaultPhases);
 

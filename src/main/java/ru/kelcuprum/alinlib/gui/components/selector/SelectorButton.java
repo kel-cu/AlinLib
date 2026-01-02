@@ -110,6 +110,13 @@ public class SelectorButton extends Button implements Resetable {
         if(this.builder.getOnPress() != null) this.builder.getOnPress().onPress(this);
     }
 
+    //#if MC >= 12111
+    @Override
+    public void renderContents(GuiGraphics guiGraphics, int i, int j, float f) {
+        super.renderContents(guiGraphics, i, j, f);
+    }
+    //#endif
+
     @Override
     public void resetValue() {
         if(resettable()){

@@ -49,7 +49,13 @@ public class World {
         return AlinLib.MINECRAFT.level == null ? -1 : (int) (AlinLib.MINECRAFT.level.getDayTime() / 24000L);
     }
     public static String getCodeName(){
-        return AlinLib.MINECRAFT.level == null ? "unknown" : AlinLib.MINECRAFT.level.dimension().location().toString();
+        return AlinLib.MINECRAFT.level == null ? "unknown" : AlinLib.MINECRAFT.level.dimension().
+                //#if MC < 12111
+                //$$location
+                //#else
+                        identifier
+                //#endif
+                        ().toString();
     }
 
     // Worlds

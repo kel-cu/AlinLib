@@ -12,8 +12,9 @@ import com.mojang.blaze3d.platform.cursor.CursorTypes;
 //#endif
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
+//#else
+//$$ import net.minecraft.client.renderer.RenderType;
 //#endif
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -57,7 +58,12 @@ public class Button extends AbstractButton implements Description {
 
     // Рендер
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+
+    //#if MC < 12111
+    //$$ public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        //#else
+        public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        //#endif
         if (visible) {
             renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
             renderText(guiGraphics, mouseX, mouseY, partialTicks);
@@ -68,6 +74,7 @@ public class Button extends AbstractButton implements Description {
             //#endif
         }
     }
+
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
         if(isResetable()){
             if(builder.getStyle() != null) this.builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, mouseX, mouseY));
@@ -151,17 +158,6 @@ public class Button extends AbstractButton implements Description {
     }
     protected boolean isResetable(){
         return this instanceof Resetable && ((Resetable) this).resettable() && AlinLib.bariumConfig.getBoolean("BUTTON.ENABLE_RESET_BUTTON", true);
-    }
-
-    @Override
-    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j) {
-        int k = this.getX() + i;
-        int l = this.getX() + this.getWidth() - i;
-        if(builder instanceof ButtonBuilder){
-            if(((ButtonBuilder) builder).icon != null) k+=height;
-        }
-        if(isResetable()) k+=(height+2);
-        renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j);
     }
 
     @Override

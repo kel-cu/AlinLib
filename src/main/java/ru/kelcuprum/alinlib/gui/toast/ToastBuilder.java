@@ -8,7 +8,13 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 //$$ import net.minecraft.client.gui.components.toasts.ToastComponent;
 //#endif
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+            //#endif
+            ;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -23,7 +29,13 @@ public class ToastBuilder {
     protected Component title = Component.empty();
     protected Component message = Component.empty();
     protected ItemStack itemIcon;
-    protected ResourceLocation icon;
+    protected 
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+            //#endif
+             icon;
     public Type type = Type.INFO;
     protected AbstractStyle style = null;
     protected boolean isWhiteIcon = false;
@@ -54,7 +66,13 @@ public class ToastBuilder {
         return setIcon(GuiUtils.getResourceLocation(namespace, path));
     }
 
-    public ToastBuilder setIcon(ResourceLocation icon) {
+    public ToastBuilder setIcon(
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+            //#endif
+             icon) {
         this.icon = icon;
         return this;
     }

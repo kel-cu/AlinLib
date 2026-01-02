@@ -10,8 +10,9 @@ import com.mojang.blaze3d.platform.cursor.CursorTypes;
 //#endif
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
+//#else
+//$$ import net.minecraft.client.renderer.RenderType;
 //#endif
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -166,14 +167,6 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
 
     protected boolean isResetable() {
         return this.resettable() && AlinLib.bariumConfig.getBoolean("BUTTON.ENABLE_RESET_BUTTON", true);
-    }
-
-    @Override
-    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j) {
-        int k = this.getX() + i;
-        int l = this.getX() + this.getWidth() - i;
-        if (isResetable()) k += 22;
-        renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j);
     }
 
     @Override

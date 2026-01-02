@@ -6,7 +6,13 @@ import java.util.function.Function;
 
 import com.google.common.collect.MapMaker;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+        ;
 
 public final class EventFactoryImpl {
     private static final Set<ArrayBackedEvent<?>> ARRAY_BACKED_EVENTS
@@ -24,8 +30,20 @@ public final class EventFactoryImpl {
         return event;
     }
 
-    public static void ensureContainsDefault(ResourceLocation[] defaultPhases) {
-        for (ResourceLocation id : defaultPhases) {
+    public static void ensureContainsDefault(
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    [] defaultPhases) {
+        for (
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+                Identifier
+                        //#endif
+                        id : defaultPhases) {
             if (id.equals(Event.DEFAULT_PHASE)) {
                 return;
             }
@@ -34,7 +52,13 @@ public final class EventFactoryImpl {
         throw new IllegalArgumentException("The event phases must contain Event.DEFAULT_PHASE.");
     }
 
-    public static void ensureNoDuplicates(ResourceLocation[] defaultPhases) {
+    public static void ensureNoDuplicates(
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    [] defaultPhases) {
         for (int i = 0; i < defaultPhases.length; ++i) {
             for (int j = i+1; j < defaultPhases.length; ++j) {
                 if (defaultPhases[i].equals(defaultPhases[j])) {

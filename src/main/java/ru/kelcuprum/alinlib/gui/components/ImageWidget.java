@@ -5,34 +5,77 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
+//#else
+//$$import net.minecraft.client.renderer.RenderType;
 //#endif
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+        ;
 
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_HEIGHT;
 import static ru.kelcuprum.alinlib.gui.GuiUtils.DEFAULT_WIDTH;
 
 public class ImageWidget extends AbstractWidget implements Description {
-    protected final ResourceLocation image;
+    protected final
+    //#if MC < 12111
+    //$$ResourceLocation
+    //#else
+    Identifier
+            //#endif
+            image;
     protected final int imageWidth, imageHeight;
     protected final boolean isScale;
 
-    public ImageWidget(int x, int y, ResourceLocation image, Component message) {
+    public ImageWidget(int x, int y,
+                       //#if MC < 12111
+                       //$$ResourceLocation
+                       //#else
+                       Identifier
+                               //#endif
+                               image, Component message) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, image, DEFAULT_WIDTH(), DEFAULT_HEIGHT, message);
     }
-    public ImageWidget(int x, int y, ResourceLocation image, int imageWidth, int imageHeight, Component message) {
+    public ImageWidget(int x, int y,
+                       //#if MC < 12111
+                       //$$ResourceLocation
+                       //#else
+                       Identifier
+                               //#endif
+                               image, int imageWidth, int imageHeight, Component message) {
         this(x, y, DEFAULT_WIDTH(), DEFAULT_HEIGHT, image, imageWidth, imageHeight, message);
     }
     ///
-    public ImageWidget(int x, int y, int width, int height, ResourceLocation image, Component message) {
+    public ImageWidget(int x, int y, int width, int height,
+                       //#if MC < 12111
+                       //$$ResourceLocation
+                       //#else
+                       Identifier
+                               //#endif
+                               image, Component message) {
         this(x, y, width, height, image, width, height, message);
     }
-    public ImageWidget(int x, int y, int width, int height, ResourceLocation image, int imageWidth, int imageHeight, Component message) {
+    public ImageWidget(int x, int y, int width, int height,
+                       //#if MC < 12111
+                       //$$ResourceLocation
+                       //#else
+                       Identifier
+                               //#endif
+                               image, int imageWidth, int imageHeight, Component message) {
         this(x, y, width, height, image, imageWidth, imageHeight, false, message);
     }
 
-    public ImageWidget(int x, int y, int width, int height, ResourceLocation image, int imageWidth, int imageHeight, boolean isScale, Component message) {
+    public ImageWidget(int x, int y, int width, int height,
+                       //#if MC < 12111
+                       //$$ResourceLocation
+                       //#else
+                       Identifier
+                               //#endif
+                               image, int imageWidth, int imageHeight, boolean isScale, Component message) {
         super(x, y, width, height, message);
         this.isScale = isScale;
         this.image = image;

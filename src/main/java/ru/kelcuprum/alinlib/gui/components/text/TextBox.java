@@ -1,6 +1,11 @@
 package ru.kelcuprum.alinlib.gui.components.text;
 
-import net.minecraft.Util;
+//#if MC < 12111
+//$$ import net.minecraft.Util;
+//#else
+import net.minecraft.util.Util;
+//#endif
+
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -207,10 +212,13 @@ public class TextBox extends AbstractWidget implements Description {
                 int y = getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l);
                 if (x <= d && d <= x + AlinLib.MINECRAFT.font.width(chars)) {
                     if (y <= e && e <= y + AlinLib.MINECRAFT.font.lineHeight) {
-                        Style style = AlinLib.MINECRAFT.font.getSplitter().componentStyleAtWidth(chars, Mth.floor(screenToChatX(x, d)));
-                        if (style != null && this.handleComponentClicked(style)) {
-                            return true;
-                        }
+                        //#if MC < 12111
+                        //$$ Style style = AlinLib.MINECRAFT.font.getSplitter().componentStyleAtWidth(chars, Mth.floor(screenToChatX(x, d)));
+                        //$$ if (style != null && this.handleComponentClicked(style)) {
+                        //$$     return true;
+                        //$$ }
+                        //#else
+                        //#endif
                     }
                 }
                 l++;

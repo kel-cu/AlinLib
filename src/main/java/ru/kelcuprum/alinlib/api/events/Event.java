@@ -1,6 +1,12 @@
 package ru.kelcuprum.alinlib.api.events;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+        ;
 import org.jetbrains.annotations.ApiStatus;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 
@@ -44,7 +50,13 @@ public abstract class Event<T> {
      * The ResourceLocation of the default phase.
      * Have a look at {@link EventFactory#createWithPhases} for an explanation of event phases.
      */
-    public static final ResourceLocation DEFAULT_PHASE = GuiUtils.getResourceLocation("alinlib", "default");
+    public static final
+    //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+            //#endif
+            DEFAULT_PHASE = GuiUtils.getResourceLocation("alinlib", "default");
 
     /**
      * Register a listener to the event for the specified phase.
@@ -53,7 +65,13 @@ public abstract class Event<T> {
      * @param phase ResourceLocation of the phase this listener should be registered for. It will be created if it didn't exist yet.
      * @param listener The desired listener.
      */
-    public void register(ResourceLocation phase, T listener) {
+    public void register(
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    phase, T listener) {
         // This is done to keep compatibility with existing Event subclasses, but they should really not be subclassing Event.
         register(listener);
     }
@@ -69,7 +87,19 @@ public abstract class Event<T> {
      * @param firstPhase The ResourceLocation of the phase that should run before the other. It will be created if it didn't exist yet.
      * @param secondPhase The ResourceLocation of the phase that should run after the other. It will be created if it didn't exist yet.
      */
-    public void addPhaseOrdering(ResourceLocation firstPhase, ResourceLocation secondPhase) {
+    public void addPhaseOrdering(
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    firstPhase,
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    secondPhase) {
         // This is not abstract to avoid breaking existing Event subclasses, but they should really not be subclassing Event.
     }
 }

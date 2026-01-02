@@ -8,8 +8,9 @@ import net.minecraft.client.input.MouseButtonEvent;
 //#endif
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
+//else
+//$$ import net.minecraft.client.renderer.RenderType;
 //#endif
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;

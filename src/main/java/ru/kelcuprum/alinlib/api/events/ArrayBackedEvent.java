@@ -9,7 +9,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+        ;
 
 class ArrayBackedEvent<T> extends Event<T> {
     private final Function<T[], T> invokerFactory;
@@ -18,7 +24,13 @@ class ArrayBackedEvent<T> extends Event<T> {
     /**
      * Registered event phases.
      */
-    private final Map<ResourceLocation, EventPhaseData<T>> phases = new LinkedHashMap<>();
+    private final Map<
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+            //#endif
+            , EventPhaseData<T>> phases = new LinkedHashMap<>();
     /**
      * Phases sorted in the correct dependency order.
      */
@@ -41,7 +53,13 @@ class ArrayBackedEvent<T> extends Event<T> {
     }
 
     @Override
-    public void register(ResourceLocation phaseResourceLocation, T listener) {
+    public void register(
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    phaseResourceLocation, T listener) {
         Objects.requireNonNull(phaseResourceLocation, "Tried to register a listener for a null phase!");
         Objects.requireNonNull(listener, "Tried to register a null listener!");
 
@@ -51,7 +69,13 @@ class ArrayBackedEvent<T> extends Event<T> {
         }
     }
 
-    private EventPhaseData<T> getOrCreatePhase(ResourceLocation id, boolean sortIfCreate) {
+    private EventPhaseData<T> getOrCreatePhase(
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    id, boolean sortIfCreate) {
         EventPhaseData<T> phase = phases.get(id);
 
         if (phase == null) {
@@ -91,7 +115,19 @@ class ArrayBackedEvent<T> extends Event<T> {
     }
 
     @Override
-    public void addPhaseOrdering(ResourceLocation firstPhase, ResourceLocation secondPhase) {
+    public void addPhaseOrdering(
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    firstPhase,
+            //#if MC < 12111
+            //$$ResourceLocation
+            //#else
+            Identifier
+                    //#endif
+                    secondPhase) {
         Objects.requireNonNull(firstPhase, "Tried to add an ordering for a null phase.");
         Objects.requireNonNull(secondPhase, "Tried to add an ordering for a null phase.");
         if (firstPhase.equals(secondPhase)) throw new IllegalArgumentException("Tried to add a phase that depends on itself.");

@@ -1,7 +1,8 @@
 {
   "versions": [
     "1.21.6-fabric",
-    "1.21.9-fabric"
+    "1.21.9-fabric",
+    "1.21.11-fabric"
   ],
   "archive": [
     "1.21-neoforge",

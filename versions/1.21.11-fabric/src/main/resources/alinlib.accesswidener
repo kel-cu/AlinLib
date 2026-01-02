@@ -1,0 +1,8 @@
+accessWidener	v1	named
+accessible method net/minecraft/client/gui/components/AbstractSliderButton setValue (D)V
+accessible field net/minecraft/client/Minecraft userPropertiesFuture Ljava/util/concurrent/CompletableFuture;
+accessible field net/minecraft/client/gui/components/EditBox font Lnet/minecraft/client/gui/Font;
+accessible field net/minecraft/client/gui/components/EditBox displayPos I
+accessible method net/minecraft/client/gui/components/EditBox applyFormat (Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+accessible method net/minecraft/client/KeyMapping$Category register (Ljava/lang/String;)Lnet/minecraft/client/KeyMapping$Category;
+accessible method net/minecraft/client/gui/components/MultiLineEditBox <init> (Lnet/minecraft/client/gui/Font;IIIILnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;IZIZZ)V

@@ -48,7 +48,13 @@ public abstract class AbstractStyle {
         int cW = getCheckBoxSizes(width, height)[0];
         int cH = getCheckBoxSizes(width, height)[1];
         //#if MC >= 12108
-        guiGraphics.submitOutline(x, y, cW, cH, getCheckBoxColor(value));
+        guiGraphics.
+                //#if MC < 12111
+                //$$submitOutline
+                //#else
+                renderOutline
+        //#endif
+        (x, y, cW, cH, getCheckBoxColor(value));
         //#else
         //$$ guiGraphics.fill(x, y, x + cW, y+1, getCheckBoxColor(value));
         //$$ guiGraphics.fill(x, y+cH-1, x + cW, y+cH, getCheckBoxColor(value));

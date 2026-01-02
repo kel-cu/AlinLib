@@ -15,6 +15,8 @@ public interface Colors {
     int TETRA = 0xFFff67d1;
     int DROPLET = 0xffab2b4e;
     int FORGOT = 0xFF4f3e60;
+    int DRAGONET = 0xFF00b4a7;
+    int[] COPYCAT = {0xff274661, 0xFF354da8, 0xfffca53c, 0xFFab0ffc};
     int WHITE = 0xFFFFFFFF;
     int BLACK = 0xFF000000;
     int BLACK_ALPHA = 0x37000000;

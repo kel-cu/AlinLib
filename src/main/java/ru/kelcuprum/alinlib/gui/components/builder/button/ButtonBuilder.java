@@ -1,7 +1,13 @@
 package ru.kelcuprum.alinlib.gui.components.builder.button;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+        ;
 import ru.kelcuprum.alinlib.gui.components.builder.AbstractBuilder;
 import ru.kelcuprum.alinlib.gui.components.buttons.Button;
 
@@ -9,11 +15,23 @@ public class ButtonBuilder extends AbstractBuilder {
     public Button.OnPress onPress;
     public boolean isCentered = true;
     public Component rightTitle;
-    public ResourceLocation sprite;
+    public 
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+         sprite;
     public int textureWidth = width;
     public int textureHeight = height;
 
-    public ResourceLocation icon;
+    public 
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+         icon;
 
     public ButtonBuilder(){
         this(Component.empty());
@@ -57,13 +75,25 @@ public class ButtonBuilder extends AbstractBuilder {
         return this;
     }
     // Icon
-    public ButtonBuilder setIcon(ResourceLocation icon){
+    public ButtonBuilder setIcon(
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+         icon){
         this.icon = icon;
         return this;
     }
 
     // Sprite
-    public ButtonBuilder setSprite(ResourceLocation sprite){
+    public ButtonBuilder setSprite(
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+         sprite){
         this.sprite = sprite;
         return this;
     }

@@ -1,19 +1,32 @@
 package ru.kelcuprum.alinlib.gui.screens;
 
 import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
-import net.minecraft.Util;
+
+//#if MC < 12111
+//$$ import net.minecraft.Util;
+//#else
+import net.minecraft.util.Util;
+//#endif
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 //#if MC >= 12106
 import org.joml.Matrix3x2f;
 import net.minecraft.client.renderer.RenderPipelines;
+//#else
+//$$ import net.minecraft.client.renderer.RenderType;
 //#endif
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.
+        //#if MC < 12111
+        //$$ResourceLocation
+        //#else
+        Identifier
+        //#endif
+        ;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 
@@ -24,13 +37,25 @@ public class ConfirmScreen extends Screen {
     public final Screen parent;
     public final Component message;
     public final BooleanConsumer consumer;
-    public final ResourceLocation icon;
+    public final
+    //#if MC < 12111
+    //$$ResourceLocation
+    //#else
+    Identifier
+            //#endif
+            icon;
     public String url;
 
     public ConfirmScreen(Screen parent, Component title, Component message, String url){
         this(parent, null, title, message, url);
     }
-    public ConfirmScreen(Screen parent, ResourceLocation icon, Component title, Component message, String url){
+    public ConfirmScreen(Screen parent,
+                         //#if MC < 12111
+                         //$$ResourceLocation
+                         //#else
+                         Identifier
+                                 //#endif
+                                 icon, Component title, Component message, String url){
         this(parent, icon, title, message, (bl) -> {
             if (bl) Util.getPlatform().openUri(url);
         });
@@ -39,7 +64,13 @@ public class ConfirmScreen extends Screen {
     public ConfirmScreen(Screen parent, Component title, Component message, BooleanConsumer consumer) {
         this(parent, null, title, message, consumer);
     }
-    public ConfirmScreen(Screen parent, ResourceLocation icon, Component title, Component message, BooleanConsumer consumer) {
+    public ConfirmScreen(Screen parent,
+                         //#if MC < 12111
+                         //$$ResourceLocation
+                         //#else
+                         Identifier
+                                 //#endif
+                                 icon, Component title, Component message, BooleanConsumer consumer) {
         super(title);
         this.consumer = consumer;
         this.message = message;

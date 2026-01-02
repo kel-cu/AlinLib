@@ -2,7 +2,12 @@ package ru.kelcuprum.alinlib.gui.screens;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.minecraft.Util;
+//#if MC < 12111
+//$$import net.minecraft.Util;
+//#else
+import net.minecraft.util.Util;
+//#endif
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 //#if MC >= 12109
@@ -10,8 +15,9 @@ import net.minecraft.client.input.KeyEvent;
 //#endif
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
+//#else
+//$$import net.minecraft.client.renderer.RenderType;
 //#endif
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;

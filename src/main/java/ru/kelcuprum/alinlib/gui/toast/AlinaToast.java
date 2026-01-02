@@ -12,7 +12,6 @@ import net.minecraft.client.gui.components.toasts.ToastManager;
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
 //#endif
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
 
