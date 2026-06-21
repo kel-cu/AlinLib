@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.util.Util;
 //#endif
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 //#if MC >= 12109
 import net.minecraft.client.input.KeyEvent;
@@ -112,8 +112,8 @@ public class ThanksScreen extends Screen {
 
     @Override
     //#if MC >=12002
-    public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
-        super.renderBackground(guiGraphics, i, j, f);
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int i, int j, float f) {
+        super.extractBackground(guiGraphics, i, j, f);
         //#elseif MC < 12002
         //$$ public void renderBackground(GuiGraphics guiGraphics) {
         //$$         super.renderBackground(guiGraphics);
@@ -151,7 +151,7 @@ public class ThanksScreen extends Screen {
         int modifiers = keyEvent.modifiers();
         //#endif
         if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0)
-            AlinLib.MINECRAFT.setScreen(parent);
+            AlinLib.MINECRAFT.setScreenAndShow(parent);
         return super.keyPressed(
                 //#if MC >= 12109
                 keyEvent
@@ -163,6 +163,6 @@ public class ThanksScreen extends Screen {
 
     public void onClose() {
         assert this.minecraft != null;
-        this.minecraft.setScreen(parent);
+        this.minecraft.setScreenAndShow(parent);
     }
 }

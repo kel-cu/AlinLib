@@ -1,7 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.sliders;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractSliderButton;
 //#if MC >= 12109
 import net.minecraft.client.input.KeyEvent;
@@ -94,23 +94,23 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
 
     // Рендер
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
+    public void extractWidgetRenderState(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float tick) {
         if (this.visible) {
-            renderBackground(guiGraphics, mouseX, mouseY, tick);
-            renderText(guiGraphics, mouseX, mouseY, tick);
+            renderBackground(GuiGraphicsExtractor, mouseX, mouseY, tick);
+            renderText(GuiGraphicsExtractor, mouseX, mouseY, tick);
             //#if MC >= 12109
             if (this.isHovered()) {
-                guiGraphics.requestCursor(this.isActive() ? isFocused() ? CursorTypes.RESIZE_EW : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+                GuiGraphicsExtractor.requestCursor(this.isActive() ? isFocused() ? CursorTypes.RESIZE_EW : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
             }
             //#endif
         }
     }
 
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
+    public void renderBackground(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float tick) {
         if (isResetable()) {
             if (builder.getStyle() != null)
-                builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, mouseX, mouseY));
-            guiGraphics.blit(
+                builder.getStyle().renderBackground$widget(GuiGraphicsExtractor, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, mouseX, mouseY));
+            GuiGraphicsExtractor.blit(
                     //#if MC >= 12106
                     RenderPipelines.GUI_TEXTURED,
                     //#elseif MC >= 12102
@@ -118,35 +118,35 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
                     //#endif
                     RESET, getX() + 2, getY() + 2, 0f, 0f, getHeight() - 4, getHeight() - 4, getHeight() - 4, getHeight() - 4);
             if (builder.getStyle() != null)
-                builder.getStyle().renderBackground$slider(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, mouseX, mouseY), this.value);
+                builder.getStyle().renderBackground$slider(GuiGraphicsExtractor, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, mouseX, mouseY), this.value);
         } else
-            builder.getStyle().renderBackground$slider(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value);
+            builder.getStyle().renderBackground$slider(GuiGraphicsExtractor, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused(), this.value);
     }
 
-    public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float tick) {
+    public void renderText(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float tick) {
         if (GuiUtils.isDoesNotFit(Component.literal(builder.getTitle().getString()).append(": ").append(getComponentValue()), getWidth(), getHeight())) {
             if (isHoveredOrFocused()) {
                 this.setMessage(getComponentValue());
             } else {
                 this.setMessage(Component.literal(builder.getTitle().getString()).append(": ").append(getComponentValue()));
             }
-            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
+            this.renderScrollingString(GuiGraphicsExtractor, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
         } else {
             if (isHovered()) {
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getXComponent() + (getWidthComponent() / 2) - (AlinLib.MINECRAFT.font.width(getComponentValue().getString()) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
+                GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, getComponentValue(), getXComponent() + (getWidthComponent() / 2) - (AlinLib.MINECRAFT.font.width(getComponentValue().getString()) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
             } else {
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
+                GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
                 // VOLUME
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, getComponentValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getComponentValue().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
+                GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, getComponentValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getComponentValue().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextSliderColor(active), builder.getStyle().sliderShadow());
             }
         }
     }
 
 
-    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j, boolean shadow) {
+    protected void renderScrollingString(GuiGraphicsExtractor GuiGraphicsExtractor, Font font, int i, int j, boolean shadow) {
         int k = this.getX() + i;
         int l = this.getX() + this.getWidth() - i;
-        TextBox.renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
+        TextBox.renderScrollingString(GuiGraphicsExtractor, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
     }
 
 

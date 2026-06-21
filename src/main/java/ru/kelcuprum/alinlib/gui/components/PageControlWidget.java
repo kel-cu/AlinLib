@@ -1,7 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#if MC >= 12109
@@ -27,12 +27,12 @@ public class PageControlWidget extends AbstractWidget {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
+    protected void extractWidgetRenderState(GuiGraphicsExtractor GuiGraphicsExtractor, int i, int j, float f) {
         int p = (this.getHeight() - 8) / 2;
-        guiGraphics.drawString(AlinLib.MINECRAFT.font, "◀", getX() + p, getY() + p, GuiUtils.getSelected().getTextColor(availableLeftScroll()), GuiUtils.getSelected().textShadow());
-        guiGraphics.drawString(AlinLib.MINECRAFT.font, String.format("%s / %s", position + 1, size),
+        GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, "◀", getX() + p, getY() + p, GuiUtils.getSelected().getTextColor(availableLeftScroll()), GuiUtils.getSelected().textShadow());
+        GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, String.format("%s / %s", position + 1, size),
                 getX() + (getWidth() / 2) - (AlinLib.MINECRAFT.font.width(String.format("%s / %s", position + 1, size))/2), getY() + p, GuiUtils.getSelected().getTextColor(availableLeftScroll()), GuiUtils.getSelected().textShadow());
-        guiGraphics.drawString(AlinLib.MINECRAFT.font, "▶", getRight() - p - AlinLib.MINECRAFT.font.width("▶"), getY() + p, GuiUtils.getSelected().getTextColor(availableLeftScroll()), GuiUtils.getSelected().textShadow());
+        GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, "▶", getRight() - p - AlinLib.MINECRAFT.font.width("▶"), getY() + p, GuiUtils.getSelected().getTextColor(availableLeftScroll()), GuiUtils.getSelected().textShadow());
 
         //#if MC >= 12109
         if (i < getX() + getHeight() || i > getRight() - getHeight()) {
@@ -40,7 +40,7 @@ public class PageControlWidget extends AbstractWidget {
             if(i < getX() + getHeight()){
                 enable = availableLeftScroll();
             } else enable = availableRightScroll();
-            guiGraphics.requestCursor(this.isActive() && enable ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+            GuiGraphicsExtractor.requestCursor(this.isActive() && enable ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
         }
         //#endif
     }

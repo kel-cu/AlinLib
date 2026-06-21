@@ -8,7 +8,7 @@ import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 import net.minecraft.util.Util;
 //#endif
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 //#if MC >= 12106
@@ -108,8 +108,8 @@ public class ConfirmScreen extends Screen {
     }
 
     //#if MC >= 12002
-    public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
-        super.renderBackground(guiGraphics, i, j, f);
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int i, int j, float f) {
+        super.extractBackground(guiGraphics, i, j, f);
         //#elseif MC < 12002
         //$$ public void renderBackground(GuiGraphics guiGraphics) {
         //$$         super.renderBackground(guiGraphics);
@@ -131,11 +131,11 @@ public class ConfirmScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int i, int j, float f) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int i, int j, float f) {
         //#if MC < 12002
         //$$     renderBackground(guiGraphics);
         //#endif
-        super.render(guiGraphics, i, j, f);
+        super.extractRenderState(guiGraphics, i, j, f);
 
         int y = 60;
         if(this.icon != null){
@@ -161,7 +161,7 @@ public class ConfirmScreen extends Screen {
                     matrix3x2f
                     //#endif
             );
-            guiGraphics.drawCenteredString(this.font, this.title, this.width / 2 / 2, y / 2, -1);
+            guiGraphics.centeredText(this.font, this.title, this.width / 2 / 2, y / 2, -1);
             //#if MC <= 12105
             //$$ guiGraphics.pose().popPose();
             //#else
@@ -170,18 +170,18 @@ public class ConfirmScreen extends Screen {
             y += 25;
         }
         for(FormattedCharSequence arg : getSplitText()){
-            guiGraphics.drawCenteredString(this.font, arg, this.width / 2, y, -1);
+            guiGraphics.centeredText(this.font, arg, this.width / 2, y, -1);
             y+=(this.font.lineHeight+3);
         }
         if(url != null){
             y+=3;
-            guiGraphics.drawCenteredString(this.font, Component.empty().setStyle(Style.EMPTY.withColor(0xFFbac2de)).append(url), this.width / 2, y, -1);
+            guiGraphics.centeredText(this.font, Component.empty().setStyle(Style.EMPTY.withColor(0xFFbac2de)).append(url), this.width / 2, y, -1);
             y+=(this.font.lineHeight);
         }
     }
 
     public void onClose() {
         assert this.minecraft != null;
-        this.minecraft.setScreen(parent);
+        this.minecraft.setScreenAndShow(parent);
     }
 }

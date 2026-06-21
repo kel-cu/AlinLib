@@ -5,7 +5,7 @@ import ru.kelcuprum.alinlib.AlinLib;
 
 public class KeyMappingHelper {
     //#if FABRIC
-    public static OnRegister onRegister = net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper::registerKeyBinding;
+    public static OnRegister onRegister = net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper::registerKeyMapping;
     //#elseif NEOFORGE
     //$$ public static final java.util.List<KeyMapping> EXAMPLE_MAPPING = new java.util.ArrayList<>();
     //$$ public static OnRegister onRegister = (s) -> {

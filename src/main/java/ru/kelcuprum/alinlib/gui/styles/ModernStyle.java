@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.gui.styles;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
@@ -13,7 +13,7 @@ public class ModernStyle extends AbstractStyle {
     }
 
     @Override
-    public void renderBackground$widget(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused) {
+    public void renderBackground$widget(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused) {
         float state = !active ? 3 : isHoveredOrFocused ? 2 : 1;
         final float f = state / 2 * 0.9F + 0.1F;
         final int background = (int) (255.0F * f);
@@ -28,7 +28,7 @@ public class ModernStyle extends AbstractStyle {
     }
 
     @Override
-    public void renderBackground$slider(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position) {
+    public void renderBackground$slider(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position) {
         float state = !active ? 3 : isHoveredOrFocused ? 2 : 1;
         final float f = state / 2 * 0.9F + 0.1F;
         final int background = (int) (255.0F * f);
@@ -47,7 +47,7 @@ public class ModernStyle extends AbstractStyle {
     }
 
     @Override
-    public void renderToastBackground(ToastBuilder builder, GuiGraphics guiGraphics, int x, int y, int width, int height, double timeline) {
+    public void renderToastBackground(ToastBuilder builder, GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, double timeline) {
         guiGraphics.fill(0, 0, width, height - 1, 0xB3000000);
         if(builder.color != null) guiGraphics.fill(0, height - 1, width, height, builder.color.intValue());
         else if (builder.type != ToastBuilder.Type.FLAT) {
@@ -57,7 +57,7 @@ public class ModernStyle extends AbstractStyle {
         } else guiGraphics.fill(0, height - 1, width, height, 0xB3000000);
     }
 
-    public static void renderDefaultBlockquoteBackground(TextBuilder builder, GuiGraphics guiGraphics, int x, int y, int width, int height, int[] colors){
+    public static void renderDefaultBlockquoteBackground(TextBuilder builder, GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, int[] colors){
         guiGraphics.fill(x, y, x + 1, y + height, colors[0]);
         guiGraphics.fill(x + 1, y, x + width, y + height, colors[1]);
     }

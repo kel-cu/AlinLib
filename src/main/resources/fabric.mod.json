@@ -31,11 +31,10 @@
   "mixins": [
     "alinlib.mixin.json"
   ],
-  "accessWidener": "alinlib.accesswidener",
+  "accessWidener": "alinlib.classtweaker",
   "icon": "assets/alinlib/icon.png",
   "depends": {
     "fabricloader": "*",
-    "fabric": "*",
     "minecraft": "${minecraft_dependency}"
   },
   "custom": {

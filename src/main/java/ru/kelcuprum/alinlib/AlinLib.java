@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.gui.screens.Screen;
 import org.meteordev.starscript.value.ValueMap;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -72,7 +73,7 @@ public class AlinLib implements net.fabricmc.api.ClientModInitializer {
             GuiRenderEvents.RENDER.register(new GUIRender());
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
                 assert client.player != null;
-                while (openConfig.consumeClick()) MINECRAFT.setScreen(DesignScreen.build(MINECRAFT.screen));
+                while (openConfig.consumeClick()) MINECRAFT.setScreenAndShow(DesignScreen.build(MINECRAFT.gui.screen()));
             });
         }
 

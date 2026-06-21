@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.mixin.events.client;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 //#if MC >= 12109
 import net.minecraft.client.input.KeyEvent;
@@ -14,8 +14,8 @@ import ru.kelcuprum.alinlib.api.events.client.ScreenEvents;
 
 @Mixin(value = Screen.class)
 public class ScreenMixin {
-    @Inject(method = "render", at = @At("HEAD"))
-    private void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
+    @Inject(method = "extractRenderState", at = @At("HEAD"))
+    private void render(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
         ScreenEvents.SCREEN_RENDER.invoker().onScreenRender((Screen) (Object) this, guiGraphics, mouseX, mouseY, partialTick);
     }
 

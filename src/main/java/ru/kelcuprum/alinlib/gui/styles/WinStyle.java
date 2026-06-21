@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.gui.styles;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
@@ -14,7 +14,7 @@ public class WinStyle extends AbstractStyle{
     }
 
     @Override
-    public void renderBackground$widget(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused) {
+    public void renderBackground$widget(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused) {
         int color = isHoveredOrFocused && active ? Colors.getWinColor(): 0xffc0c0c0;
 
         int color1 = 0x20000000;
@@ -41,7 +41,7 @@ public class WinStyle extends AbstractStyle{
     }
 
     @Override
-    public void renderBackground$editbox(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused){
+    public void renderBackground$editbox(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused){
         if(!isHoveredOrFocused) renderBackground$widget(guiGraphics, x, y, width, height, active, isHoveredOrFocused);
         else {
             int color = 0xff717171;
@@ -71,7 +71,7 @@ public class WinStyle extends AbstractStyle{
     }
 
     @Override
-    public void renderBackground$slider(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position) {
+    public void renderBackground$slider(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position) {
         int color = 0xff717171;
         int colorb = isHoveredOrFocused ? Colors.getWinColor() : 0xFFC0C0C0;
 
@@ -115,7 +115,7 @@ public class WinStyle extends AbstractStyle{
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+    public void renderBackground(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height) {
         int color = 0xffd0d0d0;
 
         int color1 = 0x20000000;
@@ -141,7 +141,7 @@ public class WinStyle extends AbstractStyle{
         guiGraphics.fill(x, height-1, width, height, color4);
     }
     @Override
-    public void renderTitleBackground(GuiGraphics guiGraphics, int x, int y, int width, int height) {
+    public void renderTitleBackground(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height) {
         int factWidth = width-x;
         int[] colors = Colors.getWinTitleGradientColor();
         for(int i = 0; i<factWidth; i++){
@@ -164,7 +164,7 @@ public class WinStyle extends AbstractStyle{
     }
 
     @Override
-    public void renderToastBackground(ToastBuilder toastBuilder, GuiGraphics guiGraphics, int x, int y, int width, int height, double timeline) {
+    public void renderToastBackground(ToastBuilder toastBuilder, GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, double timeline) {
         y+=1; height-=1; width-=2;
         guiGraphics.fill(x+1, y+1, x-1+width, y-1+height, 0xFFffffe1);
         guiGraphics.fill(x+1, y+1, x+width+1, y+3, 0xFFffffe1);
@@ -183,7 +183,7 @@ public class WinStyle extends AbstractStyle{
     }
 
     @Override
-    public void renderBlockquoteBackground(TextBuilder builder, GuiGraphics guiGraphics, int x, int y, int width, int height, int[] colors) {
+    public void renderBlockquoteBackground(TextBuilder builder, GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, int[] colors) {
         width-=2;
         guiGraphics.fill(x+1, y+1, x-1+width, y-1+height, 0xFFffffe1);
         guiGraphics.fill(x+1, y+1, x+width+1, y+3, 0xFFffffe1);

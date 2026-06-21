@@ -40,7 +40,7 @@ public class DemoScreen {
                 .addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.design.demo.button.sprite")).setSprite(CLOWNFISH));
         if (AlinLib.isNotReleaseVersion()) {
             builder.addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.title.not_release"),
-                    (s) -> AlinLib.MINECRAFT.setScreen(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
+                    (s) -> AlinLib.MINECRAFT.setScreenAndShow(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
                             Component.translatable("alinlib.title.not_release.description"), "https://github.com/kel-cu/alinlib/issues"))
             ).setIcon(SEARCH).setCentered(false));
         }
@@ -118,7 +118,7 @@ public class DemoScreen {
                 .changeState(false)
         )
                 .addWidget(new ButtonBuilder(Component.translatable("..."),
-                        (s) -> AlinLib.MINECRAFT.setScreen(new DialogScreen(AlinLib.MINECRAFT.screen, new String[]{}, null))));
+                        (s) -> AlinLib.MINECRAFT.setScreenAndShow(new DialogScreen(AlinLib.MINECRAFT.gui.screen(), new String[]{}, null))));
 
 
         return builder.build();

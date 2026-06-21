@@ -130,7 +130,7 @@ public class ToastBuilder {
     public AlinaToast buildAndShow(){
         return
         //#if MC >= 12102
-        buildAndShow(AlinLib.MINECRAFT.getToastManager());
+        buildAndShow(AlinLib.MINECRAFT.gui.toastManager());
         //#elseif MC < 12102
         //$$ buildAndShow(AlinLib.MINECRAFT.getToasts());
         //#endif

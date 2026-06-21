@@ -26,15 +26,15 @@ import static ru.kelcuprum.alinlib.gui.Icons.*;
 public class DesignScreen {
     public static AbstractBuilder[] getPanelWidgets(Screen parent){
         AbstractBuilder[] list = {
-                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreen(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreen(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false)
+                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false)
         };
         if(FabricLoader.getInstance().isDevelopmentEnvironment()) list = new AbstractBuilder[]{
-                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreen(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreen(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.config.design.demo"), (s) -> AlinLib.MINECRAFT.setScreen(DemoScreen.build(parent))).setIcon(WIKI).setCentered(false)
+                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.config.design.demo"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(DemoScreen.build(parent))).setIcon(WIKI).setCentered(false)
         };
         return list;
     }
@@ -43,7 +43,7 @@ public class DesignScreen {
         builder.addPanelWidgets(getPanelWidgets(parent));
         if (AlinLib.isNotReleaseVersion()) {
             builder.addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.title.not_release"),
-                    (s) -> AlinLib.MINECRAFT.setScreen(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
+                    (s) -> AlinLib.MINECRAFT.setScreenAndShow(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
                             Component.translatable("alinlib.title.not_release.description"), "https://github.com/kel-cu/alinlib/issues"))
             ).setIcon(SEARCH).setCentered(false));
         }

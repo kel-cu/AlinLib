@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.api.events.client;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import ru.kelcuprum.alinlib.api.events.Event;
@@ -24,7 +24,7 @@ public final class ScreenEvents {
 
     @FunctionalInterface
     public interface ScreenRender {
-        void onScreenRender(Screen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick);
+        void onScreenRender(Screen screen, GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick);
     }
 
     @FunctionalInterface

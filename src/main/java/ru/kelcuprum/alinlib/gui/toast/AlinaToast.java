@@ -2,7 +2,7 @@ package ru.kelcuprum.alinlib.gui.toast;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
 //#if MC >= 12102
 import net.minecraft.client.gui.components.toasts.ToastManager;
@@ -45,7 +45,7 @@ public class AlinaToast implements Toast {
 
     @Override
     //#if MC >= 12102
-    public void render(GuiGraphics guiGraphics, Font font, long l) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, Font font, long l) {
         //#elseif MC < 12102
         //$$ public @NotNull Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long l) {
         //#endif
@@ -56,7 +56,7 @@ public class AlinaToast implements Toast {
         texts.addAll(AlinLib.MINECRAFT.font.split(builder.message, textWidth()));
         int y = builder.hasIcon() ? 7 : 8;
         for(FormattedCharSequence text : texts){
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, text, builder.hasIcon() ? 30 : 8, y, builder.getStyle().getToastTextColor(), false);
+            guiGraphics.text(AlinLib.MINECRAFT.font, text, builder.hasIcon() ? 30 : 8, y, builder.getStyle().getToastTextColor(), false);
             y+=11;
         }
         if (builder.hasIcon()) {
@@ -67,7 +67,7 @@ public class AlinaToast implements Toast {
                     //$$ RenderType::guiTextured,
                     //#endif
                     builder.icon, 8, 8, 0.0F, 0.0F, 16, 16, 16, 16);
-            else if (builder.itemIcon != null) guiGraphics.renderFakeItem(builder.itemIcon, 8, 8);
+            else if (builder.itemIcon != null) guiGraphics.fakeItem(builder.itemIcon, 8, 8);
         }
         //#if MC < 12102
         //$$ Visibility visibility = (double) l >= builder.displayTime * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;

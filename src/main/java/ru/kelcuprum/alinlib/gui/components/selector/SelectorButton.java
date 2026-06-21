@@ -1,7 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.selector;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 //#if MC >= 12109
 import net.minecraft.client.input.InputWithModifiers;
 //#endif
@@ -72,26 +72,26 @@ public class SelectorButton extends Button implements Resetable {
 
     // Рендер
     @Override
-    public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void renderText(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTicks) {
         if(GuiUtils.isDoesNotFit(Component.empty().append(builder.getTitle()).append(": ").append(getValue()), getWidthComponent(), getHeight())){
             if(isHoveredOrFocused()){
                 this.setMessage(getValue());
             } else {
                 this.setMessage(Component.empty().append(builder.getTitle()).append(": ").append(getValue()));
             }
-            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active),builder.getStyle().textShadow());
+            this.renderScrollingString(GuiGraphicsExtractor, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active),builder.getStyle().textShadow());
         } else {
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active),builder.getStyle().textShadow());
+            GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active),builder.getStyle().textShadow());
             // VOLUME
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, getValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getValue()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active),builder.getStyle().textShadow());
+            GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, getValue(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(getValue()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active),builder.getStyle().textShadow());
         }
     }
 
 
-    public void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j, boolean shadow) {
+    public void renderScrollingString(GuiGraphicsExtractor GuiGraphicsExtractor, Font font, int i, int j, boolean shadow) {
         int k = this.getX() + i;
         int l = this.getX() + this.getWidth() - i;
-        TextBox.renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
+        TextBox.renderScrollingString(GuiGraphicsExtractor, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
     }
 
     // Мелочь
@@ -112,8 +112,8 @@ public class SelectorButton extends Button implements Resetable {
 
     //#if MC >= 12111
     @Override
-    public void renderContents(GuiGraphics guiGraphics, int i, int j, float f) {
-        super.renderContents(guiGraphics, i, j, f);
+    public void extractContents(GuiGraphicsExtractor GuiGraphicsExtractor, int i, int j, float f) {
+        super.extractContents(GuiGraphicsExtractor, i, j, f);
     }
     //#endif
 

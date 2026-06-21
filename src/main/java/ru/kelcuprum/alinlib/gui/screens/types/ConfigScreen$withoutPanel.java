@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.gui.screens.types;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 //#if MC >= 12109
@@ -45,12 +45,12 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
 
         back = addRenderableWidget(new ButtonBuilder(AlinLib.isAprilFool() ? CommonComponents.GUI_BACK : Component.literal("x")).setOnPress((OnPress) -> {
             assert this.minecraft != null;
-            this.minecraft.setScreen(builder.parent);
+            this.minecraft.setScreenAndShow(builder.parent);
         }).setSprite(AlinLib.isAprilFool() ? EXIT : null).setPosition(x + size - 20, 5).setSize(20, 20).build());
 
         if (builder.isResetable)
             reset = addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.component.reset")).setOnPress((OnPress) ->
-                    this.minecraft.setScreen(new ConfirmScreen(this, RESET, Component.translatable("alinlib.title.reset"), Component.translatable("alinlib.title.reset.description"), (bl) -> {
+                    this.minecraft.setScreenAndShow(new ConfirmScreen(this, RESET, Component.translatable("alinlib.title.reset"), Component.translatable("alinlib.title.reset.description"), (bl) -> {
                         if (bl) {
                             for (AbstractWidget widget : builder.widgets)
                                 if (widget instanceof Resetable) ((Resetable) widget).resetValue();
@@ -198,9 +198,9 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
 
     //#if MC >= 12002
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int i, int j, float f) {
         assert this.minecraft != null;
-        super.renderBackground(guiGraphics, i, j, f);
+        super.extractBackground(guiGraphics, i, j, f);
         int size = Math.min(maxSize, width - 10);
         int x = (width - size) / 2;
         guiGraphics.fill(x - 5, 0, x + size + 5, height, Colors.BLACK_ALPHA); // Затемнение
@@ -219,14 +219,14 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
     //$$  }
     //#endif
 
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
         //#if MC < 12002
         //$$ renderBackground(guiGraphics);
         //#endif
-        super.render(guiGraphics, mouseX, mouseY, partialTicks);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
         guiGraphics.enableScissor(0, 30, width, this.height - 5);
         if (scroller != null)
-            for (AbstractWidget widget : scroller.widgets) widget.render(guiGraphics, mouseX, mouseY, partialTicks);
+            for (AbstractWidget widget : scroller.widgets) widget.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
         guiGraphics.disableScissor();
         if (!Objects.equals(description, Component.empty())) {
             List<FormattedCharSequence> listed = AlinLib.MINECRAFT.font.split(description, width - 20);

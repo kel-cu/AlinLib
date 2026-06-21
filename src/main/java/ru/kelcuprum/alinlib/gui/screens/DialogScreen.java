@@ -1,7 +1,7 @@
 package ru.kelcuprum.alinlib.gui.screens;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 //#if MC >= 12109
@@ -58,8 +58,8 @@ public class DialogScreen extends Screen {
 
     @Override
     //#if MC >= 12002
-    public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
-        super.renderBackground(guiGraphics, i, j, f);
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int i, int j, float f) {
+        super.extractBackground(guiGraphics, i, j, f);
         //#elseif MC < 12002
         //$$ public void renderBackground(GuiGraphics guiGraphics) {
         //$$         super.renderBackground(guiGraphics);
@@ -74,7 +74,7 @@ public class DialogScreen extends Screen {
             int heightText = (minecraft.font.lineHeight * texts.size()) + (3 * (texts.size()-1));
             int y = height / 2 - heightText / 2;
             for(FormattedCharSequence text : texts) {
-                guiGraphics.drawCenteredString(minecraft.font, text, width / 2, y, backT);
+                guiGraphics.centeredText(minecraft.font, text, width / 2, y, backT);
                 y+=minecraft.font.lineHeight+3;
             }
         }
@@ -138,15 +138,15 @@ public class DialogScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int i, int j, float f) {
-        super.render(guiGraphics, i, j, f);
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int i, int j, float f) {
+        super.extractRenderState(guiGraphics, i, j, f);
     }
 
     @Override
     public void onClose() {
         if (isClose) {
             if (runnable != null) runnable.run();
-            else AlinLib.MINECRAFT.setScreen(screen);
+            else AlinLib.MINECRAFT.setScreenAndShow(screen);
         }
     }
 }

@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.gui.components.editbox;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 //#if MC >= 12109
 import net.minecraft.client.input.KeyEvent;
 import com.mojang.blaze3d.platform.cursor.CursorTypes;
@@ -92,20 +92,20 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
     }
 
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractWidgetRenderState(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTick) {
         if (isVisible()) {
-            renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+            renderBackground(GuiGraphicsExtractor, mouseX, mouseY, partialTick);
             if (isFocused()) {
                 this.tweakBorder = true;
-                super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
+                super.extractWidgetRenderState(GuiGraphicsExtractor, mouseX, mouseY, partialTick);
                 this.tweakBorder = false;
             } else {
-                renderText(guiGraphics, mouseX, mouseY, partialTick);
+                renderText(GuiGraphicsExtractor, mouseX, mouseY, partialTick);
             }
 
             //#if MC >= 12109
             if (this.isHovered()) {
-                guiGraphics.requestCursor(this.isActive() ? isFocused() ? CursorTypes.IBEAM : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+                GuiGraphicsExtractor.requestCursor(this.isActive() ? isFocused() ? CursorTypes.IBEAM : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
             }
             //#endif
         }
@@ -143,14 +143,14 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
         );
     }
 
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.builder.getStyle().renderBackground$editbox(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
+    public void renderBackground(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTick) {
+        this.builder.getStyle().renderBackground$editbox(GuiGraphicsExtractor, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
 
-    public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.drawString(font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : builder.getStyle().getEditBoxColor(active), builder.getStyle().editBoxShadow());
+    public void renderText(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTick) {
+        GuiGraphicsExtractor.text(font, getMessage(), getX() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, isError ? Colors.GROUPIE : builder.getStyle().getEditBoxColor(active), builder.getStyle().editBoxShadow());
         String volume1 = font.plainSubstrByWidth(this.builder.secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue(), getX() + getWidth() - (getPositionContent(this.builder.secret ? Component.translatable("alinlib.editbox.secret").getString() : getValue())));
-        guiGraphics.drawString(font,
+        GuiGraphicsExtractor.text(font,
                 //#if MC < 12109
                 //$$ formatter.apply(volume1, displayPos)
                 //#else

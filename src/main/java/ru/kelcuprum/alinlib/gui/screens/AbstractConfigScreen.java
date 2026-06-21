@@ -134,7 +134,7 @@ public class AbstractConfigScreen extends Screen {
             }
         }
         if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0 && !(getFocused() instanceof EditBox))
-            AlinLib.MINECRAFT.setScreen(new ThanksScreen(this));
+            AlinLib.MINECRAFT.setScreenAndShow(new ThanksScreen(this));
         return super.keyPressed(
                 //#if MC >= 12109
                 keyEvent
@@ -155,6 +155,6 @@ public class AbstractConfigScreen extends Screen {
 
     public void onClose() {
         assert this.minecraft != null;
-        this.minecraft.setScreen(builder.parent);
+        this.minecraft.setScreenAndShow(builder.parent);
     }
 }

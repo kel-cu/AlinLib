@@ -1,6 +1,7 @@
 package ru.kelcuprum.alinlib;
 
 import net.minecraft.client.KeyMapping;
+import net.minecraft.resources.Identifier;
 import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 
@@ -58,7 +59,7 @@ public class CommonUtils {
         KeyMapping.Category category1;
         if(categories.containsKey(category)) category1 = categories.get(category);
         else{
-            category1 = args.length == 1 ? KeyMapping.Category.register(category) : KeyMapping.Category.register(GuiUtils.getResourceLocation(args[0], args[1]));
+            category1 = args.length == 1 ? KeyMapping.Category.register(Identifier.parse(category)) : KeyMapping.Category.register(GuiUtils.getResourceLocation(args[0], args[1]));
             categories.put(category, category1);
         }
         //#endif

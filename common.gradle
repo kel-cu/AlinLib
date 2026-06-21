@@ -1,5 +1,5 @@
 apply plugin: 'maven-publish'
-apply plugin: 'fabric-loom'
+apply plugin: 'net.fabricmc.fabric-loom'
 apply plugin: 'com.replaymod.preprocess'
 apply plugin: 'me.fallenbreath.yamlang'
 apply plugin: 'com.modrinth.minotaur'
@@ -7,14 +7,14 @@ apply plugin: 'com.modrinth.minotaur'
 //def mod_brand = (loom.platform.get() as String).toLowerCase()
 //assert mod_brand in ['fabric', 'forge', 'neoforge']
 def mod_brand = 'fabric'
-archivesBaseName = rootProject.archives_base_name + "-" + mod_brand
+archives_base_name = rootProject.archives_base_name + "-" + mod_brand
 group = rootProject.maven_group
 
 
 int mcVersion = 1
 preprocess {
     mcVersion = vars.get()["MC"] as int
-    tabIndentation = true
+//    tabIndentation = true
 
     vars.put("MC", mcVersion)
     vars.put("FABRIC", mod_brand == 'fabric' ? 1 : 0)
@@ -26,7 +26,6 @@ repositories {
     mavenLocal()
     maven { url = 'https://jitpack.io' }
     maven { url = "https://maven.terraformersmc.com/releases" } // MODMENU
-    maven { url = "https://maven.neoforged.net/releases/" } // NEOFORGE
     maven { url = "https://repo.kelcuprum.ru/forks" } // STARSCRIPT
     maven { url = "https://maven.parchmentmc.org" } // MAPPINGS
     maven { url = 'https://api.modrinth.com/maven'} // MODRINTH
@@ -42,34 +41,35 @@ loom {
             vmArgs '-Dmixin.debug.export=true'
         }
 
-    accessWidenerPath = file("./src/main/resources/alinlib.accesswidener")
+    accessWidenerPath = file("./src/main/resources/alinlib.classtweaker")
 }
-remapJar {
-    if(mod_brand == 'neoforge') atAccessWideners.add("alinlib.accesswidener")
-//    remapperIsolation = true
-//    injectAccessWidener = true
-}
+//remapJar {
+//    if(mod_brand == 'neoforge') atAccessWideners.add("alinlib.accesswidener")
+////    remapperIsolation = true
+////    injectAccessWidener = true
+//}
 dependencies {
     // loom
     implementation("com.google.code.gson:gson:2.10.1")
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.layered() {
-        officialMojangMappings()
-    }
+//    mappings loom.layered() {
+//        officialMojangMappings()
+//    }
     include(implementation("meteordevelopment:starscript:0.3.4"))
 
     if (mod_brand == 'fabric') {
-        modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
-        modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-        modCompileOnly "maven.modrinth:reglass:${project.reglass_version}"
-        modCompileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
+        implementation  "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+        implementation  "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+        compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
     } else if (mod_brand == 'neoforge') {
         neoForge "net.neoforged:neoforge:${project.forge_version}"
     }
 }
 
 int JAVA_COMPATIBILITY
-if (mcVersion >= 12005)
+if (mcVersion >= 26100)
+    JAVA_COMPATIBILITY = 25
+else if (mcVersion >= 12005)
     JAVA_COMPATIBILITY = 21
 else
     JAVA_COMPATIBILITY = 17
@@ -121,7 +121,7 @@ modrinth {
     changelog = file("../../changelog.md").text
     versionNumber = rootProject.mod_version
     versionType = rootProject.version_type // This is the default -- can also be `beta` or `alpha`
-    uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
+//    uploadFile = remapJar // With Loom, this MUST be set to `remapJar` instead of `jar`!
     project.modrinth_versions.split(", ").each {
         gameVersions.add it
     }

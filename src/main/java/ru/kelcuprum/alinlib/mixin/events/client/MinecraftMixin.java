@@ -1,8 +1,10 @@
 package ru.kelcuprum.alinlib.mixin.events.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.screens.Overlay;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,11 +16,13 @@ import ru.kelcuprum.alinlib.api.events.client.ClientTickEvents;
 @Mixin(value = Minecraft.class)
 public class MinecraftMixin {
 
-    @Shadow @Nullable private Overlay overlay;
+    @Shadow
+    @Final
+    public Gui gui;
 
     @Inject(at = @At(value = "HEAD"), method = "tick")
     private void onStartTick(CallbackInfo ci) {
-        if(this.overlay == null && !ClientLifecycleEvents.isClientFullStarted){
+        if(this.gui.overlay() == null && !ClientLifecycleEvents.isClientFullStarted){
             ClientLifecycleEvents.isClientFullStarted = true;
             ClientLifecycleEvents.CLIENT_FULL_STARTED.invoker().onClientFullStarted((Minecraft) (Object) this);
         }
@@ -28,7 +32,7 @@ public class MinecraftMixin {
     private void onEndTick(CallbackInfo ci) {
         ClientTickEvents.END_CLIENT_TICK.invoker().onEndTick((Minecraft) (Object) this);
     }
-    @Inject(at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;)V", shift = At.Shift.AFTER, remap = false), method = "destroy")
+    @Inject(at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;)V", shift = At.Shift.AFTER, remap = false), method = "exitWorldAndClose")
     private void onStopping(CallbackInfo ci) {
         ClientLifecycleEvents.CLIENT_STOPPING.invoker().onClientStopping((Minecraft) (Object) this);
     }

@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.gui.styles;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
@@ -22,29 +22,29 @@ public abstract class AbstractStyle {
     }
 
     // -=-=-=- Рендеры
-    public abstract void renderBackground$widget(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused);
-    public abstract void renderBackground$slider(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position);
-    public void renderBackground$editbox(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused){
+    public abstract void renderBackground$widget(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused);
+    public abstract void renderBackground$slider(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused, double position);
+    public void renderBackground$editbox(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, boolean active, boolean isHoveredOrFocused){
         renderBackground$widget(guiGraphics, x, y, width, height, active, isHoveredOrFocused);
     }
-    public void renderBackground(GuiGraphics guiGraphics, int x, int y, int width, int height){
+    public void renderBackground(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height){
         guiGraphics.fill(x, y, width, height, BLACK_ALPHA);
     }
-    public void renderTitleBackground(GuiGraphics guiGraphics, int x, int y, int width, int height){
-        guiGraphics.fill(x, y, width, height, BLACK_ALPHA);
-    }
-
-    public void renderToastBackground(ToastBuilder toastBuilder, GuiGraphics guiGraphics, int x, int y, int width, int height, double timeline){
+    public void renderTitleBackground(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height){
         guiGraphics.fill(x, y, width, height, BLACK_ALPHA);
     }
 
-    public void renderBlockquoteBackground(TextBuilder builder, GuiGraphics guiGraphics, int x, int y, int width, int height, int[] colors){
+    public void renderToastBackground(ToastBuilder toastBuilder, GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, double timeline){
+        guiGraphics.fill(x, y, width, height, BLACK_ALPHA);
+    }
+
+    public void renderBlockquoteBackground(TextBuilder builder, GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, int[] colors){
         ModernStyle.renderDefaultBlockquoteBackground(builder, guiGraphics, x, y, width, height, colors);
     }
     public int[] getCheckBoxSizes(int width, int height){
         return new int[]{height-10, height-10};
     }
-    public void renderCheckBox(GuiGraphics guiGraphics, int x, int y, int width, int height, boolean value){
+    public void renderCheckBox(GuiGraphicsExtractor guiGraphics, int x, int y, int width, int height, boolean value){
         int cW = getCheckBoxSizes(width, height)[0];
         int cH = getCheckBoxSizes(width, height)[1];
         //#if MC >= 12108
@@ -52,7 +52,7 @@ public abstract class AbstractStyle {
                 //#if MC < 12111
                 //$$submitOutline
                 //#else
-                renderOutline
+                outline
         //#endif
         (x, y, cW, cH, getCheckBoxColor(value));
         //#else

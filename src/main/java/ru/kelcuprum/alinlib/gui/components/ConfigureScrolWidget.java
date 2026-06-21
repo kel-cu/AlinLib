@@ -2,7 +2,7 @@ package ru.kelcuprum.alinlib.gui.components;
 //#if MC < 12105
 //$$ import com.mojang.blaze3d.systems.RenderSystem;
 //#endif
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -49,8 +49,8 @@ public class ConfigureScrolWidget extends AbstractWidget {
         this.onScroll.accept(this);
     }
 
-    protected void renderBackground(GuiGraphics guiGraphics) {
-        if (this.scrollbarVisible()) guiGraphics.fill(getX(), getY(), getX()+this.width, getY()+getHeight(), 0x75000000);
+    protected void renderBackground(GuiGraphicsExtractor GuiGraphicsExtractor) {
+        if (this.scrollbarVisible()) GuiGraphicsExtractor.fill(getX(), getY(), getX()+this.width, getY()+getHeight(), 0x75000000);
     }
 
     private int getContentHeight() {
@@ -60,14 +60,14 @@ public class ConfigureScrolWidget extends AbstractWidget {
     private int getScrollBarHeight() {
         return Mth.clamp((int)((float)(this.height * this.height) / (float)this.getContentHeight()), 16, this.height);
     }
-    protected void renderDecorations(GuiGraphics guiGraphics) {
+    protected void renderDecorations(GuiGraphicsExtractor GuiGraphicsExtractor) {
         if (this.scrollbarVisible()) {
             int i = this.getScrollBarHeight();
             int k = Math.max(this.getY(), (int)this.scrollAmount() * (this.height - i) / this.getMaxScrollAmount()+ this.getY());
             //#if MC < 12105
             //$$ RenderSystem.enableBlend();
             //#endif
-            guiGraphics.fill(getX(), k, getX()+getWidth(), k+i, GuiUtils.getSelected().getScrollerColor());
+            GuiGraphicsExtractor.fill(getX(), k, getX()+getWidth(), k+i, GuiUtils.getSelected().getScrollerColor());
             //#if MC < 12105
             //$$ RenderSystem.disableBlend();
             //#endif
@@ -228,16 +228,16 @@ public class ConfigureScrolWidget extends AbstractWidget {
     }
     // ---
 
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+    public void extractWidgetRenderState(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float delta) {
         if(AlinLib.bariumConfig.getBoolean("SCROLLER.SMOOTH", false)) {
             checkOutOfBounds(delta);
             if (Math.abs(scrollbarVelocity(animationTimer, scrollStartVelocity)) > 1.0) applyMotion(delta);
         }
-        renderBackground(guiGraphics);
-        renderDecorations(guiGraphics);
+        renderBackground(GuiGraphicsExtractor);
+        renderDecorations(GuiGraphicsExtractor);
         //#if MC >= 12109
         if (this.isHovered()) {
-            guiGraphics.requestCursor(this.isActive() ? isFocused() ? CursorTypes.RESIZE_NS : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+            GuiGraphicsExtractor.requestCursor(this.isActive() ? isFocused() ? CursorTypes.RESIZE_NS : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
         }
         //#endif
     }

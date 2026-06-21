@@ -4,7 +4,7 @@ package ru.kelcuprum.alinlib.gui.components.editbox;
 import net.minecraft.client.input.KeyEvent;
 import com.mojang.blaze3d.platform.cursor.CursorTypes;
 //#endif
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import org.lwjgl.glfw.GLFW;
@@ -72,11 +72,11 @@ public class MultilineEditBox extends net.minecraft.client.gui.components.MultiL
     }
 
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractWidgetRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (visible) {
-            renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+            extractBackground(guiGraphics);
             if (isFocused()) {
-                super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
+                super.extractWidgetRenderState(guiGraphics, mouseX, mouseY, partialTick);
             } else {
                 renderText(guiGraphics, mouseX, mouseY, partialTick);
             }
@@ -121,22 +121,22 @@ public class MultilineEditBox extends net.minecraft.client.gui.components.MultiL
         );
     }
 
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics) {
         this.builder.getStyle().renderBackground$editbox(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
 
-    public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void renderText(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick) {
         int y = 4;
         int x = 4;
         if(!builder.getTitle().equals(Component.empty())){
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getX() + 5, getY() + 5, isError ? Colors.GROUPIE : builder.getStyle().getEditBoxColor(active), builder.getStyle().editBoxShadow());
+            guiGraphics.text(AlinLib.MINECRAFT.font, builder.getTitle(), getX() + 5, getY() + 5, isError ? Colors.GROUPIE : builder.getStyle().getEditBoxColor(active), builder.getStyle().editBoxShadow());
             y+=AlinLib.MINECRAFT.font.lineHeight+4;
             guiGraphics.fill(getX()+3, getY()+y, getRight()-3, getY()+y+1, builder.getStyle().getHorizontalRuleColor());
             y+=5;
         }
         for(FormattedCharSequence formattedCharSequence : AlinLib.MINECRAFT.font.split(this.builder.secret ? Component.translatable("alinlib.editbox.secret"): Component.literal(getValue()), width-12)){
             if(y+AlinLib.MINECRAFT.font.lineHeight+3 > height) break;
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, formattedCharSequence, getX() + x, getY() + y, isError ? Colors.GROUPIE : builder.getStyle().getEditBoxColor(active), builder.getStyle().editBoxShadow());
+            guiGraphics.text(AlinLib.MINECRAFT.font, formattedCharSequence, getX() + x, getY() + y, isError ? Colors.GROUPIE : builder.getStyle().getEditBoxColor(active), builder.getStyle().editBoxShadow());
             y+=AlinLib.MINECRAFT.font.lineHeight;
         }
     }

@@ -33,7 +33,7 @@ public class StarScript {
                 //#else
                 .set("version", SharedConstants.getCurrentVersion().name())
                 //#endif
-                .set("loader", AlinLib.MINECRAFT.getVersionType())
+                .set("loader", AlinLib.MINECRAFT.getLaunchedVersion())
                 .set("fps", () -> Value.number(AlinLib.MINECRAFT.getFps()))
                 .set("window", new ValueMap()
                         .set("width", () -> Value.number(AlinLib.MINECRAFT.getWindow().getWidth()))

@@ -7,7 +7,7 @@ import net.minecraft.util.Util;
 //#endif
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.ConfirmLinkScreen;
@@ -98,28 +98,28 @@ public class TextBox extends AbstractWidget implements Description {
     }
 
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
-        renderBackground(guiGraphics);
+    public void extractWidgetRenderState(GuiGraphicsExtractor GuiGraphicsExtractor, int i, int j, float f) {
+        renderBackground(GuiGraphicsExtractor);
         if (builder.type == TEXT || builder.type == TITLE) {
-            if (isDoesNotFit()) this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2,  builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
+            if (isDoesNotFit()) this.renderScrollingString(GuiGraphicsExtractor, AlinLib.MINECRAFT.font, 2,  builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
             else if (builder.align == CENTER)
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2 - (AlinLib.MINECRAFT.font.width(getMessage())/2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
+                GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, getMessage(), getX() + getWidth() / 2 - (AlinLib.MINECRAFT.font.width(getMessage())/2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
             else
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, getMessage(), (builder.align == LEFT ? (getX() + (getHeight() - 8) / 2) : (getX() + getWidth() - (getHeight() - 8) / 2) - AlinLib.MINECRAFT.font.width(getMessage())), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
-        } else renderMessageText(guiGraphics);
+                GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, getMessage(), (builder.align == LEFT ? (getX() + (getHeight() - 8) / 2) : (getX() + getWidth() - (getHeight() - 8) / 2) - AlinLib.MINECRAFT.font.width(getMessage())), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
+        } else renderMessageText(GuiGraphicsExtractor);
 
         //#if MC >= 12109
         if (this.isHovered() && builder.onPress != null) {
-            guiGraphics.requestCursor(this.isActive() ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+            GuiGraphicsExtractor.requestCursor(this.isActive() ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
         }
         //#endif
     }
 
-    public void renderBackground(GuiGraphics guiGraphics) {
+    public void renderBackground(GuiGraphicsExtractor GuiGraphicsExtractor) {
         if (builder.type != BLOCKQUOTE && builder.onPress != null)
-            builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getWidth(), getHeight(), true, isHoveredOrFocused());
+            builder.getStyle().renderBackground$widget(GuiGraphicsExtractor, getX(), getY(), getWidth(), getHeight(), true, isHoveredOrFocused());
         else if (builder.type == BLOCKQUOTE) {
-            builder.getStyle().renderBlockquoteBackground(builder, guiGraphics, this.getX(), this.getY(), this.getWidth(), this.getHeight(), getBlockquoteColor());
+            builder.getStyle().renderBlockquoteBackground(builder, GuiGraphicsExtractor, this.getX(), this.getY(), this.getWidth(), this.getHeight(), getBlockquoteColor());
         }
     }
 
@@ -127,23 +127,23 @@ public class TextBox extends AbstractWidget implements Description {
         return builder.color == null ? builder.getStyle().getBlockquoteColors() : builder.color;
     }
 
-    public void renderMessageText(GuiGraphics guiGraphics) {
+    public void renderMessageText(GuiGraphicsExtractor GuiGraphicsExtractor) {
         List<FormattedCharSequence> list = getArrayTexts(this.builder.type == BLOCKQUOTE && this.builder.align != CENTER ? 13 : 12);
         int l = 0;
         for (FormattedCharSequence text : list) {
             if (builder.align == CENTER)
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, getX() + (getWidth() / 2) - (AlinLib.MINECRAFT.font.width(text)/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
+                GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, text, getX() + (getWidth() / 2) - (AlinLib.MINECRAFT.font.width(text)/2), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
             else
-                guiGraphics.drawString(AlinLib.MINECRAFT.font, text, (builder.align == LEFT ? getX() + (this.builder.type == BLOCKQUOTE ? 7 : 6) : getX() + getWidth() - 6 - AlinLib.MINECRAFT.font.width(text)), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
+                GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, text, (builder.align == LEFT ? getX() + (this.builder.type == BLOCKQUOTE ? 7 : 6) : getX() + getWidth() - 6 - AlinLib.MINECRAFT.font.width(text)), getY() + 6 + ((AlinLib.MINECRAFT.font.lineHeight + 3) * l), builder.getStyle().getTextColor(builder.type), builder.getStyle().textShadow(builder.type));
             l++;
         }
     }
 
-    public static void renderScrollingString(GuiGraphics guiGraphics, Font font, Component component, int i, int j, int k, int l, int m, boolean shadow) {
-        renderScrollingString(guiGraphics, font, component, (i + k) / 2, i, j, k, l, m, shadow);
+    public static void renderScrollingString(GuiGraphicsExtractor GuiGraphicsExtractor, Font font, Component component, int i, int j, int k, int l, int m, boolean shadow) {
+        renderScrollingString(GuiGraphicsExtractor, font, component, (i + k) / 2, i, j, k, l, m, shadow);
     }
 
-    public static void renderScrollingString(GuiGraphics guiGraphics, Font font, Component component, int i, int j, int k, int l, int m, int n, boolean shadow) {
+    public static void renderScrollingString(GuiGraphicsExtractor GuiGraphicsExtractor, Font font, Component component, int i, int j, int k, int l, int m, int n, boolean shadow) {
         int o = font.width(component);
         int var10000 = k + m;
         Objects.requireNonNull(font);
@@ -155,20 +155,20 @@ public class TextBox extends AbstractWidget implements Description {
             double e = Math.max((double)r * (double)0.5F, (double)3.0F);
             double f = Math.sin((Math.PI / 2D) * Math.cos((Math.PI * 2D) * d / e)) / (double)2.0F + (double)0.5F;
             double g = Mth.lerp(f, (double)0.0F, (double)r);
-            guiGraphics.enableScissor(j, k, l, m);
-            guiGraphics.drawString(font, component, j - (int)g, p, n, shadow);
-            guiGraphics.disableScissor();
+            GuiGraphicsExtractor.enableScissor(j, k, l, m);
+            GuiGraphicsExtractor.text(font, component, j - (int)g, p, n, shadow);
+            GuiGraphicsExtractor.disableScissor();
         } else {
             int r = Mth.clamp(i, j + o / 2, l - o / 2);
-            guiGraphics.drawString(font, component, r-(font.width(component)/2), p, n, shadow);
+            GuiGraphicsExtractor.text(font, component, r-(font.width(component)/2), p, n, shadow);
         }
 
     }
 
-    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j, boolean shadow) {
+    protected void renderScrollingString(GuiGraphicsExtractor GuiGraphicsExtractor, Font font, int i, int j, boolean shadow) {
         int k = this.getX() + i;
         int l = this.getX() + this.getWidth() - i;
-        renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
+        renderScrollingString(GuiGraphicsExtractor, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
     }
 
     private boolean isDoesNotFit() {
@@ -258,13 +258,13 @@ public class TextBox extends AbstractWidget implements Description {
                     //#if MC >= 12105
                     URI uRI = ((ClickEvent.OpenUrl) clickEvent).uri();
                     if (AlinLib.MINECRAFT.options.chatLinksPrompt().get()) {
-                        Screen current = AlinLib.MINECRAFT.screen;
-                        AlinLib.MINECRAFT.setScreen(new ConfirmLinkScreen((bl) -> {
+                        Screen current = AlinLib.MINECRAFT.gui.screen();
+                        AlinLib.MINECRAFT.setScreenAndShow(new ConfirmLinkScreen((bl) -> {
                             if (bl) {
                                 Util.getPlatform().openUri(uRI);
                             }
 
-                            AlinLib.MINECRAFT.setScreen(current);
+                            AlinLib.MINECRAFT.setScreenAndShow(current);
                         }, uRI.toString(), false));
                     } else {
                         Util.getPlatform().openUri(uRI);

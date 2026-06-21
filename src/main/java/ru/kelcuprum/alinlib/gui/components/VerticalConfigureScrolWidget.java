@@ -5,7 +5,7 @@
 
 package ru.kelcuprum.alinlib.gui.components;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -58,9 +58,9 @@ public class VerticalConfigureScrolWidget extends AbstractWidget {
         this.onScroll.accept(this);
     }
 
-    protected void renderBackground(GuiGraphics guiGraphics) {
+    protected void renderBackground(GuiGraphicsExtractor GuiGraphicsExtractor) {
         if (this.scrollbarVisible()) {
-            guiGraphics.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.getHeight(), 1962934272);
+            GuiGraphicsExtractor.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + this.getHeight(), 1962934272);
         }
 
     }
@@ -73,11 +73,11 @@ public class VerticalConfigureScrolWidget extends AbstractWidget {
         return Mth.clamp((int)((float)(this.width * this.width) / (float)this.getContentHeight()), 16, this.width);
     }
 
-    protected void renderDecorations(GuiGraphics guiGraphics) {
+    protected void renderDecorations(GuiGraphicsExtractor GuiGraphicsExtractor) {
         if (this.scrollbarVisible()) {
             int i = this.getScrollBarHeight();
             int k = Math.max(this.getX(), (int)this.scrollAmount() * (this.width - i) / this.getMaxScrollAmount() + this.getX());
-            guiGraphics.fill(k, this.getY(), k + i, this.getY() + this.getHeight(), GuiUtils.getSelected().getScrollerColor());
+            GuiGraphicsExtractor.fill(k, this.getY(), k + i, this.getY() + this.getHeight(), GuiUtils.getSelected().getScrollerColor());
         }
 
     }
@@ -239,7 +239,7 @@ public class VerticalConfigureScrolWidget extends AbstractWidget {
         );
     }
 
-    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
+    public void extractWidgetRenderState (GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float delta) {
         if (AlinLib.bariumConfig.getBoolean("SCROLLER.SMOOTH", false)) {
             this.checkOutOfBounds(delta);
             if (Math.abs(scrollbarVelocity(this.animationTimer, this.scrollStartVelocity)) > (double)1.0F) {
@@ -247,11 +247,11 @@ public class VerticalConfigureScrolWidget extends AbstractWidget {
             }
         }
 
-        this.renderBackground(guiGraphics);
-        this.renderDecorations(guiGraphics);
+        this.renderBackground(GuiGraphicsExtractor);
+        this.renderDecorations(GuiGraphicsExtractor);
         //#if MC >= 12109
         if (this.isHovered()) {
-            guiGraphics.requestCursor(this.isActive() ? isFocused() ? CursorTypes.RESIZE_EW : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+            GuiGraphicsExtractor.requestCursor(this.isActive() ? isFocused() ? CursorTypes.RESIZE_EW : CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
         }
         //#endif
     }

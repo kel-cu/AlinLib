@@ -1,7 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.buttons;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#if MC >= 12109
@@ -60,37 +60,37 @@ public class Button extends AbstractButton implements Description {
     @Override
 
     //#if MC < 12111
-    //$$ public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    //$$ public void renderWidget(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTicks) {
         //#else
-        public void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        public void extractContents(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTicks) {
         //#endif
         if (visible) {
-            renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
-            renderText(guiGraphics, mouseX, mouseY, partialTicks);
+            renderBackground(GuiGraphicsExtractor, mouseX, mouseY, partialTicks);
+            renderText(GuiGraphicsExtractor, mouseX, mouseY, partialTicks);
             //#if MC >= 12109
             if (this.isHovered()) {
-                guiGraphics.requestCursor(this.isActive() ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+                GuiGraphicsExtractor.requestCursor(this.isActive() ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
             }
             //#endif
         }
     }
 
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
+    public void renderBackground(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTicks){
         if(isResetable()){
-            if(builder.getStyle() != null) this.builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, mouseX, mouseY));
-            guiGraphics.blit(
+            if(builder.getStyle() != null) this.builder.getStyle().renderBackground$widget(GuiGraphicsExtractor, getX(), getY(), getHeight(), getHeight(), this.active, this.isHoveredOrFocused(true, mouseX, mouseY));
+            GuiGraphicsExtractor.blit(
                     //#if MC >= 12106
                     RenderPipelines.GUI_TEXTURED,
                     //#elseif MC >= 12102
                     //$$ RenderType::guiTextured,
                     //#endif
                     RESET, getX()+2, getY()+2, 0f, 0f, getHeight()-4, getHeight()-4, getHeight()-4, getHeight()-4);
-            if(builder.getStyle() != null) this.builder.getStyle().renderBackground$widget(guiGraphics, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, mouseX, mouseY));
+            if(builder.getStyle() != null) this.builder.getStyle().renderBackground$widget(GuiGraphicsExtractor, getXComponent(), getY(), getWidthComponent(), getHeight(), this.active, this.isHoveredOrFocused(false, mouseX, mouseY));
         }
-        else if(builder.getStyle() != null) this.builder.getStyle().renderBackground$widget(guiGraphics, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
+        else if(builder.getStyle() != null) this.builder.getStyle().renderBackground$widget(GuiGraphicsExtractor, getX(), getY(), getWidth(), getHeight(), this.active, this.isHoveredOrFocused());
     }
-    public void renderSprite(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
-        guiGraphics.blit(
+    public void renderSprite(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTicks){
+        GuiGraphicsExtractor.blit(
                 //#if MC >= 12106
                 RenderPipelines.GUI_TEXTURED,
                 //#elseif MC >= 12102
@@ -99,47 +99,47 @@ public class Button extends AbstractButton implements Description {
                 ((ButtonBuilder) builder).sprite, getX(), getY(), 0F, 0F, ((ButtonBuilder) builder).textureWidth, ((ButtonBuilder) builder).textureHeight, getWidth(), getHeight());
         if(!builder.getTitle().getString().isEmpty() && isHovered()){
             //#if MC <= 12105
-            //$$ guiGraphics.renderTooltip(AlinLib.MINECRAFT.font, builder.getTitle(), mouseX, mouseY);
+            //$$ GuiGraphicsExtractor.renderTooltip(AlinLib.MINECRAFT.font, builder.getTitle(), mouseX, mouseY);
             //#else
-            guiGraphics.setTooltipForNextFrame(AlinLib.MINECRAFT.font, builder.getTitle(), mouseX, mouseY);
+            GuiGraphicsExtractor.setTooltipForNextFrame(AlinLib.MINECRAFT.font, builder.getTitle(), mouseX, mouseY);
             //#endif
         }
     }
 
-    public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks){
+    public void renderText(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTicks){
         if(((ButtonBuilder) builder).sprite == null) {
             if (((ButtonBuilder) builder).rightTitle == null) {
                 if (GuiUtils.isDoesNotFit(getMessage(), getWidthComponent(), getHeight()))
-                    this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+                    this.renderScrollingString(GuiGraphicsExtractor, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
                 else if (((ButtonBuilder) builder).getCentered())
-                    GuiUtils.drawCenteredString(guiGraphics, AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + getWidthComponent() / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+                    GuiUtils.drawCenteredString(GuiGraphicsExtractor, AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + getWidthComponent() / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
                 else
-                    guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+                    GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
             } else {
                 if (GuiUtils.isDoesNotFit(Component.empty().append(builder.getTitle()).append(" ").append(((ButtonBuilder) builder).getRightTitle()), getWidthComponent(), getHeight())) {
                     this.setMessage(Component.empty().append(builder.getTitle()).append(" ").append(((ButtonBuilder) builder).rightTitle));
-                    this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+                    this.renderScrollingString(GuiGraphicsExtractor, AlinLib.MINECRAFT.font, 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
                 } else {
-                    guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
-                    guiGraphics.drawString(AlinLib.MINECRAFT.font, ((ButtonBuilder) builder).getRightTitle(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(((ButtonBuilder) builder).getRightTitle().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+                    GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+                    GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, ((ButtonBuilder) builder).getRightTitle(), getX() + getWidth() - AlinLib.MINECRAFT.font.width(((ButtonBuilder) builder).getRightTitle().getString()) - ((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
                 }
             }
             if (((ButtonBuilder) builder).icon != null)
-                guiGraphics.blit(
+                GuiGraphicsExtractor.blit(
                         //#if MC >= 12106
                         RenderPipelines.GUI_TEXTURED,
                         //#elseif MC >= 12102
                         //$$ RenderType::guiTextured,
                         //#endif
                         ((ButtonBuilder) builder).icon, getX(), getY(), 0.0f, 0.0f, getHeight(), getHeight(), getHeight(), getHeight());
-        } else renderSprite(guiGraphics, mouseX, mouseY, partialTicks);
+        } else renderSprite(GuiGraphicsExtractor, mouseX, mouseY, partialTicks);
     }
 
-    public void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j, boolean shadow) {
+    public void renderScrollingString(GuiGraphicsExtractor GuiGraphicsExtractor, Font font, int i, int j, boolean shadow) {
         int k = this.getX() + i;
         if (((ButtonBuilder) builder).icon != null) k+=getHeight();
         int l = this.getX() + this.getWidth() - i;
-        TextBox.renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
+        TextBox.renderScrollingString(GuiGraphicsExtractor, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
     }
     // Мелочи V2
     protected int getWidthComponent(){

@@ -93,7 +93,7 @@ public class Player {
         return Localization.getDoubleRounding(z, !AlinLib.bariumConfig.getBoolean("LOCALIZATION.EXTENDED_COORDINATES", false));
     }
     public static int getPing(){
-        if(AlinLib.MINECRAFT.getCameraEntity() == null && !(AlinLib.MINECRAFT.isSingleplayer() || AlinLib.MINECRAFT.isLocalServer()) && AlinLib.MINECRAFT.getConnection() == null) return -1;
+        if(AlinLib.MINECRAFT.getCameraEntity() == null && !(AlinLib.MINECRAFT.hasSingleplayerServer() || AlinLib.MINECRAFT.isLocalServer()) && AlinLib.MINECRAFT.getConnection() == null) return -1;
         if(AlinLib.MINECRAFT.getConnection().getPlayerInfo(AlinLib.MINECRAFT.getCameraEntity().getUUID()) != null) return AlinLib.MINECRAFT.getConnection().getPlayerInfo(AlinLib.MINECRAFT.player.getUUID()).getLatency();
         return 0;
     }

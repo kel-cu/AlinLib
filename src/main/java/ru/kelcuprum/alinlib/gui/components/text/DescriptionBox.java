@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.gui.components.text;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
@@ -52,10 +52,10 @@ public class DescriptionBox extends AbstractWidget{
     int lastTextHeight = 0;
     int textSize = (AlinLib.MINECRAFT.font.lineHeight + 3);
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
+    public void extractWidgetRenderState(GuiGraphicsExtractor GuiGraphicsExtractor, int i, int j, float f) {
         List<FormattedCharSequence> list = AlinLib.MINECRAFT.font.split(description, width - 12);
-        guiGraphics.fill(getX(), getY(), getX() + width, getY() + height, 0x75000000);
-        guiGraphics.enableScissor(getX(), getY(), getX() + width, getY() + height);
+        GuiGraphicsExtractor.fill(getX(), getY(), getX() + width, getY() + height, 0x75000000);
+        GuiGraphicsExtractor.enableScissor(getX(), getY(), getX() + width, getY() + height);
         int y = getY() + 6;
         textHeight = ((list.size()+1)*textSize)+12;
         if(lastTextHeight != textHeight){
@@ -65,10 +65,10 @@ public class DescriptionBox extends AbstractWidget{
         }
 
         for (FormattedCharSequence text : list) {
-            guiGraphics.drawCenteredString(AlinLib.MINECRAFT.font, text, getX() + (getWidth() / 2), (int) (y-scrollAmount), -1);
+            GuiGraphicsExtractor.centeredText(AlinLib.MINECRAFT.font, text, getX() + (getWidth() / 2), (int) (y-scrollAmount), -1);
             y+=textSize;
         }
-        guiGraphics.disableScissor();
+        GuiGraphicsExtractor.disableScissor();
     }
     @Override
     protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {

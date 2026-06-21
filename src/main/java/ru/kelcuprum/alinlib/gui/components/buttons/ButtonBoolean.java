@@ -1,7 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.buttons;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 //#if MC >= 12109
 import net.minecraft.client.input.InputWithModifiers;
 //#endif
@@ -42,17 +42,17 @@ public class ButtonBoolean extends Button implements Resetable {
     }
 
     @Override
-    public void renderText(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void renderText(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTicks) {
         if(GuiUtils.isDoesNotFit(builder.isCheckBox ? builder.getTitle() : getMessage(), getWidthComponent() - (builder.isCheckBox ? (10+builder.getStyle().getCheckBoxSizes(getWidth(), getHeight())[0]) : 0), getHeight())){
-            this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, builder.isCheckBox ? builder.getTitle() : getMessage(), (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+            this.renderScrollingString(GuiGraphicsExtractor, AlinLib.MINECRAFT.font, builder.isCheckBox ? builder.getTitle() : getMessage(), (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
         } else {
-            guiGraphics.drawString(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
-            if(!builder.isCheckBox) guiGraphics.drawString(AlinLib.MINECRAFT.font, volumeState, getX() + getWidth()-AlinLib.MINECRAFT.font.width(volumeState.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+            GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, builder.getTitle(), getXComponent() + (getHeight() - 8) / 2, getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
+            if(!builder.isCheckBox) GuiGraphicsExtractor.text(AlinLib.MINECRAFT.font, volumeState, getX() + getWidth()-AlinLib.MINECRAFT.font.width(volumeState.getString())-((getHeight() - 8) / 2), getY() + (getHeight() - 8) / 2, builder.getStyle().getTextColor(active), builder.getStyle().textShadow());
         }
         if(builder.isCheckBox) {
             int boxX = getXComponent() + getWidthComponent()-5-builder.getStyle().getCheckBoxSizes(getWidth(), getHeight())[0];
             int boxY = getY() + (height-builder.getStyle().getCheckBoxSizes(getWidth(), getHeight())[1]) / 2;
-            builder.getStyle().renderCheckBox(guiGraphics, boxX, boxY, getWidth(), getHeight(), value);
+            builder.getStyle().renderCheckBox(GuiGraphicsExtractor, boxX, boxY, getWidth(), getHeight(), value);
         }
     }
 
@@ -66,11 +66,11 @@ public class ButtonBoolean extends Button implements Resetable {
         return this;
     }
 
-    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, Component message, int x, int color, boolean shadow) {
+    protected void renderScrollingString(GuiGraphicsExtractor GuiGraphicsExtractor, Font font, Component message, int x, int color, boolean shadow) {
         int k = this.getXComponent() + x;
         int l = this.getX() + this.getWidth() - x;
         if(builder.isCheckBox) l-=(10+builder.getStyle().getCheckBoxSizes(getWidth(), getHeight())[0]);
-        TextBox.renderScrollingString(guiGraphics, font, message, k, getY(), l, getY()+height, color, shadow);
+        TextBox.renderScrollingString(GuiGraphicsExtractor, font, message, k, getY(), l, getY()+height, color, shadow);
     }
 
     @Override

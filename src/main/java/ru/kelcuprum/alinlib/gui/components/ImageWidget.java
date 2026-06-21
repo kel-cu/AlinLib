@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.gui.components;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#if MC >= 12106
@@ -99,20 +99,20 @@ public class ImageWidget extends AbstractWidget implements Description {
     }
 
     @Override
-    protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    protected void extractWidgetRenderState(GuiGraphicsExtractor GuiGraphicsExtractor, int mouseX, int mouseY, float partialTick) {
         if(isScale) {
             double scale = (double) width / imageWidth;
             int imWidth = (int) (imageWidth * scale);
             int imHeight = (int) (imageHeight * scale);
             //#if MC >= 12106
-            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imWidth, imHeight);
-        } else guiGraphics.blit(RenderPipelines.GUI_TEXTURED, this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imageWidth, imageHeight);
+            GuiGraphicsExtractor.blit(RenderPipelines.GUI_TEXTURED, this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imWidth, imHeight);
+        } else GuiGraphicsExtractor.blit(RenderPipelines.GUI_TEXTURED, this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imageWidth, imageHeight);
             //#elseif MC >= 12102
-            //$$    guiGraphics.blit(RenderType::guiTextured, this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imWidth, imHeight);
-            //$$ } else guiGraphics.blit(RenderType::guiTextured, this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imageWidth, imageHeight);
+            //$$    GuiGraphicsExtractor.blit(RenderType::guiTextured, this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imWidth, imHeight);
+            //$$ } else GuiGraphicsExtractor.blit(RenderType::guiTextured, this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imageWidth, imageHeight);
             //#elseif MC < 12102
-            //$$    guiGraphics.blit(this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imWidth, imHeight);
-            //$$ } else guiGraphics.blit(this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imageWidth, imageHeight);
+            //$$    GuiGraphicsExtractor.blit(this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imWidth, imHeight);
+            //$$ } else GuiGraphicsExtractor.blit(this.image, getX(), getY(), 0.0F, 0.0F, getWidth(), getHeight(), imageWidth, imageHeight);
             //#endif
 
     }

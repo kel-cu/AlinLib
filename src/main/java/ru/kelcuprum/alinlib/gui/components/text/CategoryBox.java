@@ -1,7 +1,7 @@
 package ru.kelcuprum.alinlib.gui.components.text;
 
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#if MC >= 12109
@@ -148,43 +148,43 @@ public class CategoryBox extends AbstractWidget {
     }
 
     @Override
-    public void renderWidget(GuiGraphics guiGraphics, int i, int j, float f) {
+    public void extractWidgetRenderState(GuiGraphicsExtractor GuiGraphicsExtractor, int i, int j, float f) {
         if (visible) {
             int y = getY() + (getHeight() - 8) / 2;
             Font font = AlinLib.MINECRAFT.font;
             if(GuiUtils.isDoesNotFit(Component.literal(state ? "▼" : "▶").append("   ").append(getName()), getWidth(), getHeight())){
                 this.setMessage(Component.literal(state ? "▼" : "▶").append("   ").append(getName()));
-                this.renderScrollingString(guiGraphics, AlinLib.MINECRAFT.font, 2, getStyle().getTextColor(isActive()), getStyle().textShadow());
+                this.renderScrollingString(GuiGraphicsExtractor, AlinLib.MINECRAFT.font, 2, getStyle().getTextColor(isActive()), getStyle().textShadow());
                 int textWidth = font.width(getMessage());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
-                guiGraphics.fill(Math.max(x, getX()), y+font.lineHeight+1, Math.max(x, getX())+Math.min(textWidth, getWidth()), y+font.lineHeight+2, getStyle().getHorizontalRuleColor());
+                GuiGraphicsExtractor.fill(Math.max(x, getX()), y+font.lineHeight+1, Math.max(x, getX())+Math.min(textWidth, getWidth()), y+font.lineHeight+2, getStyle().getHorizontalRuleColor());
             } else {
-                guiGraphics.drawString(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, getStyle().getTextColor(isActive()), getStyle().textShadow());
-                guiGraphics.drawString(font, getName(), getX() + getWidth() / 2 - (font.width(getName())/2), y, getStyle().getTextColor(isActive()), getStyle().textShadow());
+                GuiGraphicsExtractor.text(font, state ? "▼" : "▶", getX() + (getHeight() - 8) / 2, y, getStyle().getTextColor(isActive()), getStyle().textShadow());
+                GuiGraphicsExtractor.text(font, getName(), getX() + getWidth() / 2 - (font.width(getName())/2), y, getStyle().getTextColor(isActive()), getStyle().textShadow());
                 int textWidth = font.width(getName());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
-                guiGraphics.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, getStyle().getHorizontalRuleColor());
+                GuiGraphicsExtractor.fill(x, y+font.lineHeight+1, x+textWidth, y+font.lineHeight+2, getStyle().getHorizontalRuleColor());
             }
             if(state && renderLine){
                 int yW = height+5;
                 for(AbstractWidget widget : values) yW+=widget.getHeight()+5;
                 int textWidth = font.width(getName());
                 int x = (getX() + getWidth() / 2) - (textWidth/2);
-                guiGraphics.fill(x, getY()+yW, x+textWidth, getY()+yW+1, getStyle().getHorizontalRuleColor());
+                GuiGraphicsExtractor.fill(x, getY()+yW, x+textWidth, getY()+yW+1, getStyle().getHorizontalRuleColor());
             }
             //#if MC >= 12109
             if (this.isHovered()) {
-                guiGraphics.requestCursor(this.isActive() ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
+                GuiGraphicsExtractor.requestCursor(this.isActive() ? CursorTypes.POINTING_HAND : CursorTypes.NOT_ALLOWED);
             }
             //#endif
         }
     }
 
 
-    protected void renderScrollingString(GuiGraphics guiGraphics, Font font, int i, int j, boolean shadow) {
+    protected void renderScrollingString(GuiGraphicsExtractor GuiGraphicsExtractor, Font font, int i, int j, boolean shadow) {
         int k = this.getX() + i;
         int l = this.getX() + this.getWidth() - i;
-        TextBox.renderScrollingString(guiGraphics, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
+        TextBox.renderScrollingString(GuiGraphicsExtractor, font, this.getMessage(), k, this.getY(), l, this.getY() + this.getHeight(), j, shadow);
     }
 
     protected Component description;

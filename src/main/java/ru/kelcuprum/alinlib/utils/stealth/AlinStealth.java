@@ -17,7 +17,7 @@ public class AlinStealth extends AbstractStealthManager {
 
     @Override
     public double getX(Entity player) {
-        return getFunnyValueCoordinate(player.getX(), (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), true);
+        return getFunnyValueCoordinate(player.getX(), (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.hasSingleplayerServer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), true);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class AlinStealth extends AbstractStealthManager {
 
     @Override
     public double getZ(Entity player) {
-        return getFunnyValueCoordinate(player.getZ(), (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.isSingleplayer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), false);
+        return getFunnyValueCoordinate(player.getZ(), (AlinLib.MINECRAFT.isLocalServer() || AlinLib.MINECRAFT.hasSingleplayerServer()) ? "single" : AlinLib.MINECRAFT.getCurrentServer().ip, World.getCodeName(), false);
     }
     public static double getFunnyValueCoordinate(double coordinate, String server, String world, boolean isX) {
         String info = server + "-" + world;

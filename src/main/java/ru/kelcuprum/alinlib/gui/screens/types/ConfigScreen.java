@@ -1,6 +1,6 @@
 package ru.kelcuprum.alinlib.gui.screens.types;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 //#if MC >= 12109
@@ -9,7 +9,6 @@ import net.minecraft.client.input.MouseButtonEvent;
 //#if MC >= 12106
 import net.minecraft.client.renderer.RenderPipelines;
 //else
-//$$ import net.minecraft.client.renderer.RenderType;
 //#endif
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -67,11 +66,11 @@ public class ConfigScreen extends AbstractConfigScreen {
         yo = Math.min(heigthScroller, height-30);
         back = addRenderableWidget(new ButtonBuilder(CommonComponents.GUI_BACK).setOnPress((OnPress) -> {
             assert this.minecraft != null;
-            this.minecraft.setScreen(builder.parent);
+            this.minecraft.setScreenAndShow(builder.parent);
         }).setIcon(AlinLib.isAprilFool() ? EXIT : null).setPosition(5, yo+5).setSize(this.builder.panelSize - (builder.isResetable ? 35 : 10), 20).build());
 
         if(builder.isResetable) reset = addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.component.reset")).setOnPress((OnPress) -> {
-            this.minecraft.setScreen(new ConfirmScreen(this, RESET, Component.translatable("alinlib.title.reset"), Component.translatable("alinlib.title.reset.description"), (bl) -> {
+            this.minecraft.setScreenAndShow(new ConfirmScreen(this, RESET, Component.translatable("alinlib.title.reset"), Component.translatable("alinlib.title.reset.description"), (bl) -> {
                 if(bl){
                     for (AbstractWidget widget : builder.widgets)
                         if (widget instanceof Resetable) ((Resetable) widget).resetValue();
@@ -258,9 +257,9 @@ public class ConfigScreen extends AbstractConfigScreen {
 
     //#if MC >= 12002
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int i, int j, float f) {
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int i, int j, float f) {
         assert this.minecraft != null;
-        super.renderBackground(guiGraphics, i, j, f);
+        super.extractBackground(guiGraphics, i, j, f);
         //#elseif MC < 12002
         //$$  @Override
         //$$  public void renderBackground(GuiGraphics guiGraphics){
@@ -269,7 +268,7 @@ public class ConfigScreen extends AbstractConfigScreen {
         //#endif
         builder.getStyle().renderTitleBackground(guiGraphics, 5, 5, this.builder.panelSize-5, 25);
 
-        if(builder.itemIcon != null) guiGraphics.renderFakeItem(builder.itemIcon.getDefaultInstance(), 5, 5, 20);
+        if(builder.itemIcon != null) guiGraphics.fakeItem(builder.itemIcon.getDefaultInstance(), 5, 5, 20);
         else if(builder.textureIcon != null) guiGraphics.blit(
                 //#if MC >= 12106
                 RenderPipelines.GUI_TEXTURED,
@@ -286,17 +285,17 @@ public class ConfigScreen extends AbstractConfigScreen {
         if(builder.categoryTitle != null && !builder.categoryTitle.getString().isBlank()) builder.getStyle().renderTitleBackground(guiGraphics, getX(), 10, getX()+getContentWidth(), 30);
     }
 
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTicks) {
         //#if MC < 12002
         //$$ renderBackground(guiGraphics);
         //#endif
-        super.render(guiGraphics, mouseX, mouseY, partialTicks);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
         guiGraphics.enableScissor(10, 35, builder.panelSize-10, yo-5);
-        if (scroller_panel != null) for (AbstractWidget widget : scroller_panel.widgets) widget.render(guiGraphics, mouseX, mouseY, partialTicks);
+        if (scroller_panel != null) for (AbstractWidget widget : scroller_panel.widgets) widget.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
         guiGraphics.disableScissor();
 
         guiGraphics.enableScissor(0, builder.categoryTitle == null || builder.categoryTitle.getString().isBlank() ? 10 : 35, width, yc-5);
-        if (scroller != null) for (AbstractWidget widget : scroller.widgets) widget.render(guiGraphics, mouseX, mouseY, partialTicks);
+        if (scroller != null) for (AbstractWidget widget : scroller.widgets) widget.extractRenderState(guiGraphics, mouseX, mouseY, partialTicks);
         guiGraphics.disableScissor();
     }
 }

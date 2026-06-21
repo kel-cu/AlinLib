@@ -2,7 +2,7 @@ package ru.kelcuprum.alinlib.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.AlinLib;
@@ -13,9 +13,9 @@ import java.util.*;
 
 public class GuiUtils {
     // Utils
-    public static void drawCenteredString(GuiGraphics guiGraphics, Font font, Component component, int x, int y, int color, boolean shadow) {
+    public static void drawCenteredString(GuiGraphicsExtractor guiGraphics, Font font, Component component, int x, int y, int color, boolean shadow) {
         FormattedCharSequence formattedCharSequence = component.getVisualOrderText();
-        guiGraphics.drawString(font, formattedCharSequence, x - font.width(formattedCharSequence) / 2, y, color, shadow);
+        guiGraphics.text(font, formattedCharSequence, x - font.width(formattedCharSequence) / 2, y, color, shadow);
     }
 
     public static boolean isDoesNotFit(Component message, Number width, Number height) {

@@ -22,7 +22,7 @@ public class StealthScreen {
         builder.addPanelWidgets(getPanelWidgets(parent));
         if (AlinLib.isNotReleaseVersion()) {
             builder.addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.title.not_release"),
-                    (s) -> AlinLib.MINECRAFT.setScreen(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
+                    (s) -> AlinLib.MINECRAFT.setScreenAndShow(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
                             Component.translatable("alinlib.title.not_release.description"), "https://github.com/kel-cu/alinlib/issues"))
             ).setIcon(SEARCH).setCentered(false));
         }
