@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.screens;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
@@ -7,7 +8,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
 //#endif
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.components.ConfigureScrolWidget;
 import ru.kelcuprum.alinlib.gui.components.text.DescriptionBox;
@@ -127,14 +127,14 @@ public class AbstractConfigScreen extends Screen {
         int keyCode = keyEvent.key();
         int modifiers = keyEvent.modifiers();
         //#endif
-        if(keyCode == GLFW.GLFW_KEY_ESCAPE){
+        if(keyCode == InputConstants.KEY_ESCAPE){
             if(getFocused() != null && getFocused().isFocused()) {
                 getFocused().setFocused(false);
                 return true;
             }
         }
-        if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0 && !(getFocused() instanceof EditBox))
-            AlinLib.MINECRAFT.setScreenAndShow(new ThanksScreen(this));
+        if(keyCode == InputConstants.KEY_D && (modifiers & InputConstants.MOD_SHIFT) != 0 && !(getFocused() instanceof EditBox))
+            AlinLib.MINECRAFT.gui.setScreen(new ThanksScreen(this));
         return super.keyPressed(
                 //#if MC >= 12109
                 keyEvent
@@ -155,6 +155,6 @@ public class AbstractConfigScreen extends Screen {
 
     public void onClose() {
         assert this.minecraft != null;
-        this.minecraft.setScreenAndShow(builder.parent);
+        this.minecraft.gui.setScreen(builder.parent);
     }
 }

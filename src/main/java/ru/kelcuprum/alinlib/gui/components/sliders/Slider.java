@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.components.sliders;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractSliderButton;
@@ -14,7 +15,6 @@ import net.minecraft.client.renderer.RenderPipelines;
 //$$ import net.minecraft.client.renderer.RenderType;
 //#endif
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
@@ -242,7 +242,7 @@ public class Slider extends AbstractSliderButton implements Description, Resetab
         //#if MC >= 12109
         int i = keyEvent.key();
         //#endif
-        if (i == GLFW.GLFW_KEY_DELETE && this.resettable()) {
+        if (i == InputConstants.KEY_DELETE && this.resettable()) {
             ((Resetable) this).resetValue();
             assert AlinLib.MINECRAFT != null;
             new ToastBuilder()

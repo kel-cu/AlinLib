@@ -176,6 +176,10 @@
   "alinlib.color.convict": "Convict",
   "alinlib.color.seabird": "Seabird",
   "alinlib.color.droplet": "Droplet",
+  "alinlib.color.copycat": "Copycat",
+  "alinlib.color.quardi": "Quardi (Color: %s)",
+  "alinlib.color.clione": "Clione (Color: %s)",
+  "alinlib.color.magni": "Magni",
   "alinlib.color.sodium": "Sodium",
   "alinlib.color.embeddium": "Embeddium",
   "alinlib.color.white": "White",
@@ -204,7 +208,8 @@
   "alinlib.thanks.donationalerts": "DonationAlerts",
   "alinlib.thanks.exit": "Walking away from support :(",
 
-  "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cuprum",
+  "modmenu.descriptionTranslation.alinlib": "A library to facilitate mod development by Kel Cleverov",
+  "modmenu.telegram": "Telegram",
 
 
 

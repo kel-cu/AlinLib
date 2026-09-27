@@ -3,12 +3,12 @@
   "name": "AlinLib",
   "id": "alinlib",
   "version": "${version}",
-  "description": "A library to facilitate mod development by Kel Cuprum",
+  "description": "A library to facilitate mod development by Kel Cleverov",
   "authors": [
-    "Kel Cuprum"
+    "Kel Cleverov"
   ],
   "contributors": [
-    "Kel Cuprum [Developer, Tester, Translator]",
+    "Kel Cleverov [Developer, Tester, Translator]",
     "@dima_dencep [#1, #4, #5]",
     "ImGRUI [Stealth mode algorithm]"
   ],
@@ -42,7 +42,8 @@
       "links": {
         "modmenu.modrinth": "https://modrinth.com/project/AlinLib",
         "modmenu.donate": "https://kelcu.ru/don",
-        "modmenu.discord": "https://kelcu.ru/ds"
+        "modmenu.discord": "https://kelcu.ru/ds",
+        "modmenu.telegram": "https://kelcu.ru/tgc"
       },
       "badges": ["library"]
     }

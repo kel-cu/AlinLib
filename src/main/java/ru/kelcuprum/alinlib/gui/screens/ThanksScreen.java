@@ -5,6 +5,10 @@ import com.google.gson.JsonObject;
 //#if MC < 12111
 //$$import net.minecraft.Util;
 //#else
+//#if MC >= 26300
+import com.mojang.blaze3d.Blaze3D;
+//#endif
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.util.Util;
 //#endif
 
@@ -21,7 +25,6 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.WebAPI;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
@@ -29,6 +32,7 @@ import ru.kelcuprum.alinlib.gui.components.builder.text.TextBuilder;
 import ru.kelcuprum.alinlib.gui.components.text.TextBox;
 
 import java.awt.*;
+import java.net.URI;
 
 import static ru.kelcuprum.alinlib.gui.Icons.EXIT;
 import static ru.kelcuprum.alinlib.gui.Icons.THANKS;
@@ -81,8 +85,20 @@ public class ThanksScreen extends Screen {
         addRenderableWidget(new TextBuilder(Component.translatable("alinlib.thanks")).setPosition(width/2-200, 10).setSize(400, 20).build());
         pwgood3 = (TextBox) addRenderableWidget( new TextBuilder(getDobryak()).setPosition(width/2-200, 35).setSize(400, AlinLib.MINECRAFT.font.lineHeight).build());
         offer = (TextBox) addRenderableWidget(new TextBuilder(Component.translatable("alinlib.thanks.offer")).setType(TextBuilder.TYPE.MESSAGE).setAlign(TextBuilder.ALIGN.CENTER).setPosition(width/2-200, (40+AlinLib.MINECRAFT.font.lineHeight)).setSize(400, 100).build());
-        addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.thanks.boosty"), (s) -> Util.getPlatform().openUri("https://kelcu.ru/boo")).setWidth(150).setPosition(width-155, height-75).build());
-        addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.thanks.donationalerts"), (s) -> Util.getPlatform().openUri("https://www.donationalerts.com/r/kel_cu")).setWidth(150).setPosition(width-155, height-50).build());
+        addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.thanks.boosty"), (s) ->
+                //#if MC < 260200
+                //$$ Util.getPlatform().openUri("https://kelcu.ru/boo")
+                //#else
+                Blaze3D.openUri(URI.create("https://kelcu.ru/boo"))
+                //#endif
+        ).setWidth(150).setPosition(width-155, height-75).build());
+        addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.thanks.donationalerts"), (s) ->
+                //#if MC < 260200
+                //$$ Util.getPlatform().openUri("https://www.donationalerts.com/r/kel_cu")
+                //#else
+                Blaze3D.openUri(URI.create("https://www.donationalerts.com/r/kel_cu"))
+                //#endif
+        ).setWidth(150).setPosition(width-155, height-50).build());
         addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.thanks.exit"), (s) -> onClose()).setIcon(EXIT).setWidth(150).setPosition(width-155, height-25).build());
     }
     long stime = System.currentTimeMillis();
@@ -150,8 +166,8 @@ public class ThanksScreen extends Screen {
         int keyCode = keyEvent.key();
         int modifiers = keyEvent.modifiers();
         //#endif
-        if(keyCode == GLFW.GLFW_KEY_D && (modifiers & GLFW.GLFW_MOD_SHIFT) != 0)
-            AlinLib.MINECRAFT.setScreenAndShow(parent);
+        if(keyCode == InputConstants.KEY_D && (modifiers & InputConstants.MOD_SHIFT) != 0)
+            AlinLib.MINECRAFT.gui.setScreen(parent);
         return super.keyPressed(
                 //#if MC >= 12109
                 keyEvent
@@ -163,6 +179,6 @@ public class ThanksScreen extends Screen {
 
     public void onClose() {
         assert this.minecraft != null;
-        this.minecraft.setScreenAndShow(parent);
+        this.minecraft.gui.setScreen(parent);
     }
 }

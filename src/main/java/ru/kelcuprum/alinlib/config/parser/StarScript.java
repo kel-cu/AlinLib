@@ -40,7 +40,13 @@ public class StarScript {
                         .set("height", () -> Value.number(AlinLib.MINECRAFT.getWindow().getHeight()))
                         .set("scaled_width", () -> Value.number(AlinLib.MINECRAFT.getWindow().getGuiScaledWidth()))
                         .set("scaled_height", () -> Value.number(AlinLib.MINECRAFT.getWindow().getGuiScaledHeight()))
-                        .set("fullscreen", () -> Value.bool(AlinLib.MINECRAFT.getWindow().isFullscreen()))
+                        .set("fullscreen", () -> Value.bool(AlinLib.MINECRAFT.getWindow()
+                                //#if MC < 260200
+                                //$$ .isFullscreen()
+                                //#else
+                                        .isExclusiveFullscreen()
+                                //#endif
+                        ))
                         .set("vsync", () -> Value.bool(AlinLib.MINECRAFT.options.enableVsync().get()))
                 )
         );

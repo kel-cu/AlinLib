@@ -28,11 +28,13 @@ public class ScreenMixin {
             //#endif
             , CallbackInfoReturnable<Boolean> cir) {
         ScreenEvents.KEY_PRESS.invoker().onKeyPressed((Screen) (Object) this,
-                //#if MC >= 12109
-                keyEvent.key(), keyEvent.scancode(), keyEvent.modifiers()
+                keyEvent.key(),
+                //#if MC >= 26300
+                keyEvent.keycode()
                 //#else
-                //$$keycode, scanCode, modifiers
+                //$$ keyEvent.scancode()
                 //#endif
+                ,keyEvent.modifiers()
                 , cir);
     }
 }

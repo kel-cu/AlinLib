@@ -7,18 +7,17 @@ apply plugin: 'com.modrinth.minotaur'
 //def mod_brand = (loom.platform.get() as String).toLowerCase()
 //assert mod_brand in ['fabric', 'forge', 'neoforge']
 def mod_brand = 'fabric'
-archives_base_name = rootProject.archives_base_name + "-" + mod_brand
+base {
+    archivesName = rootProject.archives_base_name + "-" + mod_brand
+}
 group = rootProject.maven_group
 
 
 int mcVersion = 1
 preprocess {
     mcVersion = vars.get()["MC"] as int
-//    tabIndentation = true
-
     vars.put("MC", mcVersion)
     vars.put("FABRIC", mod_brand == 'fabric' ? 1 : 0)
-    vars.put("NEOFORGE", mod_brand == 'neoforge' ? 1 : 0)
 }
 
 repositories {
@@ -136,7 +135,7 @@ modrinth {
 }
 
 processResources {
-    inputs.property "version", version
+    inputs.property "version", mod_version
     inputs.property "minecraft_dependency", project.minecraft_dependency
 
     [
@@ -148,7 +147,7 @@ processResources {
             if (brand == mod_brand) {
                 filesMatching(name) {
                     def valueMap = [
-                            "version": version,
+                            "version": mod_version,
                             "minecraft_dependency": project.minecraft_dependency,
                     ]
                     expand valueMap

@@ -66,11 +66,11 @@ public class ConfigScreen extends AbstractConfigScreen {
         yo = Math.min(heigthScroller, height-30);
         back = addRenderableWidget(new ButtonBuilder(CommonComponents.GUI_BACK).setOnPress((OnPress) -> {
             assert this.minecraft != null;
-            this.minecraft.setScreenAndShow(builder.parent);
+            this.minecraft.gui.setScreen(builder.parent);
         }).setIcon(AlinLib.isAprilFool() ? EXIT : null).setPosition(5, yo+5).setSize(this.builder.panelSize - (builder.isResetable ? 35 : 10), 20).build());
 
         if(builder.isResetable) reset = addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.component.reset")).setOnPress((OnPress) -> {
-            this.minecraft.setScreenAndShow(new ConfirmScreen(this, RESET, Component.translatable("alinlib.title.reset"), Component.translatable("alinlib.title.reset.description"), (bl) -> {
+            this.minecraft.gui.setScreen(new ConfirmScreen(this, RESET, Component.translatable("alinlib.title.reset"), Component.translatable("alinlib.title.reset.description"), (bl) -> {
                 if(bl){
                     for (AbstractWidget widget : builder.widgets)
                         if (widget instanceof Resetable) ((Resetable) widget).resetValue();

@@ -45,12 +45,12 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
 
         back = addRenderableWidget(new ButtonBuilder(AlinLib.isAprilFool() ? CommonComponents.GUI_BACK : Component.literal("x")).setOnPress((OnPress) -> {
             assert this.minecraft != null;
-            this.minecraft.setScreenAndShow(builder.parent);
+            this.minecraft.gui.setScreen(builder.parent);
         }).setSprite(AlinLib.isAprilFool() ? EXIT : null).setPosition(x + size - 20, 5).setSize(20, 20).build());
 
         if (builder.isResetable)
             reset = addRenderableWidget(new ButtonBuilder(Component.translatable("alinlib.component.reset")).setOnPress((OnPress) ->
-                    this.minecraft.setScreenAndShow(new ConfirmScreen(this, RESET, Component.translatable("alinlib.title.reset"), Component.translatable("alinlib.title.reset.description"), (bl) -> {
+                    this.minecraft.gui.setScreen(new ConfirmScreen(this, RESET, Component.translatable("alinlib.title.reset"), Component.translatable("alinlib.title.reset.description"), (bl) -> {
                         if (bl) {
                             for (AbstractWidget widget : builder.widgets)
                                 if (widget instanceof Resetable) ((Resetable) widget).resetValue();
@@ -203,8 +203,10 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
         super.extractBackground(guiGraphics, i, j, f);
         int size = Math.min(maxSize, width - 10);
         int x = (width - size) / 2;
-        guiGraphics.fill(x - 5, 0, x + size + 5, height, Colors.BLACK_ALPHA); // Затемнение
-        guiGraphics.fill(x + 25, 5, x + size - 25, 25, Colors.BLACK_ALPHA);
+        builder.getStyle().renderBackground(guiGraphics, x-5, 0, x + size + 5, height);
+        builder.getStyle().renderTitleBackground(guiGraphics, x+25, 5, x + size - 25, 25);
+//        guiGraphics.fill(x - 5, 0, x + size + 5, height, Colors.BLACK_ALPHA); // Затемнение
+//        guiGraphics.fill(x + 25, 5, x + size - 25, 25, Colors.BLACK_ALPHA);
     }
     //#elseif MC < 12002
     //$$

@@ -1,1 +1,9 @@
-- Ported to 26.2 (now only)
+- Added new colors:
+  - Quadri: #141026, #c32342
+  - Magni: #c32342
+  - Cllone: #6bbeff, #6bbeff
+- Ported to 26.3
+- Changed icon
+- Changed developer nickname
+- Fixed screen changes
+- Fixed #18 (Опечатка в настройках)

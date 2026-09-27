@@ -32,10 +32,10 @@ public class MinecraftMixin {
     private void onEndTick(CallbackInfo ci) {
         ClientTickEvents.END_CLIENT_TICK.invoker().onEndTick((Minecraft) (Object) this);
     }
-    @Inject(at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;)V", shift = At.Shift.AFTER, remap = false), method = "exitWorldAndClose")
-    private void onStopping(CallbackInfo ci) {
-        ClientLifecycleEvents.CLIENT_STOPPING.invoker().onClientStopping((Minecraft) (Object) this);
-    }
+//    @Inject(at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;info(Ljava/lang/String;)V", shift = At.Shift.AFTER, remap = false), method = "exitWorldAndClose")
+//    private void onStopping(CallbackInfo ci) {
+//        ClientLifecycleEvents.CLIENT_STOPPING.invoker().onClientStopping((Minecraft) (Object) this);
+//    }
     @Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;gameThread:Ljava/lang/Thread;", shift = At.Shift.AFTER, ordinal = 0), method = "run")
     private void onStart(CallbackInfo ci) {
         ClientLifecycleEvents.CLIENT_STARTED.invoker().onClientStarted((Minecraft) (Object) this);

@@ -2,7 +2,6 @@ package ru.kelcuprum.alinlib;
 
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
-import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 
 import java.io.File;

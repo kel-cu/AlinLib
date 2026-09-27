@@ -1,5 +1,8 @@
 package ru.kelcuprum.alinlib.gui.screens;
 
+//#if MC >= 26300
+import com.mojang.blaze3d.Blaze3D;
+//#endif
 import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
 
 //#if MC < 12111
@@ -30,6 +33,7 @@ import net.minecraft.resources.
 import net.minecraft.util.FormattedCharSequence;
 import ru.kelcuprum.alinlib.gui.components.builder.button.ButtonBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 
@@ -57,7 +61,13 @@ public class ConfirmScreen extends Screen {
                                  //#endif
                                  icon, Component title, Component message, String url){
         this(parent, icon, title, message, (bl) -> {
-            if (bl) Util.getPlatform().openUri(url);
+            if (bl)
+
+                //#if MC < 260200
+                //$$ Util.getPlatform().openUri(url);
+                //#else
+                Blaze3D.openUri(URI.create(url));
+                //#endif
         });
         this.url = url;
     }
@@ -182,6 +192,6 @@ public class ConfirmScreen extends Screen {
 
     public void onClose() {
         assert this.minecraft != null;
-        this.minecraft.setScreenAndShow(parent);
+        this.minecraft.gui.setScreen(parent);
     }
 }

@@ -15,7 +15,9 @@ plugins {
 
 preprocess {
     def mc262_fabric = createNode('26.2-fabric', 26_2_00, '')
-    mc262_fabric.link(mc262_fabric, null)
+    def mc263_fabric = createNode('26.3-fabric', 26_3_00, '')
+    mc262_fabric.link(mc263_fabric, null)
+    mc263_fabric.link(mc263_fabric, null)
 }
 
 publishing {

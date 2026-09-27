@@ -10,9 +10,9 @@ version = "${version}"
 displayURL = "https://modrinth.com/mod/alinlib"
 displayName = "AlinLib"
 updateJSONURL = "https://api.modrinth.com/updates/alinlib/forge_updates.json"
-authors = "Im_Kel (Kel Cuprum)"
+authors = "Im_Kel (Kel Cleverov)"
 credits = "dima_dencep [#1, #4, #5], ImGRUI [Stealth mode algorithm]"
-description = "A library to facilitate mod development by Kel Cuprum"
+description = "A library to facilitate mod development by Kel Cleverov"
 logoFile = "assets/alinlib/icon.png"
 
 [[mixins]]

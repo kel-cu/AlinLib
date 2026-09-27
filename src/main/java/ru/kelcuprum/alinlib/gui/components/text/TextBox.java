@@ -3,6 +3,9 @@ package ru.kelcuprum.alinlib.gui.components.text;
 //#if MC < 12111
 //$$ import net.minecraft.Util;
 //#else
+//#if MC >= 26300
+import com.mojang.blaze3d.Blaze3D;
+//#endif
 import net.minecraft.util.Util;
 //#endif
 
@@ -259,15 +262,27 @@ public class TextBox extends AbstractWidget implements Description {
                     URI uRI = ((ClickEvent.OpenUrl) clickEvent).uri();
                     if (AlinLib.MINECRAFT.options.chatLinksPrompt().get()) {
                         Screen current = AlinLib.MINECRAFT.gui.screen();
-                        AlinLib.MINECRAFT.setScreenAndShow(new ConfirmLinkScreen((bl) -> {
+                        AlinLib.MINECRAFT.gui.setScreen(new ConfirmLinkScreen((bl) -> {
                             if (bl) {
-                                Util.getPlatform().openUri(uRI);
+                                //#if MC < 260200
+                                //$$ Util.getPlatform().openUri(uRI);
+                                //#else
+                                Blaze3D.openUri(uRI);
+                                //#endif
                             }
 
-                            AlinLib.MINECRAFT.setScreenAndShow(current);
-                        }, uRI.toString(), false));
+                            AlinLib.MINECRAFT.gui.setScreen(current);
+                        }, uRI
+                                //#if MC < 260200
+                                //$$.toString()
+                                //#endif
+                                , false));
                     } else {
-                        Util.getPlatform().openUri(uRI);
+                        //#if MC < 260200
+                        //$$ Util.getPlatform().openUri(uRI);
+                        //#else
+                        Blaze3D.openUri(uRI);
+                        //#endif
                     }
                     //#else
                     //$$ try {
@@ -289,7 +304,12 @@ public class TextBox extends AbstractWidget implements Description {
 
                     //#if MC >= 12105
                 } else if (clickEvent.action() == ClickEvent.Action.OPEN_FILE) {
-                    Util.getPlatform().openFile(((ClickEvent.OpenFile) clickEvent).file());
+
+                    //#if MC < 260200
+                    //$$ Util.getPlatform().openFile(((ClickEvent.OpenFile) clickEvent).file());
+                    //#else
+                    Blaze3D.openPath(((ClickEvent.OpenFile) clickEvent).file().toPath());
+                    //#endif
                 } else if (clickEvent.action() == ClickEvent.Action.RUN_COMMAND) {
                     String string = StringUtil.filterText(((ClickEvent.RunCommand) clickEvent).command());
                     //#else

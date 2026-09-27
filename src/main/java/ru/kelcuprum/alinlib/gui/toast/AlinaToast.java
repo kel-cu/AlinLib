@@ -28,7 +28,7 @@ public class AlinaToast implements Toast {
 
     @Override
     public int width() {
-        return Math.min(AlinLib.MINECRAFT.getWindow().getGuiScaledWidth()/2 , Math.max(165, (builder.hasIcon() ? 38 : 16) + Math.max(AlinLib.MINECRAFT.font.width(this.builder.title), AlinLib.MINECRAFT.font.width(this.builder.message))));
+        return Math.clamp((builder.hasIcon() ? 38 : 16) + Math.max(AlinLib.MINECRAFT.font.width(this.builder.title), AlinLib.MINECRAFT.font.width(this.builder.message)), 165, AlinLib.MINECRAFT.getWindow().getGuiScaledWidth() / 2);
     }
     public int textWidth(){
         int toastSize = width();

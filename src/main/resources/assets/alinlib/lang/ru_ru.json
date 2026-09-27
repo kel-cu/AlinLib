@@ -117,7 +117,7 @@
   "alinlib.localization.date.time": "Формат времени",
   "alinlib.localization.unknown": "Неизвестно",
   "alinlib.localization.sides": "Стороны",
-  "alinlib.localization.north": "Сервер",
+  "alinlib.localization.north": "Север",
   "alinlib.localization.south": "Юг",
   "alinlib.localization.west": "Запад",
   "alinlib.localization.east": "Восток",
@@ -172,6 +172,10 @@
   "alinlib.color.convict": "Convict",
   "alinlib.color.seabird": "Seabird",
   "alinlib.color.droplet": "Droplet",
+  "alinlib.color.copycat": "Copycat",
+  "alinlib.color.quardi": "Quardi (Цвет: %s)",
+  "alinlib.color.clione": "Clione (Цвет: %s)",
+  "alinlib.color.magni": "Magni",
   "alinlib.color.sodium": "Sodium",
   "alinlib.color.embeddium": "Embeddium",
   "alinlib.color.white": "Белый",
@@ -202,5 +206,5 @@
   "alinlib.thanks.donationalerts": "DonationAlerts",
   "alinlib.thanks.exit": "Уйти от поддержки :(",
 
-  "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cuprum"
+  "modmenu.descriptionTranslation.alinlib": "Библиотека для облегчения разработки модов от Kel Cleverov"
 }

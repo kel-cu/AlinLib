@@ -26,15 +26,15 @@ import static ru.kelcuprum.alinlib.gui.Icons.*;
 public class DesignScreen {
     public static AbstractBuilder[] getPanelWidgets(Screen parent){
         AbstractBuilder[] list = {
-                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false)
+                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.gui.setScreen(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.gui.setScreen(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.gui.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false)
         };
         if(FabricLoader.getInstance().isDevelopmentEnvironment()) list = new AbstractBuilder[]{
-                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false),
-                new ButtonBuilder(Component.translatable("alinlib.config.design.demo"), (s) -> AlinLib.MINECRAFT.setScreenAndShow(DemoScreen.build(parent))).setIcon(WIKI).setCentered(false)
+                new ButtonBuilder(Component.translatable("alinlib.config.design"), (s) -> AlinLib.MINECRAFT.gui.setScreen(DesignScreen.build(parent))).setIcon(OPTIONS).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.config.stealth"), (s) -> AlinLib.MINECRAFT.gui.setScreen(StealthScreen.build(parent))).setIcon(INVISIBILITY).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.localization"), (s) -> AlinLib.MINECRAFT.gui.setScreen(LocalizationScreen.build(parent))).setIcon(LIST).setCentered(false),
+                new ButtonBuilder(Component.translatable("alinlib.config.design.demo"), (s) -> AlinLib.MINECRAFT.gui.setScreen(DemoScreen.build(parent))).setIcon(WIKI).setCentered(false)
         };
         return list;
     }
@@ -43,7 +43,7 @@ public class DesignScreen {
         builder.addPanelWidgets(getPanelWidgets(parent));
         if (AlinLib.isNotReleaseVersion()) {
             builder.addPanelWidget(new ButtonBuilder(Component.translatable("alinlib.title.not_release"),
-                    (s) -> AlinLib.MINECRAFT.setScreenAndShow(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
+                    (s) -> AlinLib.MINECRAFT.gui.setScreen(new ConfirmScreen(builder.build(), Component.translatable("alinlib"),
                             Component.translatable("alinlib.title.not_release.description"), "https://github.com/kel-cu/alinlib/issues"))
             ).setIcon(SEARCH).setCentered(false));
         }
@@ -62,6 +62,14 @@ public class DesignScreen {
                                 Component.translatable("alinlib.color.tetra").getString(),
                                 Component.translatable("alinlib.color.convict").getString(),
                                 Component.translatable("alinlib.color.seabird").getString(),
+
+                                Component.translatable("alinlib.color.copycat").getString(),
+                                Component.translatable("alinlib.color.clione", 1).getString(),
+                                Component.translatable("alinlib.color.clione", 2).getString(),
+                                Component.translatable("alinlib.color.quardi", 1).getString(),
+                                Component.translatable("alinlib.color.quardi", 2).getString(),
+                                Component.translatable("alinlib.color.magni").getString(),
+
                                 Component.translatable("alinlib.color.sodium").getString(),
                                 Component.translatable("alinlib.color.embeddium").getString(),
                                 Component.translatable("alinlib.color.waterplayer").getString(),
@@ -93,6 +101,14 @@ public class DesignScreen {
                                 Component.translatable("alinlib.color.tetra").getString(),
                                 Component.translatable("alinlib.color.convict").getString(),
                                 Component.translatable("alinlib.color.seabird").getString(),
+
+                                Component.translatable("alinlib.color.copycat").getString(),
+                                Component.translatable("alinlib.color.clione", 1).getString(),
+                                Component.translatable("alinlib.color.clione", 2).getString(),
+                                Component.translatable("alinlib.color.quardi", 1).getString(),
+                                Component.translatable("alinlib.color.quardi", 2).getString(),
+                                Component.translatable("alinlib.color.magni").getString(),
+
                                 Component.translatable("alinlib.color.sodium").getString(),
                                 Component.translatable("alinlib.color.embeddium").getString(),
                                 Component.translatable("alinlib.color.waterplayer").getString(),
@@ -129,6 +145,14 @@ public class DesignScreen {
                                 Component.translatable("alinlib.color.tetra").getString(),
                                 Component.translatable("alinlib.color.convict").getString(),
                                 Component.translatable("alinlib.color.seabird").getString(),
+
+                                Component.translatable("alinlib.color.copycat").getString(),
+                                Component.translatable("alinlib.color.clione", 1).getString(),
+                                Component.translatable("alinlib.color.clione", 2).getString(),
+                                Component.translatable("alinlib.color.quardi", 1).getString(),
+                                Component.translatable("alinlib.color.quardi", 2).getString(),
+                                Component.translatable("alinlib.color.magni").getString(),
+
                                 Component.translatable("alinlib.color.sodium").getString(),
                                 Component.translatable("alinlib.color.embeddium").getString(),
                                 Component.translatable("alinlib.color.white").getString(),
@@ -166,6 +190,14 @@ public class DesignScreen {
                                 Component.translatable("alinlib.color.tetra").getString(),
                                 Component.translatable("alinlib.color.convict").getString(),
                                 Component.translatable("alinlib.color.seabird").getString(),
+
+                                Component.translatable("alinlib.color.copycat").getString(),
+                                Component.translatable("alinlib.color.clione", 1).getString(),
+                                Component.translatable("alinlib.color.clione", 2).getString(),
+                                Component.translatable("alinlib.color.quardi", 1).getString(),
+                                Component.translatable("alinlib.color.quardi", 2).getString(),
+                                Component.translatable("alinlib.color.magni").getString(),
+
                                 Component.translatable("alinlib.color.sodium").getString(),
                                 Component.translatable("alinlib.color.embeddium").getString(),
                                 Component.translatable("alinlib.color.waterplayer").getString(),
@@ -196,6 +228,14 @@ public class DesignScreen {
                                 Component.translatable("alinlib.color.tetra").getString(),
                                 Component.translatable("alinlib.color.convict").getString(),
                                 Component.translatable("alinlib.color.seabird").getString(),
+
+                                Component.translatable("alinlib.color.copycat").getString(),
+                                Component.translatable("alinlib.color.clione", 1).getString(),
+                                Component.translatable("alinlib.color.clione", 2).getString(),
+                                Component.translatable("alinlib.color.quardi", 1).getString(),
+                                Component.translatable("alinlib.color.quardi", 2).getString(),
+                                Component.translatable("alinlib.color.magni").getString(),
+
                                 Component.translatable("alinlib.color.sodium").getString(),
                                 Component.translatable("alinlib.color.embeddium").getString(),
                                 Component.translatable("alinlib.color.waterplayer").getString(),

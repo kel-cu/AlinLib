@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.screens;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
@@ -11,7 +12,6 @@ import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.util.FormattedCharSequence;
-import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 
 import java.util.List;
@@ -98,7 +98,7 @@ public class DialogScreen extends Screen {
         int i = keyEvent.key();
         //#endif
 
-        if(i == GLFW.GLFW_KEY_SPACE || i == GLFW.GLFW_KEY_Z){
+        if(i == InputConstants.KEY_SPACE || i == InputConstants.KEY_Z){
             changePosition();
             return false;
         } else return super.keyPressed(
@@ -146,7 +146,7 @@ public class DialogScreen extends Screen {
     public void onClose() {
         if (isClose) {
             if (runnable != null) runnable.run();
-            else AlinLib.MINECRAFT.setScreenAndShow(screen);
+            else AlinLib.MINECRAFT.gui.setScreen(screen);
         }
     }
 }

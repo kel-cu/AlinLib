@@ -1,13 +1,12 @@
 package ru.kelcuprum.alinlib;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.gui.screens.Screen;
 import org.meteordev.starscript.value.ValueMap;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
-import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.api.KeyMappingHelper;
 import ru.kelcuprum.alinlib.api.events.alinlib.AlinLibEvents;
 import ru.kelcuprum.alinlib.api.events.client.ClientLifecycleEvents;
@@ -55,7 +54,7 @@ public class AlinLib implements net.fabricmc.api.ClientModInitializer {
         StealthManager.registerDefault();
         KeyMapping toggleStealth = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                 "alinlib.key.stealth",
-                GLFW.GLFW_KEY_UNKNOWN,
+                InputConstants.UNKNOWN.getValue(),
                 "alinlib"
         ));
 
@@ -67,13 +66,13 @@ public class AlinLib implements net.fabricmc.api.ClientModInitializer {
         if(FabricLoader.getInstance().isDevelopmentEnvironment()){
             KeyMapping openConfig = KeyMappingHelper.register(CommonUtils.getKeyMapping(
                     "alinlib.key.config",
-                    GLFW.GLFW_KEY_L,
+                    InputConstants.KEY_L,
                     "alinlib"
             ));
             GuiRenderEvents.RENDER.register(new GUIRender());
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
                 assert client.player != null;
-                while (openConfig.consumeClick()) MINECRAFT.setScreenAndShow(DesignScreen.build(MINECRAFT.gui.screen()));
+                while (openConfig.consumeClick()) MINECRAFT.gui.setScreen(DesignScreen.build(MINECRAFT.gui.screen()));
             });
         }
 

@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.components.editbox;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 //#if MC >= 12109
 import net.minecraft.client.input.KeyEvent;
@@ -8,7 +9,6 @@ import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;
-import org.lwjgl.glfw.GLFW;
 import ru.kelcuprum.alinlib.AlinLib;
 import ru.kelcuprum.alinlib.gui.Colors;
 import ru.kelcuprum.alinlib.gui.components.Description;
@@ -122,7 +122,7 @@ public class EditBox extends net.minecraft.client.gui.components.EditBox impleme
         //#if MC >= 12109
         int i = keyEvent.key();
         //#endif
-        if (i == GLFW.GLFW_KEY_DELETE && this.resettable()) {
+        if (i == InputConstants.KEY_DELETE && this.resettable()) {
             ((Resetable) this).resetValue();
             assert AlinLib.MINECRAFT != null;
             new ToastBuilder()
