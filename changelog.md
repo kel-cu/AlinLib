@@ -1,9 +1,5 @@
-- Added new colors:
-  - Quadri: #141026, #c32342
-  - Magni: #c32342
-  - Cllone: #6bbeff, #6bbeff
-- Ported to 26.3
-- Changed icon
-- Changed developer nickname
-- Fixed screen changes
-- Fixed #18 (Опечатка в настройках)
+- Fixed getting time
+- Fixed mouse drag on config screens
+- Fixed GuiMixin
+- Fixed SelectorButton
+- Я ебал бляских Mojang

@@ -21,7 +21,7 @@ public class GuiMixin {
     @Shadow
     private boolean isHidden;
 
-    @Inject(method = "extractRenderState", at = @At("RETURN"))
+    @Inject(method = "extractRenderState", at = @At("TAIL"))
     private void render(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
         if(this.isHidden) return;
         GuiRenderEvents.RENDER.invoker().onRender(graphics, deltaTracker.getGameTimeDeltaTicks());

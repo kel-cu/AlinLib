@@ -18,6 +18,7 @@ import ru.kelcuprum.alinlib.config.Localization;
 import ru.kelcuprum.alinlib.config.parser.StarScript;
 import ru.kelcuprum.alinlib.gui.GuiUtils;
 import ru.kelcuprum.alinlib.gui.config.DesignScreen;
+import ru.kelcuprum.alinlib.gui.screens.TestScreen;
 import ru.kelcuprum.alinlib.gui.styles.*;
 import ru.kelcuprum.alinlib.gui.toast.ToastBuilder;
 import ru.kelcuprum.alinlib.info.World;
@@ -72,7 +73,8 @@ public class AlinLib implements net.fabricmc.api.ClientModInitializer {
             GuiRenderEvents.RENDER.register(new GUIRender());
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
                 assert client.player != null;
-                while (openConfig.consumeClick()) MINECRAFT.gui.setScreen(DesignScreen.build(MINECRAFT.gui.screen()));
+                while (openConfig.consumeClick()) MINECRAFT.gui.setScreen(client.hasControlDown() ? new TestScreen() : DesignScreen.build(client.gui.screen()));
+//                while (openConfig.consumeClick()) MINECRAFT.gui.setScreen(new TestScreen());
             });
         }
 

@@ -26,7 +26,7 @@ public class SelectorButton extends Button implements Resetable {
         this.builder = (SelectorBuilder) builder;
         if(((SelectorBuilder) builder).hasConfigurable()){
             if(((SelectorBuilder) builder).defaultString == null) setPosition(this.builder.config.getNumber(this.builder.configType, this.builder.defaultInt).intValue());
-            else setPosition(Arrays.stream(getList()).toList().indexOf(this.builder.config.getString(((SelectorBuilder) builder).configType, ((SelectorBuilder) builder).defaultString)));
+            else setPosition(Arrays.asList(getList()).indexOf(this.builder.config.getString(((SelectorBuilder) builder).configType, ((SelectorBuilder) builder).defaultString)));
         } else setPosition(((SelectorBuilder) builder).defaultInt);
     }
 
@@ -34,8 +34,8 @@ public class SelectorButton extends Button implements Resetable {
     // Получить
     public Component getValue(){
         assert this.builder.list !=null;
-        if(this.position >= this.builder.list.length) {
-            setPosition(-1);
+        if(getPosition() >= this.builder.list.length) {
+            setPosition(0);
             onPress(
                     //#if MC >= 12109
                     null
@@ -43,14 +43,15 @@ public class SelectorButton extends Button implements Resetable {
             );
         }
         try {
-            return Component.literal(this.builder.list[this.position]);
+            return Component.literal(this.builder.list[getPosition()]);
         } catch (Exception ex){
             AlinLib.LOG.log(ex.getLocalizedMessage(), Level.ERROR);
+            setPosition(0);
             return Component.literal(this.builder.list[0]);
         }
     }
     public int getPosition(){
-        return position;
+        return Math.max(0, position);
     }
     public String[] getList(){
         return builder.list;

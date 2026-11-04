@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.gui.screens.types;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -161,7 +162,7 @@ public class ConfigScreen$withoutPanel extends AbstractConfigScreen {
         }
 
         this.setFocused(selected);
-        if (i == 0) {
+        if (i == InputConstants.MOUSE_BUTTON_LEFT) {
             this.setDragging(true);
         }
 
