@@ -1,5 +1,6 @@
 package ru.kelcuprum.alinlib.config.parser;
 
+import net.minecraft.client.Minecraft;
 import org.meteordev.starscript.Script;
 import org.meteordev.starscript.Section;
 import org.meteordev.starscript.StandardLib;
@@ -33,21 +34,21 @@ public class StarScript {
                 //#else
                 .set("version", SharedConstants.getCurrentVersion().name())
                 //#endif
-                .set("loader", AlinLib.MINECRAFT.getLaunchedVersion())
-                .set("fps", () -> Value.number(AlinLib.MINECRAFT.getFps()))
+                .set("loader", Minecraft.getInstance().getLaunchedVersion())
+                .set("fps", () -> Value.number(Minecraft.getInstance().getFps()))
                 .set("window", new ValueMap()
-                        .set("width", () -> Value.number(AlinLib.MINECRAFT.getWindow().getWidth()))
-                        .set("height", () -> Value.number(AlinLib.MINECRAFT.getWindow().getHeight()))
-                        .set("scaled_width", () -> Value.number(AlinLib.MINECRAFT.getWindow().getGuiScaledWidth()))
-                        .set("scaled_height", () -> Value.number(AlinLib.MINECRAFT.getWindow().getGuiScaledHeight()))
-                        .set("fullscreen", () -> Value.bool(AlinLib.MINECRAFT.getWindow()
+                        .set("width", () -> Value.number(Minecraft.getInstance().getWindow().getWidth()))
+                        .set("height", () -> Value.number(Minecraft.getInstance().getWindow().getHeight()))
+                        .set("scaled_width", () -> Value.number(Minecraft.getInstance().getWindow().getGuiScaledWidth()))
+                        .set("scaled_height", () -> Value.number(Minecraft.getInstance().getWindow().getGuiScaledHeight()))
+                        .set("fullscreen", () -> Value.bool(Minecraft.getInstance().getWindow()
                                 //#if MC < 260200
                                 //$$ .isFullscreen()
                                 //#else
                                         .isExclusiveFullscreen()
                                 //#endif
                         ))
-                        .set("vsync", () -> Value.bool(AlinLib.MINECRAFT.options.enableVsync().get()))
+                        .set("vsync", () -> Value.bool(Minecraft.getInstance().options.enableVsync().get()))
                 )
         );
         ss.set("time", () -> Value.string(getTime()));
@@ -56,40 +57,40 @@ public class StarScript {
                 .set("name", () -> Value.string(Player.getName()))
                 .set("uuid", () -> Value.string(Player.getUUID()))
                 .set("license", () -> Value.string(""+Player.isLicenseAccount()))
-                .set("health", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getHealth() : 0))
-                .set("health_max", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getMaxHealth() : 0))
-                .set("health_percent", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getPercentHealth() : 0))
-                .set("armor", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getArmor() : 0))
-                .set("direction", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getDirection(false) : ""))
-                .set("direction_symbol", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getDirection(true) : ""))
-                .set("debug.direction", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getDebugDirection(false) : ""))
-                .set("debug.direction_symbol", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getDebugDirection(true) : ""))
-                .set("ping", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getPing() : -1))
-                .set("hunger", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getHunger() : 0))
+                .set("health", () -> Value.number(Minecraft.getInstance().player != null ? Player.getHealth() : 0))
+                .set("health_max", () -> Value.number(Minecraft.getInstance().player != null ? Player.getMaxHealth() : 0))
+                .set("health_percent", () -> Value.number(Minecraft.getInstance().player != null ? Player.getPercentHealth() : 0))
+                .set("armor", () -> Value.number(Minecraft.getInstance().player != null ? Player.getArmor() : 0))
+                .set("direction", () -> Value.string(Minecraft.getInstance().player != null ? Player.getDirection(false) : ""))
+                .set("direction_symbol", () -> Value.string(Minecraft.getInstance().player != null ? Player.getDirection(true) : ""))
+                .set("debug.direction", () -> Value.string(Minecraft.getInstance().player != null ? Player.getDebugDirection(false) : ""))
+                .set("debug.direction_symbol", () -> Value.string(Minecraft.getInstance().player != null ? Player.getDebugDirection(true) : ""))
+                .set("ping", () -> Value.number(Minecraft.getInstance().player != null ? Player.getPing() : -1))
+                .set("hunger", () -> Value.number(Minecraft.getInstance().player != null ? Player.getHunger() : 0))
                 .set("pos", new ValueMap()
-                        .set("x", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getX() : 0))
-                        .set("y", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getY() : 0))
-                        .set("z", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getZ() : 0))
+                        .set("x", () -> Value.number(Minecraft.getInstance().player != null ? Player.getX() : 0))
+                        .set("y", () -> Value.number(Minecraft.getInstance().player != null ? Player.getY() : 0))
+                        .set("z", () -> Value.number(Minecraft.getInstance().player != null ? Player.getZ() : 0))
                 )
 
-                .set("item", () -> Value.string(AlinLib.MINECRAFT.player != null ? Player.getItemName() : ""))
-                .set("item_count", () -> Value.number(AlinLib.MINECRAFT.player != null ? Player.getItemCount() : 0))
+                .set("item", () -> Value.string(Minecraft.getInstance().player != null ? Player.getItemName() : ""))
+                .set("item_count", () -> Value.number(Minecraft.getInstance().player != null ? Player.getItemCount() : 0))
 
                 .set("xp", new ValueMap()
-                        .set("level", () -> Value.number(AlinLib.MINECRAFT.player != null ? AlinLib.MINECRAFT.player.experienceLevel : 0))
-                        .set("progress", () -> Value.number(AlinLib.MINECRAFT.player != null ? AlinLib.MINECRAFT.player.experienceProgress : 0))
-                        .set("total", () -> Value.number(AlinLib.MINECRAFT.player != null ? AlinLib.MINECRAFT.player.totalExperience : 0))
+                        .set("level", () -> Value.number(Minecraft.getInstance().player != null ? Minecraft.getInstance().player.experienceLevel : 0))
+                        .set("progress", () -> Value.number(Minecraft.getInstance().player != null ? Minecraft.getInstance().player.experienceProgress : 0))
+                        .set("total", () -> Value.number(Minecraft.getInstance().player != null ? Minecraft.getInstance().player.totalExperience : 0))
                 )
         );
         // World
         ss.set("world", new ValueMap()
-                .set("name", () -> Value.string(AlinLib.MINECRAFT.level != null ? World.getName() : ""))
-                .set("time_type", () -> Value.string(AlinLib.MINECRAFT.level != null ? World.getTimeType() : ""))
-                .set("time_formatted", () -> Value.string(AlinLib.MINECRAFT.level != null ? World.getFormattedTime() : ""))
-                .set("time", () -> Value.number(AlinLib.MINECRAFT.level != null ? World.getTime() : -1))
-                .set("day_time", () -> Value.number(AlinLib.MINECRAFT.level != null ? World.getTime() : -1))
-                .set("days", () -> Value.number(AlinLib.MINECRAFT.level != null ? World.getDays() : -1))
-                .set("difficulty", () -> Value.string(AlinLib.MINECRAFT.level != null ? AlinLib.MINECRAFT.level.getDifficulty().getDisplayName().getString() : ""))
+                .set("name", () -> Value.string(Minecraft.getInstance().level != null ? World.getName() : ""))
+                .set("time_type", () -> Value.string(Minecraft.getInstance().level != null ? World.getTimeType() : ""))
+                .set("time_formatted", () -> Value.string(Minecraft.getInstance().level != null ? World.getFormattedTime() : ""))
+                .set("time", () -> Value.number(Minecraft.getInstance().level != null ? World.getTime() : -1))
+                .set("day_time", () -> Value.number(Minecraft.getInstance().level != null ? World.getTime() : -1))
+                .set("days", () -> Value.number(Minecraft.getInstance().level != null ? World.getDays() : -1))
+                .set("difficulty", () -> Value.string(Minecraft.getInstance().level != null ? Minecraft.getInstance().level.getDifficulty().getDisplayName().getString() : ""))
         );
     }
     // Helpers

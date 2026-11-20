@@ -1,5 +1,1 @@
-- Fixed getting time
-- Fixed mouse drag on config screens
-- Fixed GuiMixin
-- Fixed SelectorButton
-- Я ебал бляских Mojang
+Я ебал нахуй кодинг

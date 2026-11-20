@@ -44,6 +44,7 @@ public class AlinLib implements net.fabricmc.api.ClientModInitializer {
 
     // Init
     public static void init() {
+        MINECRAFT = Minecraft.getInstance();
         starScript = new StarScript();
         GuiUtils.registerStyle(new FlatStyle());
         GuiUtils.registerStyle(new ModernStyle());
